@@ -1,3 +1,37 @@
+
+# Slider.Fun
+
+TODO: super short project description, some sample screenshots or mockups that you keep up-to-date.
+
+## Architecture
+
+TODO:  overall descriptions of code organization and tools and libraries used
+
+## Setup
+
+TODO: how to get the project dev environment up and running, npm install etc, all necessary commands needed, environment variables etc
+
+## Deployment
+
+TODO: how to deploy the project
+
+## Authors
+
+Kashan Mahmood, Zhoucai Ni, Ethan Gearey, Russel Chai, Johan Cruz Hernandez
+
+## Acknowledgments
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
