@@ -1,7 +1,12 @@
 
 # Slider.Fun
 
-TODO: super short project description, some sample screenshots or mockups that you keep up-to-date.
+Our aim for this project is to help players learn photo editing skill but in a fun way. We will provide the player with an edited photo and give them options to change things such as contrast, brightness, etc to get the original image as close as possible to the eddited image provided. 
+
+![Start Screen](project_photos/start_screen.png)
+![Game Screen](project_photos/game_screen.png)
+![Share Screen](project_photos/share_screen.png)
+
 
 ## Architecture
 
