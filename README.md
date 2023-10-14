@@ -11,9 +11,11 @@ TODO:  overall descriptions of code organization and tools and libraries used
 
 TODO: how to get the project dev environment up and running, npm install etc, all necessary commands needed, environment variables etc
 
+Run `npm install` 
+
 ## Deployment
 
-TODO: how to deploy the project
+Use `npm start` in order to deploy the web app
 
 ## Authors
 
@@ -28,8 +30,7 @@ Kashan Mahmood, Zhoucai Ni, Ethan Gearey, Russel Chai, Johan Cruz Hernandez
 
 
 
-
-
+### KEEP THE INFO BELOW FOR NOW. MIGHT BE USEFUL LATER
 
 
 # Getting Started with Create React App
