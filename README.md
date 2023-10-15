@@ -1,7 +1,12 @@
 
 # Slider.Fun
 
-TODO: super short project description, some sample screenshots or mockups that you keep up-to-date.
+Our aim for this project is to help players learn photo editing skill but in a fun way. We will provide the player with an edited photo and give them options to change things such as contrast, brightness, etc to get the original image as close as possible to the eddited image provided. 
+
+![Start Screen](project_photos/start_screen.png)
+![Game Screen](project_photos/game_screen.png)
+![Share Screen](project_photos/share_screen.png)
+
 
 ## Architecture
 
@@ -11,9 +16,11 @@ TODO:  overall descriptions of code organization and tools and libraries used
 
 TODO: how to get the project dev environment up and running, npm install etc, all necessary commands needed, environment variables etc
 
+Run `npm install` 
+
 ## Deployment
 
-TODO: how to deploy the project
+Use `npm start` in order to deploy the web app
 
 ## Authors
 
@@ -28,8 +35,7 @@ Kashan Mahmood, Zhoucai Ni, Ethan Gearey, Russel Chai, Johan Cruz Hernandez
 
 
 
-
-
+### KEEP THE INFO BELOW FOR NOW. MIGHT BE USEFUL LATER
 
 
 # Getting Started with Create React App
