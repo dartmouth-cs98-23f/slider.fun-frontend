@@ -7,10 +7,11 @@ Our aim for this project is to help players learn photo editing skill but in a f
 ![Game Screen](project_photos/game_screen.png)
 ![Share Screen](project_photos/share_screen.png)
 
-
 ## Architecture
 
 TODO:  overall descriptions of code organization and tools and libraries used
+- Front-end framework: React
+- Code organization: [front-end repo](https://github.com/dartmouth-cs98-23f/slider.fun-frontend), [back-end repo](https://github.com/dartmouth-cs98-23f/slider.fun-backend)
 
 ## Setup
 
@@ -31,15 +32,7 @@ Kashan Mahmood, Zhoucai Ni, Ethan Gearey, Russel Chai, Johan Cruz Hernandez
 
 ## Acknowledgments
 
-
-
-
-
-
-
-
 ### KEEP THE INFO BELOW FOR NOW. MIGHT BE USEFUL LATER
-
 
 # Getting Started with Create React App
 
