@@ -15,16 +15,14 @@ TODO:  overall descriptions of code organization and tools and libraries used
 
 ## Setup
 
-To get the project dev environment up and running, the developer needs to download all necessary React dependencies.
-- Download and install Node.js from [this link](https://nodejs.org/en)
-- Install create-react-app globally: npm install -g create-react-app
-Then, start the dev server with the command "npm start" (in the directory of the project).
+#### For developer
+If setting up the environment for the first time you need to do
 
-Run `npm install` 
-
+`npm i` to download all necessary React dependencies. and then do `npm run start`
+ 
 ## Deployment
 
-Use `npm start` in order to deploy the web app
+This project will be hosted using AWS and it will be synced with the github repo. It's not currently set up yet but will most likely be using the command  `npm run deploy`
 
 ## Authors
 
