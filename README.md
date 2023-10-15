@@ -9,7 +9,10 @@ TODO:  overall descriptions of code organization and tools and libraries used
 
 ## Setup
 
-TODO: how to get the project dev environment up and running, npm install etc, all necessary commands needed, environment variables etc
+To get the project dev environment up and running, the developer needs to download all necessary React dependencies.
+- Download and install Node.js from [this link](https://nodejs.org/en)
+- Install create-react-app globally: npm install -g create-react-app
+Then, start the dev server with the command "npm start" (in the directory of the project).
 
 ## Deployment
 
