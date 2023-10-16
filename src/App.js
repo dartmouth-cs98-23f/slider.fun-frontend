@@ -3,9 +3,14 @@ import Home from './pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>Hello, world!</Text>
+    </View>
   );
 }
 
