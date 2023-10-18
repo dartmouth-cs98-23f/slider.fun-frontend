@@ -1,16 +1,18 @@
 import './App.css';
 import Home from './pages/Home';
+import Game from './pages/Game';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Hello, world!</Text>
-    </View>
+   <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />} />
+          <Route path="game" element={<Game />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
