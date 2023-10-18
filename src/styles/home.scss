@@ -1,20 +1,39 @@
 .homeContainer {
-
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 
+  .mainMenu {
 
-  .headerContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
-    border-bottom: 1px solid #D4D6DA;;
-    height: 60px;
+    align-items: center;
 
-    h1 {
-      color: black;
+    img {
+      height: auto;
+      width: 400px;
     }
 
+    .buttonContainer {
+
+      display: flex;
+      gap: 10px;
+
+      button {
+        background-color: #3C64B1;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        width: 100px;
+        cursor: pointer;
+      }
+    }
   }
+
+
 
 }
