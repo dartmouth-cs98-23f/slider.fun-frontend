@@ -83,6 +83,8 @@ const DEFAULT_OPTIONS = [
 const Game = () => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [options, setOptions] = useState(DEFAULT_OPTIONS)
+  const [score, setScore] = useState(0)
+  const [defaultScore, setDefaultScore] = useState(false)
   const selectedOption = options[selectedOptionIndex]
 
   function handleSliderChange({ target }) {
@@ -94,10 +96,11 @@ const Game = () => {
     })
   }
 
-  const [averageRgbValues, setAverageRgbValues] = useState([]);
+  // const [averageRgbValues, setAverageRgbValues] = useState([]);
 
 
-  const getRBG = (pictureFile) => {
+  const getRBG = (pictureFile, filters = false) => {
+    console.log(filters)
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.src = pictureFile;
@@ -112,6 +115,10 @@ const Game = () => {
         canvas.height = img.height;
 
         // Draw the image onto the canvas
+        if (filters) {
+          ctx.filter = filters
+        }
+
         ctx.drawImage(img, 0, 0);
 
         const gridSize = 10;
@@ -147,12 +154,6 @@ const Game = () => {
           }
         }
 
-        // Set the state with grid average RGB values
-        // setAverageRgbValues(gridAverageRgbValues);
-        // console.log(gridAverageRgbValues)
-        // return (gridAverageRgbValues)
-        // console.log(gridAverageRgbValues)
-
         resolve(gridAverageRgbValues);
 
       };
@@ -162,28 +163,47 @@ const Game = () => {
         reject(new Error("Image loading error"));
       };
       // console.log("hi", gridAverageRgbValues.length)
-      // setAverageRgbValues(gridAverageRgbValues)
       return (gridAverageRgbValues)
     });
   }
 
-  const compareTwoPhotos = async (pic1, pic2) => {
-    const pic1RGB = await getRBG(pic1)
-    const pic2RGB = await getRBG(pic2)
-    console.log("length", pic1RGB, pic2RGB)
-    console.log("length", pic1RGB.length, pic2RGB.length)
+  const compareTwoPhotos = async (pic1, pic2, filters = false) => {
+    let pic1RGB = []
 
-    // console.log(typeof (pic1RGB), typeof (pic2RGB))
-    // console.log(Object.keys(pic1RGB), pic2RGB.length)
-    // console.log(pic1RGB)
+    if (filters) {
+      pic1RGB = await getRBG(pic1, filters)
+    } else {
+      pic1RGB = await getRBG(pic1)
+    }
+
+    const pic2RGB = await getRBG(pic2)
 
     if ((pic1RGB.length) === (pic2RGB.length)) {
+
+      let redSum = 0
+      let greenSum = 0
+      let blueSum = 0
       for (let i = 0; i < pic1RGB.length; i++) {
-        console.log(pic1RGB[i])
-        console.log(pic2RGB[i])
-        console.log(i)
+
+        // console.log(pic2RGB[i])
+        redSum += Math.abs(pic1RGB[i].averageRed - pic2RGB[i].averageRed)
+        greenSum += Math.abs(pic1RGB[i].averageGreen - pic2RGB[i].averageGreen)
+        blueSum += Math.abs(pic1RGB[i].averageBlue - pic2RGB[i].averageBlue)
+        // console.log(i)
       }
+      console.log(redSum, greenSum, blueSum)
+      console.log("total sum", redSum + greenSum + blueSum)
+      return (redSum + greenSum + blueSum)
     }
+  }
+
+
+  const handleScoreProcessing = async (current, edited, filter) => {
+    if (defaultScore === false) {
+      setDefaultScore(await compareTwoPhotos(current, edited))
+    }
+
+    setScore(await compareTwoPhotos(current, edited, filter) )
   }
 
 
@@ -201,7 +221,6 @@ const Game = () => {
       <Header>  </Header>
 
       <div className="container">
-        {/* <div className="main-image" style={getImageStyle()} /> */}
         <div className='photoContainer'>
           <div className='photo'>
             <p> Pre </p>
@@ -231,7 +250,11 @@ const Game = () => {
           value={selectedOption.value}
           handleChange={handleSliderChange}
         />
-        <button onClick={() => compareTwoPhotos(current, edited)} > Check RBG </button>
+        <button onClick={() => handleScoreProcessing(current, edited, getImageStyle().filter)} > Compare! </button>
+        <div className='score'>
+          <p> Score: {score} </p>
+          <p> Default socre: {defaultScore}</p>
+        </div>
       </div>
       {/* <div>{averageRgbValues}</div> */}
     </div>
