@@ -6,6 +6,7 @@ import SidebarItem from '../components/SliderbarItem'
 import edited from '../assets/Chai-Edited.jpg'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
+import { useEffect } from 'react'
 
 const DEFAULT_OPTIONS = [
   {
@@ -84,6 +85,7 @@ const Game = () => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [options, setOptions] = useState(DEFAULT_OPTIONS)
   const [score, setScore] = useState(0)
+  const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
   const selectedOption = options[selectedOptionIndex]
 
@@ -203,7 +205,8 @@ const Game = () => {
       setDefaultScore(await compareTwoPhotos(current, edited))
     }
 
-    setScore(await compareTwoPhotos(current, edited, filter) )
+    setScore(await compareTwoPhotos(current, edited, filter))
+
   }
 
 
@@ -211,9 +214,19 @@ const Game = () => {
     const filters = options.map(option => {
       return `${option.property}(${option.value}${option.unit})`
     })
-
     return { filter: filters.join(' ') }
   }
+
+
+
+  useEffect(() => {
+    if (score && defaultScore) {
+      // zero is full score
+      console.log(score / defaultScore)
+      setPercentScore(100 - (Math.round(score / defaultScore) * 5))
+    }
+  }, [score, defaultScore])
+
 
   return (
     <div>
@@ -252,8 +265,9 @@ const Game = () => {
         />
         <button onClick={() => handleScoreProcessing(current, edited, getImageStyle().filter)} > Compare! </button>
         <div className='score'>
-          <p> Score: {score} </p>
-          <p> Default socre: {defaultScore}</p>
+          {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
+            <p>Percent score: {percentScore}</p>
+          )}
         </div>
       </div>
       {/* <div>{averageRgbValues}</div> */}
