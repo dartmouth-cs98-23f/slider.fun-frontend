@@ -101,18 +101,166 @@ const DEFAULT_OPTIONS = [
   }
 ]
 
+
+const CURRENT_OPTIONS = [
+  {
+    name: 'Brightness',
+    property: 'brightness',
+    value: 100,
+    range: {
+      min: 0,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Contrast',
+    property: 'contrast',
+    value: 100,
+    range: {
+      min: 0,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Saturation',
+    property: 'saturate',
+    value: 100,
+    range: {
+      min: 0,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Grayscale',
+    property: 'grayscale',
+    value: 0,
+    range: {
+      min: 0,
+      max: 100
+    },
+    unit: '%'
+  },
+  {
+    name: 'Sepia',
+    property: 'sepia',
+    value: 0,
+    range: {
+      min: 0,
+      max: 100
+    },
+    unit: '%'
+  },
+  {
+    name: 'Hue Rotate',
+    property: 'hue-rotate',
+    value: 0,
+    range: {
+      min: 0,
+      max: 360
+    },
+    unit: 'deg'
+  },
+  {
+    name: 'Blur',
+    property: 'blur',
+    value: 0,
+    range: {
+      min: 0,
+      max: 20
+    },
+    unit: 'px'
+  }
+]
+
+const MODIFIED_OPTIONS = [
+  {
+    name: 'Brightness',
+    property: 'brightness',
+    value: 150,
+    range: {
+      min: 0,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Contrast',
+    property: 'contrast',
+    value: 100,
+    range: {
+      min: 0,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Saturation',
+    property: 'saturate',
+    value: 123,
+    range: {
+      min: 0,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Grayscale',
+    property: 'grayscale',
+    value: 4,
+    range: {
+      min: 0,
+      max: 100
+    },
+    unit: '%'
+  },
+  {
+    name: 'Sepia',
+    property: 'sepia',
+    value: 23,
+    range: {
+      min: 0,
+      max: 100
+    },
+    unit: '%'
+  },
+  {
+    name: 'Hue Rotate',
+    property: 'hue-rotate',
+    value: 0,
+    range: {
+      min: 0,
+      max: 360
+    },
+    unit: 'deg'
+  },
+  {
+    name: 'Blur',
+    property: 'blur',
+    value: 0,
+    range: {
+      min: 0,
+      max: 20
+    },
+    unit: 'px'
+  }
+]
+
 const Game = () => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
-  const [options, setOptions] = useState(DEFAULT_OPTIONS)
+  const [defaultOptions] = useState(DEFAULT_OPTIONS)
+  const [editedOptions] = useState(MODIFIED_OPTIONS)
+  const [currentOptions, setCurrentOptions] = useState(CURRENT_OPTIONS)
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
   const [importEdited, setImportEdited] = useState("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2F4.jpg?alt=media&token=4910492b-1934-4014-b1c1-dea6a0365b51&_gl=1*5klvjs*_ga*MTI5MTQyNzc4OS4xNjk4MjUzOTEz*_ga_CW55HF8NVT*MTY5ODYzMzU1Mi44LjEuMTY5ODYzNzgzOS42MC4wLjA")
-  const selectedOption = options[selectedOptionIndex]
+  const selectedOption = currentOptions[selectedOptionIndex]
 
   function handleSliderChange(propertyIndex, { target }) {
-    console.log(target)
-    setOptions(prevOptions => {
+    setCurrentOptions(prevOptions => {
       return prevOptions.map((option, index) => {
         if (index !== propertyIndex) return option
         return { ...option, value: target.value }
@@ -128,6 +276,9 @@ const Game = () => {
         setImportEdited(data.imageURL);
       }
     });
+
+
+
   }, []);
 
   // const [averageRgbValues, setAverageRgbValues] = useState([]);
@@ -201,68 +352,68 @@ const Game = () => {
     });
   }
 
-  const compareTwoPhotos = async (pic1, pic2, filters = false) => {
-    let pic1RGB = []
+  const compareTwoPhotos = async (pic, editedFilter, goalFilter1) => {
+    const pic1RGB = await getRBG(pic, goalFilter1);
+    const pic2RGB = await getRBG(pic, editedFilter);
 
-    if (filters) {
-      pic1RGB = await getRBG(pic1, filters)
-    } else {
-      pic1RGB = await getRBG(pic1)
+    if (pic1RGB.length !== pic2RGB.length) {
+      throw new Error('Image dimensions do not match.');
     }
 
-    const pic2RGB = await getRBG(pic2)
+    let redSum = 0, greenSum = 0, blueSum = 0;
 
-    if ((pic1RGB.length) === (pic2RGB.length)) {
-
-      let redSum = 0
-      let greenSum = 0
-      let blueSum = 0
-      for (let i = 0; i < pic1RGB.length; i++) {
-
-        // console.log(pic2RGB[i])
-        redSum += Math.abs(pic1RGB[i].averageRed - pic2RGB[i].averageRed)
-        greenSum += Math.abs(pic1RGB[i].averageGreen - pic2RGB[i].averageGreen)
-        blueSum += Math.abs(pic1RGB[i].averageBlue - pic2RGB[i].averageBlue)
-        // console.log(i)
-      }
-      console.log(redSum, greenSum, blueSum)
-      console.log("total sum", redSum + greenSum + blueSum)
-      return (redSum + greenSum + blueSum)
+    for (let i = 0; i < pic1RGB.length; i++) {
+      redSum += Math.pow(pic1RGB[i].averageRed - pic2RGB[i].averageRed, 2);
+      greenSum += Math.pow(pic1RGB[i].averageGreen - pic2RGB[i].averageGreen, 2);
+      blueSum += Math.pow(pic1RGB[i].averageBlue - pic2RGB[i].averageBlue, 2);
     }
+
+    const redRMSE = Math.sqrt(redSum / pic1RGB.length);
+    const greenRMSE = Math.sqrt(greenSum / pic1RGB.length);
+    const blueRMSE = Math.sqrt(blueSum / pic1RGB.length);
+
+    const totalRMSE = (redRMSE + greenRMSE + blueRMSE) / 3;
+
+    console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
+    console.log('Total RMSE:', totalRMSE);
+
+    return totalRMSE;
   }
 
 
-  const handleScoreProcessing = async (current, edited, filter) => {
+
+  const handleScoreProcessing = async (photo, filter1, filter2) => {
     if (defaultScore === false) {
-      setDefaultScore(await compareTwoPhotos(current, edited))
+      setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
     }
 
-    setScore(await compareTwoPhotos(current, edited, filter))
+    setScore(await compareTwoPhotos(photo, filter1, filter2))
 
   }
 
 
-  function getImageStyle() {
-    const filters = options.map(option => {
+  function getImageStyle(state) {
+    const filters = state.map(option => {
       return `${option.property}(${option.value}${option.unit})`
     })
     return { filter: filters.join(' ') }
   }
 
-
-
   useEffect(() => {
     if (score && defaultScore) {
       // zero is full score
       console.log(score / defaultScore)
-      setPercentScore(100 - (Math.round(score / defaultScore) * 5))
+      // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
+      setPercentScore(100 - (Math.round(score)))
     }
   }, [score, defaultScore])
 
 
-  useEffect(() => {
-    console.log(importEdited)
-  }, [importEdited])
+  // useEffect(() => {
+  //   if (defaultScore === false) {
+  //     setDefaultScore(compareTwoPhotos(current, edited, getImageStyle().filter, getEditedImageStyle().filter))
+  //   }
+  // }, [importEdited])
 
 
   return (
@@ -274,11 +425,11 @@ const Game = () => {
         <div className='photoContainer'>
           <div className='photo'>
             <p> Pre </p>
-            <img src={importEdited} alt="pre edit pics" style={getImageStyle()} />
+            <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
           </div>
           <div className='photo'>
             <p> Goal </p>
-            <img src={edited} alt="edited pics" />
+            <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
           </div>
         </div>
 
@@ -286,70 +437,72 @@ const Game = () => {
           <div className='sliderContainer'>
             <p> Brightness</p>
             <Slider
-              min={options[0].range.min}
-              max={options[0].range.max}
-              value={options[0].value}
+              min={currentOptions[0].range.min}
+              max={currentOptions[0].range.max}
+              value={currentOptions[0].value}
               handleChange={(event) => handleSliderChange(0, event)}
             />
           </div>
           <div className='sliderContainer'>
             <p> Contrast</p>
             <Slider
-              min={options[1].range.min}
-              max={options[1].range.max}
-              value={options[1].value}
+              min={currentOptions[1].range.min}
+              max={currentOptions[1].range.max}
+              value={currentOptions[1].value}
               handleChange={(event) => handleSliderChange(1, event)}
             />
           </div>
           <div className='sliderContainer'>
             <p> Saturation </p>
             <Slider
-              min={options[2].range.min}
-              max={options[2].range.max}
-              value={options[2].value}
+              min={currentOptions[2].range.min}
+              max={currentOptions[2].range.max}
+              value={currentOptions[2].value}
               handleChange={(event) => handleSliderChange(2, event)}
             />
           </div>
           <div className='sliderContainer'>
             <p> Greyscale</p>
             <Slider
-              min={options[3].range.min}
-              max={options[3].range.max}
-              value={options[3].value}
+              min={currentOptions[3].range.min}
+              max={currentOptions[3].range.max}
+              value={currentOptions[3].value}
               handleChange={(event) => handleSliderChange(3, event)}
             />
           </div>
           <div className='sliderContainer'>
             <p> Sepia</p>
             <Slider
-              min={options[4].range.min}
-              max={options[4].range.max}
-              value={options[4].value}
+              min={currentOptions[4].range.min}
+              max={currentOptions[4].range.max}
+              value={currentOptions[4].value}
               handleChange={(event) => handleSliderChange(4, event)}
             />
           </div>
           <div className='sliderContainer'>
             <p> Hue Rotate</p>
             <Slider
-              min={options[5].range.min}
-              max={options[5].range.max}
-              value={options[5].value}
+              min={currentOptions[5].range.min}
+              max={currentOptions[5].range.max}
+              value={currentOptions[5].value}
               handleChange={(event) => handleSliderChange(5, event)}
             />
           </div>
           <div className='sliderContainer'>
             <p> Blur</p>
             <Slider
-              min={options[6].range.min}
-              max={options[6].range.max}
-              value={options[6].value}
+              min={currentOptions[6].range.min}
+              max={currentOptions[6].range.max}
+              value={currentOptions[6].value}
               handleChange={(event) => handleSliderChange(6, event)}
             />
           </div>
         </div>
 
-        <button onClick={() => handleScoreProcessing(current, edited, getImageStyle().filter)} > Compare! </button>
+        <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button>
         <div className='score'>
+          <p> Default Score: {defaultScore}</p>
+          <p> Current Score: {score}</p>
           {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
             <p>Percent score: {percentScore}</p>
           )}
