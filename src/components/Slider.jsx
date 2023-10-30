@@ -1,9 +1,10 @@
 import React from 'react'
+import '../App.scss'
 
 export default function Slider({ min, max, value, handleChange}) {
   return (
     <div className="slider-container">
-      <input
+      <input 
         type="range"
         className="slider"
         min={min}

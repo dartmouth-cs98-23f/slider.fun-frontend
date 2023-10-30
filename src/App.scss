@@ -32,6 +32,14 @@ body {
   .photoContainer {
     display: flex;
     flex-direction: row;
+
+    .photo {
+      p {
+        text-align: center;
+        font-weight: bold;
+      }
+
+    }
   }
 
   // display: flex;
@@ -74,11 +82,7 @@ body {
   cursor: pointer;
   border: none;
   flex-direction: row;
-  // outline: none;
-  // background-color: hsl(265, 100%, 86%);
-  // padding: 1rem;
-  // position: relative;
-  // transition: background-color 150ms;
+
 }
 
 .sidebar-item:hover,
@@ -97,20 +101,76 @@ body {
   left: 10%;
   bottom: 0;
   height: 1px;
-  background-color: hsl(265, 100%, 46%);
+  // background-color: hsl(265, 100%, 46%);
 }
 
 .sidebar-item:last-child::after {
   display: none;
 }
 
-.slider-container {
-  // grid-area: slider;
-  // margin-top: 2rem;
-  // padding: 2rem;
-}
+// .slider-container {
+//   // -webkit-appearance: none;
+// }
 
 .slider {
-  width: 100%;
+  width: 200%;
+  cursor: pointer;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+.slider::-webkit-slider-runnable-track {
+  background: rgb(183, 183, 183);
+  height: 0.5rem;
+  border-radius: 5px;
+}
+
+/***** Thumb Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* Override default look */
+  appearance: none;
+  margin-top: -4px;
+  /* Centers thumb on the track */
+  background-color: #363636;
+  height: 1rem;
+  width: 0.5rem;
+
+}
+
+.slidersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+
+  .sliderContainer {
+    margin-left: -45px;
+    width: 400px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    p {
+      width: 125px;
+
+    }
+  }
+
+}
+
+button {
+  margin: 10px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  background-color: #363636;
+  color: white;
   cursor: pointer;
 }
