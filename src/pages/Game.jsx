@@ -2,11 +2,31 @@ import { useState } from 'react'
 import React from 'react'
 import Header from '../components/Header'
 import Slider from '../components/Slider'
-import SidebarItem from '../components/SliderbarItem'
 import edited from '../assets/Chai-Edited.jpg'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useEffect } from 'react'
+
+import axios from 'axios';
+
+async function fetchPhoto() {
+  try {
+    const response = await axios.get('https://slider-fun.onrender.com/api/photo/653f28684b5cc0e8cb636edb');
+
+    if (response.status === 200) {
+      return response.data; // This will contain the data returned from the server
+    } else {
+      console.error(`Error: ${response.status} - ${response.statusText}`);
+      return null;
+    }
+
+  } catch (error) {
+    console.error('There was an error fetching the photo:', error);
+    return null;
+  }
+}
+
+
 
 const DEFAULT_OPTIONS = [
   {
@@ -87,6 +107,7 @@ const Game = () => {
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
+  const [importEdited, setImportEdited] = useState("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2F4.jpg?alt=media&token=4910492b-1934-4014-b1c1-dea6a0365b51&_gl=1*5klvjs*_ga*MTI5MTQyNzc4OS4xNjk4MjUzOTEz*_ga_CW55HF8NVT*MTY5ODYzMzU1Mi44LjEuMTY5ODYzNzgzOS42MC4wLjA")
   const selectedOption = options[selectedOptionIndex]
 
   function handleSliderChange(propertyIndex, { target }) {
@@ -99,7 +120,15 @@ const Game = () => {
     })
   }
 
-
+  useEffect(() => {
+    // Example usage:
+    fetchPhoto().then(data => {
+      console.log("Received data:", data); // Check the full data object
+      if (data && data.imageURL) {
+        setImportEdited(data.imageURL);
+      }
+    });
+  }, []);
 
   // const [averageRgbValues, setAverageRgbValues] = useState([]);
 
@@ -231,6 +260,11 @@ const Game = () => {
   }, [score, defaultScore])
 
 
+  useEffect(() => {
+    console.log(importEdited)
+  }, [importEdited])
+
+
   return (
     <div>
 
@@ -240,7 +274,7 @@ const Game = () => {
         <div className='photoContainer'>
           <div className='photo'>
             <p> Pre </p>
-            <img src={current} alt="pre edit pics" style={getImageStyle()} />
+            <img src={importEdited} alt="pre edit pics" style={getImageStyle()} />
           </div>
           <div className='photo'>
             <p> Goal </p>
@@ -248,18 +282,6 @@ const Game = () => {
           </div>
         </div>
 
-        {/* <div className="sidebar">
-          {options.map((option, index) => {
-            return (
-              <SidebarItem
-                key={index}
-                name={option.name}
-                active={index === selectedOptionIndex}
-                handleClick={() => setSelectedOptionIndex(index)}
-              />
-            )
-          })}
-        </div> */}
         <div className='slidersContainer'>
           <div className='sliderContainer'>
             <p> Brightness</p>
