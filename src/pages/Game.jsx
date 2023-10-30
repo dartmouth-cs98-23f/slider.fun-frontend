@@ -89,14 +89,17 @@ const Game = () => {
   const [defaultScore, setDefaultScore] = useState(false)
   const selectedOption = options[selectedOptionIndex]
 
-  function handleSliderChange({ target }) {
+  function handleSliderChange(propertyIndex, { target }) {
+    console.log(target)
     setOptions(prevOptions => {
       return prevOptions.map((option, index) => {
-        if (index !== selectedOptionIndex) return option
+        if (index !== propertyIndex) return option
         return { ...option, value: target.value }
       })
     })
   }
+
+
 
   // const [averageRgbValues, setAverageRgbValues] = useState([]);
 
@@ -245,7 +248,7 @@ const Game = () => {
           </div>
         </div>
 
-        <div className="sidebar">
+        {/* <div className="sidebar">
           {options.map((option, index) => {
             return (
               <SidebarItem
@@ -256,13 +259,73 @@ const Game = () => {
               />
             )
           })}
+        </div> */}
+        <div className='slidersContainer'>
+          <div className='sliderContainer'>
+            <p> Brightness</p>
+            <Slider
+              min={options[0].range.min}
+              max={options[0].range.max}
+              value={options[0].value}
+              handleChange={(event) => handleSliderChange(0, event)}
+            />
+          </div>
+          <div className='sliderContainer'>
+            <p> Contrast</p>
+            <Slider
+              min={options[1].range.min}
+              max={options[1].range.max}
+              value={options[1].value}
+              handleChange={(event) => handleSliderChange(1, event)}
+            />
+          </div>
+          <div className='sliderContainer'>
+            <p> Saturation </p>
+            <Slider
+              min={options[2].range.min}
+              max={options[2].range.max}
+              value={options[2].value}
+              handleChange={(event) => handleSliderChange(2, event)}
+            />
+          </div>
+          <div className='sliderContainer'>
+            <p> Greyscale</p>
+            <Slider
+              min={options[3].range.min}
+              max={options[3].range.max}
+              value={options[3].value}
+              handleChange={(event) => handleSliderChange(3, event)}
+            />
+          </div>
+          <div className='sliderContainer'>
+            <p> Sepia</p>
+            <Slider
+              min={options[4].range.min}
+              max={options[4].range.max}
+              value={options[4].value}
+              handleChange={(event) => handleSliderChange(4, event)}
+            />
+          </div>
+          <div className='sliderContainer'>
+            <p> Hue Rotate</p>
+            <Slider
+              min={options[5].range.min}
+              max={options[5].range.max}
+              value={options[5].value}
+              handleChange={(event) => handleSliderChange(5, event)}
+            />
+          </div>
+          <div className='sliderContainer'>
+            <p> Blur</p>
+            <Slider
+              min={options[6].range.min}
+              max={options[6].range.max}
+              value={options[6].value}
+              handleChange={(event) => handleSliderChange(6, event)}
+            />
+          </div>
         </div>
-        <Slider
-          min={selectedOption.range.min}
-          max={selectedOption.range.max}
-          value={selectedOption.value}
-          handleChange={handleSliderChange}
-        />
+
         <button onClick={() => handleScoreProcessing(current, edited, getImageStyle().filter)} > Compare! </button>
         <div className='score'>
           {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
