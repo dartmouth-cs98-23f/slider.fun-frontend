@@ -173,4 +173,9 @@ button {
   background-color: #363636;
   color: white;
   cursor: pointer;
+
+
+  &:hover {
+    background-color: #70737a;
+  }
 }
