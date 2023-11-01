@@ -1,20 +1,61 @@
 .homeContainer {
-
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 
+  .mainMenu {
 
-  .headerContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    width: 100%;
-    border-bottom: 1px solid #D4D6DA;;
-    height: 60px;
+    align-items: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
 
-    h1 {
-      color: black;
+    img {
+      height: auto;
+      width: 500px;
+      margin: 50px;
     }
 
+    .buttonContainer {
+
+      display: flex;
+      gap: 50px;
+
+      button {
+        font-size: 18px;
+        justify-content: center;
+        padding: 20px 40px 40px 40px;
+        width: 150px;
+        font-weight: bold;
+        background-color: #3C64B1;
+        border: 2px solid #3C64B1;
+        transition-duration: 0.4s;
+        vertical-align: middle;
+        color: white;
+        border-radius: 5px;
+        
+        cursor: pointer;
+      }
+
+      button:hover {
+        justify-content: center;
+        font-weight: bold;
+        background-color: white;
+        border: 2px solid #3C64B1;
+        transition-duration: 0.4s;
+        vertical-align: middle;
+        color: #3C64B1;
+        border-radius: 5px;
+        width: 150px;
+        cursor: pointer;
+      }
+    }
   }
+
+
 
 }

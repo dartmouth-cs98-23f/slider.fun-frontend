@@ -1,39 +1,36 @@
 
 # Slider.Fun
 
-TODO: super short project description, some sample screenshots or mockups that you keep up-to-date.
+Our aim for this project is to help players learn photo editing skill but in a fun way. We will provide the player with an edited photo and give them options to change things such as contrast, brightness, etc to get the original image as close as possible to the eddited image provided. 
+
+![Start Screen](project_photos/start_screen.png)
+![Game Screen](project_photos/game_screen.png)
+![Share Screen](project_photos/share_screen.png)
 
 ## Architecture
 
 TODO:  overall descriptions of code organization and tools and libraries used
+- Front-end framework: React
+- Code organization: [front-end repo](https://github.com/dartmouth-cs98-23f/slider.fun-frontend), [back-end repo](https://github.com/dartmouth-cs98-23f/slider.fun-backend)
 
 ## Setup
 
-To get the project dev environment up and running, the developer needs to download all necessary React dependencies.
-- Download and install Node.js from [this link](https://nodejs.org/en)
-- Install create-react-app globally: npm install -g create-react-app
-Then, start the dev server with the command "npm start" (in the directory of the project).
+#### For developer
+If setting up the environment for the first time you need to do
 
+`npm i` to download all necessary React dependencies. and then do `npm run start`
+ 
 ## Deployment
 
-TODO: how to deploy the project
+This project will be hosted using AWS and it will be synced with the github repo. It's not currently set up yet but will most likely be using the command  `npm run deploy`
 
 ## Authors
 
-Kashan Mahmood, Zhoucai Ni, Ethan Gearey, Russel Chai, Johan Cruz Hernandez
+Kashan Mahmood, Zhoucai Ni, Ethan Gearey, Russell Chai, Johan Cruz Hernandez
 
 ## Acknowledgments
 
-
-
-
-
-
-
-
-
-
-
+### KEEP THE INFO BELOW FOR NOW. MIGHT BE USEFUL LATER
 
 # Getting Started with Create React App
 
@@ -76,11 +73,6 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
 
