@@ -6,6 +6,7 @@ import edited from '../assets/Chai-Edited.jpg'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 
 import axios from 'axios';
 
@@ -258,6 +259,7 @@ const Game = () => {
   const [defaultScore, setDefaultScore] = useState(false)
   const [importEdited, setImportEdited] = useState("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2F4.jpg?alt=media&token=4910492b-1934-4014-b1c1-dea6a0365b51&_gl=1*5klvjs*_ga*MTI5MTQyNzc4OS4xNjk4MjUzOTEz*_ga_CW55HF8NVT*MTY5ODYzMzU1Mi44LjEuMTY5ODYzNzgzOS42MC4wLjA")
   const selectedOption = currentOptions[selectedOptionIndex]
+  const navigate = useNavigate();
 
   function handleSliderChange(propertyIndex, { target }) {
     setCurrentOptions(prevOptions => {
@@ -498,8 +500,8 @@ const Game = () => {
             />
           </div>
         </div>
-
-        <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button>
+        <button onClick={() => {navigate("/results")}}>Compare!</button>
+        {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
           <p> Default Score: {defaultScore}</p>
           <p> Current Score: {score}</p>
