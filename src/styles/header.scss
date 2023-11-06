@@ -1,9 +1,12 @@
 .headerContainer {
   display: flex;
+  align-items: center;
   justify-content: center;
-  width: 100%;
-  border-bottom: 1px solid #D4D6DA;
-  height: 60px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 25px 0px 10px 0px;
+  background-color: #EDEDED;
+
 
   h1 {
     color: black;

@@ -38,8 +38,16 @@ body {
         text-align: center;
         font-weight: bold;
       }
-
     }
+    
+  }
+
+  .viewButtonsContainer {
+    display: flex;
+    flex: 2;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: end;
   }
 
   // display: flex;
@@ -55,6 +63,8 @@ body {
     width: 500px;
   }
 }
+
+
 
 .main-image {
   grid-area: image;

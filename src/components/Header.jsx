@@ -1,5 +1,6 @@
 import React from 'react'
 import "../styles/header.scss"
+import sliderHeader from "../assets/header_red.png"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -10,8 +11,9 @@ const Header = () => {
     navigate(path);
   };
   return (
+
     <div className='headerContainer'>
-      <h1>Slider.Fun </h1>
+      <img src={sliderHeader} alt="" width="800"></img>
 
       <nav className='headerNav'>
         <button onClick={() => handleNavigate("/stage1")}>Stage 1</button>
