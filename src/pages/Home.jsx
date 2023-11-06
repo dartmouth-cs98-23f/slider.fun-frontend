@@ -34,25 +34,25 @@ const Home = () => {
           What is Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider.fun is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo. 
+          Slider is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo. 
         </p>
         <h2 className="tutorialHeader2">
-          What is Slider?
+          Why use Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider.fun is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo. 
+          Slider is for photographers and photo editors of all skill levels. Each set of photos is a puzzle, and as you complete more puzzles, your photo-editing skills will improve. 
         </p>
         <h2 className="tutorialHeader2">
-          What is Slider?
+          Why not use Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider.fun is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo. 
+          Slider is not Lightroom or Photoshop. Those photo editing apps have many more features, and they allow you to make spot edits. Slider will not teach you those skills. 
         </p>
         <h2 className="tutorialHeader2">
-          What is Slider?
+          Who created Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider.fun is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo. 
+          Slider was created as part of the culminating experience in Computer Science at Dartmouth College in Fall 2023. The principle authors are Zhoucai Ni, Kashan Mahmood, Ethan Gearey, Russell Chai, and CrypticMatter. 
         </p>
       </div>
     </div>
