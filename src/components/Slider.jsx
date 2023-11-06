@@ -1,10 +1,10 @@
-import React from 'react'
-import '../App.scss'
+import React from 'react';
+import '../App.scss';
 
-export default function Slider({ min, max, value, handleChange}) {
-  return (
-    <div className="slider-container">
-      <input 
+export default function Slider({ name, min, max, value, status, handleChange }) {
+  return status ? (
+    <div>
+      <input
         type="range"
         className="slider"
         min={min}
@@ -13,5 +13,15 @@ export default function Slider({ min, max, value, handleChange}) {
         onChange={handleChange}
       />
     </div>
-  )
+  ) : (
+    <div>
+      <input
+        type="range"
+        className="sliderLocked"
+        min={min}
+        max={max}
+        value={value}
+      />
+    </div>
+  );
 }
