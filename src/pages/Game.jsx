@@ -2,7 +2,7 @@ import { useState } from 'react'
 import React from 'react'
 import Header from '../components/Header'
 import Slider from '../components/Slider'
-import edited from '../assets/Chai-Edited.jpg'
+// import edited from '../assets/Chai-Edited.jpg'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useEffect } from 'react'
@@ -11,7 +11,7 @@ import axios from 'axios';
 
 async function fetchPhoto() {
   try {
-    const response = await axios.get('https://slider-fun.onrender.com/api/photo/653f28684b5cc0e8cb636edb');
+    const response = await axios.get('https://slider-fun.onrender.com/api/photo/65495d668d1d5c2fa933c23a');
 
     if (response.status === 200) {
       return response.data; // This will contain the data returned from the server
@@ -182,89 +182,19 @@ const CURRENT_OPTIONS = [
   }
 ]
 
-const MODIFIED_OPTIONS = [
-  {
-    name: 'Brightness',
-    property: 'brightness',
-    value: 150,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%'
-  },
-  {
-    name: 'Contrast',
-    property: 'contrast',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%'
-  },
-  {
-    name: 'Saturation',
-    property: 'saturate',
-    value: 123,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%'
-  },
-  {
-    name: 'Grayscale',
-    property: 'grayscale',
-    value: 4,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%'
-  },
-  {
-    name: 'Sepia',
-    property: 'sepia',
-    value: 23,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%'
-  },
-  {
-    name: 'Hue Rotate',
-    property: 'hue-rotate',
-    value: 0,
-    range: {
-      min: 0,
-      max: 360
-    },
-    unit: 'deg'
-  },
-  {
-    name: 'Blur',
-    property: 'blur',
-    value: 0,
-    range: {
-      min: 0,
-      max: 20
-    },
-    unit: 'px'
-  }
-]
+const MODIFIED_OPTIONS = []
 
 const Game = (stage_options) => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
-  const [editedOptions] = useState(MODIFIED_OPTIONS)
+  const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
   const [currentOptions, setCurrentOptions] = useState(stage_options.stage_options)
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
-  const [importEdited, setImportEdited] = useState("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2F4.jpg?alt=media&token=4910492b-1934-4014-b1c1-dea6a0365b51&_gl=1*5klvjs*_ga*MTI5MTQyNzc4OS4xNjk4MjUzOTEz*_ga_CW55HF8NVT*MTY5ODYzMzU1Mi44LjEuMTY5ODYzNzgzOS42MC4wLjA")
-  const selectedOption = currentOptions[selectedOptionIndex]
+  const [importEdited, setImportEdited] = useState("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg")
+  // const selectedOption = currentOptions[selectedOptionIndex]
+
 
   function handleSliderChange(propertyIndex, { target }) {
     setCurrentOptions(prevOptions => {
@@ -278,21 +208,21 @@ const Game = (stage_options) => {
   useEffect(() => {
     // Example usage:
     fetchPhoto().then(data => {
-      console.log("Received data:", data); // Check the full data object
-      if (data && data.imageURL) {
-        setImportEdited(data.imageURL);
+      // console.log("Received data:", data); // Check the full data object
+      if (data) {
+        // console.log("second loop:", data.imageUrl); // Check the full data object
+
+        setImportEdited(data.imageUrl);
+        setEditedOptions(data.photoProperties)
       }
     });
-
-
-
   }, []);
 
   // const [averageRgbValues, setAverageRgbValues] = useState([]);
 
 
   const getRBG = (pictureFile, filters = false) => {
-    console.log(filters)
+    // console.log(filters)
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.src = pictureFile;
