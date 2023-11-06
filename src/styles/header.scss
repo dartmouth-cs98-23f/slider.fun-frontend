@@ -1,6 +1,9 @@
 .headerContainer {
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
   padding: 25px 0px 10px 0px;
   background-color: #EDEDED;
 
@@ -9,4 +12,9 @@
     color: black;
   }
 
+}
+
+.headerNav {
+  display: flex;
+  align-items: end;
 }
