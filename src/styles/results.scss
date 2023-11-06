@@ -11,31 +11,34 @@
     text-align: center;
   }
 
-  .buttonsModal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.buttonsModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   }
 
-  .imagesModal-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 400px;
-    max-width: 100%;
+.imagesModal-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 400px;
+  max-width: 100%;
   }
 
-  .imagesModal-container img {
-    max-width: 100%;
-    height: auto;
+.imagesModal-container img {
+  max-width: 100%;
+  height: auto;
   }
 
-  button {
-    padding: 5px;
-    border-radius: 12px;;
+button {
+  padding: 5px;
+  border-radius: 12px;
   }
 
-  .shareResultsButton {
-    margin-top: 22px;
+.shareResultsButton {
+  margin-top: 22px;
   }
-  
+
+.backButton {
+  display: flex;
+}
