@@ -111,7 +111,8 @@ const CURRENT_OPTIONS = [
       min: 0,
       max: 200
     },
-    unit: '%'
+    unit: '%',
+    status: false,
   },
   {
     name: 'Contrast',
@@ -121,7 +122,8 @@ const CURRENT_OPTIONS = [
       min: 0,
       max: 200
     },
-    unit: '%'
+    unit: '%',
+    status: true,
   },
   {
     name: 'Saturation',
@@ -131,7 +133,8 @@ const CURRENT_OPTIONS = [
       min: 0,
       max: 200
     },
-    unit: '%'
+    unit: '%',
+    status: true,
   },
   {
     name: 'Grayscale',
@@ -141,7 +144,8 @@ const CURRENT_OPTIONS = [
       min: 0,
       max: 100
     },
-    unit: '%'
+    unit: '%',
+    status: true,
   },
   {
     name: 'Sepia',
@@ -151,7 +155,8 @@ const CURRENT_OPTIONS = [
       min: 0,
       max: 100
     },
-    unit: '%'
+    unit: '%',
+    status: true,
   },
   {
     name: 'Hue Rotate',
@@ -161,7 +166,8 @@ const CURRENT_OPTIONS = [
       min: 0,
       max: 360
     },
-    unit: 'deg'
+    unit: 'deg',
+    status: true,
   },
   {
     name: 'Blur',
@@ -171,7 +177,8 @@ const CURRENT_OPTIONS = [
       min: 0,
       max: 20
     },
-    unit: 'px'
+    unit: 'px',
+    status: false,
   }
 ]
 
@@ -248,11 +255,11 @@ const MODIFIED_OPTIONS = [
   }
 ]
 
-const Game = () => {
+const Game = (stage_options) => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions] = useState(MODIFIED_OPTIONS)
-  const [currentOptions, setCurrentOptions] = useState(CURRENT_OPTIONS)
+  const [currentOptions, setCurrentOptions] = useState(stage_options.stage_options)
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
@@ -440,6 +447,7 @@ const Game = () => {
               min={currentOptions[0].range.min}
               max={currentOptions[0].range.max}
               value={currentOptions[0].value}
+              status={currentOptions[0].status}
               handleChange={(event) => handleSliderChange(0, event)}
             />
           </div>
@@ -449,6 +457,7 @@ const Game = () => {
               min={currentOptions[1].range.min}
               max={currentOptions[1].range.max}
               value={currentOptions[1].value}
+              status={currentOptions[1].status}
               handleChange={(event) => handleSliderChange(1, event)}
             />
           </div>
@@ -458,6 +467,7 @@ const Game = () => {
               min={currentOptions[2].range.min}
               max={currentOptions[2].range.max}
               value={currentOptions[2].value}
+              status={currentOptions[2].status}
               handleChange={(event) => handleSliderChange(2, event)}
             />
           </div>
@@ -467,6 +477,7 @@ const Game = () => {
               min={currentOptions[3].range.min}
               max={currentOptions[3].range.max}
               value={currentOptions[3].value}
+              status={currentOptions[3].status}
               handleChange={(event) => handleSliderChange(3, event)}
             />
           </div>
@@ -476,6 +487,7 @@ const Game = () => {
               min={currentOptions[4].range.min}
               max={currentOptions[4].range.max}
               value={currentOptions[4].value}
+              status={currentOptions[4].status}
               handleChange={(event) => handleSliderChange(4, event)}
             />
           </div>
@@ -485,6 +497,7 @@ const Game = () => {
               min={currentOptions[5].range.min}
               max={currentOptions[5].range.max}
               value={currentOptions[5].value}
+              status={currentOptions[5].status}
               handleChange={(event) => handleSliderChange(5, event)}
             />
           </div>
@@ -494,6 +507,7 @@ const Game = () => {
               min={currentOptions[6].range.min}
               max={currentOptions[6].range.max}
               value={currentOptions[6].value}
+              status={currentOptions[6].status}
               handleChange={(event) => handleSliderChange(6, event)}
             />
           </div>
