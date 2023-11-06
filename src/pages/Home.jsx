@@ -1,12 +1,13 @@
-import React from 'react'
-import "../styles/home.scss"
+import React from 'react';
+import "../styles/home.scss";
 // import Header from '../components/Header'
 // import homeSliderPic from "../assets/group8.svg"
-import sliderLogo from "../assets/main_logo.png"
+import sliderLogo from "../assets/main_logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+
   return (
     <div className='homeContainer'>
       {/* <Header /> */}
@@ -15,13 +16,19 @@ const Home = () => {
 
         <div className='buttonContainer'>
           <button>Tutorial</button>
-          <button onClick={() => { navigate("/stage1") }} >
+          <button onClick={() => { navigate("/stage1") }}>
             Play
           </button>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default Home
+      <div className="tutorialText">
+        <h1 className="tutorialHeader">
+          An online game to practice your photo-editing skills
+        </h1>
+      </div>
+    </div>
+  );
+};
+
+export default Home;

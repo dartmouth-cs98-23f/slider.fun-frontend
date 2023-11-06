@@ -59,3 +59,24 @@
 
 
 }
+
+.tutorialText {
+  position: relative;
+  top: 40vh; // This will position the text right below the viewport regardless of its height
+  width: 50%;
+  text-align: left;
+  
+  .tutorialHeader {
+    flex-shrink: 0;
+    color: #000;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+
+
+
+}
+
