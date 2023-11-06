@@ -433,6 +433,12 @@ const Game = () => {
           </div>
         </div>
 
+        <div className='viewButtonsContainer'>
+          <button>Side-by-Side</button>
+          <button>Vertical Split</button>
+          <button>Horizontal Split</button>
+        </div>
+        
         <div className='slidersContainer'>
           <div className='sliderContainer'>
             <p> Brightness</p>
