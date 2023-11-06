@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import "../styles/home.scss";
 // import Header from '../components/Header'
+import sliderLogo from "../assets/main_logo_red.png"
 // import homeSliderPic from "../assets/group8.svg"
-import sliderLogo from "../assets/main_logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
