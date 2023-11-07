@@ -3,10 +3,11 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  // height: 100vh;
+  
 
   .mainMenu {
-
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,7 +18,8 @@
     img {
       height: auto;
       width: 500px;
-      margin: 50px;
+      margin-top: 200px;
+      margin-bottom: 50px;
     }
 
     .buttonContainer {
@@ -56,6 +58,42 @@
     }
   }
 
+  .tutorialText {
+    position: relative;
+    top: 40vh; // This will position the text right below the viewport regardless of its height
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: left;
+    
+    .tutorialHeader {
+      flex-shrink: 0;
+      color: #000;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
 
+    .tutorialHeader2 {
+      flex-shrink: 0;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: normal;
+      color: #E27272;
+      margin-bottom: 10px;
+    }
+
+    .tutorialParagraph{
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 300;
+      margin-top: 10px;
+      margin-bottom: 60px;
+    }
+
+  }
 
 }
