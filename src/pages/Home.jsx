@@ -37,6 +37,12 @@ const Home = () => {
           Slider is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo. 
         </p>
         <h2 className="tutorialHeader2">
+          How do I play?
+        </h2>
+        <p className="tutorialParagraph">
+          Click the Play button. On the left is the unedited photo, while the right is the target photo. Use the different sliders to try to match the unedited photo to the target photo. You can change the view style with the buttons below the photos. When you're done, press submit!
+        </p>
+        <h2 className="tutorialHeader2">
           Why use Slider?
         </h2>
         <p className="tutorialParagraph">
@@ -46,7 +52,7 @@ const Home = () => {
           Why not use Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider is not Lightroom or Photoshop. Those photo editing apps have many more features, and they allow you to make spot edits. Slider will not teach you those skills. 
+          Slider is not Lightroom or Photoshop. Those photo editing apps have many more features, and they allow you to make spot edits. Slider will not teach you those skills. Instead, the goal is to teach and practice the very basics: the sliders. 
         </p>
         <h2 className="tutorialHeader2">
           Who created Slider?
