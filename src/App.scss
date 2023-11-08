@@ -37,12 +37,15 @@ body {
       p {
         text-align: center;
         font-weight: bold;
+        
       }
     }
     
   }
 
   .viewButtonsContainer {
+
+    margin-top: 15px;
     display: flex;
     flex: 2;
     flex-direction: row;
@@ -68,7 +71,7 @@ body {
 
 .main-image {
   grid-area: image;
-  background-image: url("../src/assets/Chai000724-R2-077-37.jpg");
+  // background-image: url("../src/assets/Chai000724-R2-077-37.jpg");
   width: 100%;
   height: 100%;
   background-position: top center;
@@ -147,9 +150,10 @@ body {
   appearance: none;
   margin-top: -4px;
   /* Centers thumb on the track */
-  background-color: #363636;
+  background-color: #525252;
   height: 1rem;
-  width: 0.5rem;
+  width: 1rem;
+  border-radius: 0.5rem;
 }
 
 .sliderLocked::-webkit-slider-thumb {
@@ -158,9 +162,10 @@ body {
   appearance: none;
   margin-top: -4px;
   /* Centers thumb on the track */
-  background-color: #f32d2d;
+  background-color: #f86969;
   height: 1rem;
-  width: 0.5rem;
+  width: 1rem;
+  border-radius: 0.5rem;
 }
 
 .slidersContainer {
@@ -169,6 +174,8 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 
   .sliderContainer {
     margin-left: -45px;
@@ -190,7 +197,7 @@ body {
 }
 
 button {
-  margin: 10px;
+  margin: 8px;
   width: 100px;
   height: 30px;
   border-radius: 5px;
@@ -204,3 +211,43 @@ button {
     background-color: #70737a;
   }
 }
+
+.viewButtonVS {
+  margin: 8px;
+  width: 30px;
+  height: 30px;
+  background-image: url('assets/VerticalSplit.png'); 
+  background-size: cover; /* This will ensure that the image covers the whole button */
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.viewButtonHS {
+  margin: 8px;
+  width: 30px;
+  height: 30px;
+  background-image: url('assets/HorizontalSplit.png'); 
+  background-size: cover; /* This will ensure that the image covers the whole button */
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.viewButtonS2S {
+  margin: 8px;
+  width: 60px;
+  height: 30px;
+  background-image: url('assets/SideToSideSplit.png'); 
+  background-size: cover; /* This will ensure that the image covers the whole button */
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+

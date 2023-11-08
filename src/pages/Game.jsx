@@ -192,7 +192,7 @@ const Game = (stage_options) => {
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
-  const [importEdited, setImportEdited] = useState("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg")
+  const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
   // const selectedOption = currentOptions[selectedOptionIndex]
 
 
@@ -361,19 +361,20 @@ const Game = (stage_options) => {
       <div className="container">
         <div className='photoContainer'>
           <div className='photo'>
-            <p> Pre </p>
+            <p> You </p>
             <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
           </div>
           <div className='photo'>
-            <p> Goal </p>
+            <p> Target </p>
             <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
           </div>
         </div>
 
         <div className='viewButtonsContainer'>
-          <button>Side-by-Side</button>
-          <button>Vertical Split</button>
-          <button>Horizontal Split</button>
+          <p> View: &nbsp;&nbsp;&nbsp;</p>
+          <button class='viewButtonS2S'></button>
+          <button class='viewButtonVS'></button>
+          <button class='viewButtonHS'></button>
         </div>
         
         <div className='slidersContainer'>
