@@ -4,6 +4,7 @@ import "../styles/home.scss";
 import sliderLogo from "../assets/main_logo_red.png"
 // import homeSliderPic from "../assets/group8.svg"
 import { useNavigate } from "react-router-dom";
+import seq from "../assets/seq.mp4"
 
 const Home = () => {
   const tutorialRef = useRef(null);
@@ -16,6 +17,9 @@ const Home = () => {
   return (
     <div className='homeContainer'>
       <div className="mainMenu">
+        <video autoplay="autoplay" loop="loop" muted="muted" id="video">
+          <source src={seq} type="video/mp4"></source>
+        </video>
         <img src={sliderLogo} alt=""></img>
 
         <div className='buttonContainer'>
@@ -34,7 +38,7 @@ const Home = () => {
           What is Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo. 
+          Slider is a slider-only photo editing game. There are different levels of difficulty, but at every level, you alter the sliders to edit the unedited photo, aiming to match the (edited) target photo.
         </p>
         <h2 className="tutorialHeader2">
           How do I play?
@@ -46,19 +50,19 @@ const Home = () => {
           Why use Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider is for photographers and photo editors of all skill levels. Each set of photos is a puzzle, and as you complete more puzzles, your photo-editing skills will improve. 
+          Slider is for photographers and photo editors of all skill levels. Each set of photos is a puzzle, and as you complete more puzzles, your photo-editing skills will improve.
         </p>
         <h2 className="tutorialHeader2">
           Why not use Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider is not Lightroom or Photoshop. Those photo editing apps have many more features, and they allow you to make spot edits. Slider will not teach you those skills. Instead, the goal is to teach and practice the very basics: the sliders. 
+          Slider is not Lightroom or Photoshop. Those photo editing apps have many more features, and they allow you to make spot edits. Slider will not teach you those skills. Instead, the goal is to teach and practice the very basics: the sliders.
         </p>
         <h2 className="tutorialHeader2">
           Who created Slider?
         </h2>
         <p className="tutorialParagraph">
-          Slider was created as part of the culminating experience in Computer Science at Dartmouth College in Fall 2023. The principle authors are Zhoucai Ni, Kashan Mahmood, Ethan Gearey, Russell Chai, and CrypticMatter. 
+          Slider was created as part of the culminating experience in Computer Science at Dartmouth College in Fall 2023. The principle authors are Zhoucai Ni, Kashan Mahmood, Ethan Gearey, Russell Chai, and CrypticMatter.
         </p>
       </div>
     </div>
