@@ -83,11 +83,14 @@ const CURRENT_OPTIONS = [
 ]
 
 
+const link = "https://slider-fun.onrender.com/api/photo/65495d668d1d5c2fa933c23a"
+
+
 const Stage3 = () => {
   return (
     <div>
       <Game
-        stage_options={CURRENT_OPTIONS}
+        stage_options={CURRENT_OPTIONS} pic_link={link}
       />
     </div>
   )
