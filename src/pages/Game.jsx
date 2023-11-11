@@ -197,6 +197,7 @@ const Game = (stage_options) => {
 
 
   function handleSliderChange(propertyIndex, { target }) {
+    console.log(currentOptions)
     setCurrentOptions(prevOptions => {
       return prevOptions.map((option, index) => {
         if (index !== propertyIndex) return option
@@ -214,6 +215,9 @@ const Game = (stage_options) => {
 
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
+
+        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fcontrast.jpg?alt=media&token=24b06fc7-ad1d-454e-8bde-90d97d60e99a")
+        // setEditedOptions(defaultOptions)
       }
     });
   }, []);
