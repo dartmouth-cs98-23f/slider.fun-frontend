@@ -9,9 +9,9 @@ import { useEffect } from 'react'
 
 import axios from 'axios';
 
-async function fetchPhoto() {
+async function fetchPhoto(link) {
   try {
-    const response = await axios.get('https://slider-fun.onrender.com/api/photo/65495d668d1d5c2fa933c23a');
+    const response = await axios.get(link);
 
     if (response.status === 200) {
       return response.data; // This will contain the data returned from the server
@@ -184,16 +184,17 @@ const CURRENT_OPTIONS = [
 
 const MODIFIED_OPTIONS = []
 
-const Game = (stage_options) => {
+const Game = (props) => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
-  const [currentOptions, setCurrentOptions] = useState(stage_options.stage_options)
+  const [currentOptions, setCurrentOptions] = useState(props.stage_options)
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
   // const selectedOption = currentOptions[selectedOptionIndex]
+
 
 
   function handleSliderChange(propertyIndex, { target }) {
@@ -207,7 +208,7 @@ const Game = (stage_options) => {
 
   useEffect(() => {
     // Example usage:
-    fetchPhoto().then(data => {
+    fetchPhoto(props.pic_link).then(data => {
       // console.log("Received data:", data); // Check the full data object
       if (data) {
         // console.log("second loop:", data.imageUrl); // Check the full data object
@@ -216,7 +217,7 @@ const Game = (stage_options) => {
         setEditedOptions(data.photoProperties)
       }
     });
-  }, []);
+  }, [props.pic_link]);
 
   // const [averageRgbValues, setAverageRgbValues] = useState([]);
 
@@ -376,7 +377,7 @@ const Game = (stage_options) => {
           <button class='viewButtonVS'></button>
           <button class='viewButtonHS'></button>
         </div>
-        
+
         <div className='slidersContainer'>
           <div className='sliderContainer'>
             <p> Brightness</p>
