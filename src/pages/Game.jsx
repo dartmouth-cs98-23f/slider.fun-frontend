@@ -9,9 +9,9 @@ import { useEffect } from 'react'
 
 import axios from 'axios';
 
-async function fetchPhoto(link) {
+async function fetchPhoto() {
   try {
-    const response = await axios.get(link);
+    const response = await axios.get('https://slider-fun.onrender.com/api/photo/65495d668d1d5c2fa933c23a');
 
     if (response.status === 200) {
       return response.data; // This will contain the data returned from the server
@@ -184,17 +184,16 @@ const CURRENT_OPTIONS = [
 
 const MODIFIED_OPTIONS = []
 
-const Game = (props) => {
+const Game = (stage_options) => {
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
-  const [currentOptions, setCurrentOptions] = useState(props.stage_options)
+  const [currentOptions, setCurrentOptions] = useState(stage_options.stage_options)
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
   // const selectedOption = currentOptions[selectedOptionIndex]
-
 
 
   function handleSliderChange(propertyIndex, { target }) {
@@ -208,7 +207,7 @@ const Game = (props) => {
 
   useEffect(() => {
     // Example usage:
-    fetchPhoto(props.pic_link).then(data => {
+    fetchPhoto().then(data => {
       // console.log("Received data:", data); // Check the full data object
       if (data) {
         // console.log("second loop:", data.imageUrl); // Check the full data object
@@ -217,7 +216,7 @@ const Game = (props) => {
         setEditedOptions(data.photoProperties)
       }
     });
-  }, [props.pic_link]);
+  }, []);
 
   // const [averageRgbValues, setAverageRgbValues] = useState([]);
 
@@ -377,7 +376,7 @@ const Game = (props) => {
           <button class='viewButtonVS'></button>
           <button class='viewButtonHS'></button>
         </div>
-
+        
         <div className='slidersContainer'>
           <div className='sliderContainer'>
             <p> Brightness</p>
@@ -453,10 +452,10 @@ const Game = (props) => {
 
         <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button>
         <div className='score'>
-          <p> Default Score: {defaultScore}</p>
-          <p> Current Score: {score}</p>
+          {/*<p> Default Score: {defaultScore}</p>
+          <p> Current Score: {score}</p> */}
           {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
-            <p>Percent score: {percentScore}</p>
+            <p>Score: {percentScore}%</p>
           )}
         </div>
       </div>
