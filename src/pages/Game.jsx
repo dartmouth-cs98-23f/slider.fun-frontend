@@ -317,6 +317,12 @@ const Game = (stage_options) => {
     return totalRMSE;
   }
 
+  // evaluate totalRMSE for grading
+  const evaluateRMSE = async (totalRMSE) => {
+    // if totalRMSE >= 
+  }
+    
+
 
 
   const handleScoreProcessing = async (photo, filter1, filter2) => {
