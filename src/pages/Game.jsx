@@ -2,6 +2,7 @@ import { useState } from 'react'
 import React from 'react'
 import Header from '../components/Header'
 import Slider from '../components/Slider'
+import ResultsModal from '../components/ResultsModal'
 // import edited from '../assets/Chai-Edited.jpg'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
@@ -351,11 +352,14 @@ const Game = (props) => {
   }, [score, defaultScore])
 
 
-  // useEffect(() => {
-  //   if (defaultScore === false) {
-  //     setDefaultScore(compareTwoPhotos(current, edited, getImageStyle().filter, getEditedImageStyle().filter))
-  //   }
-  // }, [importEdited])
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const handleCompareClick = () => {
+    setIsModalVisible(true);
+    setScore(10);
+  };
+  const closeModal = () => {
+    setIsModalVisible(false)
+  };
 
 
   return (
@@ -454,8 +458,11 @@ const Game = (props) => {
             />
           </div>
         </div>
-
-        <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button>
+        <button onClick={handleCompareClick}>Compare</button>
+        {isModalVisible && (
+          <ResultsModal score={score} onClose={closeModal} />
+        )}
+        {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
           <p> Default Score: {defaultScore}</p>
           <p> Current Score: {score}</p>
