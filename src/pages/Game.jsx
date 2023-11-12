@@ -6,6 +6,8 @@ import Slider from '../components/Slider'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useEffect } from 'react'
+import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle, styleFitContainer} from 'react-compare-slider';
+import ReactCompareImage from 'react-compare-image';
 
 import axios from 'axios';
 
@@ -357,6 +359,76 @@ const Game = (props) => {
   //   }
   // }, [importEdited])
 
+  const [active, setActive] = React.useState(1);
+  const SetView = (active) => {
+    setActive(active);
+  };
+
+  const ImageView = () => {
+    switch (active) {
+      case 1:
+        return (
+          <div className='photoContainer'>
+            <div className='photo'>
+              <p> You </p>
+              <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
+            </div>
+            <div className='photo'>
+              <p> Target </p>
+              <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
+            </div>
+          </div>
+        )
+      case 2:
+        return (
+          <div style={{ width: '75%', height: '75%', flexGrow: 1 }}>
+            <ReactCompareSlider
+              handle={
+                <ReactCompareSliderHandle 
+                  buttonStyle={{
+                    backdropFilter: undefined,
+                    WebkitBackdropFilter: undefined,
+                    backgroundColor: '#E27272',
+                  }}
+                  linesStyle={{
+                    opacity: 0
+                    
+                  }}
+                />
+              }
+              
+              itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
+              itemTwo={<ReactCompareSliderImage src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />}
+            />
+          </div>
+        )
+      default:
+        return (
+          <div className='comparisonContainer'>
+            <ReactCompareSlider
+              portrait
+              handle={
+                
+                <ReactCompareSliderHandle 
+                  portrait
+                  buttonStyle={{
+                    backdropFilter: undefined,
+                    WebkitBackdropFilter: undefined,
+                    backgroundColor: '#E27272',
+                  }}
+                  linesStyle={{
+                    opacity: 0
+                  }}
+                />
+              }
+              
+              itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
+              itemTwo={<ReactCompareSliderImage src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />}
+            />
+          </div>
+        )
+    }
+  };
 
   return (
     <div>
@@ -364,7 +436,7 @@ const Game = (props) => {
       <Header>  </Header>
 
       <div className="container">
-        <div className='photoContainer'>
+        {/* <div className='photoContainer'>
           <div className='photo'>
             <p> You </p>
             <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
@@ -373,13 +445,14 @@ const Game = (props) => {
             <p> Target </p>
             <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
           </div>
-        </div>
+        </div> */}
+        {ImageView()}
 
         <div className='viewButtonsContainer'>
           <p> View: &nbsp;&nbsp;&nbsp;</p>
-          <button class='viewButtonS2S'></button>
-          <button class='viewButtonVS'></button>
-          <button class='viewButtonHS'></button>
+          <button class='viewButtonS2S' onClick={() => SetView(1)}></button>
+          <button class='viewButtonVS' onClick={() => SetView(2)}></button>
+          <button class='viewButtonHS' onClick={() => SetView(3)}></button>
         </div>
 
         <div className='slidersContainer'>
