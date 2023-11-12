@@ -67,7 +67,7 @@ const CURRENT_OPTIONS = [
       max: 360
     },
     unit: 'deg',
-    status: true,
+    status: false,
   },
   {
     name: 'Blur',
