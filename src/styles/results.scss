@@ -11,6 +11,13 @@
     text-align: center;
   }
 
+.headerModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  }
+
 .buttonsModal {
   display: flex;
   flex-direction: column;

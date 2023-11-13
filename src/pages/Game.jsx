@@ -8,7 +8,7 @@ import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useEffect } from 'react'
 
-import axios from 'axios';
+import axios from 'axios';                   
 
 async function fetchPhoto(link) {
   try {
@@ -193,7 +193,7 @@ const Game = (props) => {
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
-  const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
+  const [importEdited, setImportEdited] = useState("")
   // const selectedOption = currentOptions[selectedOptionIndex]
 
 
@@ -353,10 +353,12 @@ const Game = (props) => {
 
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+
   const handleCompareClick = () => {
+    handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
     setIsModalVisible(true);
-    setScore(10);
   };
+
   const closeModal = () => {
     setIsModalVisible(false)
   };
@@ -366,7 +368,7 @@ const Game = (props) => {
     <div>
 
       <Header>  </Header>
-
+      {/* <Loader /> */}
       <div className="container">
         <div className='photoContainer'>
           <div className='photo'>
@@ -460,12 +462,12 @@ const Game = (props) => {
         </div>
         <button onClick={handleCompareClick}>Compare</button>
         {isModalVisible && (
-          <ResultsModal score={score} onClose={closeModal} />
+          <ResultsModal score={percentScore} onClose={closeModal} />
         )}
         {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
-          <p> Default Score: {defaultScore}</p>
-          <p> Current Score: {score}</p>
+          {/* <p> Default Score: {defaultScore}</p> */}
+          {/* <p> Current Score: {score}</p> */}
           {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
             <p>Percent score: {percentScore}</p>
           )}
