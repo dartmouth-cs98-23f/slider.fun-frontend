@@ -6,7 +6,7 @@ import Slider from '../components/Slider'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useEffect } from 'react'
-import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle, styleFitContainer} from 'react-compare-slider';
+import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle, styleFitContainer } from 'react-compare-slider';
 import ReactCompareImage from 'react-compare-image';
 
 import axios from 'axios';
@@ -219,7 +219,7 @@ const Game = (props) => {
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
 
-        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fcontrast.jpg?alt=media&token=24b06fc7-ad1d-454e-8bde-90d97d60e99a")
+        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fsepia.JPG?alt=media&token=20f842a1-bf9f-4279-85cc-24ae0bc16ded")
         // setEditedOptions(defaultOptions)
       }
     });
@@ -384,7 +384,7 @@ const Game = (props) => {
           <div style={{ width: '75%', height: '75%', flexGrow: 1 }}>
             <ReactCompareSlider
               handle={
-                <ReactCompareSliderHandle 
+                <ReactCompareSliderHandle
                   buttonStyle={{
                     backdropFilter: undefined,
                     WebkitBackdropFilter: undefined,
@@ -392,11 +392,11 @@ const Game = (props) => {
                   }}
                   linesStyle={{
                     opacity: 0
-                    
+
                   }}
                 />
               }
-              
+
               itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
               itemTwo={<ReactCompareSliderImage src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />}
             />
@@ -408,8 +408,8 @@ const Game = (props) => {
             <ReactCompareSlider
               portrait
               handle={
-                
-                <ReactCompareSliderHandle 
+
+                <ReactCompareSliderHandle
                   portrait
                   buttonStyle={{
                     backdropFilter: undefined,
@@ -421,7 +421,7 @@ const Game = (props) => {
                   }}
                 />
               }
-              
+
               itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
               itemTwo={<ReactCompareSliderImage src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />}
             />

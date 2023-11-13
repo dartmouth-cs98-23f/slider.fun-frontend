@@ -67,7 +67,7 @@ const CURRENT_OPTIONS = [
       max: 360
     },
     unit: 'deg',
-    status: true,
+    status: false,
   },
   {
     name: 'Blur',
@@ -82,7 +82,7 @@ const CURRENT_OPTIONS = [
   }
 ]
 
-const link = "https://slider-fun.onrender.com/api/photo/6549659c8d1d5c2fa933c8f2"
+const link = "https://slider-fun.onrender.com/api/photo/6551658492d16a06e6567353"
 
 const Stage5 = () => {
   return (
