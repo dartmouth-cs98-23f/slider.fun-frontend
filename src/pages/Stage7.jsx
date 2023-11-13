@@ -74,7 +74,7 @@ const CURRENT_OPTIONS = [
     value: 0,
     range: {
       min: 0,
-      max: 5
+      max: 1.5
     },
     unit: 'px',
     status: true,

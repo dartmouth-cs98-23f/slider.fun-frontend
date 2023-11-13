@@ -218,7 +218,7 @@ const Game = (props) => {
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
 
-        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fblur.jpeg?alt=media&token=3b5de3b7-32d6-4765-85c7-43ff91f0d803")
+        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fblur2.jpg?alt=media&token=f26f7dd0-c5f4-4dda-96c1-0b19209a4c66")
         // setEditedOptions(defaultOptions)
       }
     });
@@ -463,6 +463,7 @@ const Game = (props) => {
               value={currentOptions[0].value}
               status={currentOptions[0].status}
               handleChange={(event) => handleSliderChange(0, event)}
+
             />
           </div>
           <div className='sliderContainer'>
@@ -523,6 +524,7 @@ const Game = (props) => {
               value={currentOptions[6].value}
               status={currentOptions[6].status}
               handleChange={(event) => handleSliderChange(6, event)}
+              step={0.1}
             />
           </div>
         </div>
