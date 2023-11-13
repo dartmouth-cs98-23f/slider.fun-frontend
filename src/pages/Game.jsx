@@ -366,7 +366,7 @@ const Game = (props) => {
 
   return (
     <div>
-
+      {isModalVisible && <div className="modal-overlay"></div>}
       <Header>  </Header>
       <div className="container">
         <div className='photoContainer'>
