@@ -16,11 +16,13 @@ const Header = () => {
       <img src={sliderHeader} alt="" width="800"></img>
 
       <nav className='headerNav'>
-        <button onClick={() => handleNavigate("/stage1")}>Level 1</button>
-        <button onClick={() => handleNavigate("/stage2")}>Level 2</button>
-        <button onClick={() => handleNavigate("/stage3")}>Level 3</button>
-        <button onClick={() => handleNavigate("/stage4")}>Level 4</button>
-        <button onClick={() => handleNavigate("/stage5")}>Level 5</button>
+        <button onClick={() => handleNavigate("/stage1")}>Brightness</button>
+        <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
+        <button onClick={() => handleNavigate("/stage3")}>Saturation</button>
+        <button onClick={() => handleNavigate("/stage4")}>Greyscale</button>
+        <button onClick={() => handleNavigate("/stage5")}>Sepia</button>
+        <button onClick={() => handleNavigate("/stage6")}>Hue Rotate</button>
+        <button onClick={() => handleNavigate("/stage7")}>Blur</button>
       </nav>
     </div>
   )

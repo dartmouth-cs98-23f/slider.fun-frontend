@@ -27,7 +27,7 @@ function ResultsModal(props) {
               {props.score >= 50 && props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
               {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
               {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
-              {props.score > 95 ? <h2>Nice job!</h2> : null}
+              {props.score >= 95 ? <h2>Nice job!</h2> : null}
               <h3> {props.score} </h3>
 
             </div>}
@@ -41,13 +41,9 @@ function ResultsModal(props) {
                   buttonStyle={{
                     backdropFilter: undefined,
                     WebkitBackdropFilter: undefined,
-                    // backgroundColor: '#E27272',
                     border: 0,
-                    // height: '25px',
-                    // width: '25px',
                     boxShadow: 'none',
                     marginLeft: "-15px"
-                    // cursor: 'pointer',
                   }}
                   linesStyle={{
                     opacity: 0.0,
