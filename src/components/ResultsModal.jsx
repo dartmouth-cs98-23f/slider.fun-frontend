@@ -20,7 +20,9 @@ function ResultsModal(props) {
     <>
       <div className="resultsModal">
         <div className="headerModal">
-          {props.score > 90 && props.score < 95? <h2>So close!</h2> : null}
+          {props.score > 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
+          {props.score > 90 && props.score < 95 ? <h2>So close!</h2> : null}
+          {props.score > 95 ? <h2>Nice job!</h2> : null}
           {loading ? <Loader /> : <h3> {props.score} </h3>}
           {/* <h3>{score}</h3> */}
         </div>
