@@ -194,11 +194,15 @@ const Game = (props) => {
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
+  const [active, setActive] = React.useState(1);
+
   // const selectedOption = currentOptions[selectedOptionIndex]
 
 
+  const [resetPressable, setResetPressable] = useState(true);
 
   function handleSliderChange(propertyIndex, { target }) {
+    setResetPressable(false);
     console.log(currentOptions)
     setCurrentOptions(prevOptions => {
       return prevOptions.map((option, index) => {
@@ -351,16 +355,28 @@ const Game = (props) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+
   const handleCompareClick = () => {
     handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
     setIsModalVisible(true);
+  };
+
+
+  const handleResetSliders = () => {
+    currentOptions[0].value = defaultOptions[0].value;
+    currentOptions[1].value = defaultOptions[1].value;
+    currentOptions[2].value = defaultOptions[2].value;
+    currentOptions[3].value = defaultOptions[3].value;
+    currentOptions[4].value = defaultOptions[4].value;
+    currentOptions[5].value = defaultOptions[5].value;
+    currentOptions[6].value = defaultOptions[6].value;
+    setResetPressable(true);
   };
 
   const closeModal = () => {
     setIsModalVisible(false)
   };
 
-  const [active, setActive] = React.useState(1);
   const SetView = (active) => {
     setActive(active);
   };
@@ -526,7 +542,11 @@ const Game = (props) => {
             />
           </div>
         </div>
-        <button onClick={handleCompareClick}>Compare</button>
+        <div className='actionButtons'>
+          <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
+          <button onClick={handleCompareClick}>Compare</button>
+        </div>
+        
         {isModalVisible && (
           <ResultsModal score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
