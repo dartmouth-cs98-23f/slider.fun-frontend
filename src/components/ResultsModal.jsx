@@ -12,7 +12,7 @@ function ResultsModal(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 800);
+    }, 700);
   }, [loading]);
 
 
@@ -20,23 +20,25 @@ function ResultsModal(props) {
     <>
       <div className="resultsModal">
         <div className="headerModal">
-          {props.score > 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
-          {props.score > 90 && props.score < 95 ? <h2>So close!</h2> : null}
-          {props.score > 95 ? <h2>Nice job!</h2> : null}
-          {loading ? <Loader /> : <h3> {props.score} </h3>}
-          {/* <h3>{score}</h3> */}
+          {loading ? <Loader /> :
+            <div>
+              {props.score >= 50 && props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
+              {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
+              {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
+              {props.score > 95 ? <h2>Nice job!</h2> : null}
+              <h3> {props.score} </h3>
+
+            </div>}
         </div>
         <div className="imagesModal-container">
           <div>
-            <img alt="im1" src={preImage} />
+            <img alt="im1" src={props.img} style={props.currentStyle} />
           </div>
           <div>
             <img alt="img2" src={goalImage} />
           </div>
         </div>
         <div className="buttonsModal">
-          {/* <button className="shareResultsButton">share results</button>
-                <button className="viewStatsButton">view stats</button> */}
           <button onClick={props.onClose}>Close</button>
         </div>
       </div>
