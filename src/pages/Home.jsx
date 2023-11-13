@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className='homeContainer'>
       <div className="mainMenu">
-        <video autoplay="autoplay" loop="loop" muted="muted" id="video">
+        <video autoplay="autoplay" loop="loop" muted="muted" id="video" playsinline>
           <source src={seq} type="video/mp4"></source>
         </video>
         <img src={sliderLogo} alt=""></img>

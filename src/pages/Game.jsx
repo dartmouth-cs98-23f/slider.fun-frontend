@@ -218,7 +218,7 @@ const Game = (props) => {
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
 
-        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fsepia.JPG?alt=media&token=20f842a1-bf9f-4279-85cc-24ae0bc16ded")
+        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fblur.jpeg?alt=media&token=3b5de3b7-32d6-4765-85c7-43ff91f0d803")
         // setEditedOptions(defaultOptions)
       }
     });
@@ -390,6 +390,7 @@ const Game = (props) => {
                     backdropFilter: undefined,
                     WebkitBackdropFilter: undefined,
                     backgroundColor: '#E27272',
+                    marginLeft: "-15px"
                   }}
                   linesStyle={{
                     opacity: 0
@@ -414,6 +415,7 @@ const Game = (props) => {
                     backdropFilter: undefined,
                     WebkitBackdropFilter: undefined,
                     backgroundColor: '#E27272',
+                    marginTop: "-15px"
                   }}
                   linesStyle={{
                     opacity: 0
