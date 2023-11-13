@@ -82,7 +82,7 @@ const CURRENT_OPTIONS = [
   }
 ]
 
-const link = "https://slider-fun.onrender.com/api/photo/6549659c8d1d5c2fa933c8f2"
+const link = "https://slider-fun.onrender.com/api/photo/6551641e92d16a06e6567292"
 
 const Stage4 = () => {
   return (
