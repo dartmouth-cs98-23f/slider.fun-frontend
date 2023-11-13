@@ -1,6 +1,7 @@
 import React from 'react'
 import "../styles/header.scss"
 import sliderHeader from "../assets/header_red.png"
+import mainLogo from "../assets/main_logo_red.png"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,8 +14,9 @@ const Header = () => {
   return (
 
     <div className='headerContainer'>
-      <img src={sliderHeader} alt="" width="800"></img>
-
+      <div className='headerLogo'>
+        <img src={mainLogo} alt="" width="100"></img>
+      </div>
       <nav className='headerNav'>
         <button onClick={() => handleNavigate("/stage1")}>Brightness</button>
         <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
