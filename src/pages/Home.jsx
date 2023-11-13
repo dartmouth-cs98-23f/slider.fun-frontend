@@ -18,7 +18,7 @@ const Home = () => {
     <div className='homeContainer'>
       <div className="mainMenu">
         <video autoplay="autoplay" loop="loop" muted="muted" id="video" playsinline>
-          <source src={seq} type="video/mp4"></source>
+          <source src="https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/videos%2Fseq.mov?alt=media&token=fe8d69fb-7bf0-405f-bacb-ae38a5059d37" type="video/mp4"></source>
         </video>
         <img src={sliderLogo} alt=""></img>
 
