@@ -2,12 +2,11 @@ import { useState } from 'react'
 import React from 'react'
 import Header from '../components/Header'
 import Slider from '../components/Slider'
-// import edited from '../assets/Chai-Edited.jpg'
+import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useEffect } from 'react'
-import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle, styleFitContainer } from 'react-compare-slider';
-import ReactCompareImage from 'react-compare-image';
+import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 
 import axios from 'axios';
 
@@ -224,9 +223,6 @@ const Game = (stage_options) => {
     });
   }, []);
 
-  // const [averageRgbValues, setAverageRgbValues] = useState([]);
-
-
   const getRBG = (pictureFile, filters = false) => {
     // console.log(filters)
     return new Promise((resolve, reject) => {
@@ -358,11 +354,16 @@ const Game = (stage_options) => {
   }, [score, defaultScore])
 
 
-  // useEffect(() => {
-  //   if (defaultScore === false) {
-  //     setDefaultScore(compareTwoPhotos(current, edited, getImageStyle().filter, getEditedImageStyle().filter))
-  //   }
-  // }, [importEdited])
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleCompareClick = () => {
+    handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
+    setIsModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+  };
 
   const [active, setActive] = React.useState(1);
   const SetView = (active) => {
@@ -380,7 +381,7 @@ const Game = (stage_options) => {
             </div>
             <div className='photo'>
               <p> Target </p>
-              <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
+              <img src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />
             </div>
           </div>
         )
@@ -401,9 +402,8 @@ const Game = (stage_options) => {
                   }}
                 />
               }
-
               itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
-              itemTwo={<ReactCompareSliderImage src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />}
+              itemTwo={<ReactCompareSliderImage src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />}
             />
           </div>
         )
@@ -413,7 +413,6 @@ const Game = (stage_options) => {
             <ReactCompareSlider
               portrait
               handle={
-
                 <ReactCompareSliderHandle
                   portrait
                   buttonStyle={{
@@ -426,9 +425,8 @@ const Game = (stage_options) => {
                   }}
                 />
               }
-
               itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
-              itemTwo={<ReactCompareSliderImage src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />}
+              itemTwo={<ReactCompareSliderImage src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />}
             />
           </div>
         )
@@ -437,9 +435,8 @@ const Game = (stage_options) => {
 
   return (
     <div>
-
+      {isModalVisible && <div className="modal-overlay"></div>}
       <Header>  </Header>
-
       <div className="container">
         {/* <div className='photoContainer'>
           <div className='photo'>
@@ -532,11 +529,14 @@ const Game = (stage_options) => {
             />
           </div>
         </div>
-
-        <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button>
+        <button onClick={handleCompareClick}>Compare</button>
+        {isModalVisible && (
+          <ResultsModal score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+        )}
+        {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
-          {/*<p> Default Score: {defaultScore}</p>
-          <p> Current Score: {score}</p> */}
+          {/* <p> Default Score: {defaultScore}</p> */}
+          {/* <p> Current Score: {score}</p> */}
           {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
             <p>Score: {percentScore}%</p>
           )}
