@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import preImage from "../assets/pre.jpeg";
-import goalImage from "../assets/goal.jpeg";
+// import preImage from "../assets/pre.jpeg";
+// import goalImage from "../assets/goal.jpeg";
 import "../styles/results.scss";
 import Loader from './Loader';
+import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
+import CustomHandle from './CustomHandle';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
-
+  console.log(props)
 
   useState(() => {
     setLoading(true);
@@ -32,11 +34,37 @@ function ResultsModal(props) {
         </div>
         <div className="imagesModal-container">
           <div>
+            <ReactCompareSlider
+
+              handle={
+                <ReactCompareSliderHandle
+                  buttonStyle={{
+                    backdropFilter: undefined,
+                    WebkitBackdropFilter: undefined,
+                    // backgroundColor: '#E27272',
+                    border: 0,
+                    // height: '25px',
+                    // width: '25px',
+                    boxShadow: 'none',
+                    marginLeft: "-15px"
+                    // cursor: 'pointer',
+                  }}
+                  linesStyle={{
+                    opacity: 0.0,
+                  }}
+                />
+              }
+
+              itemOne={<ReactCompareSliderImage src={props.img} alt="pre edit pics" style={props.currentStyle} />}
+              itemTwo={<ReactCompareSliderImage src={props.img} alt="edited pics" style={props.targetStyle} />}
+            />
+          </div>
+          {/* <div>
             <img alt="im1" src={props.img} style={props.currentStyle} />
           </div>
           <div>
             <img alt="img2" src={goalImage} />
-          </div>
+          </div> */}
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
