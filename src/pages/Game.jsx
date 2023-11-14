@@ -5,6 +5,7 @@ import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react'
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 
@@ -186,6 +187,7 @@ const CURRENT_OPTIONS = [
 const MODIFIED_OPTIONS = []
 
 const Game = (props) => {
+  const location = useLocation();
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
@@ -554,6 +556,7 @@ const Game = (props) => {
           {/* </div> */}
         </div>
         <div className='actionButtons'>
+          {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >need help?</button>}
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
           <button onClick={handleCompareClick}>Compare</button>
         </div>

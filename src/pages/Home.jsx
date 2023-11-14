@@ -23,7 +23,7 @@ const Home = () => {
 
         <div className='buttonContainer'>
           <button onClick={scrollToTutorial}>Tutorial</button>
-          <button onClick={() => { navigate("/stage1") }}>
+          <button onClick={() => { navigate("/tutorial/stage1") }}>
             Play
           </button>
         </div>

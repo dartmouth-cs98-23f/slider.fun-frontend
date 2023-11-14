@@ -13,13 +13,13 @@ const TutorialHeader = () => {
 
     <div >
       <nav className='headerNav'>
-        <button onClick={() => handleNavigate("/stage1")}>Brightness</button>
-        <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
-        <button onClick={() => handleNavigate("/stage3")}>Saturation</button>
-        <button onClick={() => handleNavigate("/stage4")}>Greyscale</button>
-        <button onClick={() => handleNavigate("/stage5")}>Sepia</button>
-        <button onClick={() => handleNavigate("/stage6")}>Hue Rotate</button>
-        <button onClick={() => handleNavigate("/stage7")}>Blur</button>
+        <button onClick={() => handleNavigate("/tutorial/stage1")}>Brightness</button>
+        <button onClick={() => handleNavigate("/tutorial/stage2")}>Contrast</button>
+        <button onClick={() => handleNavigate("/tutorial/stage3")}>Saturation</button>
+        <button onClick={() => handleNavigate("/tutorial/stage4")}>Greyscale</button>
+        <button onClick={() => handleNavigate("/tutorial/stage5")}>Sepia</button>
+        <button onClick={() => handleNavigate("/tutorial/stage6")}>Hue Rotate</button>
+        <button onClick={() => handleNavigate("/tutorial/stage7")}>Blur</button>
       </nav>
     </div>
   )

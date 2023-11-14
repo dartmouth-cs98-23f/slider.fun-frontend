@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Game from './Game'
 import InfoModal from '../components/InfoModal'
 import TutorialHeader from '../components/TutorialHeader'
@@ -83,17 +83,29 @@ const CURRENT_OPTIONS = [
   }
 ]
 
+
+
 const link = "https://slider-fun.onrender.com/api/photo/65495d668d1d5c2fa933c23a"
 
 const infoText = "Adjusting brightness involves altering the overall lightness or darkness of an image. This can be particularly useful in low-light conditions to enhance image clarity, or in overly bright conditions to reduce glare and balance the exposure."
 
 const StageOne = () => {
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+  };
+
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
-      <InfoModal text={infoText} />
+      <InfoModal text={infoText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link}
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal}
       />
     </div>
   )

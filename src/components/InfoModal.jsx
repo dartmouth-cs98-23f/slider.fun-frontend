@@ -3,7 +3,7 @@ import "../styles/results.scss";
 
 function InfoModal(props) {
   const [loading, setLoading] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  
   console.log(props)
 
   // useState(() => {
@@ -13,20 +13,17 @@ function InfoModal(props) {
   //   }, 700);
   // }, [loading]);
 
-  const closeModal = () => {
-    setIsModalVisible(false)
-  };
+ 
 
 
   return (
     <>
-      {isModalVisible &&
+      {props.isModalVisible &&
         <div className="resultsModal">
           <div className="headerModal">
             <p> {props.text}</p>
-
             <div className="buttonsModal">
-              <button onClick={closeModal}>Close</button>
+              <button onClick={props.closeModal}>Close</button>
             </div>
           </div>
         </div>
