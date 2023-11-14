@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import React from 'react'
-import Header from '../components/Header'
+// import Header from '../components/Header'
 import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
@@ -195,6 +195,7 @@ const Game = (props) => {
   const [defaultScore, setDefaultScore] = useState(false)
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
   const [active, setActive] = React.useState(1);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // const selectedOption = currentOptions[selectedOptionIndex]
 
@@ -353,7 +354,7 @@ const Game = (props) => {
   }, [score, defaultScore])
 
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+
 
 
   const handleCompareClick = () => {
@@ -449,7 +450,7 @@ const Game = (props) => {
   return (
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
-      <Header>  </Header>
+
       <div className="container">
         {/* <div className='photoContainer'>
           <div className='photo'>

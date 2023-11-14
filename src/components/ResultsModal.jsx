@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
-import CustomHandle from './CustomHandle';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
@@ -14,7 +13,7 @@ function ResultsModal(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 700);
+    }, 900);
   }, [loading]);
 
 
@@ -55,12 +54,7 @@ function ResultsModal(props) {
               itemTwo={<ReactCompareSliderImage src={props.img} alt="edited pics" style={props.targetStyle} />}
             />
           </div>
-          {/* <div>
-            <img alt="im1" src={props.img} style={props.currentStyle} />
-          </div>
-          <div>
-            <img alt="img2" src={goalImage} />
-          </div> */}
+
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>

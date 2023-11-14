@@ -9,10 +9,13 @@ import Stage4 from './pages/Stage4';
 import Stage5 from './pages/Stage5';
 import Stage6 from './pages/Stage6';
 import Stage7 from './pages/Stage7';
+import HeaderWrapper from './components/HeaderWrapper';
 
 function App() {
+
   return (
     <BrowserRouter>
+      <HeaderWrapper />
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
