@@ -1,7 +1,7 @@
 import React from 'react'
 import "../styles/header.scss"
-// import sliderHeader from "../assets/header_red.png"
 import domainLogo from "../assets/domain_logo.svg"
+import inLineLogo from "../assets/InLineLogoRed.png"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,7 +15,7 @@ const Header = () => {
 
     <div className='headerContainer'>
       <div className='contentContainer'>
-        <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
+        <img onClick={() => handleNavigate("/")} src={inLineLogo} alt="" width="150"></img>
         <nav className='headerNav'>
           <button onClick={() => handleNavigate("/stage1")}> how to play</button>
           {/* <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
