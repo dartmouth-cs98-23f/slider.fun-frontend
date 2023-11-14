@@ -528,7 +528,7 @@ const Game = (props) => {
             />
           </div>
         </div>
-        <button onClick={handleCompareClick}>Compare</button>
+        <button className='compareButton' onClick={handleCompareClick}>Compare</button>
         {isModalVisible && (
           <ResultsModal score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
