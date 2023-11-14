@@ -11,6 +11,9 @@ import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle }
 
 import axios from 'axios';
 
+
+
+
 async function fetchPhoto(link) {
   try {
     const response = await axios.get(link);
@@ -187,6 +190,7 @@ const CURRENT_OPTIONS = [
 const MODIFIED_OPTIONS = []
 
 const Game = (props) => {
+
   const location = useLocation();
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
@@ -454,18 +458,8 @@ const Game = (props) => {
       {isModalVisible && <div className="modal-overlay"></div>}
 
       <div className="container">
-        {/* <div className='photoContainer'>
-          <div className='photo'>
-            <p> You </p>
-            <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
-          </div>
-          <div className='photo'>
-            <p> Target </p>
-            <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
-          </div>
-        </div> */}
-        {ImageView()}
 
+        {ImageView()}
         <div className='viewButtonsContainer'>
           <p> View: &nbsp;&nbsp;&nbsp;</p>
           <button class='viewButtonS2S' onClick={() => SetView(1)}></button>
@@ -563,7 +557,7 @@ const Game = (props) => {
         </div>
 
         {isModalVisible && (
-          <ResultsModal score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal nextLevel={props.nextLevel} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
         {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>

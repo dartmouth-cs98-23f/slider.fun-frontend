@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
+import { useNavigate } from 'react-router-dom';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   console.log(props)
 
   useState(() => {
@@ -58,6 +60,7 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
+          {props.score >= 95 ? <button onClick={() => { navigate("/tutorial" + props.nextLevel) }}> Next!</button> : null}
         </div>
       </div>
     </>

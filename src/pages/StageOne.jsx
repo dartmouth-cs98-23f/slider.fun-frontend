@@ -7,9 +7,9 @@ const CURRENT_OPTIONS = [
   {
     name: 'Brightness',
     property: 'brightness',
-    value: 110,
+    value: 100,
     range: {
-      min: 20,
+      min: 0,
       max: 200
     },
     unit: '%',
@@ -106,7 +106,7 @@ const StageOne = () => {
       <InfoModal heading="Brightness" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal}
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/stage2"
       />
     </div>
   )

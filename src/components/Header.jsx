@@ -15,7 +15,7 @@ const Header = () => {
 
     <div className='headerContainer'>
       <div className='contentContainer'>
-        <img onClick={() => handleNavigate("/")} src={inLineLogo} alt="" width="150"></img>
+        <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
         <nav className='headerNav'>
           <button onClick={() => handleNavigate("/tutorial/stage1")}> how to play</button>
           {/* <button onClick={() => handleNavigate("/stage2")}>Contrast</button>

@@ -103,10 +103,10 @@ const Stage7 = () => {
   return (
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
-      <InfoModal text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
+      <InfoModal heading="Blur"  text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link}
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal}
       />
     </div>
   )
