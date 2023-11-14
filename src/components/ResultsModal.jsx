@@ -13,7 +13,7 @@ function ResultsModal(props) {
   const navigate = useNavigate();
   console.log(props)
 
-  useState(() => {
+  useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -21,7 +21,7 @@ function ResultsModal(props) {
         makeConfetti();
       }
     }, 1100);
-  }, [loading]);
+  }, [props.score]);
 
   return (
     <>
