@@ -28,13 +28,14 @@
 .tutorialHeaderNav {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 
   .tutorialNavButton {
-    background-color: #777777;
+    background-color: #9b9797;
     border-radius: 0px;
 
     &:hover {
-      background-color: #70737a;
+      background-color: #363636;
     }
   }
 }
@@ -46,6 +47,7 @@
   button {
     background-color: #363636;
     border-radius: 7px;
+    margin-bottom: 13px;
 
     &:hover {
       background-color: #70737a;
