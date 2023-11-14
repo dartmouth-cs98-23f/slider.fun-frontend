@@ -1,6 +1,6 @@
 import React from 'react'
 import "../styles/header.scss"
-import sliderHeader from "../assets/header_red.png"
+import domainLogo from "../assets/domain_logo.svg"
 import inLineLogo from "../assets/InLineLogoRed.png"
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ const Header = () => {
   return (
 
     <div className='headerContainer'>
-      <div onClick={() => handleNavigate("/")} style={{ cursor: "pointer" }}>
-        <img src={inLineLogo} alt="Logo" width="300"></img>
+      <div className='contentContainer'>
+        <img onClick={() => handleNavigate("/")} src={inLineLogo} alt="" width="150"></img>
+        <nav className='headerNav'>
+          <button onClick={() => handleNavigate("/stage1")}> how to play</button>
+          {/* <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
+        <button onClick={() => handleNavigate("/stage3")}>Saturation</button>
+        <button onClick={() => handleNavigate("/stage4")}>Greyscale</button>
+        <button onClick={() => handleNavigate("/stage5")}>Sepia</button>
+        <button onClick={() => handleNavigate("/stage6")}>Hue Rotate</button> */}
+          <button onClick={() => handleNavigate("/stage7")}>daily puzzle </button>
+        </nav>
       </div>
-      <nav className='headerNav'>
-        <button className='stageButtonHeader' onClick={() => handleNavigate("/stage1")}>Brightness</button>
-        <button className='stageButtonHeader' onClick={() => handleNavigate("/stage2")}>Contrast</button>
-        <button className='stageButtonHeader' onClick={() => handleNavigate("/stage3")}>Saturation</button>
-        <button className='stageButtonHeader' onClick={() => handleNavigate("/stage4")}>Greyscale</button>
-        <button className='stageButtonHeader' onClick={() => handleNavigate("/stage5")}>Sepia</button>
-        <button className='stageButtonHeader' onClick={() => handleNavigate("/stage6")}>Hue Rotate</button>
-        <button className='stageButtonHeader' onClick={() => handleNavigate("/stage7")}>Blur</button>
-      </nav>
-    </div>
+    </div >
   )
 }
 
