@@ -13,7 +13,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 50%;
+    width: 70%;
   }
 
   h1 {
@@ -28,4 +28,13 @@
 .headerNav {
   display: flex;
   align-items: end;
+
+  button {
+    background-color: #3c3c3c;
+    border-radius: 7px;
+
+    &:hover {
+      background-color: #70737a;
+    }
+  }
 }
