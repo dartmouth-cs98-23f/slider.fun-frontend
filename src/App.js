@@ -9,6 +9,7 @@ import Stage4 from './pages/Stage4';
 import Stage5 from './pages/Stage5';
 import Stage6 from './pages/Stage6';
 import Stage7 from './pages/Stage7';
+import Daily from './pages/Daily';
 import HeaderWrapper from './components/HeaderWrapper';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/tutorial/stage5" element={<Stage5 />} />
           <Route path="/tutorial/stage6" element={<Stage6 />} />
           <Route path="/tutorial/stage7" element={<Stage7 />} />
+          <Route path="/daily" element={<Daily />} />
         </Route>
       </Routes>
     </BrowserRouter>
