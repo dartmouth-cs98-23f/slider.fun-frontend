@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import React from 'react'
-import Header from '../components/Header'
+// import Header from '../components/Header'
 import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react'
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 
@@ -186,6 +187,8 @@ const CURRENT_OPTIONS = [
 const MODIFIED_OPTIONS = []
 
 const Game = (props) => {
+
+  const location = useLocation();
   const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
@@ -195,6 +198,7 @@ const Game = (props) => {
   const [defaultScore, setDefaultScore] = useState(false)
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
   const [active, setActive] = React.useState(1);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // const selectedOption = currentOptions[selectedOptionIndex]
 
@@ -353,7 +357,7 @@ const Game = (props) => {
   }, [score, defaultScore])
 
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+
 
 
   const handleCompareClick = () => {
@@ -449,25 +453,15 @@ const Game = (props) => {
   return (
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
-      <Header>  </Header>
-      <div className="container">
-        {/* <div className='photoContainer'>
-          <div className='photo'>
-            <p> You </p>
-            <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
-          </div>
-          <div className='photo'>
-            <p> Target </p>
-            <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
-          </div>
-        </div> */}
-        {ImageView()}
 
+      <div className="container">
+
+        {ImageView()}
         <div className='viewButtonsContainer'>
           <p> View: &nbsp;&nbsp;&nbsp;</p>
-          <button class='viewButtonS2S' onClick={() => SetView(1)}></button>
-          <button class='viewButtonVS' onClick={() => SetView(2)}></button>
-          <button class='viewButtonHS' onClick={() => SetView(3)}></button>
+          <button className='viewButtonS2S' onClick={() => SetView(1)}></button>
+          <button className='viewButtonVS' onClick={() => SetView(2)}></button>
+          <button className='viewButtonHS' onClick={() => SetView(3)}></button>
         </div>
 
         <div className='slidersContainer'>
@@ -553,20 +547,20 @@ const Game = (props) => {
           {/* </div> */}
         </div>
         <div className='actionButtons'>
+
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
+          {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Need Help?</button>}
           <button onClick={handleCompareClick}>Compare</button>
         </div>
 
         {isModalVisible && (
-          <ResultsModal score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal nextLevel={props.nextLevel} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
         {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
-          {/* <p> Default Score: {defaultScore}</p> */}
-          {/* <p> Current Score: {score}</p> */}
-          {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
-            <p>Percent score: {percentScore}</p>
-          )}
+          {/* <p> Default Score: {defaultScore}</p>
+          <p> Current Score: {score}</p> */}
+          {percentScore !== null && percentScore !== undefined && percentScore !== 0}
         </div>
       </div>
       {/* <div>{averageRgbValues}</div> */}

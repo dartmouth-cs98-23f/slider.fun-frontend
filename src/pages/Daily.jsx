@@ -90,24 +90,15 @@ const infoText = "Adding blur to a photo can soften edges, create a sense of mot
 const extraText = "Widely used in sports and action photography to convey motion and speed, and in portrait photography to isolate the subject from a distracting background."
 
 const Stage7 = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
-
-  const closeModal = () => {
-    setIsModalVisible(false)
-  };
-
-  const openModal = () => {
-    setIsModalVisible(true)
-  };
-
   return (
     <div>
-      {isModalVisible && <div className="modal-overlay"></div>}
-      <InfoModal heading="Blur"  text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
-      <TutorialHeader />
-      <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/daily"
-      />
+      {/* {isModalVisible && <div className="modal-overlay"></div>} */}
+      {/* <InfoModal heading="Blur" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} /> */}
+      {/* <TutorialHeader /> */}
+      <h1> Coming Soon....</h1>
+      {/* <Game
+        stage_options={CURRENT_OPTIONS} pic_link={link}
+      /> */}
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import "../styles/home.scss";
 // import Header from '../components/Header'
 import sliderLogo from "../assets/main_logo_red.png"
+// import domainLogo from "../assets/domain_logo.png"
 // import homeSliderPic from "../assets/group8.svg"
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +24,7 @@ const Home = () => {
 
         <div className='buttonContainer'>
           <button onClick={scrollToTutorial}>Tutorial</button>
-          <button onClick={() => { navigate("/stage1") }}>
+          <button onClick={() => { navigate("/tutorial/stage1") }}>
             Play
           </button>
         </div>

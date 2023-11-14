@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Game from './Game'
+import InfoModal from '../components/InfoModal'
+import TutorialHeader from '../components/TutorialHeader'
+
 
 const CURRENT_OPTIONS = [
   {
@@ -83,11 +86,27 @@ const CURRENT_OPTIONS = [
 
 const link = "https://slider-fun.onrender.com/api/photo/6551658492d16a06e6567353"
 
+const infoText = "Applying a sepia tone gives photos a warm brown tint, reminiscent of vintage or historical photographs, often used to evoke nostalgia or age."
+const extraText = "Frequently used in portrait photography to create a warm, nostalgic feel, and in documenting historical reenactments or antiques to enhance the vintage aesthetic."
+
 const Stage5 = () => {
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+  };
+
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Sepia" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
+      <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link}
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/stage6"
       />
     </div>
   )

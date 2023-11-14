@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Game from './Game'
-import Home from './Home'
+import InfoModal from '../components/InfoModal'
+import TutorialHeader from '../components/TutorialHeader'
+
 
 const CURRENT_OPTIONS = [
   {
@@ -84,11 +86,27 @@ const CURRENT_OPTIONS = [
 
 const link = "https://slider-fun.onrender.com/api/photo/6551641e92d16a06e6567292"
 
+const infoText = "Converting a photo to greyscale removes all color, resulting in a black-and-white image, which is great for creating a timeless, classic look or focusing on textures and shapes."
+const extraText = "Popular in street photography for its timeless quality and ability to focus on emotion and context, and in fine art photography for its dramatic and moody effect."
+
 const Stage4 = () => {
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+  };
+
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Greyscale" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
+      <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link}
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/stage5"
       />
     </div>
   )

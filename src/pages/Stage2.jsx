@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Game from './Game'
+import InfoModal from '../components/InfoModal'
+import TutorialHeader from '../components/TutorialHeader'
+
 
 const CURRENT_OPTIONS = [
   {
     name: 'Brightness',
     property: 'brightness',
-    value: 110,
+    value: 100,
     range: {
       min: 20,
       max: 200
@@ -16,7 +19,7 @@ const CURRENT_OPTIONS = [
   {
     name: 'Contrast',
     property: 'contrast',
-    value: 110,
+    value: 100,
     range: {
       min: 20,
       max: 200
@@ -29,7 +32,7 @@ const CURRENT_OPTIONS = [
     property: 'saturate',
     value: 100,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%',
@@ -83,12 +86,27 @@ const CURRENT_OPTIONS = [
 
 const link = "https://slider-fun.onrender.com/api/photo/654ff0d49389098760e3ebbe"
 
+const infoText = " Adjusting contrast in photo editing enhances the difference between the light and dark areas of an image, making it ideal for adding depth and dimension, especially in flat or dull images."
+const extraText = "Often used in portrait photography to add depth and emphasis to facial features and landscape photography to emphasize textures and contours, and in "
 
 const Stage2 = () => {
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+  };
+
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Contrast" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
+      <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link}
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/stage3"
       />
     </div>
   )

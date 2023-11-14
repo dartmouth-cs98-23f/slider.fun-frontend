@@ -4,17 +4,18 @@ import React, { useState } from 'react';
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
-import CustomHandle from './CustomHandle';
+import { useNavigate } from 'react-router-dom';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   console.log(props)
 
   useState(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 700);
+    }, 900);
   }, [loading]);
 
 
@@ -55,15 +56,11 @@ function ResultsModal(props) {
               itemTwo={<ReactCompareSliderImage src={props.img} alt="edited pics" style={props.targetStyle} />}
             />
           </div>
-          {/* <div>
-            <img alt="im1" src={props.img} style={props.currentStyle} />
-          </div>
-          <div>
-            <img alt="img2" src={goalImage} />
-          </div> */}
+
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
+          {props.score >= 95 ? <button onClick={() => { navigate("/tutorial" + props.nextLevel) }}> Next!</button> : null}
         </div>
       </div>
     </>
