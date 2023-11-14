@@ -3,11 +3,13 @@ import "../styles/header.scss"
 import domainLogo from "../assets/domain_logo.svg"
 import inLineLogo from "../assets/InLineLogoRed.png"
 import { useNavigate } from 'react-router-dom';
+import TodaysDate from './TodaysDate';
+import { useLocation } from 'react-router-dom';
 
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const handleNavigate = (path) => {
     navigate(path);
   };
@@ -15,7 +17,10 @@ const Header = () => {
 
     <div className='headerContainer'>
       <div className='contentContainer'>
-        <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
+        <div className="logoDateContainer">
+          <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
+          {location.pathname.startsWith('/daily') && <TodaysDate />}
+        </div>
         <nav className='headerNav'>
           <button onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
           {/* <button onClick={() => handleNavigate("/stage2")}>Contrast</button>

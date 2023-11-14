@@ -189,7 +189,7 @@ const MODIFIED_OPTIONS = []
 const Game = (props) => {
 
   const location = useLocation();
-  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
+  // const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
   const [currentOptions, setCurrentOptions] = useState(props.stage_options)
@@ -226,7 +226,7 @@ const Game = (props) => {
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
 
-        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fblur2.jpg?alt=media&token=f26f7dd0-c5f4-4dda-96c1-0b19209a4c66")
+        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fdaily3.jpeg?alt=media&token=faeb4d74-5b3b-4fc4-8c68-e19278a570fe")
         // setEditedOptions(defaultOptions)
       }
     });
