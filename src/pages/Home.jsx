@@ -4,7 +4,6 @@ import "../styles/home.scss";
 import sliderLogo from "../assets/main_logo_red.png"
 // import homeSliderPic from "../assets/group8.svg"
 import { useNavigate } from "react-router-dom";
-import seq from "../assets/seq.mov"
 
 const Home = () => {
   const tutorialRef = useRef(null);

@@ -471,84 +471,92 @@ const Game = (props) => {
         </div>
 
         <div className='slidersContainer'>
-          <div className='sliderContainer'>
-            <p> Brightness</p>
-            <Slider
-              min={currentOptions[0].range.min}
-              max={currentOptions[0].range.max}
-              value={currentOptions[0].value}
-              status={currentOptions[0].status}
-              handleChange={(event) => handleSliderChange(0, event)}
+          {/* <div className='sliderContainer'> */}
+          {/* <p> Brightness</p> */}
+          <Slider
 
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Contrast</p>
-            <Slider
-              min={currentOptions[1].range.min}
-              max={currentOptions[1].range.max}
-              value={currentOptions[1].value}
-              status={currentOptions[1].status}
-              handleChange={(event) => handleSliderChange(1, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Saturation </p>
-            <Slider
-              min={currentOptions[2].range.min}
-              max={currentOptions[2].range.max}
-              value={currentOptions[2].value}
-              status={currentOptions[2].status}
-              handleChange={(event) => handleSliderChange(2, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Greyscale</p>
-            <Slider
-              min={currentOptions[3].range.min}
-              max={currentOptions[3].range.max}
-              value={currentOptions[3].value}
-              status={currentOptions[3].status}
-              handleChange={(event) => handleSliderChange(3, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Sepia</p>
-            <Slider
-              min={currentOptions[4].range.min}
-              max={currentOptions[4].range.max}
-              value={currentOptions[4].value}
-              status={currentOptions[4].status}
-              handleChange={(event) => handleSliderChange(4, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Hue Rotate</p>
-            <Slider
-              min={currentOptions[5].range.min}
-              max={currentOptions[5].range.max}
-              value={currentOptions[5].value}
-              status={currentOptions[5].status}
-              handleChange={(event) => handleSliderChange(5, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Blur</p>
-            <Slider
-              min={currentOptions[6].range.min}
-              max={currentOptions[6].range.max}
-              value={currentOptions[6].value}
-              status={currentOptions[6].status}
-              handleChange={(event) => handleSliderChange(6, event)}
-              step={0.1}
-            />
-          </div>
+            name={currentOptions[0].name}
+            min={currentOptions[0].range.min}
+            max={currentOptions[0].range.max}
+            value={currentOptions[0].value}
+            status={currentOptions[0].status}
+            handleChange={(event) => handleSliderChange(0, event)}
+
+          />
+          {/* </div> */}
+          {/* <div className='sliderContainer'> */}
+          {/* <p> Contrast</p> */}
+          <Slider
+            name={currentOptions[1].name}
+            min={currentOptions[1].range.min}
+            max={currentOptions[1].range.max}
+            value={currentOptions[1].value}
+            status={currentOptions[1].status}
+            handleChange={(event) => handleSliderChange(1, event)}
+          />
+          {/* </div> */}
+          {/* <div className='sliderContainer'> */}
+          {/* <p> Saturation </p> */}
+          <Slider
+            name={currentOptions[2].name}
+            min={currentOptions[2].range.min}
+            max={currentOptions[2].range.max}
+            value={currentOptions[2].value}
+            status={currentOptions[2].status}
+            handleChange={(event) => handleSliderChange(2, event)}
+          />
+          {/* </div> */}
+          {/* <div className='sliderContainer'> */}
+          {/* <p> Greyscale</p> */}
+          <Slider
+            name={currentOptions[3].name}
+            min={currentOptions[3].range.min}
+            max={currentOptions[3].range.max}
+            value={currentOptions[3].value}
+            status={currentOptions[3].status}
+            handleChange={(event) => handleSliderChange(3, event)}
+          />
+          {/* </div> */}
+          {/* <div className='sliderContainer'> */}
+          {/* <p> Sepia</p> */}
+          <Slider
+            name={currentOptions[4].name}
+            min={currentOptions[4].range.min}
+            max={currentOptions[4].range.max}
+            value={currentOptions[4].value}
+            status={currentOptions[4].status}
+            handleChange={(event) => handleSliderChange(4, event)}
+          />
+          {/* </div> */}
+          {/* <div className='sliderContainer'>
+            <p> Hue Rotate</p> */}
+          <Slider
+            name={currentOptions[5].name}
+            min={currentOptions[5].range.min}
+            max={currentOptions[5].range.max}
+            value={currentOptions[5].value}
+            status={currentOptions[5].status}
+            handleChange={(event) => handleSliderChange(5, event)}
+          />
+          {/* </div> */}
+          {/* <div className='sliderContainer'>
+            <p> Blur</p> */}
+          <Slider
+            name={currentOptions[6].name}
+            min={currentOptions[6].range.min}
+            max={currentOptions[6].range.max}
+            value={currentOptions[6].value}
+            status={currentOptions[6].status}
+            handleChange={(event) => handleSliderChange(6, event)}
+            step={0.1}
+          />
+          {/* </div> */}
         </div>
         <div className='actionButtons'>
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
           <button onClick={handleCompareClick}>Compare</button>
         </div>
-        
+
         {isModalVisible && (
           <ResultsModal score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}

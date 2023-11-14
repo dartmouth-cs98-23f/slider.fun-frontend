@@ -3,15 +3,26 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
   padding: 25px 0px 10px 0px;
   background-color: #EDEDED;
 
+  .contentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 50%;
+  }
 
   h1 {
     color: black;
   }
 
+  img {
+    cursor: pointer;
+  }
 }
 
 .headerNav {

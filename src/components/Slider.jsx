@@ -5,7 +5,9 @@ export default function Slider({ name, min, max, value, status, handleChange, st
   const isStepValid = step && !isNaN(step);
 
   return status ? (
-    <div>
+
+    <div className='sliderContainer'>
+      <p> {name} </p>
       <input
         type="range"
         className="slider"
@@ -17,7 +19,8 @@ export default function Slider({ name, min, max, value, status, handleChange, st
       />
     </div>
   ) : (
-    <div>
+    <div className='sliderContainer sliderContainerLocked'>
+      <p> {name} </p>
       <input
         type="range"
         className="sliderLocked"
