@@ -221,7 +221,6 @@ const Game = (props) => {
     fetchPhoto(props.pic_link).then(data => {
       // console.log("Received data:", data); // Check the full data object
       if (data) {
-        // console.log("second loop:", data.imageUrl); // Check the full data object
 
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
@@ -295,7 +294,6 @@ const Game = (props) => {
       img.onerror = function (err) {
         reject(new Error("Image loading error"));
       };
-      // console.log("hi", gridAverageRgbValues.length)
       return (gridAverageRgbValues)
     });
   }
