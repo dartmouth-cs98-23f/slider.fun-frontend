@@ -25,12 +25,26 @@
   }
 }
 
+.tutorialHeaderNav {
+  display: flex;
+  justify-content: center;
+
+  .tutorialNavButton {
+    background-color: #777777;
+    border-radius: 0px;
+
+    &:hover {
+      background-color: #70737a;
+    }
+  }
+}
+
 .headerNav {
   display: flex;
   justify-content: center;
 
   button {
-    background-color: #3c3c3c;
+    background-color: #363636;
     border-radius: 7px;
 
     &:hover {

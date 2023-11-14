@@ -17,13 +17,13 @@ const Header = () => {
       <div className='contentContainer'>
         <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
         <nav className='headerNav'>
-          <button onClick={() => handleNavigate("/tutorial/stage1")}> how to play</button>
+          <button onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
           {/* <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
         <button onClick={() => handleNavigate("/stage3")}>Saturation</button>
         <button onClick={() => handleNavigate("/stage4")}>Greyscale</button>
         <button onClick={() => handleNavigate("/stage5")}>Sepia</button>
         <button onClick={() => handleNavigate("/stage6")}>Hue Rotate</button> */}
-          <button onClick={() => handleNavigate("/tutorial/stage7")}>daily puzzle </button>
+          <button onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
         </nav>
       </div>
     </div >

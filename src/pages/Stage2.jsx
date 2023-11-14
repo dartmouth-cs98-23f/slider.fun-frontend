@@ -8,7 +8,7 @@ const CURRENT_OPTIONS = [
   {
     name: 'Brightness',
     property: 'brightness',
-    value: 110,
+    value: 100,
     range: {
       min: 20,
       max: 200
@@ -19,7 +19,7 @@ const CURRENT_OPTIONS = [
   {
     name: 'Contrast',
     property: 'contrast',
-    value: 110,
+    value: 100,
     range: {
       min: 20,
       max: 200
@@ -32,7 +32,7 @@ const CURRENT_OPTIONS = [
     property: 'saturate',
     value: 100,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%',
@@ -106,7 +106,7 @@ const Stage2 = () => {
       <InfoModal heading="Contrast" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal}
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/stage3"
       />
     </div>
   )

@@ -9,7 +9,7 @@ const CURRENT_OPTIONS = [
     property: 'brightness',
     value: 100,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%',
@@ -18,7 +18,7 @@ const CURRENT_OPTIONS = [
   {
     name: 'Contrast',
     property: 'contrast',
-    value: 110,
+    value: 100,
     range: {
       min: 20,
       max: 200
@@ -31,7 +31,7 @@ const CURRENT_OPTIONS = [
     property: 'saturate',
     value: 100,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%',

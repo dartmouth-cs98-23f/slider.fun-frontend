@@ -11,9 +11,6 @@ import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle }
 
 import axios from 'axios';
 
-
-
-
 async function fetchPhoto(link) {
   try {
     const response = await axios.get(link);
@@ -462,9 +459,9 @@ const Game = (props) => {
         {ImageView()}
         <div className='viewButtonsContainer'>
           <p> View: &nbsp;&nbsp;&nbsp;</p>
-          <button class='viewButtonS2S' onClick={() => SetView(1)}></button>
-          <button class='viewButtonVS' onClick={() => SetView(2)}></button>
-          <button class='viewButtonHS' onClick={() => SetView(3)}></button>
+          <button className='viewButtonS2S' onClick={() => SetView(1)}></button>
+          <button className='viewButtonVS' onClick={() => SetView(2)}></button>
+          <button className='viewButtonHS' onClick={() => SetView(3)}></button>
         </div>
 
         <div className='slidersContainer'>
@@ -561,11 +558,9 @@ const Game = (props) => {
         )}
         {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
-          {/* <p> Default Score: {defaultScore}</p> */}
-          {/* <p> Current Score: {score}</p> */}
-          {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
-            <p>Percent score: {percentScore}</p>
-          )}
+          {/* <p> Default Score: {defaultScore}</p>
+          <p> Current Score: {score}</p> */}
+          {percentScore !== null && percentScore !== undefined && percentScore !== 0}
         </div>
       </div>
       {/* <div>{averageRgbValues}</div> */}

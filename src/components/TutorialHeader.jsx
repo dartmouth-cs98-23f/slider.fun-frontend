@@ -12,14 +12,14 @@ const TutorialHeader = () => {
   return (
 
     <div >
-      <nav className='headerNav'>
-        <button onClick={() => handleNavigate("/tutorial/stage1")}>Brightness</button>
-        <button onClick={() => handleNavigate("/tutorial/stage2")}>Contrast</button>
-        <button onClick={() => handleNavigate("/tutorial/stage3")}>Saturation</button>
-        <button onClick={() => handleNavigate("/tutorial/stage4")}>Greyscale</button>
-        <button onClick={() => handleNavigate("/tutorial/stage5")}>Sepia</button>
-        <button onClick={() => handleNavigate("/tutorial/stage6")}>Hue Rotate</button>
-        <button onClick={() => handleNavigate("/tutorial/stage7")}>Blur</button>
+      <nav className='tutorialHeaderNav'>
+        <button className='tutorialNavButton' onClick={() => handleNavigate("/tutorial/stage1")}>Brightness</button>
+        <button className='tutorialNavButton' onClick={() => handleNavigate("/tutorial/stage2")}>Contrast</button>
+        <button className='tutorialNavButton' onClick={() => handleNavigate("/tutorial/stage3")}>Saturation</button>
+        <button className='tutorialNavButton' onClick={() => handleNavigate("/tutorial/stage4")}>Greyscale</button>
+        <button className='tutorialNavButton' onClick={() => handleNavigate("/tutorial/stage5")}>Sepia</button>
+        <button className='tutorialNavButton' onClick={() => handleNavigate("/tutorial/stage6")}>Hue Rotate</button>
+        <button className='tutorialNavButton' onClick={() => handleNavigate("/tutorial/stage7")}>Blur</button>
       </nav>
     </div>
   )
