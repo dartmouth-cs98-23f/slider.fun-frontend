@@ -88,7 +88,7 @@ const CURRENT_OPTIONS = [
 const link = "https://slider-fun.onrender.com/api/photo/65495d668d1d5c2fa933c23a"
 
 const infoText = "Adjusting brightness involves altering the overall lightness or darkness of an image. This can be particularly useful in low-light conditions to enhance image clarity, or in overly bright conditions to reduce glare and balance the exposure."
-
+const extraText = "Commonly used in nature photography to bring out details in underexposed areas like dense forests or sunset scenes or in event photography, such as weddings or concerts, to compensate for varying lighting conditions. "
 const StageOne = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
 
@@ -102,7 +102,8 @@ const StageOne = () => {
 
   return (
     <div>
-      <InfoModal text={infoText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Brightness" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
         stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal}

@@ -85,7 +85,8 @@ const CURRENT_OPTIONS = [
 
 const link = "https://slider-fun.onrender.com/api/photo/65527a1c6cdb84a05144ef04"
 
-const infoText = "Adjusting brightness involves altering the overall lightness or darkness of an image. This can be particularly useful in low-light conditions to enhance image clarity, or in overly bright conditions to reduce glare and balance the exposure."
+const infoText = "Hue rotation changes the overall color spectrum of an image, allowing for creative and dramatic shifts in appearance, useful for artistic effects or correcting color casts."
+const extraText = "Utilized in artistic and abstract photography to create surreal and visually striking images, and in advertising to grab attention with unusual color schemes."
 
 const Stage6 = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -94,9 +95,14 @@ const Stage6 = () => {
     setIsModalVisible(false)
   };
 
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
-      <InfoModal text={infoText} isModalVisible={isModalVisible} closeModal={closeModal} />
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Hue Rotate" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
         stage_options={CURRENT_OPTIONS} pic_link={link}

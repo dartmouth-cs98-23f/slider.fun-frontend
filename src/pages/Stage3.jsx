@@ -87,9 +87,8 @@ const CURRENT_OPTIONS = [
 
 const link = "https://slider-fun.onrender.com/api/photo/654feac4663946fee35a1600"
 
-const infoText = "Adjusting brightness involves altering the overall lightness or darkness of an image. This can be particularly useful in low-light conditions to enhance image clarity, or in overly bright conditions to reduce glare and balance the exposure."
-
-
+const infoText = "Saturation editing alters the intensity of colors in a photo, increasing it can make colors more vivid and eye-catching, while decreasing it can give a more subdued, natural look."
+const extraText = "Commonly applied in nature and travel photography to enhance natural colors, and in food photography to make the dishes appear more appetizing."
 const Stage3 = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
 
@@ -97,9 +96,14 @@ const Stage3 = () => {
     setIsModalVisible(false)
   };
 
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
-      <InfoModal text={infoText} isModalVisible={isModalVisible} closeModal={closeModal} />
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Saturation"  text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
         stage_options={CURRENT_OPTIONS} pic_link={link}

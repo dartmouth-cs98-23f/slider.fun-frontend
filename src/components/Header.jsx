@@ -1,6 +1,6 @@
 import React from 'react'
 import "../styles/header.scss"
-// import domainLogo from "../assets/domain_logo.svg"
+import domainLogo from "../assets/domain_logo.svg"
 import inLineLogo from "../assets/InLineLogoRed.png"
 import { useNavigate } from 'react-router-dom';
 

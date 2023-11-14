@@ -556,8 +556,9 @@ const Game = (props) => {
           {/* </div> */}
         </div>
         <div className='actionButtons'>
-          {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >need help?</button>}
+
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
+          {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Need Help?</button>}
           <button onClick={handleCompareClick}>Compare</button>
         </div>
 

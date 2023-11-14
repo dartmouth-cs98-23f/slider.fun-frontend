@@ -86,8 +86,8 @@ const CURRENT_OPTIONS = [
 
 const link = "https://slider-fun.onrender.com/api/photo/654ff0d49389098760e3ebbe"
 
-const infoText = "Adjusting brightness involves altering the overall lightness or darkness of an image. This can be particularly useful in low-light conditions to enhance image clarity, or in overly bright conditions to reduce glare and balance the exposure."
-
+const infoText = " Adjusting contrast in photo editing enhances the difference between the light and dark areas of an image, making it ideal for adding depth and dimension, especially in flat or dull images."
+const extraText = "Often used in portrait photography to add depth and emphasis to facial features and landscape photography to emphasize textures and contours, and in "
 
 const Stage2 = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -96,9 +96,14 @@ const Stage2 = () => {
     setIsModalVisible(false)
   };
 
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
-      <InfoModal text={infoText} isModalVisible={isModalVisible} closeModal={closeModal} />
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Contrast" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
         stage_options={CURRENT_OPTIONS} pic_link={link}

@@ -86,7 +86,8 @@ const CURRENT_OPTIONS = [
 
 const link = "https://slider-fun.onrender.com/api/photo/6551658492d16a06e6567353"
 
-const infoText = "Adjusting brightness involves altering the overall lightness or darkness of an image. This can be particularly useful in low-light conditions to enhance image clarity, or in overly bright conditions to reduce glare and balance the exposure."
+const infoText = "Applying a sepia tone gives photos a warm brown tint, reminiscent of vintage or historical photographs, often used to evoke nostalgia or age."
+const extraText = "Frequently used in portrait photography to create a warm, nostalgic feel, and in documenting historical reenactments or antiques to enhance the vintage aesthetic."
 
 const Stage5 = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -95,9 +96,14 @@ const Stage5 = () => {
     setIsModalVisible(false)
   };
 
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
+
   return (
     <div>
-      <InfoModal text={infoText} isModalVisible={isModalVisible} closeModal={closeModal} />
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal heading="Sepia" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
         stage_options={CURRENT_OPTIONS} pic_link={link}
