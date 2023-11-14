@@ -153,7 +153,7 @@ body {
   appearance: none;
   margin-top: -4px;
   /* Centers thumb on the track */
-  background-color: #525252;
+  background-color: #f86969;
   height: 1rem;
   width: 1rem;
   border-radius: 0.5rem;
@@ -165,7 +165,7 @@ body {
   appearance: none;
   margin-top: -4px;
   /* Centers thumb on the track */
-  background-color: #f86969;
+  background-color: #525252;
   height: 1rem;
   width: 1rem;
   border-radius: 0.5rem;
@@ -255,6 +255,18 @@ button {
   cursor: pointer;
   border-radius: 5px;
   border: 1px solid black;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+
+  .resetButton {
+    background-color: white;
+    border: 2px solid #363636;
+    transition-duration: 0.4s;
+    color: #363636;
+  }
 }
 
 .modal-overlay {
