@@ -15,7 +15,7 @@ function ResultsModal(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 900);
+    }, 1100);
   }, [loading]);
 
 
@@ -60,7 +60,7 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
-          {props.score >= 95 ? <button onClick={() => { navigate("/tutorial" + props.nextLevel) }}> Next!</button> : null}
+          {props.score >= 95 && props.nextLevel !== undefined ? <button onClick={() => { navigate("/tutorial" + props.nextLevel) }}> Next!</button> : null}
         </div>
       </div>
     </>

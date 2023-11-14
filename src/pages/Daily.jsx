@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Game from './Game'
-import InfoModal from '../components/InfoModal'
-import TutorialHeader from '../components/TutorialHeader'
+import TodaysDate from '../components/TodaysDate'
 
 const CURRENT_OPTIONS = [
   {
@@ -84,23 +83,39 @@ const CURRENT_OPTIONS = [
 ]
 
 
-const link = "https://slider-fun.onrender.com/api/photo/655280b96cdb84a05144ef65"
+const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
+const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
+const bakerTower = "https://slider-fun.onrender.com/api/photo/6553e9f6ab042abb281b276b"
 
-const infoText = "Adding blur to a photo can soften edges, create a sense of motion, or bring focus to a particular element by reducing background detail."
-const extraText = "Widely used in sports and action photography to convey motion and speed, and in portrait photography to isolate the subject from a distracting background."
+const links = {
+  "1": dHallLink,
+  "2": nycLink,
+  "3": bakerTower,
+}
 
-const Stage7 = () => {
+const Daily = () => {
+  // Function to generate a random number
+  const getRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  // Generate a random key
+  const randomKey = getRandomNumber(1, Object.keys(links).length);
+
+  // Select a random link
+  const randomLink = links[randomKey];
+
   return (
     <div>
       {/* {isModalVisible && <div className="modal-overlay"></div>} */}
       {/* <InfoModal heading="Blur" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} /> */}
       {/* <TutorialHeader /> */}
-      <h1> Coming Soon....</h1>
-      {/* <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link}
-      /> */}
+      {/* <h1> Coming Soon....</h1> */}
+      <Game
+        stage_options={CURRENT_OPTIONS} pic_link={randomLink}
+      />
     </div>
   )
 }
 
-export default Stage7
+export default Daily
