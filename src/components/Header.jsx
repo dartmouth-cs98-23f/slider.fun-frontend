@@ -24,7 +24,7 @@ const Header = () => {
 
         </div>
         <nav className='headerNav'>
-          {location.pathname.startsWith('/tutorial') && <TutorialHeader />}
+          {/* {location.pathname.startsWith('/tutorial') && <TutorialHeader />} */}
           <button className="tutorialButton" onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
           {/* <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
         <button onClick={() => handleNavigate("/stage3")}>Saturation</button>

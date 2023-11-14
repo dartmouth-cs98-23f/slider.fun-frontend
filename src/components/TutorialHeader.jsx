@@ -29,7 +29,7 @@ const TutorialHeader = () => {
     //   </nav>
     // </div>
 
-    <div >
+    <>
       <nav className='tutorialHeaderNav'>
         <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage1") ? { backgroundColor: '#f86969' } : null} >Brightness</button>
         <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage2") ? { backgroundColor: '#f86969' } : null} >Contrast</button>
@@ -39,7 +39,7 @@ const TutorialHeader = () => {
         <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage6") ? { backgroundColor: '#f86969' } : null} >Hue Rotate</button>
         <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage7") ? { backgroundColor: '#f86969' } : null} >Blur</button>
       </nav>
-    </div>
+    </>
   )
 }
 
