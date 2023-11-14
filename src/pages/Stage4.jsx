@@ -6,9 +6,9 @@ const CURRENT_OPTIONS = [
   {
     name: 'Brightness',
     property: 'brightness',
-    value: 100,
+    value: 110,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%',
@@ -17,9 +17,9 @@ const CURRENT_OPTIONS = [
   {
     name: 'Contrast',
     property: 'contrast',
-    value: 100,
+    value: 110,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%',
