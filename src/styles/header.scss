@@ -33,27 +33,50 @@
 
 .tutorialHeaderNav {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
+  // margin-top: 10px;
+
+  gap: 0px;
+  width: 600px;
 
   .tutorialNavButton {
     background-color: #9b9797;
     border-radius: 0px;
+    cursor: default;
+    margin: 0;
+    width: 150px;
+    height: 20px;
 
-    &:hover {
-      background-color: #363636;
-    }
+    // &:hover {
+    //   background-color: #363636;
+    // }
   }
 }
 
 .headerNav {
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
+
+  .tutorialButton {
+    height: 35px;
+    background-color: #ffffff;
+    border: 2px solid #363636;
+    color: black;
+  }
+
+  .dailyButton {
+    height: 35px;
+  }
 
   button {
     background-color: #363636;
     border-radius: 7px;
     margin-bottom: 13px;
+    // padding: 10px;
 
     &:hover {
       background-color: #70737a;

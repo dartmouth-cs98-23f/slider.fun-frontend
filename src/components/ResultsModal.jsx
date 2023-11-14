@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import preImage from "../assets/pre.jpeg";
 // import goalImage from "../assets/goal.jpeg";
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 import { useNavigate } from 'react-router-dom';
+import makeConfetti from './Confetti';
+
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
@@ -15,9 +17,11 @@ function ResultsModal(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      if (props.score >= 95) {
+        makeConfetti();
+      }
     }, 1100);
   }, [loading]);
-
 
   return (
     <>

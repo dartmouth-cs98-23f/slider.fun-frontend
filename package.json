@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.0",
+    "canvas-confetti": "^1.9.0",
     "react": "^18.2.0",
     "react-compare-image": "^3.4.0",
     "react-compare-slider": "^3.0.1",
