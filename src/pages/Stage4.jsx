@@ -106,7 +106,7 @@ const Stage4 = () => {
       <InfoModal heading="Greyscale" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <TutorialHeader />
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/stage5"
+        stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/tutorial/stage5"
       />
     </div>
   )

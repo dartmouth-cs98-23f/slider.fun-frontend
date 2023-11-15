@@ -64,7 +64,7 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
-          {props.score >= 95 && props.nextLevel !== undefined ? <button onClick={() => { navigate("/tutorial" + props.nextLevel) }}> Next!</button> : null}
+          {props.score >= 95 && props.nextLevel !== undefined ? <button onClick={() => { navigate("" + props.nextLevel) }}> Next!</button> : null}
         </div>
       </div>
     </>
