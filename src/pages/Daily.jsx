@@ -1,6 +1,5 @@
 import React from 'react'
 import Game from './Game'
-import TodaysDate from '../components/TodaysDate'
 
 const CURRENT_OPTIONS = [
   {
