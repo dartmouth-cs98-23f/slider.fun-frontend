@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../styles/infoModal.scss";
 
 function InfoModal(props) {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   console.log(props)
 

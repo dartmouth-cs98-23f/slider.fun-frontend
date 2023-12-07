@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import React from 'react'
-// import Header from '../components/Header'
 import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react'
-import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
+import $ from 'jquery';
+import ImageView from '../components/ImageView'
+import side2side from "../assets/SideToSideSplit.png"
+import verticalSplit from "../assets/VerticalSplit.png"
+import horizontalSplit from "../assets/HorizontalSplit.png"
 
 import axios from 'axios';
 
@@ -27,8 +30,6 @@ async function fetchPhoto(link) {
     return null;
   }
 }
-
-
 
 const DEFAULT_OPTIONS = [
   {
@@ -103,93 +104,11 @@ const DEFAULT_OPTIONS = [
   }
 ]
 
-
-const CURRENT_OPTIONS = [
-  {
-    name: 'Brightness',
-    property: 'brightness',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: false,
-  },
-  {
-    name: 'Contrast',
-    property: 'contrast',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Saturation',
-    property: 'saturate',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Grayscale',
-    property: 'grayscale',
-    value: 0,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Sepia',
-    property: 'sepia',
-    value: 0,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Hue Rotate',
-    property: 'hue-rotate',
-    value: 0,
-    range: {
-      min: 0,
-      max: 360
-    },
-    unit: 'deg',
-    status: true,
-  },
-  {
-    name: 'Blur',
-    property: 'blur',
-    value: 0,
-    range: {
-      min: 0,
-      max: 20
-    },
-    unit: 'px',
-    status: false,
-  }
-]
-
 const MODIFIED_OPTIONS = []
 
 const Game = (props) => {
 
   const location = useLocation();
-  // const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
   const [currentOptions, setCurrentOptions] = useState(props.stage_options)
@@ -199,10 +118,6 @@ const Game = (props) => {
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
   const [active, setActive] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  // const selectedOption = currentOptions[selectedOptionIndex]
-
-
   const [resetPressable, setResetPressable] = useState(true);
 
   function handleSliderChange(propertyIndex, { target }) {
@@ -217,9 +132,7 @@ const Game = (props) => {
   }
 
   useEffect(() => {
-    // Example usage:
     fetchPhoto(props.pic_link).then(data => {
-      // console.log("Received data:", data); // Check the full data object
       if (data) {
 
         setImportEdited(data.imageUrl);
@@ -380,93 +293,37 @@ const Game = (props) => {
   };
 
   const SetView = (active) => {
-    setActive(active);
-  };
+    $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
 
-  const ImageView = () => {
-    switch (active) {
-      case 1:
-        return (
-          <div className='photoContainer'>
-            <div className='photo'>
-              <p> You </p>
-              <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
-            </div>
-            <div className='photo'>
-              <p> Target </p>
-              <img src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />
-            </div>
-          </div>
-        )
-      case 2:
-        return (
-          <div style={{ width: '75%', height: '75%', flexGrow: 1 }}>
-            <ReactCompareSlider
-              handle={
-                <ReactCompareSliderHandle
-                  buttonStyle={{
-                    backdropFilter: undefined,
-                    WebkitBackdropFilter: undefined,
-                    backgroundColor: '#E27272',
-                    marginLeft: "-15px"
-                  }}
-                  linesStyle={{
-                    opacity: 0
-
-                  }}
-                />
-              }
-              itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
-              itemTwo={<ReactCompareSliderImage src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />}
-            />
-          </div>
-        )
-      default:
-        return (
-          <div className='comparisonContainer'>
-            <ReactCompareSlider
-              portrait
-              handle={
-                <ReactCompareSliderHandle
-                  portrait
-                  buttonStyle={{
-                    backdropFilter: undefined,
-                    WebkitBackdropFilter: undefined,
-                    backgroundColor: '#E27272',
-                    marginTop: "-15px"
-                  }}
-                  linesStyle={{
-                    opacity: 0
-                  }}
-                />
-              }
-              itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
-              itemTwo={<ReactCompareSliderImage src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />}
-            />
-          </div>
-        )
+    // Add 'selected' class to the clicked image based on 'active' parameter
+    if (active === 1) {
+      $('.viewButtonS2S').addClass('selected');
+    } else if (active === 2) {
+      $('.viewButtonVS').addClass('selected');
+    } else if (active === 3) {
+      $('.viewButtonHS').addClass('selected');
     }
+
+    setActive(active);
   };
 
   return (
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
-
       <div className="container">
 
-        {ImageView()}
+        <ImageView active={active} importEdited={importEdited} getImageStyle={getImageStyle} currentOptions={currentOptions} editedOptions={editedOptions} />
+
         <div className='viewButtonsContainer'>
           <p> View: &nbsp;&nbsp;&nbsp;</p>
-          <button className='viewButtonS2S' onClick={() => SetView(1)}></button>
-          <button className='viewButtonVS' onClick={() => SetView(2)}></button>
-          <button className='viewButtonHS' onClick={() => SetView(3)}></button>
+          <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
+          <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
+          <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
         </div>
 
         <div className='slidersContainer'>
-          {/* <div className='sliderContainer'> */}
-          {/* <p> Brightness</p> */}
-          <Slider
 
+          <Slider
             name={currentOptions[0].name}
             min={currentOptions[0].range.min}
             max={currentOptions[0].range.max}
@@ -475,9 +332,7 @@ const Game = (props) => {
             handleChange={(event) => handleSliderChange(0, event)}
 
           />
-          {/* </div> */}
-          {/* <div className='sliderContainer'> */}
-          {/* <p> Contrast</p> */}
+
           <Slider
             name={currentOptions[1].name}
             min={currentOptions[1].range.min}
@@ -486,9 +341,7 @@ const Game = (props) => {
             status={currentOptions[1].status}
             handleChange={(event) => handleSliderChange(1, event)}
           />
-          {/* </div> */}
-          {/* <div className='sliderContainer'> */}
-          {/* <p> Saturation </p> */}
+
           <Slider
             name={currentOptions[2].name}
             min={currentOptions[2].range.min}
@@ -497,9 +350,7 @@ const Game = (props) => {
             status={currentOptions[2].status}
             handleChange={(event) => handleSliderChange(2, event)}
           />
-          {/* </div> */}
-          {/* <div className='sliderContainer'> */}
-          {/* <p> Greyscale</p> */}
+
           <Slider
             name={currentOptions[3].name}
             min={currentOptions[3].range.min}
@@ -508,9 +359,7 @@ const Game = (props) => {
             status={currentOptions[3].status}
             handleChange={(event) => handleSliderChange(3, event)}
           />
-          {/* </div> */}
-          {/* <div className='sliderContainer'> */}
-          {/* <p> Sepia</p> */}
+
           <Slider
             name={currentOptions[4].name}
             min={currentOptions[4].range.min}
@@ -519,9 +368,7 @@ const Game = (props) => {
             status={currentOptions[4].status}
             handleChange={(event) => handleSliderChange(4, event)}
           />
-          {/* </div> */}
-          {/* <div className='sliderContainer'>
-            <p> Hue Rotate</p> */}
+
           <Slider
             name={currentOptions[5].name}
             min={currentOptions[5].range.min}
@@ -530,9 +377,7 @@ const Game = (props) => {
             status={currentOptions[5].status}
             handleChange={(event) => handleSliderChange(5, event)}
           />
-          {/* </div> */}
-          {/* <div className='sliderContainer'>
-            <p> Blur</p> */}
+
           <Slider
             name={currentOptions[6].name}
             min={currentOptions[6].range.min}
@@ -542,7 +387,6 @@ const Game = (props) => {
             handleChange={(event) => handleSliderChange(6, event)}
             step={0.1}
           />
-          {/* </div> */}
         </div>
         <div className='actionButtons'>
 
@@ -554,14 +398,12 @@ const Game = (props) => {
         {isModalVisible && (
           <ResultsModal nextLevel={props.nextLevel} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
-        {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
           {/* <p> Default Score: {defaultScore}</p>
           <p> Current Score: {score}</p> */}
           {percentScore !== null && percentScore !== undefined && percentScore !== 0}
         </div>
       </div>
-      {/* <div>{averageRgbValues}</div> */}
     </div>
   )
 }
