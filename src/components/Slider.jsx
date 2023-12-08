@@ -27,6 +27,7 @@ export default function Slider({ name, min, max, value, status, handleChange, st
         min={min}
         max={max}
         value={value}
+        onChange={() => { }}
       />
     </div>
   );
