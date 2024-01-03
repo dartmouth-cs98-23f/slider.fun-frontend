@@ -1,14 +1,14 @@
 import React from 'react'
 import "../styles/header.scss"
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const TutorialHeader = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleNavigate = (path) => {
-    navigate(path);
-  };
+  // const handleNavigate = (path) => {
+  //   navigate(path);
+  // };
 
   const isCurrentPath = (path) => {
     return location.pathname === path;
