@@ -11,6 +11,7 @@ import Stage6 from './pages/Stage6';
 import Stage7 from './pages/Stage7';
 import Daily from './pages/Daily';
 import HeaderWrapper from './components/HeaderWrapper';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           <Route path="/tutorial/stage6" element={<Stage6 />} />
           <Route path="/tutorial/stage7" element={<Stage7 />} />
           <Route path="/daily" element={<Daily />} />
+          <Route path="/login" element={< Login />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Route>
       </Routes>
     </BrowserRouter>

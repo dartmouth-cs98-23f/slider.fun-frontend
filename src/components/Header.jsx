@@ -24,6 +24,7 @@ const Header = () => {
         <nav className='headerNav'>
           <button className="tutorialButton" onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
           <button className="dailyButton" onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
+          <button className="loginButton" onClick={() => handleNavigate("/login")}> login </button>
         </nav>
       </div>
     </div >
