@@ -10,6 +10,7 @@ import Stage5 from './pages/Stage5';
 import Stage6 from './pages/Stage6';
 import Stage7 from './pages/Stage7';
 import Daily from './pages/Daily';
+import Profile from './pages/Profile';
 import HeaderWrapper from './components/HeaderWrapper';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/">
           <Route index element={<Home />} />
           <Route path="game" element={<Game />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/tutorial/stage1" element={<StageOne />} />
           <Route path="/tutorial/stage2" element={<Stage2 />} />
           <Route path="/tutorial/stage3" element={<Stage3 />} />
