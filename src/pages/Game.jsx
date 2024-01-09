@@ -119,6 +119,8 @@ const Game = (props) => {
   const [active, setActive] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [resetPressable, setResetPressable] = useState(true);
+  const [hint, setHint] = useState('');
+
 
   function handleSliderChange(propertyIndex, { target }) {
     setResetPressable(false);
@@ -134,15 +136,51 @@ const Game = (props) => {
   useEffect(() => {
     fetchPhoto(props.pic_link).then(data => {
       if (data) {
-
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
+        // console.log('Brightness val: ')
+        // console.log(editedOptions[0].value) // outputs value of first property, which is brightness
 
         // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fdaily3.jpeg?alt=media&token=faeb4d74-5b3b-4fc4-8c68-e19278a570fe")
         // setEditedOptions(defaultOptions)
       }
     });
   }, [props.pic_link]);
+  
+  
+  // compare all sliders to suggest hint
+  const calculateHint = (editedOptions, currentOptions) => {
+    let scaledDiff = 0;
+    let optionToAdjust = '';
+  
+    for (let i = 0; i < editedOptions.length; i++) {
+      const currDiff = (editedOptions[i].value - currentOptions[i].value) / editedOptions[i].range.max;
+  
+      if (Math.abs(scaledDiff) < Math.abs(currDiff)) {
+        scaledDiff = currDiff;
+        optionToAdjust = editedOptions[i].name;
+      }
+    }
+  
+    let output = '';
+    if (scaledDiff > 0) {
+      output = "Increase " + optionToAdjust;
+    } else if (scaledDiff < 0) {
+      output = "Decrease " + optionToAdjust;
+    }
+  
+    return output;
+  };
+  
+  const handleHintClick = () => {
+    const newHint = calculateHint(editedOptions, currentOptions);
+    setHint(newHint);
+  };
+  
+
+  // TODO: add button on results modal that gives the hint
+  // eventually, make it so you need multiple compares (will require useState)
+  
 
   const getRBG = (pictureFile, filters = false) => {
     // console.log(filters)
@@ -393,6 +431,8 @@ const Game = (props) => {
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
           {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Explanation</button>}
           <button onClick={handleCompareClick}>Compare</button>
+          <button onClick={handleHintClick}>Hint</button>
+          {hint && <p>{hint}</p>}
         </div>
 
         {isModalVisible && (
