@@ -178,10 +178,6 @@ const Game = (props) => {
   };
   
 
-  // TODO: add button on results modal that gives the hint
-  // eventually, make it so you need multiple compares (will require useState)
-  
-
   const getRBG = (pictureFile, filters = false) => {
     // console.log(filters)
     return new Promise((resolve, reject) => {
