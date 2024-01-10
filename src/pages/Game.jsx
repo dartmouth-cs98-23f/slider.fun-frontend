@@ -250,11 +250,13 @@ const Game = (props) => {
 
   }
 
-
+// helper function to convert filter objects to string for css purposes. 
   function getImageStyle(state) {
+    console.log(state)
     const filters = state.map(option => {
       return `${option.property}(${option.value}${option.unit})`
     })
+    console.log(filters)
     return { filter: filters.join(' ') }
   }
 

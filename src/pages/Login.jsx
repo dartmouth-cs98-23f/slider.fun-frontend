@@ -14,9 +14,9 @@ const Login = () => {
           <button>login</button>
 
         </form>
-        <div>
-          <p> Forgot your password? </p>
-          <p> not a member yet? sign up</p>
+        <div className='helperContainer'>
+          <p className='b1'> Forgot your password? </p>
+          <p> not a member yet? <a href="./"> sign up </a> </p>
         </div>
       </div>
 
