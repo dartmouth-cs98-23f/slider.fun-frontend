@@ -1,24 +1,58 @@
 import React from 'react'
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 
+const containerStyle = {
+  width: '500px', 
+  height: '300px', 
+  margin: 'auto',
+  display: 'flex', 
+  justifyContent: 'center',
+  alignItems: 'center', 
+  marginTop: '20px',
+};
+
+const photoContainerStyle = {
+  display: 'flex', 
+  alignItems: 'flex-start', 
+  justifyContent: 'center', 
+};
+
 const ImageView = (props) => {
   switch (props.active) {
     case 1:
       return (
-        <div className='photoContainer'>
-          <div className='photo'>
-            <p> You </p>
-            <img src={props.importEdited} alt="pre edit pics" style={props.getImageStyle(props.currentOptions)} />
-          </div>
-          <div className='photo'>
-            <p> Target </p>
-            <img src={props.importEdited} alt="edited pics" style={props.getImageStyle(props.editedOptions)} />
+        <div style={containerStyle}>
+          <div className='photoContainer' style={photoContainerStyle}>
+            <div className='photo'>
+              <p> Current </p>
+              <img 
+                src={props.importEdited} 
+                alt="pre edit pics" 
+                style={{ 
+                  ...props.getImageStyle(props.currentOptions), 
+                  marginLeft: '10px' 
+                }} 
+              />
+
+            </div>
+            <div className='photo'>
+              <p> Target </p>
+              <img 
+                src={props.importEdited} 
+                alt="edited pics" 
+                style={{ 
+                  ...props.getImageStyle(props.editedOptions), 
+                  marginLeft: '10px' 
+                }} 
+              />
+            </div>
           </div>
         </div>
-      )
+      );
     case 2:
       return (
-        <div style={{ width: '75%', height: '75%', flexGrow: 1 }}>
+        <div style={{ ...containerStyle, flexGrow: 1 }}>
+          <div className='comparisonContainer'>
           <ReactCompareSlider
             handle={
               <ReactCompareSliderHandle
@@ -36,32 +70,35 @@ const ImageView = (props) => {
             itemOne={<ReactCompareSliderImage src={props.importEdited} alt="pre edit pics" style={props.getImageStyle(props.currentOptions)} />}
             itemTwo={<ReactCompareSliderImage src={props.importEdited} alt="edited pics" style={props.getImageStyle(props.editedOptions)} />}
           />
+          </div>
         </div>
-      )
+      );
     default:
       return (
-        <div className='comparisonContainer'>
-          <ReactCompareSlider
-            portrait
-            handle={
-              <ReactCompareSliderHandle
-                portrait
-                buttonStyle={{
-                  backdropFilter: undefined,
-                  WebkitBackdropFilter: undefined,
-                  backgroundColor: '#E27272',
-                  marginTop: "-15px"
-                }}
-                linesStyle={{
-                  opacity: 0
-                }}
-              />
-            }
-            itemOne={<ReactCompareSliderImage src={props.importEdited} alt="pre edit pics" style={props.getImageStyle(props.currentOptions)} />}
-            itemTwo={<ReactCompareSliderImage src={props.importEdited} alt="edited pics" style={props.getImageStyle(props.editedOptions)} />}
-          />
-        </div>
-      )
+        <div style={{...containerStyle, flexGrow: 1}}>
+          <div className='comparisonContainer'>
+            <ReactCompareSlider
+              portrait
+              handle={
+                <ReactCompareSliderHandle
+                  portrait
+                  buttonStyle={{
+                    backdropFilter: undefined,
+                    WebkitBackdropFilter: undefined,
+                    backgroundColor: '#E27272',
+                    marginTop: "-15px"
+                  }}
+                  linesStyle={{
+                    opacity: 0
+                  }}
+                />
+              }
+              itemOne={<ReactCompareSliderImage src={props.importEdited} alt="pre edit pics" style={props.getImageStyle(props.currentOptions)} />}
+              itemTwo={<ReactCompareSliderImage src={props.importEdited} alt="edited pics" style={props.getImageStyle(props.editedOptions)} />}
+            />
+          </div>
+        </div> 
+      );
   }
 }
 
