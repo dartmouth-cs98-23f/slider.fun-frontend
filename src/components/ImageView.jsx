@@ -2,23 +2,21 @@ import React from 'react'
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 
 const containerStyle = {
-  width: '500px', // Set your desired width
-  height: '300px', // Set your desired height
-  margin: 'auto', // Center the container
-  display: 'flex', // Ensure the contents are aligned properly
-  justifyContent: 'center', // Center contents horizontally
-  alignItems: 'center', // Center contents vertically
+  width: '500px', 
+  height: '300px', 
+  margin: 'auto',
+  display: 'flex', 
+  justifyContent: 'center',
+  alignItems: 'center', 
   marginTop: '20px',
 };
 
 const photoContainerStyle = {
-  display: 'flex', // Use flexbox for layout
-  alignItems: 'flex-start', // Align items to the start of the container (top)
-  justifyContent: 'center', // Center items horizontally
+  display: 'flex', 
+  alignItems: 'flex-start', 
+  justifyContent: 'center', 
 };
 
-
-// KASHAN VIEWS FIXS IT
 const ImageView = (props) => {
   switch (props.active) {
     case 1:
