@@ -1,46 +1,51 @@
-import React from 'react'
-import "../styles/header.scss"
+import React from 'react';
+import "../styles/tutorialHeader.scss";
 import { useLocation } from 'react-router-dom';
 
 const TutorialHeader = () => {
   const location = useLocation();
-  // const navigate = useNavigate();
 
-  // const handleNavigate = (path) => {
-  //   navigate(path);
-  // };
+  // Function to extract the stage number from the path
+  const getCurrentStageNumber = () => {
+    const match = location.pathname.match(/\/tutorial\/stage(\d+)/);
+    return match ? parseInt(match[1], 10) : null;
+  };
 
-  const isCurrentPath = (path) => {
-    return location.pathname === path;
+  const currentStageNumber = getCurrentStageNumber();
+
+  // Function to determine button style based on the stage number
+  const buttonStyle = (stageNumber) => {
+    if (stageNumber === currentStageNumber) {
+      // Current stage - pink color with white text
+      return { backgroundColor: '#f86969', color: 'white' };
+    } else if (stageNumber < currentStageNumber) {
+      // Stages before the current stage - yellow background
+      return { backgroundColor: 'white', color: '#333' };
+    } else {
+      // Stages after the current stage - grey background
+      return { backgroundColor: 'grey', color: '#333' };
+    }
   };
 
   return (
+    <nav className='tutorialHeaderNav'>
+      {[1, 2, 3, 4, 5, 6, 7].map((stageNumber) => (
+        <button
+          key={stageNumber}
+          className='tutorialNavButton'
+          style={buttonStyle(stageNumber)}
+        >
+          {stageNumber === 1 ? 'Brightness' :
+           stageNumber === 2 ? 'Contrast' :
+           stageNumber === 3 ? 'Saturation' :
+           stageNumber === 4 ? 'Greyscale' :
+           stageNumber === 5 ? 'Sepia' :
+           stageNumber === 6 ? 'Hue Rotate' :
+           'Blur'}
+        </button>
+      ))}
+    </nav>
+  );
+};
 
-
-    // <div >
-    //   <nav className='tutorialHeaderNav'>
-    //     <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage1") ? { backgroundColor: '#f86969' } : null} onClick={() => handleNavigate("/tutorial/stage1")}>Brightness</button>
-    //     <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage2") ? { backgroundColor: '#f86969' } : null} onClick={() => handleNavigate("/tutorial/stage2")}>Contrast</button>
-    //     <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage3") ? { backgroundColor: '#f86969' } : null} onClick={() => handleNavigate("/tutorial/stage3")}>Saturation</button>
-    //     <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage4") ? { backgroundColor: '#f86969' } : null} onClick={() => handleNavigate("/tutorial/stage4")}>Greyscale</button>
-    //     <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage5") ? { backgroundColor: '#f86969' } : null} onClick={() => handleNavigate("/tutorial/stage5")}>Sepia</button>
-    //     <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage6") ? { backgroundColor: '#f86969' } : null} onClick={() => handleNavigate("/tutorial/stage6")}>Hue Rotate</button>
-    //     <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage7") ? { backgroundColor: '#f86969' } : null} onClick={() => handleNavigate("/tutorial/stage7")}>Blur</button>
-    //   </nav>
-    // </div>
-
-    <>
-      <nav className='tutorialHeaderNav'>
-        <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage1") ? { backgroundColor: '#f86969' } : null} >Brightness</button>
-        <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage2") ? { backgroundColor: '#f86969' } : null} >Contrast</button>
-        <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage3") ? { backgroundColor: '#f86969' } : null} >Saturation</button>
-        <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage4") ? { backgroundColor: '#f86969' } : null} >Greyscale</button>
-        <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage5") ? { backgroundColor: '#f86969' } : null} >Sepia</button>
-        <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage6") ? { backgroundColor: '#f86969' } : null} >Hue Rotate</button>
-        <button className='tutorialNavButton' style={isCurrentPath("/tutorial/stage7") ? { backgroundColor: '#f86969' } : null} >Blur</button>
-      </nav>
-    </>
-  )
-}
-
-export default TutorialHeader
+export default TutorialHeader;

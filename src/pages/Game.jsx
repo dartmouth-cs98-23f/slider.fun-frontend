@@ -122,7 +122,6 @@ const Game = (props) => {
 
   function handleSliderChange(propertyIndex, { target }) {
     setResetPressable(false);
-    console.log(currentOptions)
     setCurrentOptions(prevOptions => {
       return prevOptions.map((option, index) => {
         if (index !== propertyIndex) return option

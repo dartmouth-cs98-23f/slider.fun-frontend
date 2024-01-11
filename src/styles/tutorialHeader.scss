@@ -1,0 +1,21 @@
+.tutorialHeaderNav {
+    display: flex;
+    justify-content: center; /* Adjust this to 'start', 'end', 'flex-start', or 'flex-end' if desired */
+    align-items: center;
+  }
+  
+  .tutorialHeaderNav .tutorialNavButton {
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    width: 120px;
+    margin-right: 10px; /* Add margin to the right of each button */
+    cursor: default; /* Prevents cursor from changing to a pointer */
+  }
+  
+  .tutorialHeaderNav .tutorialNavButton:last-child {
+    margin-right: 0; /* Remove margin for the last button */
+  }
+  
