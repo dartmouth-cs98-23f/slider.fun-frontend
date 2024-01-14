@@ -28,6 +28,7 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  width: auto;
 
   .photoContainer {
     display: flex;
@@ -37,12 +38,9 @@ body {
       p {
         text-align: center;
         font-weight: bold;
-
       }
     }
-
   }
-
 
   .viewButtonsContainer {
     margin-top: 5px;
@@ -88,11 +86,6 @@ body {
       margin: 8px;
       width: 60px;
       height: 30px;
-      // background-image: url('assets/SideToSideSplit.png');
-      // background-size: cover;
-      /* This will ensure that the image covers the whole button */
-      // background-repeat: no-repeat;
-      // background-position: center;
       cursor: pointer;
       border-radius: 5px;
       border: 1px solid black;
@@ -100,11 +93,10 @@ body {
   }
 
   img {
-    width: 500px;
+    max-width: 100%;
+    width: auto;
   }
 }
-
-
 
 .main-image {
   grid-area: image;
@@ -248,8 +240,6 @@ button {
   }
 }
 
-
-
 .actionButtons {
   display: flex;
   flex-direction: row;
@@ -278,6 +268,6 @@ button {
 //need to change this later when we work with images of different sizes
 .comparisonContainer {
   padding-top: 10px;
-  max-width: 60vw;
+  max-width: 400px;
   height: auto;
 }

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import preImage from "../assets/pre.jpeg";
-// import goalImage from "../assets/goal.jpeg";
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
@@ -11,7 +9,6 @@ import makeConfetti from './Confetti';
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  console.log(props)
 
   useEffect(() => {
     setLoading(true);
