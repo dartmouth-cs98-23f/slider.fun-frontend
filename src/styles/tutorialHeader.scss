@@ -1,70 +1,81 @@
-$header-color: #333;  // primary color
+// $header-color: #333; // primary color
+$header-color: #EDEDED; // primary color
 $accent-color: #E27272; // accent color
+$text-color: #333; // text color
 
-.tutorialHeaderNav {
+
+.tutorialNavContainer {
   display: flex;
   justify-content: center;
+  background-color: $header-color;
+  height: 30px;
+  // padding-top: 5px;
   /* Adjust this to 'start', 'end', 'flex-start', or 'flex-end' if desired */
-  align-items: flex-end;
+  // align-items: flex-end;
   position: fixed;
   bottom: 0;
-  gap: 0px;
+  // gap: 0px;
   width: 100vw;
 
-  .tutorialNavButton {
-    // border: none;
-    text-align: left;
-    margin: 0px;
-    border-radius: 0px;
-    font-size: 15px;
-    // padding: 15px;
-    transition: background-color 0.3s, color 0.3s;
-    // border-bottom: 2px solid #f86969;
-    // position: relative;
-    width: calc(100vw / 7);
-    height: 25px;
-    // margin-right: 10px;
-    /* Add margin to the right of each button */
-    cursor: default;
-    /* Prevents cursor from changing to a pointer */
-
-    // chatGPT
+  .tutorialHeaderNav {
     display: flex;
-    /* Enables Flexbox */
-    flex-direction: column;
-    /* Stacks children vertically */
-    justify-content: flex-start;
-    /* Aligns children (text) to the bottom */
+    // background-color: $header-color;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    width: 90vw;
 
-    &:hover {
-      background-color: #f86969;
-      color: white;
+    .tutorialNavButton {
+      text-align: left;
+      margin: 0px;
+      border-radius: 0px;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
+      // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+      width: calc(100vw / 7);
+      height: 30px;
+      // margin-right: 10px;
+      /* Add margin to the right of each button */
+      cursor: default;
+      /* Prevents cursor from changing to a pointer */
+      padding: 5px;
+      // chatGPT
+      display: flex;
+      /* Enables Flexbox */
+      flex-direction: column;
+      /* Stacks children vertically */
+      justify-content: flex-start;
+
+      &:hover {
+        background-color: $accent-color;
+        color: white;
+      }
     }
-  }
 
-  .tutorialNavButton:last-child {
-    margin-right: 0;
-    /* Remove margin for the last button */
+    /* Aligns children (text) to the bottom */
+    .currentStage {
+      background-color: $header-color;
+      color: $text-color;
+      border-top: 4px solid #f86969;
+      height: 45px;
+    }
+
+    .prevStage {
+      background-color: $header-color;
+      color: $text-color;
+      border-top: 4px solid #69F869;
+    }
+
+    .upcomingStage {
+      background-color: $header-color;
+      color: $text-color;
+      border-top: 4px solid grey;
+    }
   }
 }
 
-
-// .tutorialHeaderNav {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   // margin-top: 10px;
-
-//   gap: 0px;
-//   // width: 600px;
-
-//   .tutorialNavButton {
-//     background-color: #9b9797;
-//     border-radius: 0px;
-//     cursor: default;
-//     margin: 0;
-//     width: 150px;
-//     height: 20px;
-//   }
+// .tutorialNavButton:last-child {
+//   margin-right: 0;
+//   /* Remove margin for the last button */
 // }

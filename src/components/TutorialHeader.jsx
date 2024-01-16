@@ -13,37 +13,51 @@ const TutorialHeader = () => {
 
   const currentStageNumber = getCurrentStageNumber();
   // Function to determine button style based on the stage number
+  // const buttonStyle = (stageNumber) => {
+  //   if (stageNumber === currentStageNumber) {
+  //     // Current stage 
+  //     return { backgroundColor: '#333', color: 'white', borderTop: "4px solid #f86969", height: "40px" };
+  //   } else if (stageNumber < currentStageNumber) {
+  //     // Stages before the current stage 
+  //     return { backgroundColor: '#333', color: 'white', borderTop: "4px solid #69F869" };
+  //   } else {
+  //     // Stages after the current stage 
+  //     return { backgroundColor: '#333', color: 'white', borderTop: "4px solid grey" };
+  //   }
+  // };
+
   const buttonStyle = (stageNumber) => {
     if (stageNumber === currentStageNumber) {
       // Current stage 
-      return { backgroundColor: '#333', color: 'white', borderTop: "4px solid #f86969", height: "40px"};
+      return "tutorialNavButton currentStage";
     } else if (stageNumber < currentStageNumber) {
       // Stages before the current stage 
-      return { backgroundColor: '#333', color: 'white', borderTop: "4px solid #69F869" };
+      return "tutorialNavButton prevStage";
     } else {
       // Stages after the current stage 
-      return { backgroundColor: '#333', color: 'white' , borderTop: "4px solid grey"};
+      return "tutorialNavButton upcomingStage";
     }
   };
 
   return (
-    <nav className='tutorialHeaderNav'>
-      {[1, 2, 3, 4, 5, 6, 7].map((stageNumber) => (
-        <button
-          key={stageNumber}
-          className='tutorialNavButton'
-          style={buttonStyle(stageNumber)}
-        >
-          {stageNumber === 1 ? 'Brightness' :
-            stageNumber === 2 ? 'Contrast' :
-              stageNumber === 3 ? 'Saturation' :
-                stageNumber === 4 ? 'Greyscale' :
-                  stageNumber === 5 ? 'Sepia' :
-                    stageNumber === 6 ? 'Hue Rotate' :
-                      'Blur'}
-        </button>
-      ))}
-    </nav>
+    <div className='tutorialNavContainer'>
+      <nav className='tutorialHeaderNav'>
+        {[1, 2, 3, 4, 5, 6, 7].map((stageNumber) => (
+          <button
+            key={stageNumber}
+            className={buttonStyle(stageNumber)}
+          >
+            {stageNumber === 1 ? 'BRIGHTNESS' :
+              stageNumber === 2 ? 'CONTRAST' :
+                stageNumber === 3 ? 'SATURATION' :
+                  stageNumber === 4 ? 'GREYSCALE' :
+                    stageNumber === 5 ? 'SEPIA' :
+                      stageNumber === 6 ? 'HUE ROTATE' :
+                        'BLUR'}
+          </button>
+        ))}
+      </nav>
+    </div>
   );
 };
 

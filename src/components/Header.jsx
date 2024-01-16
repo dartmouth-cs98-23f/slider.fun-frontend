@@ -5,30 +5,29 @@ import { useNavigate } from 'react-router-dom';
 import TodaysDate from './TodaysDate';
 import { useLocation } from 'react-router-dom';
 
+
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const handleNavigate = (path) => {
     navigate(path);
   };
-
   return (
+
     <div className='headerContainer'>
       <div className='contentContainer'>
-        <div className="logoContainer">
-          <img onClick={() => handleNavigate("/")} src={domainLogo} alt="Domain Logo" width="150"></img>
-        </div>
-        <div className="dateContainer">
+        <div className="logoDateContainer">
+          <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
           {location.pathname.startsWith('/daily') && <TodaysDate />}
+
         </div>
-        <nav className='navContainer'>
-          <button className="navButton" onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
-          <button className="navButton" onClick={() => handleNavigate("/daily")}>Daily Puzzle</button>
+        <nav className='headerNav'>
+          <button className="tutorialButton" onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
+          <button className="dailyButton" onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
         </nav>
       </div>
-    </div>
+    </div >
   )
 }
 
 export default Header
-
