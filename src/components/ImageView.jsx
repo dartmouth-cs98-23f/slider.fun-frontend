@@ -6,7 +6,7 @@ const containerStyle = {
   display: 'flex', 
   justifyContent: 'center',
   alignItems: 'center', 
-  marginTop: '20px',
+  marginTop: '0px',
 };
 
 const photoContainerStyle = {

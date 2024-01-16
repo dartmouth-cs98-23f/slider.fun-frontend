@@ -1,21 +1,70 @@
+$header-color: #333;  // primary color
+$accent-color: #E27272; // accent color
+
 .tutorialHeaderNav {
-    display: flex;
-    justify-content: center; /* Adjust this to 'start', 'end', 'flex-start', or 'flex-end' if desired */
-    align-items: center;
-  }
-  
-  .tutorialHeaderNav .tutorialNavButton {
-    border: none;
-    padding: 5px 10px;
-    font-size: 16px;
+  display: flex;
+  justify-content: center;
+  /* Adjust this to 'start', 'end', 'flex-start', or 'flex-end' if desired */
+  align-items: flex-end;
+  position: fixed;
+  bottom: 0;
+  gap: 0px;
+  width: 100vw;
+
+  .tutorialNavButton {
+    // border: none;
+    text-align: left;
+    margin: 0px;
+    border-radius: 0px;
+    font-size: 15px;
+    // padding: 15px;
     transition: background-color 0.3s, color 0.3s;
-    position: relative;
-    width: 120px;
-    margin-right: 10px; /* Add margin to the right of each button */
-    cursor: default; /* Prevents cursor from changing to a pointer */
+    // border-bottom: 2px solid #f86969;
+    // position: relative;
+    width: calc(100vw / 7);
+    height: 25px;
+    // margin-right: 10px;
+    /* Add margin to the right of each button */
+    cursor: default;
+    /* Prevents cursor from changing to a pointer */
+
+    // chatGPT
+    display: flex;
+    /* Enables Flexbox */
+    flex-direction: column;
+    /* Stacks children vertically */
+    justify-content: flex-start;
+    /* Aligns children (text) to the bottom */
+
+    &:hover {
+      background-color: #f86969;
+      color: white;
+    }
   }
-  
-  .tutorialHeaderNav .tutorialNavButton:last-child {
-    margin-right: 0; /* Remove margin for the last button */
+
+  .tutorialNavButton:last-child {
+    margin-right: 0;
+    /* Remove margin for the last button */
   }
-  
+}
+
+
+// .tutorialHeaderNav {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   // margin-top: 10px;
+
+//   gap: 0px;
+//   // width: 600px;
+
+//   .tutorialNavButton {
+//     background-color: #9b9797;
+//     border-radius: 0px;
+//     cursor: default;
+//     margin: 0;
+//     width: 150px;
+//     height: 20px;
+//   }
+// }
