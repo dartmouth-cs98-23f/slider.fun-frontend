@@ -90,7 +90,7 @@ const infoText = " Adjusting contrast in photo editing enhances the difference b
 const extraText = "Often used in portrait photography to add depth and emphasis to facial features and landscape photography to emphasize textures and contours, and in "
 
 const Stage2 = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const closeModal = () => {
     setIsModalVisible(false)

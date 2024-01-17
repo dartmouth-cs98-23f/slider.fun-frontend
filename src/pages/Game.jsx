@@ -122,7 +122,6 @@ const Game = (props) => {
 
   function handleSliderChange(propertyIndex, { target }) {
     setResetPressable(false);
-    console.log(currentOptions)
     setCurrentOptions(prevOptions => {
       return prevOptions.map((option, index) => {
         if (index !== propertyIndex) return option
@@ -239,8 +238,6 @@ const Game = (props) => {
     return totalRMSE;
   }
 
-
-
   const handleScoreProcessing = async (photo, filter1, filter2) => {
     if (defaultScore === false) {
       setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
@@ -267,15 +264,10 @@ const Game = (props) => {
     }
   }, [score, defaultScore])
 
-
-
-
-
   const handleCompareClick = () => {
     handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
     setIsModalVisible(true);
   };
-
 
   const handleResetSliders = () => {
     currentOptions[0].value = defaultOptions[0].value;

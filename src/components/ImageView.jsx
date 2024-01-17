@@ -2,19 +2,19 @@ import React from 'react'
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 
 const containerStyle = {
-  width: '500px', 
-  height: '300px', 
   margin: 'auto',
   display: 'flex', 
   justifyContent: 'center',
   alignItems: 'center', 
-  marginTop: '20px',
+  marginTop: '0px',
 };
 
 const photoContainerStyle = {
   display: 'flex', 
   alignItems: 'flex-start', 
   justifyContent: 'center', 
+  width: '800px', 
+  height: 'auto',
 };
 
 const ImageView = (props) => {
@@ -30,7 +30,6 @@ const ImageView = (props) => {
                 alt="pre edit pics" 
                 style={{ 
                   ...props.getImageStyle(props.currentOptions), 
-                  marginLeft: '10px' 
                 }} 
               />
 
@@ -42,7 +41,6 @@ const ImageView = (props) => {
                 alt="edited pics" 
                 style={{ 
                   ...props.getImageStyle(props.editedOptions), 
-                  marginLeft: '10px' 
                 }} 
               />
             </div>

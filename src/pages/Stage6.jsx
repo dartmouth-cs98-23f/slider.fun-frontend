@@ -89,7 +89,7 @@ const infoText = "Hue rotation changes the overall color spectrum of an image, a
 const extraText = "Utilized in artistic and abstract photography to create surreal and visually striking images, and in advertising to grab attention with unusual color schemes."
 
 const Stage6 = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const closeModal = () => {
     setIsModalVisible(false)
