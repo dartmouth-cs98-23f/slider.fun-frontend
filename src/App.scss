@@ -1,12 +1,17 @@
+// $header-color: #333; // primary color
+$header-color: #EDEDED; // primary color
+$accent-color: #E27272; // accent color
+
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-.App {
-  text-align: center;
-}
+// .App {
+//   text-align: center;
+// }
 
 .App-header {
   background-color: #282c34;
@@ -21,6 +26,7 @@
 
 body {
   margin: 0;
+
 }
 
 .container {
@@ -195,8 +201,8 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 
   .sliderContainer {
     // margin-left: -45px;
@@ -247,8 +253,13 @@ button {
   .resetButton {
     background-color: white;
     border: 2px solid #363636;
-    transition-duration: 0.4s;
+    transition: background-color 0.7s, color 0.7s;
     color: #363636;
+
+    &:hover {
+      background-color: $accent-color;
+      color: white;
+    }
   }
 }
 

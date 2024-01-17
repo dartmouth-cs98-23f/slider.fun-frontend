@@ -90,7 +90,7 @@ const link = "https://slider-fun.onrender.com/api/photo/654feac4663946fee35a1600
 const infoText = "Saturation editing alters the intensity of colors in a photo, increasing it can make colors more vivid and eye-catching, while decreasing it can give a more subdued, natural look."
 const extraText = "Commonly applied in nature and travel photography to enhance natural colors, and in food photography to make the dishes appear more appetizing."
 const Stage3 = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const closeModal = () => {
     setIsModalVisible(false)
