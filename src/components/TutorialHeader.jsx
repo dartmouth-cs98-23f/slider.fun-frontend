@@ -13,18 +13,6 @@ const TutorialHeader = () => {
 
   const currentStageNumber = getCurrentStageNumber();
   // Function to determine button style based on the stage number
-  // const buttonStyle = (stageNumber) => {
-  //   if (stageNumber === currentStageNumber) {
-  //     // Current stage 
-  //     return { backgroundColor: '#333', color: 'white', borderTop: "4px solid #f86969", height: "40px" };
-  //   } else if (stageNumber < currentStageNumber) {
-  //     // Stages before the current stage 
-  //     return { backgroundColor: '#333', color: 'white', borderTop: "4px solid #69F869" };
-  //   } else {
-  //     // Stages after the current stage 
-  //     return { backgroundColor: '#333', color: 'white', borderTop: "4px solid grey" };
-  //   }
-  // };
 
   const buttonStyle = (stageNumber) => {
     if (stageNumber === currentStageNumber) {
