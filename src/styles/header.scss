@@ -1,3 +1,7 @@
+// $header-color: #333; // primary color
+$header-color: #EDEDED;  // primary color
+$accent-color: #E27272; // accent color
+
 .headerContainer {
   display: flex;
   align-items: center;
@@ -5,7 +9,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   padding: 10px 0px 5px 0px;
-  background-color: #EDEDED;
+  background-color: $header-color;
 
   .contentContainer {
     display: flex;
@@ -13,7 +17,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 70%;
+    width: 90%;
 
     .logoDateContainer {
       display: flex;
@@ -31,30 +35,6 @@
   }
 }
 
-.tutorialHeaderNav {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  // margin-top: 10px;
-
-  gap: 0px;
-  // width: 600px;
-
-  .tutorialNavButton {
-    background-color: #9b9797;
-    border-radius: 0px;
-    cursor: default;
-    margin: 0;
-    width: 150px;
-    height: 20px;
-
-    // &:hover {
-    //   background-color: #363636;
-    // }
-  }
-}
-
 .headerNav {
   display: flex;
   flex-direction: row;
@@ -66,10 +46,20 @@
     background-color: #ffffff;
     border: 2px solid #363636;
     color: black;
+
+    // hover to red 
+    &:hover {
+      background-color: $accent-color;
+      color: white;
+    }
   }
 
   .dailyButton {
     height: 35px;
+
+    &:hover {
+      background-color: #70737a;
+    }
   }
 
     .loginButton{
@@ -83,9 +73,5 @@
     background-color: #363636;
     border-radius: 7px;
     margin-bottom: 13px;
-
-    &:hover {
-      background-color: #70737a;
-    }
   }
 }

@@ -90,7 +90,7 @@ const infoText = "Converting a photo to greyscale removes all color, resulting i
 const extraText = "Popular in street photography for its timeless quality and ability to focus on emotion and context, and in fine art photography for its dramatic and moody effect."
 
 const Stage4 = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const closeModal = () => {
     setIsModalVisible(false)
@@ -104,10 +104,10 @@ const Stage4 = () => {
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
       <InfoModal heading="Greyscale" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
-      <TutorialHeader />
       <Game
         stage_options={CURRENT_OPTIONS} pic_link={link} openModal={openModal} nextLevel="/tutorial/stage5"
       />
+      <TutorialHeader />
     </div>
   )
 }

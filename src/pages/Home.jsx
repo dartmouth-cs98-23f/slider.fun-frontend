@@ -10,9 +10,9 @@ const Home = () => {
   const tutorialRef = useRef(null);
   const navigate = useNavigate();
 
-  const scrollToTutorial = () => {
-    tutorialRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
+  // const scrollToTutorial = () => {
+  //   tutorialRef.current.scrollIntoView({ behavior: 'smooth' });
+  // };
 
   return (
     <div className='homeContainer'>
@@ -32,7 +32,7 @@ const Home = () => {
         <img src={sliderLogo} alt=""></img>
 
         <div className='buttonContainer'>
-          <button onClick={scrollToTutorial}>Tutorial</button>
+          {/* <button onClick={scrollToTutorial}>Tutorial</button> */}
           <button onClick={() => { navigate("/tutorial/stage1") }}>
             Play
           </button>

@@ -2,7 +2,7 @@ import './App.scss';
 import Home from './pages/Home';
 import Game from './pages/Game';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import StageOne from './pages/StageOne';
+import Stage1 from './pages/Stage1';
 import Stage2 from './pages/Stage2';
 import Stage3 from './pages/Stage3';
 import Stage4 from './pages/Stage4';
@@ -21,7 +21,7 @@ function App() {
         <Route path="/">
           <Route index element={<Home />} />
           <Route path="game" element={<Game />} />
-          <Route path="/tutorial/stage1" element={<StageOne />} />
+          <Route path="/tutorial/stage1" element={<Stage1 />} />
           <Route path="/tutorial/stage2" element={<Stage2 />} />
           <Route path="/tutorial/stage3" element={<Stage3 />} />
           <Route path="/tutorial/stage4" element={<Stage4 />} />

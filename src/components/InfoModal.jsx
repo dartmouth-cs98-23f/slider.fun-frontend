@@ -2,17 +2,6 @@ import React from 'react';
 import "../styles/infoModal.scss";
 
 function InfoModal(props) {
-  // const [loading, setLoading] = useState(false);
-
-  console.log(props)
-
-  // useState(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 700);
-  // }, [loading]);
-
   return (
     <>
       {props.isModalVisible &&
