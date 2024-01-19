@@ -90,7 +90,7 @@ const infoText = "Applying a sepia tone gives photos a warm brown tint, reminisc
 const extraText = "Frequently used in portrait photography to create a warm, nostalgic feel, and in documenting historical reenactments or antiques to enhance the vintage aesthetic."
 
 const Stage5 = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const closeModal = () => {
     setIsModalVisible(false)

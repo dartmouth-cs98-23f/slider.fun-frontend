@@ -90,7 +90,7 @@ const infoText = "Adding blur to a photo can soften edges, create a sense of mot
 const extraText = "Widely used in sports and action photography to convey motion and speed, and in portrait photography to isolate the subject from a distracting background."
 
 const Stage7 = () => {
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const closeModal = () => {
     setIsModalVisible(false)

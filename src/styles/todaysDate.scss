@@ -1,0 +1,20 @@
+.todaysDate {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #E27272;
+    opacity: 0.7;
+    animation: fadeIn 0.5s;
+    font-weight: bold;
+    padding: 0;
+    height: 25px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 0.7; }
+    }
+  }
+  
