@@ -111,7 +111,7 @@ const Daily = () => {
       {/* <TutorialHeader /> */}
       {/* <h1> Coming Soon....</h1> */}
       <Game
-        stage_options={CURRENT_OPTIONS} pic_link={randomLink}
+        stageOptions={CURRENT_OPTIONS} pic_link={randomLink}
       />
     </div>
   )
