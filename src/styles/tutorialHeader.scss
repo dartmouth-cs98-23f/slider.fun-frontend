@@ -43,9 +43,10 @@ $text-color: #333; // text color
       // chatGPT
       display: flex;
       /* Enables Flexbox */
-      flex-direction: column;
+      flex-direction: row;
+
       /* Stacks children vertically */
-      justify-content: flex-start;
+      justify-content: space-between;
 
       &:hover {
         background-color: $text-color;

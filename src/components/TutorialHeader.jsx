@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "../styles/tutorialHeader.scss";
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
-const TutorialHeader = () => {
-  const location = useLocation();
+const TutorialHeader = (props) => {
+  // const location = useLocation();
 
   // Function to extract the stage number from the path
-  const getCurrentStageNumber = () => {
-    const match = location.pathname.match(/\/tutorial\/stage(\d+)/);
-    return match ? parseInt(match[1], 10) : null;
-  };
+  // const getCurrentStageNumber = () => {
+  //   const match = location.pathname.match(/\/tutorial\/stage(\d+)/);
+  //   return match ? parseInt(match[1], 10) : null;
+  // };
 
-  const currentStageNumber = getCurrentStageNumber();
+  const currentStageNumber = props.stageNumber;
+
   // Function to determine button style based on the stage number
 
   const buttonStyle = (stageNumber) => {
@@ -30,19 +31,27 @@ const TutorialHeader = () => {
   return (
     <div className='tutorialNavContainer'>
       <nav className='tutorialHeaderNav'>
-        {[1, 2, 3, 4, 5, 6, 7].map((stageNumber) => (
-          <button
+        {[0, 1, 2, 3, 4, 5, 6].map((stageNumber) => (
+          <div
             key={stageNumber}
             className={buttonStyle(stageNumber)}
           >
-            {stageNumber === 1 ? 'BRIGHTNESS' :
-              stageNumber === 2 ? 'CONTRAST' :
-                stageNumber === 3 ? 'SATURATION' :
-                  stageNumber === 4 ? 'GREYSCALE' :
-                    stageNumber === 5 ? 'SEPIA' :
-                      stageNumber === 6 ? 'HUE ROTATE' :
-                        'BLUR'}
-          </button>
+            <div>
+              {stageNumber === 0 ? 'BRIGHTNESS ' :
+                stageNumber === 1 ? 'CONTRAST ' :
+                  stageNumber === 2 ? 'SATURATION ' :
+                    stageNumber === 3 ? 'GREYSCALE ' :
+                      stageNumber === 4 ? 'SEPIA ' :
+                        stageNumber === 5 ? 'HUE ROTATE ' :
+                          'BLUR '}
+            </div>
+            <div
+              style={{ fontWeight: 'bold' }}
+            >
+
+              {props.scores[stageNumber] !== 0 ? props.scores[stageNumber] : null}
+            </div>
+          </div>
         ))}
       </nav>
     </div>

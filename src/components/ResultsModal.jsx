@@ -8,7 +8,6 @@ import makeConfetti from './Confetti';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -19,6 +18,12 @@ function ResultsModal(props) {
       }
     }, 1100);
   }, [props.score]);
+
+
+  const nextStageHandler = () => {
+    props.onClose();
+    props.goToNextStage();
+  }
 
   return (
     <>
@@ -61,7 +66,7 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
-          {props.score >= 95 && props.nextLevel !== undefined ? <button onClick={() => { navigate("" + props.nextLevel) }}> Next!</button> : null}
+          {props.score >= 95 ? <button onClick={nextStageHandler}> Next!</button> : null}
         </div>
       </div>
     </>

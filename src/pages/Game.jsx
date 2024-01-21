@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
 import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react'
 import $ from 'jquery';
 import ImageView from '../components/ImageView'
 import side2side from "../assets/SideToSideSplit.png"
@@ -55,7 +54,7 @@ const DEFAULT_OPTIONS = [
   {
     name: 'Saturation',
     property: 'saturate',
-    value: 100,
+    value: 110,
     range: {
       min: 0,
       max: 200
@@ -107,14 +106,17 @@ const DEFAULT_OPTIONS = [
 const MODIFIED_OPTIONS = []
 
 const Game = (props) => {
+  const stageOptions = props.stageOptions;
 
   const location = useLocation();
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
-  const [currentOptions, setCurrentOptions] = useState(props.stage_options)
+  const [currentOptions, setCurrentOptions] = useState(stageOptions)
+
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
+
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
   const [active, setActive] = React.useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -122,12 +124,19 @@ const Game = (props) => {
 
   function handleSliderChange(propertyIndex, { target }) {
     setResetPressable(false);
-    setCurrentOptions(prevOptions => {
-      return prevOptions.map((option, index) => {
-        if (index !== propertyIndex) return option
-        return { ...option, value: target.value }
-      })
-    })
+
+    const newSliderValues = currentOptions.map((option, index) => {
+      if (index !== propertyIndex) {
+        return option;
+      }
+      return { ...option, value: target.value };
+    });
+
+    // sets the local sliders to the new value 
+    setCurrentOptions(newSliderValues)
+
+    // sets the global tutorial sliders to the new value
+    props.updateStageSliders(props.stageNumber, newSliderValues)
   }
 
   useEffect(() => {
@@ -142,6 +151,11 @@ const Game = (props) => {
       }
     });
   }, [props.pic_link]);
+
+
+  useEffect(() => {
+    setCurrentOptions(stageOptions)
+  }, [stageOptions]);
 
   const getRBG = (pictureFile, filters = false) => {
     // console.log(filters)
@@ -219,13 +233,14 @@ const Game = (props) => {
     }
 
     let redSum = 0, greenSum = 0, blueSum = 0;
-
+    // for loop to calculate the differences for each color
     for (let i = 0; i < pic1RGB.length; i++) {
       redSum += Math.pow(pic1RGB[i].averageRed - pic2RGB[i].averageRed, 2);
       greenSum += Math.pow(pic1RGB[i].averageGreen - pic2RGB[i].averageGreen, 2);
       blueSum += Math.pow(pic1RGB[i].averageBlue - pic2RGB[i].averageBlue, 2);
     }
 
+    // calculate the RMSE for each color
     const redRMSE = Math.sqrt(redSum / pic1RGB.length);
     const greenRMSE = Math.sqrt(greenSum / pic1RGB.length);
     const blueRMSE = Math.sqrt(blueSum / pic1RGB.length);
@@ -238,12 +253,17 @@ const Game = (props) => {
     return totalRMSE;
   }
 
+
+
   const handleScoreProcessing = async (photo, filter1, filter2) => {
+    // setting a default score for the first time
     if (defaultScore === false) {
       setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
     }
-
-    setScore(await compareTwoPhotos(photo, filter1, filter2))
+    console.log("hi", filter1, filter2)
+    let photoScore = (await compareTwoPhotos(photo, filter1, filter2))
+    console.log("photo score", photoScore)
+    setScore(photoScore)
 
   }
 
@@ -259,12 +279,18 @@ const Game = (props) => {
     if (score && defaultScore) {
       // zero is full score
       console.log(score / defaultScore)
+
       // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
-      setPercentScore(100 - (Math.round(score)))
+      let calcPercentScore = 100 - (Math.round(score))
+      console.log("percent store", calcPercentScore)
+
+      setPercentScore(calcPercentScore)
+      props.updateScores(props.stageNumber, calcPercentScore)
     }
   }, [score, defaultScore])
 
   const handleCompareClick = () => {
+
     handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
     setIsModalVisible(true);
   };
@@ -314,86 +340,37 @@ const Game = (props) => {
         </div>
 
         <div className='slidersContainer'>
-
-          <Slider
-            name={currentOptions[0].name}
-            min={currentOptions[0].range.min}
-            max={currentOptions[0].range.max}
-            value={currentOptions[0].value}
-            status={currentOptions[0].status}
-            handleChange={(event) => handleSliderChange(0, event)}
-
-          />
-
-          <Slider
-            name={currentOptions[1].name}
-            min={currentOptions[1].range.min}
-            max={currentOptions[1].range.max}
-            value={currentOptions[1].value}
-            status={currentOptions[1].status}
-            handleChange={(event) => handleSliderChange(1, event)}
-          />
-
-          <Slider
-            name={currentOptions[2].name}
-            min={currentOptions[2].range.min}
-            max={currentOptions[2].range.max}
-            value={currentOptions[2].value}
-            status={currentOptions[2].status}
-            handleChange={(event) => handleSliderChange(2, event)}
-          />
-
-          <Slider
-            name={currentOptions[3].name}
-            min={currentOptions[3].range.min}
-            max={currentOptions[3].range.max}
-            value={currentOptions[3].value}
-            status={currentOptions[3].status}
-            handleChange={(event) => handleSliderChange(3, event)}
-          />
-
-          <Slider
-            name={currentOptions[4].name}
-            min={currentOptions[4].range.min}
-            max={currentOptions[4].range.max}
-            value={currentOptions[4].value}
-            status={currentOptions[4].status}
-            handleChange={(event) => handleSliderChange(4, event)}
-          />
-
-          <Slider
-            name={currentOptions[5].name}
-            min={currentOptions[5].range.min}
-            max={currentOptions[5].range.max}
-            value={currentOptions[5].value}
-            status={currentOptions[5].status}
-            handleChange={(event) => handleSliderChange(5, event)}
-          />
-
-          <Slider
-            name={currentOptions[6].name}
-            min={currentOptions[6].range.min}
-            max={currentOptions[6].range.max}
-            value={currentOptions[6].value}
-            status={currentOptions[6].status}
-            handleChange={(event) => handleSliderChange(6, event)}
-            step={0.1}
-          />
+          {currentOptions.map((option, index) => (
+            <Slider
+              key={index}
+              name={option.name}
+              min={option.range.min}
+              max={option.range.max}
+              value={option.value}
+              status={option.status}
+              handleChange={(event) => handleSliderChange(index, event)}
+              // only want to set `step` for the last slider
+              step={index === 6 ? 0.1 : undefined}
+            />
+          ))}
         </div>
         <div className='actionButtons'>
 
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
           {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Explanation</button>}
           <button onClick={handleCompareClick}>Compare</button>
+          <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button>
+          <button onClick={props.goToNextStage} disabled={props.currentStageIndex === 7 - 1}>Next Stage</button>
         </div>
 
         {isModalVisible && (
-          <ResultsModal nextLevel={props.nextLevel} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
         <div className='score'>
-          {/* <p> Default Score: {defaultScore}</p>
-          <p> Current Score: {score}</p> */}
+          <p> Default RMSE: {defaultScore}</p>
+          <p> Current RMSE: {score}</p>
           {percentScore !== null && percentScore !== undefined && percentScore !== 0}
+
         </div>
       </div>
     </div>
