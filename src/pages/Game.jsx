@@ -136,7 +136,9 @@ const Game = (props) => {
     setCurrentOptions(newSliderValues)
 
     // sets the global tutorial sliders to the new value
-    props.updateStageSliders(props.stageNumber, newSliderValues)
+    if (props.updateStageSliders !== undefined) {
+      props.updateStageSliders(props.stageNumber, newSliderValues)
+    }
   }
 
   useEffect(() => {
@@ -264,7 +266,6 @@ const Game = (props) => {
     let photoScore = (await compareTwoPhotos(photo, filter1, filter2))
     console.log("photo score", photoScore)
     setScore(photoScore)
-
   }
 
 
@@ -285,7 +286,9 @@ const Game = (props) => {
       console.log("percent store", calcPercentScore)
 
       setPercentScore(calcPercentScore)
-      props.updateScores(props.stageNumber, calcPercentScore)
+      if (props.updateScores !== undefined) {
+        props.updateScores(props.stageNumber, calcPercentScore)
+      }
     }
   }, [score, defaultScore])
 
@@ -359,16 +362,16 @@ const Game = (props) => {
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
           {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Explanation</button>}
           <button onClick={handleCompareClick}>Compare</button>
-          <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button>
-          <button onClick={props.goToNextStage} disabled={props.currentStageIndex === 7 - 1}>Next Stage</button>
+          {/* <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button>
+          <button onClick={props.goToNextStage} disabled={props.currentStageIndex === 7 - 1}>Next Stage</button> */}
         </div>
 
         {isModalVisible && (
-          <ResultsModal goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
         <div className='score'>
-          <p> Default RMSE: {defaultScore}</p>
-          <p> Current RMSE: {score}</p>
+          {/* <p> Default RMSE: {defaultScore}</p>
+          <p> Current RMSE: {score}</p> */}
           {percentScore !== null && percentScore !== undefined && percentScore !== 0}
 
         </div>

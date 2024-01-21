@@ -94,8 +94,8 @@ const TutorialData = {
     {
       "title": "Saturation",
       "link": "https://slider-fun.onrender.com/api/photo/654feac4663946fee35a1600",
-      "infoText": " dd",
-      "extraText": "eT"
+      "infoText": "Saturation editing alters the intensity of colors in a photo, increasing it can make colors more vivid and eye-catching, while decreasing it can give a more subdued, natural look.",
+      "extraText": "Commonly applied in nature and travel photography to enhance natural colors, and in food photography to make the dishes appear more appetizing."
     },
     {
       "title": "Greyscale",
@@ -106,20 +106,20 @@ const TutorialData = {
     {
       "title": "Sepia",
       "link": "https://slider-fun.onrender.com/api/photo/6551658492d16a06e6567353",
-      "infoText": " dd",
-      "extraText": "eT"
+      "infoText": "Applying a sepia tone gives photos a warm brown tint, reminiscent of vintage or historical photographs, often used to evoke nostalgia or age.",
+      "extraText": "Frequently used in portrait photography to create a warm, nostalgic feel, and in documenting historical reenactments or antiques to enhance the vintage aesthetic."
     },
     {
       "title": "Hue Rotate",
       "link": "https://slider-fun.onrender.com/api/photo/65527a1c6cdb84a05144ef04",
-      "infoText": " dd",
-      "extraText": "eT"
+      "infoText": "Hue rotation changes the overall color spectrum of an image, allowing for creative and dramatic shifts in appearance, useful for artistic effects or correcting color casts.",
+      "extraText": "Utilized in artistic and abstract photography to create surreal and visually striking images, and in advertising to grab attention with unusual color schemes."
     },
     {
       "title": "Blur",
       "link": "https://slider-fun.onrender.com/api/photo/655280b96cdb84a05144ef65",
-      "infoText": " dd",
-      "extraText": "eT"
+      "infoText": "Adding blur to a photo can soften edges, create a sense of motion, or bring focus to a particular element by reducing background detail.",
+      "extraText": "Widely used in sports and action photography to convey motion and speed, and in portrait photography to isolate the subject from a distracting background."
     }
   ]
 }

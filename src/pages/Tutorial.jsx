@@ -8,6 +8,7 @@ const Tutorial = () => {
   const [scores, setScores] = useState([0, 0, 0, 0, 0, 0, 0]);
 
   const totalStages = tutorialData.Stages.length;
+  const [mostForwardStage, setMostForwardStage] = useState(0);
 
   const updateScores = (indexToUpdate, newScore) => {
     console.log(newScore)
@@ -18,10 +19,17 @@ const Tutorial = () => {
   const goToNextStage = () => {
     console.log("goToNextStage called")
     setCurrentStageIndex((prevIndex) => Math.min(prevIndex + 1, totalStages - 1));
+    setMostForwardStage(Math.max(mostForwardStage, currentStageIndex + 1));
   };
 
   const goToPreviousStage = () => {
     setCurrentStageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const goToSpecificStage = (index) => {
+    if (index <= mostForwardStage) {
+      setCurrentStageIndex(index);
+    }
   };
 
   const currentStage = tutorialData.Stages[currentStageIndex];
@@ -45,23 +53,22 @@ const Tutorial = () => {
   };
 
   return (
-    <div>
-      <div> {currentStageIndex}</div>
-      <div>
-        <Stage
-          stageNumber={currentStageIndex}
-          currentOptions={stageSliders[currentStageIndex]}
-          link={currentStage.link}
-          infoText={currentStage.infoText}
-          extraText={currentStage.extraText}
-          updateScores={updateScores}
-          updateStageSliders={updateStageSliders}
-          goToPreviousStage={goToPreviousStage}
-          goToNextStage={goToNextStage}
-        />
-      </div>
-      <TutorialHeader scores={scores} stageNumber={currentStageIndex} />
 
+    <div className='stageContainer'>
+      <Stage
+        title={currentStage.title}
+        stageNumber={currentStageIndex}
+        currentOptions={stageSliders[currentStageIndex]}
+        link={currentStage.link}
+        infoText={currentStage.infoText}
+        extraText={currentStage.extraText}
+        updateScores={updateScores}
+        updateStageSliders={updateStageSliders}
+        goToPreviousStage={goToPreviousStage}
+        goToNextStage={goToNextStage}
+        tutorial={true}
+      />
+      <TutorialHeader scores={scores} stageNumber={currentStageIndex} mostForwardStage={mostForwardStage} goToSpecificStage={goToSpecificStage} />
     </div>
   )
 }

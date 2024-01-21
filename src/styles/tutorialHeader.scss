@@ -34,7 +34,7 @@ $text-color: #333; // text color
       // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       transition: background-color 0.3s, color 0.3s;
       width: calc(100vw / 7);
-      height: 30px;
+      height: 40px;
       // margin-right: 10px;
       /* Add margin to the right of each button */
       cursor: default;
@@ -59,7 +59,7 @@ $text-color: #333; // text color
       background-color: $header-color;
       color: $text-color;
       border-top: 4px solid #f86969;
-      height: 45px;
+      height: 55px;
     }
 
     .prevStage {
@@ -72,6 +72,12 @@ $text-color: #333; // text color
       background-color: $header-color;
       color: $text-color;
       border-top: 4px solid grey;
+
+      &:hover {
+        background-color: $text-color;
+        color: white;
+        cursor: not-allowed;
+      }
     }
   }
 }

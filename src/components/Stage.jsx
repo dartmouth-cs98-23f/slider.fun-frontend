@@ -32,6 +32,7 @@ const Stage = (props) => {
         stageNumber={props.stageNumber}
         goToPreviousStage={props.goToPreviousStage}
         goToNextStage={props.goToNextStage}
+
       />
 
     </div>

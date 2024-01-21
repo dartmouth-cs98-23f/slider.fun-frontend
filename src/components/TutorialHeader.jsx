@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/tutorialHeader.scss";
+import HoverMessage from './HoverMessage';
 // import { useLocation } from 'react-router-dom';
 
 const TutorialHeader = (props) => {
@@ -12,14 +13,14 @@ const TutorialHeader = (props) => {
   // };
 
   const currentStageNumber = props.stageNumber;
-
+  const [messageVisability, setMessageVisability] = useState(false);
   // Function to determine button style based on the stage number
-
   const buttonStyle = (stageNumber) => {
+    console.log(props.mostForwardStage)
     if (stageNumber === currentStageNumber) {
       // Current stage 
       return "tutorialNavButton currentStage";
-    } else if (stageNumber < currentStageNumber) {
+    } else if (stageNumber <= props.mostForwardStage) {
       // Stages before the current stage 
       return "tutorialNavButton prevStage";
     } else {
@@ -28,13 +29,36 @@ const TutorialHeader = (props) => {
     }
   };
 
+  const onTutorialNavButtonClick = (stageNumber) => {
+    if (stageNumber <= props.mostForwardStage) {
+      // Stages before the current stage 
+      props.goToSpecificStage(stageNumber);
+    } else {
+      setMessageVisability(true);
+    }
+  }
+
+  // hover message function 
+  useEffect(() => {
+
+    // wait for 2 seconds before hiding the message
+    const timer = setTimeout(() => {
+      setMessageVisability(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [messageVisability]);
+
+
   return (
     <div className='tutorialNavContainer'>
+      <HoverMessage message={"Get a 95% or higher to move on!!"} messageVisability={messageVisability} />
       <nav className='tutorialHeaderNav'>
         {[0, 1, 2, 3, 4, 5, 6].map((stageNumber) => (
           <div
             key={stageNumber}
             className={buttonStyle(stageNumber)}
+            onClick={() => onTutorialNavButtonClick(stageNumber)}
           >
             <div>
               {stageNumber === 0 ? 'BRIGHTNESS ' :
