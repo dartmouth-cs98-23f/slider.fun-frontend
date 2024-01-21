@@ -4,6 +4,7 @@ import domainLogo from "../assets/domain_logo.svg"
 import { useNavigate } from 'react-router-dom';
 import TodaysDate from './TodaysDate';
 import { useLocation } from 'react-router-dom';
+import ProfileIcon from './ProfileIcon';
 
 
 const Header = () => {
@@ -22,9 +23,9 @@ const Header = () => {
 
         </div>
         <nav className='headerNav'>
-          <button className="tutorialButton" onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
+          <button className="tutorialButton" onClick={() => handleNavigate("/tutorial")}>Tutorial Mode</button>
           <button className="dailyButton" onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
-          <button className="loginButton" onClick={() => handleNavigate("/login")}> login </button>
+          {localStorage.getItem('token') === null ? <button className="loginButton" onClick={() => handleNavigate("/login")}> login </button> : <ProfileIcon />}
         </nav>
       </div>
     </div >

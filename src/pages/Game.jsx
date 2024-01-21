@@ -122,6 +122,9 @@ const Game = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [resetPressable, setResetPressable] = useState(true);
 
+  const updateScores = props.updateScores;
+  const stageNumber = props.stageNumber;
+
   function handleSliderChange(propertyIndex, { target }) {
     setResetPressable(false);
 
@@ -274,7 +277,7 @@ const Game = (props) => {
     const filters = state.map(option => {
       return `${option.property}(${option.value}${option.unit})`
     })
-    console.log(filters)
+    // console.log(filters)
     return { filter: filters.join(' ') }
   }
 
@@ -288,11 +291,11 @@ const Game = (props) => {
       console.log("percent store", calcPercentScore)
 
       setPercentScore(calcPercentScore)
-      if (props.updateScores !== undefined) {
-        props.updateScores(props.stageNumber, calcPercentScore)
+      if (updateScores !== undefined) {
+        updateScores(stageNumber, calcPercentScore)
       }
     }
-  }, [score, defaultScore])
+  }, [score, defaultScore, updateScores, stageNumber])
 
   const handleCompareClick = () => {
 

@@ -6,21 +6,26 @@ import Daily from './pages/Daily';
 import HeaderWrapper from './components/HeaderWrapper';
 import Login from './pages/Login';
 import Tutorial from './pages/Tutorial';
+import Profile from './pages/Profile';
+import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <HeaderWrapper />
-      <Routes classname="routesContainer">
-        <Route path="/">
-          <Route index element={<Home />} />
-          <Route path="game" element={<Game />} />
-          <Route path="/tutorial" element={<Tutorial />} />
-          <Route path="/daily" element={<Daily />} />
-          <Route path="/login" element={< Login />} />
-          <Route path="*" element={<h1>Not Found</h1>} />
-        </Route>
-      </Routes>
+      <AuthContextProvider>
+        <HeaderWrapper />
+        <div className="routesContainer">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="game" element={<Game />} />
+            <Route path="tutorial" element={<Tutorial />} />
+            <Route path="daily" element={<Daily />} />
+            <Route path="login" element={<Login />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="*" element={<h1>Not Found</h1>} />
+          </Routes>
+        </div>
+      </AuthContextProvider>
     </BrowserRouter>
   );
 }

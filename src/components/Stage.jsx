@@ -34,7 +34,6 @@ const Stage = (props) => {
         goToNextStage={props.goToNextStage}
         tutorial={props.tutorial}
       />
-
     </div>
   )
 }
