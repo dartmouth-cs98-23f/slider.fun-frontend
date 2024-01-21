@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
-import { useNavigate } from 'react-router-dom';
 import makeConfetti from './Confetti';
 
 
