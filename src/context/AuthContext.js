@@ -3,9 +3,9 @@ import axios from 'axios';;
 
 export const AuthContext = createContext();
 // online
-// const API_URL = 'https://slider-fun.onrender.com/api/users';
+const API_URL = 'https://slider-fun.onrender.com/api/users';
 // local
-const API_URL = 'http://localhost:9090/api/users/';
+// const API_URL = 'http://localhost:9090/api/users/';
 
 
 export const AuthContextProvider = ({ children }) => {

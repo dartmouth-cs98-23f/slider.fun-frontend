@@ -363,7 +363,6 @@ const Game = (props) => {
           ))}
         </div>
         <div className='actionButtons'>
-
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
           {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Explanation</button>}
           <button onClick={handleCompareClick}>Compare</button>

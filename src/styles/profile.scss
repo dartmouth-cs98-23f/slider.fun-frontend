@@ -1,0 +1,66 @@
+$header-color: #EDEDED; // primary color
+$light-header-color: #bbbbbb; // primary color
+$accent-color: #E27272; // accent color
+$text-color: #333; // text color
+
+.profileContainer {
+  border-top: $light-header-color 1px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  // margin-top: 5px;
+  height: calc(100vh - 71px);
+  background-color: $header-color;
+  // padding: 10px;
+
+  .leftProfileBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 20%;
+    background-color: $light-header-color
+  }
+
+  .rightProfileBar {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 80%;
+    // background-color: aqua;
+
+    .profileViewContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      margin-left: 10px;
+      margin-top: 10px;
+      max-width: 100%;
+      width: 100%;
+
+      .profileViewNav {
+        height: 5%;
+        display: flex;
+        flex-direction: row;
+        background-color: $light-header-color;
+        border-radius: 5px;
+        gap: 0px;
+        padding: 5px;
+
+        button {
+          height: 100%;
+          border-radius: 0px;
+        }
+      }
+
+      .profileViewContent {
+        background-color: #007188;
+        height: 95%;
+        width: 100%;
+      }
+    }
+  }
+}

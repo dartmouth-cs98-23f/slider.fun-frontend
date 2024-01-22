@@ -1,5 +1,5 @@
 // $header-color: #333; // primary color
-$header-color: #EDEDED;  // primary color
+$header-color: #EDEDED; // primary color
 $accent-color: #E27272; // accent color
 
 .headerContainer {
@@ -41,6 +41,10 @@ $accent-color: #E27272; // accent color
   justify-content: center;
   align-items: center;
 
+  button {
+    margin: 8px;
+  }
+
   .tutorialButton {
     height: 35px;
     background-color: #ffffff;
@@ -62,12 +66,12 @@ $accent-color: #E27272; // accent color
     }
   }
 
-    .loginButton{
-      height: 35px;
-      background-color: #ffffff;
-      border: 2px solid #363636;
-      color: black;
-    }
+  .loginButton {
+    height: 35px;
+    background-color: #ffffff;
+    border: 2px solid #363636;
+    color: black;
+  }
 
   button {
     background-color: #363636;

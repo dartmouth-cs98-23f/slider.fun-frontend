@@ -232,7 +232,6 @@ body {
 }
 
 button {
-  margin: 8px;
   width: 100px;
   height: 30px;
   border-radius: 5px;
@@ -247,6 +246,7 @@ button {
 }
 
 .actionButtons {
+  gap: 8px;
   display: flex;
   flex-direction: row;
 

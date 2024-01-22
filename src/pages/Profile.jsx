@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+import Activity from '../components/Activity';
+import Statistics from '../components/Statistics';
+import '../styles/profile.scss'
+import ProfileViews from '../components/ProfileViews';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -48,11 +52,16 @@ const Profile = () => {
   }
 
   return (
-    <div>Profile page
-      <h1>User Profile</h1>
-      <p>Name: {currentUser.name}</p>
-      <p>Email: {currentUser.email}</p>
-      <button onClick={signOutHandler}>Sign out</button>
+    <div className='profileContainer'>
+      <div className='leftProfileBar'>
+        leftProfileBar
+        <button onClick={signOutHandler}>Sign out</button>
+      </div>
+
+      <div className='rightProfileBar'>
+        <ProfileViews />
+      </div>
+
     </div>
   )
 }
