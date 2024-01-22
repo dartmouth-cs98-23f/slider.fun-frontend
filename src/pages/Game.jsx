@@ -252,8 +252,8 @@ const Game = (props) => {
 
     const totalRMSE = (redRMSE + greenRMSE + blueRMSE) / 3;
 
-    console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
-    console.log('Total RMSE:', totalRMSE);
+    // console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
+    // console.log('Total RMSE:', totalRMSE);
 
     return totalRMSE;
   }
@@ -265,9 +265,9 @@ const Game = (props) => {
     if (defaultScore === false) {
       setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
     }
-    console.log("hi", filter1, filter2)
+    // console.log("hi", filter1, filter2)
     let photoScore = (await compareTwoPhotos(photo, filter1, filter2))
-    console.log("photo score", photoScore)
+    // console.log("photo score", photoScore)
     setScore(photoScore)
   }
 
@@ -282,18 +282,19 @@ const Game = (props) => {
   useEffect(() => {
     if (score && defaultScore) {
       // zero is full score
-      console.log(score / defaultScore)
+      // console.log(score / defaultScore)
 
       // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
       let calcPercentScore = 100 - (Math.round(score))
-      console.log("percent store", calcPercentScore)
+      // console.log("percent store", calcPercentScore)
 
       setPercentScore(calcPercentScore)
       if (updateScores !== undefined) {
         updateScores(stageNumber, calcPercentScore)
       }
     }
-  }, [score, defaultScore, stageNumber, updateScores])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [score, defaultScore])
 
   const handleCompareClick = () => {
 
