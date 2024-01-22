@@ -122,6 +122,9 @@ const Game = (props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [resetPressable, setResetPressable] = useState(true);
 
+  const stageNumber = props.stageNumber;
+  const updateScores = props.updateScores;
+
   function handleSliderChange(propertyIndex, { target }) {
     setResetPressable(false);
 
@@ -286,11 +289,11 @@ const Game = (props) => {
       console.log("percent store", calcPercentScore)
 
       setPercentScore(calcPercentScore)
-      if (props.updateScores !== undefined) {
-        props.updateScores(props.stageNumber, calcPercentScore)
+      if (updateScores !== undefined) {
+        updateScores(stageNumber, calcPercentScore)
       }
     }
-  }, [score, defaultScore])
+  }, [score, defaultScore, stageNumber, updateScores])
 
   const handleCompareClick = () => {
 
