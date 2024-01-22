@@ -22,7 +22,7 @@ const Header = () => {
 
         </div>
         <nav className='headerNav'>
-          <button className="tutorialButton" onClick={() => handleNavigate("/tutorial/stage1")}>Tutorial Mode</button>
+          <button className="tutorialButton" onClick={() => handleNavigate("/tutorial")}>Tutorial Mode</button>
           <button className="dailyButton" onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
         </nav>
       </div>
