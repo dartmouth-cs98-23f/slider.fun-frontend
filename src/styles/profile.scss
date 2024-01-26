@@ -57,9 +57,10 @@ $text-color: #333; // text color
       }
 
       .profileViewContent {
-        background-color: #007188;
-        height: 95%;
-        width: 100%;
+        background-color: $light-header-color;
+        border-radius: 5px;
+        height: 60%;
+        width: 80%;
       }
     }
   }

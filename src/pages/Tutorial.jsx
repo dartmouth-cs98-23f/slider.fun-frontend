@@ -49,7 +49,6 @@ const Tutorial = () => {
 
   const updateStageSliders = (indexToUpdate, newValues) => {
     setStageSlider(stageSliders.map((sliders, index) => index === indexToUpdate ? newValues : sliders));
-    // console.log(stageSliders)
   };
 
   return (
