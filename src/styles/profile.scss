@@ -2,6 +2,7 @@ $header-color: #EDEDED; // primary color
 $light-header-color: #bbbbbb; // primary color
 $accent-color: #E27272; // accent color
 $text-color: #333; // text color
+$light-text-color: #8d8d8d; // text color
 
 .profileContainer {
   border-top: $light-header-color 1px solid;
@@ -21,7 +22,8 @@ $text-color: #333; // text color
     align-items: center;
     height: 100%;
     width: 20%;
-    background-color: $light-header-color
+    background-color: $light-header-color;
+    padding: 10px;
   }
 
   .rightProfileBar {
@@ -57,10 +59,59 @@ $text-color: #333; // text color
       }
 
       .profileViewContent {
-        background-color: $light-header-color;
+        // background-color: $light-header-color;
         border-radius: 5px;
         height: 60%;
-        width: 80%;
+        width: 95%;
+
+
+        .activityCards {
+          display: flex;
+          flex-direction: column;
+          // gap: 5px;
+
+          .activityCard {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 5px;
+            border-bottom: 1px solid $light-header-color;
+            padding: 10px 5px 10px 5px;
+
+            &:hover {
+              background-color: $light-header-color;
+            }
+
+            .activityCardType {
+              background-color: $light-text-color;
+              border-radius: 50px;
+              padding: 5px;
+              width: 30px;
+              height: 30px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+
+            .activityCenterCard {
+              flex-grow: 2;
+
+              .activityCardHeader {
+                font-weight: bold;
+              }
+
+              .activityCardContent {
+                color: $light-text-color
+              }
+            }
+
+            .activityCardDate {
+              color: $light-text-color
+            }
+          }
+
+        }
       }
     }
   }

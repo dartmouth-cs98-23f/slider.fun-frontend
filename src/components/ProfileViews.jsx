@@ -5,7 +5,6 @@ import Statistics from './Statistics'
 const ProfileViews = () => {
   const [currentView, setCurrentView] = useState(0)
 
-
   return (
     <div className='profileViewContainer'>
 
@@ -14,8 +13,8 @@ const ProfileViews = () => {
         <button onClick={() => setCurrentView(1)}>Statistics</button>
       </div>
       <div className='profileViewContent'>
-        <Activity />
-        <Statistics />
+        {currentView === 0 ? <Activity username={"Admin"} /> : ""}
+        {currentView === 1 ? <Statistics /> : ""}
       </div>
     </div>
   )
