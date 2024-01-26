@@ -287,3 +287,20 @@ button {
   font-weight: bold;
   font-size: larger;
 }
+
+.avatar {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.columnFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+.rowFlex {
+  display: flex;
+  flex-direction: row;
+}

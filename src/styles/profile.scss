@@ -23,7 +23,52 @@ $light-text-color: #8d8d8d; // text color
     height: 100%;
     width: 20%;
     background-color: $light-header-color;
-    padding: 10px;
+    padding: 15px;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .topBar {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+
+      .avatarContainer {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+
+        .avatar {
+          background-color: white;
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          padding: 5px;
+
+        }
+      }
+
+      .username {
+        flex-grow: 3;
+      }
+
+    }
+
+    .middleBar {
+      width: 100%;
+      // padding: 5px;
+      flex-grow: 2;
+
+      .sliderScoreHeader {
+        justify-content: space-between;
+
+        .progressBar {
+          color: red;
+        }
+      }
+    }
   }
 
   .rightProfileBar {

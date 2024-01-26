@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
-import Activity from '../components/Activity';
-import Statistics from '../components/Statistics';
+
 import '../styles/profile.scss'
 import ProfileViews from '../components/ProfileViews';
+import LeftProfileBar from '../components/LeftProfileBar';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -32,8 +32,6 @@ const Profile = () => {
     navigate("/login");
   };
 
-  // const [userInfo, setUserInfo] = useState(null);
-
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -53,11 +51,7 @@ const Profile = () => {
 
   return (
     <div className='profileContainer'>
-      <div className='leftProfileBar'>
-        leftProfileBar
-        <button onClick={signOutHandler}>Sign out</button>
-      </div>
-
+      <LeftProfileBar signOutHandler={signOutHandler} />
       <div className='rightProfileBar'>
         <ProfileViews />
       </div>
