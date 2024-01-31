@@ -124,7 +124,6 @@ const Game = (props) => {
 
   const stageNumber = props.stageNumber;
   const updateScores = props.updateScores;
-  const [hint, setHint] = useState('');
 
 
   function handleSliderChange(propertyIndex, { target }) {
@@ -182,13 +181,7 @@ const Game = (props) => {
     }
   
     return output;
-  };
-  
-  const handleHintClick = () => {
-    const newHint = calculateHint(editedOptions, currentOptions);
-    setHint(newHint);
-  };
-  
+  }; 
 
 
   useEffect(() => {
@@ -409,7 +402,7 @@ const Game = (props) => {
         </div>
 
         {isModalVisible && (
-          <ResultsModal tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal tutorial={props.tutorial} calculateHint={calculateHint} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} currentOptions={currentOptions} targetStyle={getImageStyle(editedOptions)} editedOptions={editedOptions}/>
         )}
         <div className='score'>
           {/* <p> Default RMSE: {defaultScore}</p>
