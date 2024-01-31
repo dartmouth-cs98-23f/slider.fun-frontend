@@ -63,6 +63,18 @@ $light-text-color: #8d8d8d; // text color
 
       .sliderScoreHeader {
         justify-content: space-between;
+        align-items: center;
+
+        .scoreQuestionMark {
+          border: 1px solid $text-color;
+          border-radius: 50%;
+          height: 100%;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+        }
 
         .progressBar {
           color: red;
@@ -156,6 +168,23 @@ $light-text-color: #8d8d8d; // text color
             }
           }
 
+        }
+
+        .statisticsContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .puzzleCardContainer {
+            width: 100%;
+            padding: 10px;
+            background-color: $light-header-color;
+
+            img {
+              width: auto;
+              height: 100px;
+            }
+          }
         }
       }
     }

@@ -3,7 +3,7 @@ import '../styles/collapsible.scss';
 import { IconChevronUp } from '@tabler/icons-react';
 import { IconChevronDown } from '@tabler/icons-react';
 
-const CollapsibleHeader = ({ title }) => {
+const CollapsibleHeader = ({ title, content }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -14,7 +14,7 @@ const CollapsibleHeader = ({ title }) => {
       </div>
       {isOpen &&
         <div className="collapsible-content">
-          filler text filler text filler text
+          {content}
         </div>
       }
     </div>

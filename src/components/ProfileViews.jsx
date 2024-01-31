@@ -14,7 +14,7 @@ const ProfileViews = () => {
       </div>
       <div className='profileViewContent'>
         {currentView === 0 ? <Activity username={"Admin"} /> : ""}
-        {currentView === 1 ? <Statistics /> : ""}
+        {currentView === 1 ? <Statistics username={"Admin"} /> : ""}
       </div>
     </div>
   )
