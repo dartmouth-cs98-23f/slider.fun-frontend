@@ -6,7 +6,7 @@ const Statistics = ({ username }) => {
     {
       "dailyPuzzle": {
         "photo": "https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fbrightness.jpg?alt=media&token=f716b679-5d21-431e-814d-1e8a2e37bffa",
-        "date": "2020-01-01"
+        "date": "January, 2nd"
       },
       "photoProperties": [
         {
@@ -101,14 +101,14 @@ const Statistics = ({ username }) => {
           "id": "654feac4663946fee35a1607"
         }
       ],
-      "score": "97",
+      "score": "21",
       "date": "2020-01-02",
 
     },
     {
       "dailyPuzzle": {
         "photo": "https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fdaily3.jpeg?alt=media&token=faeb4d74-5b3b-4fc4-8c68-e19278a570fe",
-        "date": "2020-01-01"
+        "date": "January, 3rd"
       },
       "score": "95",
       "photoProperties": [
