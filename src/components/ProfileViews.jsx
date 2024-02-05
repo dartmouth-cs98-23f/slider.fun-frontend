@@ -10,7 +10,7 @@ const ProfileViews = () => {
 
       <div className='profileViewNav'>
         <button onClick={() => setCurrentView(0)}>Activity</button>
-        <button onClick={() => setCurrentView(1)}>Statistics</button>
+        <button onClick={() => setCurrentView(1)}>Gallery</button>
       </div>
       <div className='profileViewContent'>
         {currentView === 0 ? <Activity username={"Admin"} /> : ""}

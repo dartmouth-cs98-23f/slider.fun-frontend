@@ -223,7 +223,7 @@ const Statistics = ({ username }) => {
   )
   return (
     <div >
-      <div className='headerText' style={{ padding: "5px" }} > {username}'s Daily Puzzle Statistics </div>
+      <div className='headerText' style={{ padding: "5px" }} > {username}'s Photo Gallery </div>
       <div className='statisticsContainer'> {puzzleCards} </div>
     </div>
   )

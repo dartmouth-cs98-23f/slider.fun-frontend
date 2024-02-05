@@ -20,17 +20,30 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, [token]);
 
+  const signUp = async (email, username, password) => {
+    // try {
+      console.log(email, username, password)
+      const response = await axios.post(`${API_URL}/new`, { email, username, password });
+      console.log(response.data.token)
+      setToken(response.data.token);
+      setUser({ email });
+    // } catch (error) {
+    //   console.error('Error during sign in:', error.response.data.error);
+    // }
+  };
+
   const signIn = async (email, password) => {
-    try {
+    // try {
       const response = await axios.post(`${API_URL}/signin`, { email, password });
       console.log(response.data.token)
 
       setToken(response.data.token);
-
+      
       setUser({ email });
-    } catch (error) {
-      console.error('Error during sign in:', error);
-    }
+
+    // } catch (error) {
+    //   console.error('Error during sign in:', error);
+    // }
   };
 
   const signOut = () => {
@@ -63,6 +76,7 @@ export const AuthContextProvider = ({ children }) => {
   const value = {
     user,
     token,
+    signUp,
     signIn,
     signOut,
     getUserInfo,

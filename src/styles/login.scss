@@ -85,5 +85,16 @@
     }
 
     padding-bottom: 30px;
+
+    .helperButton {
+      background-color: white;
+      border: none;
+      width: fit-content;
+      height: auto;
+      color:black;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
   }
 }

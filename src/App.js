@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Tutorial from './pages/Tutorial';
 import Profile from './pages/Profile';
 import { AuthContextProvider } from './context/AuthContext';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="tutorial" element={<Tutorial />} />
             <Route path="daily" element={<Daily />} />
             <Route path="login" element={<Login />} />
+            <Route path="signup" element={<SignUp />} />
             <Route path="profile" element={<Profile />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>

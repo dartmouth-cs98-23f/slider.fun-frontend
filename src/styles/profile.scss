@@ -95,8 +95,8 @@ $light-text-color: #8d8d8d; // text color
       flex-direction: column;
       align-items: flex-start;
       gap: 5px;
-      margin-left: 10px;
-      margin-top: 10px;
+      margin-left: 20px;
+      margin-top: 20px;
       max-width: 100%;
       width: 100%;
 
@@ -177,7 +177,7 @@ $light-text-color: #8d8d8d; // text color
 
           .puzzleCardContainer {
             // width: 100%;
-            width: 250px;
+            // width: 250px;
             padding: 12px 12px 12px 12px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -197,9 +197,9 @@ $light-text-color: #8d8d8d; // text color
             }
 
             img {
-              width: 100%; // Ensure the photo fills the frame
+              width: 255px; // Ensure the photo fills the frame
               display: block; // Remove any default margins/paddings
-              height: auto; // Maintain aspect ratio
+              height: 150px; // Maintain aspect ratio
             }
 
             .scoreHeader {
