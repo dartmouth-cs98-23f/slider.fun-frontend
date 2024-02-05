@@ -102,7 +102,6 @@ const Statistics = ({ username }) => {
         }
       ],
       "score": "21",
-      "date": "2020-01-02",
 
     },
     {
@@ -204,7 +203,6 @@ const Statistics = ({ username }) => {
           "id": "654feac4663946fee35a1607"
         }
       ],
-      "date": "2020-01-01",
     },
   ]
 

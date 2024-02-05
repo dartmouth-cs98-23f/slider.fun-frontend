@@ -5,8 +5,8 @@ import domainLogo from "../assets/domain_logo.svg"
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState('sliderdotfun@gmail.com')
-  const [password, setPassword] = useState('sliderAdmin')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const { signIn } = useContext(AuthContext);
   const [err, setErr] = useState(null)
   const navigate = useNavigate();
