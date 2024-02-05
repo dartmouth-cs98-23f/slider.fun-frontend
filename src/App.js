@@ -3,10 +3,10 @@ import Home from './pages/Home';
 import Game from './pages/Game';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Daily from './pages/Daily';
+import Profile from './pages/Profile';
 import HeaderWrapper from './components/HeaderWrapper';
 import Login from './pages/Login';
 import Tutorial from './pages/Tutorial';
-import Profile from './pages/Profile';
 import { AuthContextProvider } from './context/AuthContext';
 import SignUp from './pages/SignUp';
 

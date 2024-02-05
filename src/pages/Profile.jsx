@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
-
-import '../styles/profile.scss'
+import '../styles/profile.scss';
 import ProfileViews from '../components/ProfileViews';
 import LeftProfileBar from '../components/LeftProfileBar';
 

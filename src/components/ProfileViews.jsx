@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Activity from './Activity'
 import Statistics from './Statistics'
+import FirebaseUpload from './FirebaseUpload'
 
 const ProfileViews = () => {
   const [currentView, setCurrentView] = useState(0)
@@ -15,6 +16,8 @@ const ProfileViews = () => {
       <div className='profileViewContent'>
         {currentView === 0 ? <Activity username={"Admin"} /> : ""}
         {currentView === 1 ? <Statistics username={"Admin"} /> : ""}
+        {FirebaseUpload}
+
       </div>
     </div>
   )
