@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { storage } from '../firebase';
-import { ref, uploadBytes, listAll, getDownloadURL } from '../firebase/storage';
+import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 
 const FirebaseUpload = () => {
@@ -35,6 +35,7 @@ const FirebaseUpload = () => {
     };
 
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -44,7 +45,7 @@ const FirebaseUpload = () => {
 
 
   return (
-    <div className="App">
+    <div>
       <input
         type="file"
         onChange={(event) => {
