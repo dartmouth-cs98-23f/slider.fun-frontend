@@ -125,6 +125,7 @@ const Game = (props) => {
   const stageNumber = props.stageNumber;
   const updateScores = props.updateScores;
 
+
   function handleSliderChange(propertyIndex, { target }) {
     setResetPressable(false);
 
@@ -147,15 +148,45 @@ const Game = (props) => {
   useEffect(() => {
     fetchPhoto(props.pic_link).then(data => {
       if (data) {
-
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
+        // console.log('Brightness val: ')
+        // console.log(editedOptions[0].value) // outputs value of first property, which is brightness
 
         // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fdaily3.jpeg?alt=media&token=faeb4d74-5b3b-4fc4-8c68-e19278a570fe")
         // setEditedOptions(defaultOptions)
       }
     });
   }, [props.pic_link]);
+  
+  // compare all sliders to suggest hint
+  const calculateHint = (editedOptions, currentOptions) => {
+    let scaledDiff = 0;
+    let optionToAdjust = '';
+  
+    for (let i = 0; i < editedOptions.length; i++) {
+      const currDiff = (editedOptions[i].value - currentOptions[i].value) / editedOptions[i].range.max;
+  
+      if (Math.abs(scaledDiff) < Math.abs(currDiff)) {
+        scaledDiff = currDiff;
+        optionToAdjust = editedOptions[i].name;
+      }
+    }
+  
+    let output = '';
+    if (scaledDiff > 0) {
+      output = "Increase " + optionToAdjust;
+    } else if (scaledDiff < 0) {
+      output = "Decrease " + optionToAdjust;
+    }
+  
+    return output;
+  }; 
+
+
+  useEffect(() => {
+    setCurrentOptions(stageOptions)
+  }, [stageOptions]);
 
 
   useEffect(() => {
@@ -371,7 +402,7 @@ const Game = (props) => {
         </div>
 
         {isModalVisible && (
-          <ResultsModal tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal tutorial={props.tutorial} calculateHint={calculateHint} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} currentOptions={currentOptions} targetStyle={getImageStyle(editedOptions)} editedOptions={editedOptions}/>
         )}
         <div className='score'>
           {/* <p> Default RMSE: {defaultScore}</p>

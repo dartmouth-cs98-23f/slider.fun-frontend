@@ -7,6 +7,7 @@ import makeConfetti from './Confetti';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
+  const [hint, setHint] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -22,6 +23,11 @@ function ResultsModal(props) {
   const nextStageHandler = () => {
     props.onClose();
     props.goToNextStage();
+  }
+
+  const hintHandler = () => {
+    const newHint = props.calculateHint(props.editedOptions, props.currentOptions);
+    setHint(newHint);
   }
 
   return (
@@ -65,7 +71,10 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
+          {props.hint && <p className="modal-hint">{props.hint}</p>} {/* Display hint here */}
           {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
+          {props.score < 95 && props.tutorial ? <button onClick={hintHandler}>Hint</button> : null} 
+          {hint && <p className="modal-hint">{hint}</p>}
         </div>
       </div>
     </>
