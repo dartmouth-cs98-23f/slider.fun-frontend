@@ -1,8 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PuzzleCard from './PuzzleCard'
+import axios from 'axios';
 
-const Statistics = ({ username }) => {
-  const puzzleHistory = [
+
+const Statistics = ({ username, photoObjectList }) => {
+  const [puzzleHistory, setPuzzleHistory] = useState([]);
+
+  // takes a backend photo link and return the photo object
+  async function fetchPhoto(link) {
+    try {
+      const response = await axios.get(`https://slider-fun.onrender.com/api/photo/${link}`);
+
+      if (response.status === 200) {
+        return response.data; // This will contain the data returned from the server
+      } else {
+        console.error(`Error: ${response.status} - ${response.statusText}`);
+        return null;
+      }
+
+    } catch (error) {
+      console.error('There was an error fetching the photo:', error);
+      return null;
+    }
+  }
+
+  // useEffect to fetch all photo objects based on photoObjectList (an array of links)
+  useEffect(() => {
+    async function fetchAllPhotos() {
+      const photos = await Promise.all(photoObjectList.map(async (link) => {
+        console.log(link)
+        const photo = await fetchPhoto(link);
+        return photo; // This will be null if there's an error
+      }));
+
+      // Filter out any null responses to ensure only successfully fetched photo objects are stored
+      setPuzzleHistory(photos.filter(photo => photo !== null));
+    }
+
+    fetchAllPhotos();
+  }, [photoObjectList]); // Rerun this effect if photoObjectList changes
+  console.log(puzzleHistory)
+
+  const puzzleHistory2 = [
     {
       "dailyPuzzle": {
         "photo": "https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fbrightness.jpg?alt=media&token=f716b679-5d21-431e-814d-1e8a2e37bffa",
@@ -207,14 +246,14 @@ const Statistics = ({ username }) => {
   ]
 
   const puzzleCards = puzzleHistory.map((puzzle, index) => {
-
     return (
       <PuzzleCard
         key={index}
-        dailyPuzzle={puzzle.dailyPuzzle}
+        photoUrl={puzzle.imageUrl}
+        // dailyPuzzle={puzzle.dailyPuzzle}
         photoProperties={puzzle.photoProperties}
-        score={puzzle.score}
-        date={puzzle.date}
+      // score={puzzle.score}
+      // date={puzzle.date}
       />
     )
   }

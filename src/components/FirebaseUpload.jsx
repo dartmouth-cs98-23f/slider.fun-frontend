@@ -3,14 +3,15 @@ import { storage } from '../firebase';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 
-const FirebaseUpload = () => {
+const FirebaseUpload = ({ token, setPhotoUrl }) => {
+  // contains the image metadata 
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
-  const imagesListRef = ref(storage, "selfUploadedImages/");
+  const imagesListRef = ref(storage, `selfUploadedImages/${token}`);
 
   const uploadFile = () => {
     if (imageUpload == null) return;
-    const imageRef = ref(storage, `selfUploadedImages/${imageUpload.name + v4()}`);
+    const imageRef = ref(storage, `selfUploadedImages/${token}/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload)
       .then((snapshot) => getDownloadURL(snapshot.ref))
       .then((url) => {
@@ -21,6 +22,8 @@ const FirebaseUpload = () => {
       .catch((error) => console.error('Error uploading file:', error));
   };
 
+
+  // runs once when the component mounts and fetches all image URLs from the storage
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,12 +38,12 @@ const FirebaseUpload = () => {
     };
 
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
   const photoStyle = {
-    height: "200px",
+    height: "50px",
   }
 
 
@@ -53,9 +56,12 @@ const FirebaseUpload = () => {
         }}
       />
       <button onClick={uploadFile}> Upload Image</button>
-      {imageUrls.map((url, index) => (
-        <img style={photoStyle} key={index} src={url} alt={`${index}`} />
-      ))}
+      <p> Your uploaded photos </p>
+      <div>
+        {imageUrls.map((url, index) => (
+          <img style={photoStyle} key={index} src={url} alt={`${index}`} onClick={() => setPhotoUrl(url)} />
+        ))}
+      </div>
     </div>
   );
 };

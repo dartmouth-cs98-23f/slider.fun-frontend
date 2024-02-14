@@ -35,7 +35,7 @@ const ImageView = (props) => {
 
             </div>
             <div className='photo'>
-              <p> Target </p>
+              <p> Edit </p>
               <img 
                 src={props.importEdited} 
                 alt="edited pics" 

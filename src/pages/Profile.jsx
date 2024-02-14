@@ -10,7 +10,7 @@ const Profile = () => {
   const token = localStorage.getItem('token');
 
   const { signOut, getUserInfo } = useContext(AuthContext);
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     if (token === null) {
@@ -45,14 +45,14 @@ const Profile = () => {
   }, [getUserInfo, setCurrentUser]);
 
   if (!currentUser) {
-    return <div>Loading...</div>;
+    return <div>user not found...</div>;
   }
 
   return (
     <div className='profileContainer'>
       <LeftProfileBar signOutHandler={signOutHandler} />
       <div className='rightProfileBar'>
-        <ProfileViews />
+        <ProfileViews token={token} userId={currentUser.id} photoObjectList={currentUser.photos} />
       </div>
 
     </div>

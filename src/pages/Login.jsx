@@ -21,6 +21,7 @@ const Login = () => {
   //   }
   // }, [navigate, token])
   // Effect hook to reset error state after 3 seconds
+
   useEffect(() => {
     let timer;
     if (err !== null) {

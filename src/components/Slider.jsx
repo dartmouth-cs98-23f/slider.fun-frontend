@@ -1,6 +1,79 @@
 import React from 'react';
 import '../App.scss';
 
+export const defaultSlider = [
+  {
+    name: 'Brightness',
+    property: 'brightness',
+    value: 110,
+    range: {
+      min: 20,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Contrast',
+    property: 'contrast',
+    value: 110,
+    range: {
+      min: 20,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Saturation',
+    property: 'saturate',
+    value: 110,
+    range: {
+      min: 0,
+      max: 200
+    },
+    unit: '%'
+  },
+  {
+    name: 'Grayscale',
+    property: 'grayscale',
+    value: 0,
+    range: {
+      min: 0,
+      max: 100
+    },
+    unit: '%'
+  },
+  {
+    name: 'Sepia',
+    property: 'sepia',
+    value: 0,
+    range: {
+      min: 0,
+      max: 100
+    },
+    unit: '%'
+  },
+  {
+    name: 'Hue Rotate',
+    property: 'hue-rotate',
+    value: 0,
+    range: {
+      min: 0,
+      max: 360
+    },
+    unit: 'deg'
+  },
+  {
+    name: 'Blur',
+    property: 'blur',
+    value: 0,
+    range: {
+      min: 0,
+      max: 20
+    },
+    unit: 'px'
+  }
+]
+
 export default function Slider({ name, min, max, value, status, handleChange, step }) {
   const isStepValid = step && !isNaN(step);
 

@@ -4,7 +4,7 @@ import Statistics from './Statistics'
 import FirebaseUpload from './FirebaseUpload'
 import UploadView from './UploadView'
 
-const ProfileViews = () => {
+const ProfileViews = ({ token, userId, photoObjectList }) => {
   const [currentView, setCurrentView] = useState(0)
 
   return (
@@ -17,8 +17,8 @@ const ProfileViews = () => {
       </div>
       <div className='profileViewContent'>
         {currentView === 0 ? <Activity username={"Admin"} /> : ""}
-        {currentView === 1 ? <Statistics username={"Admin"} /> : ""}
-        {currentView === 2 ? <UploadView username={"Admin"} /> : ""}
+        {currentView === 1 ? <Statistics username={"Admin"} photoObjectList={photoObjectList} /> : ""}
+        {currentView === 2 ? <UploadView username={"Admin"} token={token} userId={userId} /> : ""}
 
       </div>
     </div>
