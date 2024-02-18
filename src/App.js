@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Daily from './pages/Daily';
 import HeaderWrapper from './components/HeaderWrapper';
 import Tutorial from './pages/Tutorial';
-
+import DynamicResultsPage from './components/DynamicResults';
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +16,7 @@ function App() {
           <Route path="game" element={<Game />} />
           <Route path="/tutorial" element={<Tutorial />} />
           <Route path="/daily" element={<Daily />} />
+          <Route path="/dynamicResultsPage" element={<DynamicResultsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
