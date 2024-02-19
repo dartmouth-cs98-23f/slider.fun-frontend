@@ -1,0 +1,44 @@
+.results-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid red;
+
+    h1 {
+        margin-bottom: 30px;
+    }
+
+    .scores-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100;
+        border: 1px solid blue; 
+        // add more styles for the scores container
+    }
+
+    .score-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 150px;
+        text-align: center;
+
+        .stage-name {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 5px;
+            // Add more styles stage name
+        }
+
+        .stage-score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            // addmore styles for the stage score
+        }
+    }
+}
