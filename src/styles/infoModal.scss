@@ -11,6 +11,13 @@
   max-width: 80%;
   text-align: center;
   border-radius: 20px;
+
+
+  .exitButton {
+    cursor: pointer;
+    display: flex;
+    justify-self: flex-end;
+  }
 }
 
 .headerModal {

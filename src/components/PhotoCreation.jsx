@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Slider from './Slider'
 import "../App.scss";
 import ImageView from './ImageView'
@@ -8,6 +8,8 @@ import { getImageStyle } from '../components/Scoring'
 // import horizontalSplit from "../assets/HorizontalSplit.png"
 import { defaultSlider } from '../components/Slider'
 import { postPhoto } from '../context/photoFunctions';
+import photoReq from '../assets/photoReq.png'
+import HoverMessage from './HoverMessage';
 
 const PhotoCreation = (props) => {
 
@@ -15,6 +17,7 @@ const PhotoCreation = (props) => {
   // const [active, setActive] = useState(1);
   const [currentOptions, setCurrentOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions] = useState(DEFAULT_OPTIONS)
+  const setMessageVisability = props.setMessageVisability;
   const photoUrl = props.photoUrl;
   // const [photoUrl, setPhotoUrl] = useState("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/selfUploadedImages%2FeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NWM2ODQyYTk5YzhiZTNhMTc3OGNhNGMiLCJpYXQiOjE3MDc1MDg3NzkzNDB9.AAFbUj49GaxuytZ_c845fo749BSgvIci8sIZQ5khbjE%2F99243A94-704B-4036-A69C-4D9D791FBDBD.JPG57175079-348e-4738-8ad6-635879600b18?alt=media&token=d32f9f49-8a55-4ffc-88d2-fb5353f0bc4c")
 
@@ -31,6 +34,7 @@ const PhotoCreation = (props) => {
   //   setActive(active);
   // };
 
+
   function handleSliderChange(propertyIndex, { target }) {
     const newSliderValues = currentOptions.map((option, index) => {
       if (index !== propertyIndex) {
@@ -42,6 +46,8 @@ const PhotoCreation = (props) => {
     // sets the local sliders to the new value 
     setCurrentOptions(newSliderValues)
   }
+
+
 
   function addStatusToPhotoProperties(photoProperties) {
     // Iterate through each property in the photoProperties array
@@ -65,16 +71,38 @@ const PhotoCreation = (props) => {
 
     try {
       await postPhoto(data, props.userId);
-
+      props.closeModal();
+      setMessageVisability(true);
     } catch (error) {
       console.error('Error submitting photo:', error);
     }
   }
 
+  const [orientation, setOrientation] = useState('horizontal');
+
+  useEffect(() => {
+    const img = new Image();
+
+    img.onload = () => {
+      // Determine if the image is vertical or horizontal
+      setOrientation(img.width > img.height ? 'horizontal' : 'vertical');
+    };
+
+    img.src = photoUrl; // Assuming this is the image URL
+  }, [photoUrl]);
+
+  if (orientation !== 'horizontal') {
+    return (
+      <div>
+        <img style={{ width: "450px" }} src={photoReq} alt="requirement" />
+        <p style={{ fontWeight: "bold" }} >
+          Please select a horizontal/landscape picture. Vertical pictures not compatible yet </p></div>
+    )
+  }
   return (
     <div className="container">
-      <ImageView active={1} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={editedOptions} editedOptions={currentOptions} />
 
+      <ImageView active={1} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={editedOptions} editedOptions={currentOptions} />
       {/* <div className='viewButtonsContainer'>
         <p> View: &nbsp;&nbsp;&nbsp;</p>
         <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />

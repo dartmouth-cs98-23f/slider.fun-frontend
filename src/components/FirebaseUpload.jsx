@@ -3,7 +3,7 @@ import { storage } from '../firebase';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 
-const FirebaseUpload = ({ token, setPhotoUrl }) => {
+const FirebaseUpload = ({ token, setPhotoUrl, openModal }) => {
   // contains the image metadata 
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
@@ -21,7 +21,6 @@ const FirebaseUpload = ({ token, setPhotoUrl }) => {
       })
       .catch((error) => console.error('Error uploading file:', error));
   };
-
 
   // runs once when the component mounts and fetches all image URLs from the storage
   useEffect(() => {
@@ -59,7 +58,7 @@ const FirebaseUpload = ({ token, setPhotoUrl }) => {
       <p> Your uploaded photos </p>
       <div>
         {imageUrls.map((url, index) => (
-          <img style={photoStyle} key={index} src={url} alt={`${index}`} onClick={() => setPhotoUrl(url)} />
+          <img style={photoStyle} key={index} src={url} alt={`${index}`} onClick={() => { setPhotoUrl(url); openModal(); }} />
         ))}
       </div>
     </div>
