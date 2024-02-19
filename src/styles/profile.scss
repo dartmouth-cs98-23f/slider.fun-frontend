@@ -175,6 +175,7 @@ $light-text-color: #8d8d8d; // text color
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
+          justify-content: center;
           gap: 10px;
 
           .puzzleCardContainer {
@@ -190,7 +191,6 @@ $light-text-color: #8d8d8d; // text color
               cursor: pointer;
             }
 
-
             .dateHeader {
               padding-top: 5px;
               color: #333;
@@ -202,6 +202,8 @@ $light-text-color: #8d8d8d; // text color
               width: 255px; // Ensure the photo fills the frame
               display: block; // Remove any default margins/paddings
               height: 150px; // Maintain aspect ratio
+              object-fit: cover; // Maintain aspect ratio
+
             }
 
             .scoreHeader {

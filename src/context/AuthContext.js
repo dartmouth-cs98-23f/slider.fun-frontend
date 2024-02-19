@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';;
 
 export const AuthContext = createContext();
@@ -11,7 +11,7 @@ const API_URL = 'https://slider-fun.onrender.com/api/users';
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
-
+  console.log(user)
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
@@ -22,11 +22,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const signUp = async (email, username, password) => {
     // try {
-      console.log(email, username, password)
-      const response = await axios.post(`${API_URL}/new`, { email, username, password });
-      console.log(response.data.token)
-      setToken(response.data.token);
-      setUser({ email });
+    console.log(email, username, password)
+    const response = await axios.post(`${API_URL}/new`, { email, username, password });
+    console.log(response.data.token)
+    setToken(response.data.token);
+    setUser({ email });
     // } catch (error) {
     //   console.error('Error during sign in:', error.response.data.error);
     // }
@@ -34,12 +34,12 @@ export const AuthContextProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     // try {
-      const response = await axios.post(`${API_URL}/signin`, { email, password });
-      console.log(response.data.token)
+    const response = await axios.post(`${API_URL}/signin`, { email, password });
+    console.log(response.data.token)
 
-      setToken(response.data.token);
-      
-      setUser({ email });
+    setToken(response.data.token);
+
+    setUser({ email });
 
     // } catch (error) {
     //   console.error('Error during sign in:', error);
@@ -53,25 +53,28 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   // retrieve user info using the token
-  const getUserInfo = async () => {
+  const getUserInfo = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('No token found');
       }
 
-      const response = await axios.get(`${API_URL}/me`, { // Adjust the URL as needed
+      // Adjust the URL as needed
+      const response = await axios.get(`${API_URL}/me`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
+      console.log(response.data)
 
       return response.data;
     } catch (error) {
       console.error('Error fetching user info:', error);
       throw error;
     }
-  };
+
+  }, []);
 
   const value = {
     user,

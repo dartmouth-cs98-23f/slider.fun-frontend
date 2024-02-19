@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../context/AuthContext'
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/profile.scss';
 import ProfileViews from '../components/ProfileViews';
@@ -7,56 +7,52 @@ import LeftProfileBar from '../components/LeftProfileBar';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-
   const { signOut, getUserInfo } = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState(null);
 
+  // Use an effect for redirecting if the user is not authenticated
   useEffect(() => {
-    if (token === null) {
-      console.log("profile page", token)
-      navigate("/profile");
-    }
-  }, [navigate, token])
+    const userToken = localStorage.getItem('token'); // Moved inside the effect for real-time checking
+    if (!userToken) {
+      console.log("Redirecting to login page", userToken);
+      navigate("/login");
+    } else {
+      // Fetch user info if token is present
+      const fetchUserInfo = async () => {
+        try {
+          const data = await getUserInfo();
+          setCurrentUser(data);
+        } catch (error) {
+          console.error('Failed to fetch user info:', error);
+        }
+      };
 
-  console.log(currentUser)
+      fetchUserInfo();
+    }
+  }, [navigate, getUserInfo]); // Removed userToken from dependencies, as its check is now inside the effect
+
 
   const signOutHandler = async () => {
-    // Clear the token from localStorage or context
     try {
       await signOut();
+      navigate("/login");
     } catch (error) {
-      console.log(error)
+      console.error('Error during sign out:', error);
     }
-    navigate("/login");
   };
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const data = await getUserInfo();
-        setCurrentUser(data);
-      } catch (error) {
-        console.error('Failed to fetch user info:', error);
-      }
-    };
-
-    fetchUserInfo();
-  }, [getUserInfo, setCurrentUser]);
-
   if (!currentUser) {
-    return <div>user not found...</div>;
+    return <div>User not found...</div>;
   }
 
   return (
     <div className='profileContainer'>
       <LeftProfileBar signOutHandler={signOutHandler} />
       <div className='rightProfileBar'>
-        <ProfileViews token={token} userId={currentUser.id} photoObjectList={currentUser.photos} />
+        <ProfileViews token={localStorage.getItem('token')} userId={currentUser.id} photoObjectList={currentUser.photos} />
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;
