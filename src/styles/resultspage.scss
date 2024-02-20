@@ -1,47 +1,83 @@
 .results-page {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around; // Adjust based on your layout preference
+    align-items: flex-start; // Adjust if you want cards to align differently
+    height: 100vh;
+    width: 100%;
+    padding: 20px; // Add some padding around the cards if needed
+    box-sizing: border-box;
+    margin: 0;
+}
 
-    .scores-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        width: 100;
-        border: 1px solid blue; 
-        // add more styles for the scores container
+.score-card {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    width: 200px; // Adjust based on your preference
+    height: 300px; // Adjust based on your preference
+    margin: 10px; // Space between cards
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; // Prevents overlay/content from exceeding card bounds
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5); // Overlay color and opacity
+        z-index: 1;
     }
 
-    .score-card {
-        background: hsl(229, 87%, 81%);
-        //background: url('') no-repeat center center;
-        //border-radius: 10px;
+    .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
         padding: 15px;
-        //margin: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 150px;
-        height: 700px;
-        text-align: center;
-        margin-top: 0;
+        box-sizing: border-box;
+        color: #ffffff;
+    }
 
-        .stage-name {
-            font-size: 1.2em;
-            color: #252825;
-            margin-bottom: 5px;
-            // Add more styles stage name
-            border: 1px solid black;
-            height: 80%;
-            writing-mode: vertical-r1;
-            transform: rotate(180deg);
-        }
+    .stage-name {
+        font-family: Mulish, sans-serif;
+        font-size: 24px; // Adjust based on your preference
+        font-weight: 700;
+        margin: 0 0 10px; // Space between stage name and score
+        text-transform: uppercase; // Style preference
+    }
 
-        .stage-score {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: hsla(302, 72%, 47%, 0.924);
-            // addmore styles for the stage score
-            border: 1px solid black;
-            margin-top: 20px;
-        }
+    .stage-score {
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+
+    // Background images for each stage
+    &.brightness {
+        background-image: url('../assets/brightness.jpg');
+    }
+    &.contrast {
+        background-image: url('../assets/contrast.jpg');
+    }
+    &.saturation {
+        background-image: url('../assets/saturation.jpg');
+    }
+    &.grayscale {
+        background-image: url('../assets/greyscale.jpg');
+    }
+    &.sepia {
+        background-image: url('../assets/sepia.jpg');
+    }
+    &.hue-rotate {
+        background-image: url('../assets/hue_rotate.jpg');
+    }
+    &.blur {
+        background-image: url('../assets/blur2.jpg');
     }
 }

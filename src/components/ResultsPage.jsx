@@ -2,10 +2,14 @@ import React from 'react';
 import '../styles/resultspage.scss';
 
 const ScoreCard = ({stage, score}) => {
+    const stageClass = stage.replace(/\s+/g, '-').toLowerCase();
     return (
-        <div className="score-card">
-            <div className="stage-name">{stage}</div>
-            <div className="stage-score">{score}</div>
+        <div className={`score-card ${stageClass}`}>
+            <div className="overlay"></div>
+            <div className="content">
+                <div className="stage-name">{stage}</div>
+                <div className="stage-score">{score}</div>
+            </div>
         </div>
     )
 }
@@ -20,7 +24,6 @@ const ResultsPage = ({scores}) => {
             <ScoreCard key="saturation" stage="saturation" score="95"></ScoreCard>
             <ScoreCard key="grayscale" stage="grayscale" score="95"></ScoreCard>
             <ScoreCard key="sepia" stage="sepia" score="95"></ScoreCard>
-            <ScoreCard key="brightness" stage="brightness" score="95"></ScoreCard>
             <ScoreCard key="hue rotate" stage="hue rotate" score="95"></ScoreCard>
             <ScoreCard key="blur" stage="blur" score="95"></ScoreCard>
             {/* <div className="scores-container">
