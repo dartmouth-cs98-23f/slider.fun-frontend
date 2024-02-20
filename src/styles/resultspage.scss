@@ -1,13 +1,7 @@
 .results-page {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    padding: 20px;
-    border: 1px solid red;
-
-    h1 {
-        margin-bottom: 30px;
-    }
 
     .scores-container {
         display: flex;
@@ -19,26 +13,35 @@
     }
 
     .score-card {
-        background: #fff;
-        border-radius: 10px;
+        background: hsl(229, 87%, 81%);
+        //background: url('') no-repeat center center;
+        //border-radius: 10px;
         padding: 15px;
-        margin: 10px;
+        //margin: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         width: 150px;
+        height: 700px;
         text-align: center;
+        margin-top: 0;
 
         .stage-name {
             font-size: 1.2em;
-            color: #333;
+            color: #252825;
             margin-bottom: 5px;
             // Add more styles stage name
+            border: 1px solid black;
+            height: 80%;
+            writing-mode: vertical-r1;
+            transform: rotate(180deg);
         }
 
         .stage-score {
             font-size: 2.5em;
             font-weight: bold;
-            color: #333;
+            color: hsla(302, 72%, 47%, 0.924);
             // addmore styles for the stage score
+            border: 1px solid black;
+            margin-top: 20px;
         }
     }
 }

@@ -15,7 +15,6 @@ const ResultsPage = ({scores}) => {
     // For example: { Brightness: 96, Contrast: 98, Saturation: 99, Grayscale: 94, Sepia: }
     return (
         <div className="results-page">
-            <h1>Your Scores</h1>
             <ScoreCard key="brightness" stage="brightness" score="95"></ScoreCard>
             <ScoreCard key="contrast" stage="contrast" score="95"></ScoreCard>
             <ScoreCard key="saturation" stage="saturation" score="95"></ScoreCard>
