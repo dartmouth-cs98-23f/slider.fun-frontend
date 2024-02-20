@@ -1,25 +1,25 @@
 .results-page {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around; // Adjust based on your layout preference
-    align-items: flex-start; // Adjust if you want cards to align differently
+    flex-wrap: nowrap;
+    justify-content: space-around; 
+    align-items: flex-start; 
     height: 100vh;
     width: 100%;
-    padding: 20px; // Add some padding around the cards if needed
+    padding: 20px;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0 auto;
 }
 
 .score-card {
     position: relative;
     background-size: cover;
     background-position: center;
-    width: 200px; // Adjust based on your preference
-    height: 300px; // Adjust based on your preference
-    margin: 10px; // Space between cards
+    width: 200px; 
+    height: 100vh;
+    margin: 0px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden; // Prevents overlay/content from exceeding card bounds
+    overflow: hidden; 
 
     &::before {
         content: "";
@@ -28,7 +28,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.5); // Overlay color and opacity
+        background: rgba(0, 0, 0, 0.5); 
         z-index: 1;
     }
 
@@ -47,10 +47,10 @@
 
     .stage-name {
         font-family: Mulish, sans-serif;
-        font-size: 24px; // Adjust based on your preference
+        font-size: 24px; 
         font-weight: 700;
-        margin: 0 0 10px; // Space between stage name and score
-        text-transform: uppercase; // Style preference
+        margin: 0 0 10px; 
+        text-transform: uppercase; 
     }
 
     .stage-score {
