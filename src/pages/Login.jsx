@@ -11,15 +11,15 @@ const Login = () => {
   const [err, setErr] = useState(null)
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  console.log(token)
+  // console.log(token)
 
-  // useEffect(() => {
-  //   // console.log("login page", token)
-  //   if (token !== null) {
-  //     console.log("login page", token)
-  //     // navigate("/profile");
-  //   }
-  // }, [navigate, token])
+  useEffect(() => {
+    // console.log("login page", token)
+    if (token !== null) {
+   
+      navigate("/profile");
+    }
+  }, [navigate, token])
   // Effect hook to reset error state after 3 seconds
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Login = () => {
       <div className='formContainer'>
         <form onSubmit={handleLogin}>
 
-          <img src={domainLogo} alt=""></img>
+          <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
           <input placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
           <input placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />

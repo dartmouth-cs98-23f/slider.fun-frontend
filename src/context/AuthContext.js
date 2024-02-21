@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';;
 
 export const AuthContext = createContext();
@@ -27,9 +27,6 @@ export const AuthContextProvider = ({ children }) => {
     console.log(response.data.token)
     setToken(response.data.token);
     setUser({ email });
-    // } catch (error) {
-    //   console.error('Error during sign in:', error.response.data.error);
-    // }
   };
 
   const signIn = async (email, password) => {
@@ -53,28 +50,27 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   // retrieve user info using the token
-  const getUserInfo = useCallback(async () => {
+  const getUserInfo = async () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('No token found');
       }
-
       // Adjust the URL as needed
       const response = await axios.get(`${API_URL}/me`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log(response.data)
 
+      console.log(response.data)
       return response.data;
+
     } catch (error) {
       console.error('Error fetching user info:', error);
       throw error;
     }
-
-  }, []);
+  };
 
   const value = {
     user,

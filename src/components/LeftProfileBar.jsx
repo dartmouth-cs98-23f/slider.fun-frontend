@@ -3,7 +3,7 @@ import CollapsibleHeader from './CollabsableHeader'
 import { IconQuestionMark } from '@tabler/icons-react';
 import ProgressBar from './ProgressBar'
 
-const LeftProfileBar = ({ signOutHandler }) => {
+const LeftProfileBar = ({ userInfo, signOutHandler }) => {
   return (
     <div className='leftProfileBar'>
       <div className='topBar'>
@@ -12,10 +12,10 @@ const LeftProfileBar = ({ signOutHandler }) => {
         </div>
         <div className='username'>
           <div>
-            Admin
+            {userInfo.email}
           </div>
           <div>
-            @admin
+            {userInfo.username}
           </div>
         </div>
       </div>
@@ -26,8 +26,8 @@ const LeftProfileBar = ({ signOutHandler }) => {
             <div className='scoreQuestionMark'> <IconQuestionMark size={15} /> </div>
           </div>
 
-          <div className='headerText'> 78</div>
-          <ProgressBar bgcolor="green" completed={30} />
+          <div className='headerText'> {userInfo.sliderScore}</div>
+          <ProgressBar bgcolor="green" completed={userInfo.sliderScore} />
 
         </div>
         <CollapsibleHeader title="About" content="This is the admin account for slider" />

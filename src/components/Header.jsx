@@ -23,9 +23,10 @@ const Header = () => {
 
         </div>
         <nav className='headerNav'>
-          <button className="tutorialButton" onClick={() => handleNavigate("/tutorial")}>Tutorial Mode</button>
-          <button className="dailyButton" onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
-          {localStorage.getItem('token') === null ? <button className="loginButton" onClick={() => handleNavigate("/login")}> login </button> : <ProfileIcon />}
+          <button className="communityButton blackButton" onClick={() => handleNavigate("/community")}>Community</button>
+          <button className="tutorialButton whiteButton" onClick={() => handleNavigate("/tutorial")}>Tutorial</button>
+          <button className="dailyButton blackButton" onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
+          {localStorage.getItem('token') === null ? <button className="loginButton whiteButton" onClick={() => handleNavigate("/login")}> login </button> : <ProfileIcon />}
         </nav>
       </div>
     </div >

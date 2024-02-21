@@ -3,13 +3,9 @@ import Slider from './Slider'
 import "../App.scss";
 import ImageView from './ImageView'
 import { getImageStyle } from '../components/Scoring'
-// import side2side from "../assets/SideToSideSplit.png"
-// import verticalSplit from "../assets/VerticalSplit.png"
-// import horizontalSplit from "../assets/HorizontalSplit.png"
 import { defaultSlider } from '../components/Slider'
 import { postPhoto } from '../context/photoFunctions';
 import photoReq from '../assets/photoReq.png'
-import HoverMessage from './HoverMessage';
 
 const PhotoCreation = (props) => {
 
@@ -19,21 +15,6 @@ const PhotoCreation = (props) => {
   const [editedOptions] = useState(DEFAULT_OPTIONS)
   const setMessageVisability = props.setMessageVisability;
   const photoUrl = props.photoUrl;
-  // const [photoUrl, setPhotoUrl] = useState("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/selfUploadedImages%2FeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NWM2ODQyYTk5YzhiZTNhMTc3OGNhNGMiLCJpYXQiOjE3MDc1MDg3NzkzNDB9.AAFbUj49GaxuytZ_c845fo749BSgvIci8sIZQ5khbjE%2F99243A94-704B-4036-A69C-4D9D791FBDBD.JPG57175079-348e-4738-8ad6-635879600b18?alt=media&token=d32f9f49-8a55-4ffc-88d2-fb5353f0bc4c")
-
-  // const SetView = (active) => {
-  //   $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
-  //   // Add 'selected' class to the clicked image based on 'active' parameter
-  //   if (active === 1) {
-  //     $('.viewButtonS2S').addClass('selected');
-  //   } else if (active === 2) {
-  //     $('.viewButtonVS').addClass('selected');
-  //   } else if (active === 3) {
-  //     $('.viewButtonHS').addClass('selected');
-  //   }
-  //   setActive(active);
-  // };
-
 
   function handleSliderChange(propertyIndex, { target }) {
     const newSliderValues = currentOptions.map((option, index) => {
@@ -68,7 +49,7 @@ const PhotoCreation = (props) => {
       "imageUrl": imageUrl,
       "photoProperties": photoProperties
     }
-
+    console.log(data, props.userId)
     try {
       await postPhoto(data, props.userId);
       props.closeModal();

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { removePhoto as removePhotoAPI } from '../context/photoFunctions'; // Renamed for clarity
 
 
-const Statistics = ({ userId, photoObjectList }) => {
+const Statistics = ({ userInfo }) => {
   const API_URL = "https://slider-fun.onrender.com/api";
   const [puzzleHistory, setPuzzleHistory] = useState([]);
 
@@ -28,7 +28,7 @@ const Statistics = ({ userId, photoObjectList }) => {
 
   const handleRemovePhoto = async (photoId) => {
     try {
-      await removePhotoAPI(userId, photoId);
+      await removePhotoAPI(userInfo.id, photoId);
       const updatedPuzzleHistory = puzzleHistory.filter(photo => photo.id !== photoId);
       setPuzzleHistory(updatedPuzzleHistory);
     } catch (error) {
@@ -40,7 +40,7 @@ const Statistics = ({ userId, photoObjectList }) => {
   // useEffect to fetch all photo objects based on photoObjectList (an array of links)
   useEffect(() => {
     async function fetchAllPhotos() {
-      const photos = await Promise.all(photoObjectList.map(async (link) => {
+      const photos = await Promise.all(userInfo.photos.map(async (link) => {
         // console.log(link)
         const photo = await fetchPhoto(link);
         return photo; // This will be null if there's an error
@@ -49,9 +49,9 @@ const Statistics = ({ userId, photoObjectList }) => {
       // Filter out any null responses to ensure only successfully fetched photo objects are stored
       setPuzzleHistory(photos.filter(photo => photo !== null));
     }
-
     fetchAllPhotos();
-  }, [photoObjectList]); // Rerun this effect if photoObjectList changes
+
+  }, [userInfo.photos]);
 
   const puzzleCards = puzzleHistory.map((puzzle, index) => (
     <PuzzleCard
@@ -64,7 +64,7 @@ const Statistics = ({ userId, photoObjectList }) => {
 
   return (
     <div >
-      <div className='headerText' style={{ padding: "5px" }} > {userId}'s Photo Gallery </div>
+      <div className='headerText' style={{ padding: "5px" }} > {userInfo.email}'s Photo Gallery </div>
       <div className='statisticsContainer'> {puzzleCards} </div>
     </div>
   )

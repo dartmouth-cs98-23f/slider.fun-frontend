@@ -69,7 +69,7 @@ const SignUp = () => {
       <div className='formContainer'>
         <form onSubmit={handleSignUp}>
 
-          <img src={domainLogo} alt=""></img>
+          <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
           <input placeholder='email' onChange={(e) => setEmail(e.target.value)} />
 
           <input placeholder='username' onChange={(e) => setUsername(e.target.value)} />

@@ -1,10 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { IconUserCircle } from '@tabler/icons-react';
 
 const ProfileIcon = () => {
   const navigate = useNavigate();
   return (
-    <button className="loginButton" onClick={() => navigate("/profile")}> profile </button>
+    <div onClick={() => navigate("/profile")}>
+      <IconUserCircle className="profileIcon" />
+    </div>
   )
 }
 

@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Tutorial from './pages/Tutorial';
 import { AuthContextProvider } from './context/AuthContext';
 import SignUp from './pages/SignUp';
+import Community from './pages/Community';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="game" element={<Game />} />
             <Route path="tutorial" element={<Tutorial />} />
             <Route path="daily" element={<Daily />} />
+            <Route path="community" element={<Community />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="profile" element={<Profile />} />

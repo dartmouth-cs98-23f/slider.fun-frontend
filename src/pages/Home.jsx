@@ -33,7 +33,7 @@ const Home = () => {
 
         <div className='buttonContainer'>
           {/* <button onClick={scrollToTutorial}>Tutorial</button> */}
-          <button onClick={() => { navigate("/tutorial") }}>
+          <button onClick={() => { navigate("/daily") }}>
             Play
           </button>
         </div>

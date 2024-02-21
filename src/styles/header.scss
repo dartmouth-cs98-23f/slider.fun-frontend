@@ -41,12 +41,22 @@ $accent-color: #E27272; // accent color
   justify-content: center;
   align-items: center;
 
-  button {
-    margin: 8px;
+  .profileIcon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+
+    &:hover {
+      color: #E27272;
+    }
   }
 
-  .tutorialButton {
+  button {
+    margin: 8px;
     height: 35px;
+  }
+
+  .whiteButton {
     background-color: #ffffff;
     border: 2px solid #363636;
     color: black;
@@ -58,24 +68,9 @@ $accent-color: #E27272; // accent color
     }
   }
 
-  .dailyButton {
-    height: 35px;
-
+  .BlackButton {
     &:hover {
       background-color: #70737a;
     }
-  }
-
-  .loginButton {
-    height: 35px;
-    background-color: #ffffff;
-    border: 2px solid #363636;
-    color: black;
-  }
-
-  button {
-    background-color: #363636;
-    border-radius: 7px;
-    margin-bottom: 13px;
   }
 }

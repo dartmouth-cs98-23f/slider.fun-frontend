@@ -10,10 +10,8 @@ $light-text-color: #8d8d8d; // text color
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  // margin-top: 5px;
-  height: calc(100vh - 71px);
+  height: calc(100vh - 66px);
   background-color: $header-color;
-  // padding: 10px;
 
   .leftProfileBar {
     display: flex;

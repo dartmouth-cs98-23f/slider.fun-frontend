@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/profile.scss';
 import ProfileViews from '../components/ProfileViews';
 import LeftProfileBar from '../components/LeftProfileBar';
-import axios from 'axios';
 
 const Profile = () => {
   const navigate = useNavigate();
   const { signOut, getUserInfo } = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState(null);
-
+  const userToken = localStorage.getItem('token');
 
   const fetchUserInfo = async () => {
     try {
@@ -23,15 +22,15 @@ const Profile = () => {
 
   // Use an effect for redirecting if the user is not authenticated
   useEffect(() => {
-    const userToken = localStorage.getItem('token');
     if (!userToken) {
       console.log("Redirecting to login page", userToken);
       navigate("/login");
     } else {
       // Fetch user info if token is present
       fetchUserInfo();
+      navigate("/profile");
     }
-  },);
+  }, [userToken]);
 
   const signOutHandler = async () => {
     try {
@@ -55,9 +54,9 @@ const Profile = () => {
 
   return (
     <div className='profileContainer'>
-      <LeftProfileBar signOutHandler={signOutHandler} />
+      <LeftProfileBar userInfo={currentUser} signOutHandler={signOutHandler} />
       <div className='rightProfileBar'>
-        <ProfileViews token={localStorage.getItem('token')} userId={currentUser.id} photoObjectList={currentUser.photos} handleGalleryClick={handleGalleryClick} />
+        <ProfileViews token={localStorage.getItem('token')} userInfo={currentUser} handleGalleryClick={handleGalleryClick} />
       </div>
     </div>
   );
