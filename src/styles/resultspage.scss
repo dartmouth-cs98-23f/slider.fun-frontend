@@ -62,7 +62,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.5); // Semi-transparent black overlay
+        background: rgba(0, 0, 0, 0.088); // Semi-transparent black overlay
         z-index: 1; // Ensure the overlay is above the background image but below the content
     }
 
@@ -76,12 +76,12 @@
         height: 100%;
         padding: 15px;
         box-sizing: border-box;
-        color: #ffffff;
+        color: #ebe3e3;
     }
 
     .stage-name {
         font-family: Mulish, sans-serif;
-        font-size: 24px; 
+        font-size: 32px; 
         font-weight: 700;
         margin: 0 0 10px; 
         text-transform: uppercase; 
@@ -91,6 +91,8 @@
         transform: translate(-50%, -50%) rotate(-90deg);
         transform-origin: center;
         white-space: nonwrap;
+        width: max-content;
+        letter-spacing: 10px;
     }
 
     .stage-score {
@@ -98,6 +100,7 @@
         font-weight: bold;
         position: relative;
         top: 35%;
+        letter-spacing: 2px;
     }
 
     // Background images for each stage
