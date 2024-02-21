@@ -51,11 +51,19 @@
         font-weight: 700;
         margin: 0 0 10px; 
         text-transform: uppercase; 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-90deg);
+        transform-origin: center;
+        white-space: nonwrap;
     }
 
     .stage-score {
         font-size: 2.5em;
         font-weight: bold;
+        position: relative;
+        top: 35%;
     }
 
     // Background images for each stage
