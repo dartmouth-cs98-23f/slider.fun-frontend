@@ -1,0 +1,27 @@
+$dark-text-color: #6e6d6d; // text color
+
+.collapsible {
+  // background-color: aqua;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px solid #5e5e5e;
+    cursor: pointer;
+  }
+
+  .collapsible-content {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    color: $dark-text-color;
+  }
+}

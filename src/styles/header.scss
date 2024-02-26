@@ -1,5 +1,5 @@
 // $header-color: #333; // primary color
-$header-color: #EDEDED;  // primary color
+$header-color: #EDEDED; // primary color
 $accent-color: #E27272; // accent color
 
 .headerContainer {
@@ -41,8 +41,22 @@ $accent-color: #E27272; // accent color
   justify-content: center;
   align-items: center;
 
-  .tutorialButton {
+  .profileIcon {
+    width: 35px;
     height: 35px;
+    cursor: pointer;
+
+    &:hover {
+      color: #E27272;
+    }
+  }
+
+  button {
+    margin: 8px;
+    height: 35px;
+  }
+
+  .whiteButton {
     background-color: #ffffff;
     border: 2px solid #363636;
     color: black;
@@ -54,17 +68,9 @@ $accent-color: #E27272; // accent color
     }
   }
 
-  .dailyButton {
-    height: 35px;
-
+  .BlackButton {
     &:hover {
       background-color: #70737a;
     }
-  }
-
-  button {
-    background-color: #363636;
-    border-radius: 7px;
-    margin-bottom: 13px;
   }
 }

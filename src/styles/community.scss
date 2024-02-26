@@ -1,0 +1,11 @@
+.communityPhotoContainer {
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-left: 60px;
+  margin-right: 60px;
+  padding: 10px; // Optional: Adds some padding around the entire container
+}

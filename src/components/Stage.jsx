@@ -26,7 +26,7 @@ const Stage = (props) => {
         stageOptions={stageOptions}
         pic_link={link}
         openModal={openModal}
-        nextLevel="/tutorial/stage2"
+        // nextLevel="/tutorial/stage2"
         updateScores={props.updateScores}
         updateStageSliders={props.updateStageSliders}
         stageNumber={props.stageNumber}
@@ -34,7 +34,6 @@ const Stage = (props) => {
         goToNextStage={props.goToNextStage}
         tutorial={props.tutorial}
       />
-
     </div>
   )
 }
