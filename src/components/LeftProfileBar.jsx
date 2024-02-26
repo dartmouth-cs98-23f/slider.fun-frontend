@@ -12,10 +12,10 @@ const LeftProfileBar = ({ userInfo, signOutHandler }) => {
         </div>
         <div className='username'>
           <div>
-            {userInfo.email}
+            {userInfo.name}
           </div>
           <div>
-            {userInfo.username}
+            {userInfo.email}
           </div>
         </div>
       </div>

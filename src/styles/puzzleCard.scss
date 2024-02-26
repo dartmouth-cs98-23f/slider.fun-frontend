@@ -1,0 +1,43 @@
+.puzzleCardContainer {
+  // width: 100%;
+  // width: 250px;
+  padding: 12px 12px 12px 12px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+
+  &:hover {
+    transform: rotate(-5deg) scale(1.05); // Slight tilt and zoom on hover for effect
+    cursor: pointer;
+  }
+
+  .dateHeader {
+    padding-top: 5px;
+    color: #333;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+
+  img {
+    width: 255px; // Ensure the photo fills the frame
+    display: block; // Remove any default margins/paddings
+    height: 150px; // Maintain aspect ratio
+    object-fit: cover; // Maintain aspect ratio
+
+  }
+
+  .scoreHeader {
+    color: #7f7f7f;
+    // text-align: center;
+    // padding: 5px 10px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 14px;
+  }
+
+  .scoreDisplay {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+  }
+}

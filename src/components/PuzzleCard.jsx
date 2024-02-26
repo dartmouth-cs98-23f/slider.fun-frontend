@@ -1,5 +1,6 @@
 import React from 'react'
 import { getImageStyle } from './Scoring'
+import '../styles/puzzleCard.scss'
 // import ProgressBar from './ProgressBar'
 
 const PuzzleCard = ({ photoUrl, photoProperties, onRemove }) => {
@@ -9,8 +10,6 @@ const PuzzleCard = ({ photoUrl, photoProperties, onRemove }) => {
     <div className='puzzleCardContainer' >
       {/* <div className='dateHeader'> {dailyPuzzle.date} </div> */}
       <div> <img src={photoUrl} alt="pic" style={getImageStyle(photoProperties)} /></div>
-
-
       {/* <div className='dateHeader'> 2/2/2 </div> */}
       {/* <div className='scoreHeader'> Score </div> */}
       <div className='scoreDisplay'>

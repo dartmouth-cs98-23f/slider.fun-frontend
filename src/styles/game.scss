@@ -1,0 +1,85 @@
+.infoModalButton {
+  height: 30px;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid #f86969;
+    border-radius: 5px;
+  }
+}
+
+.viewButtonsContainer {
+  margin-top: 5px;
+  display: flex;
+  flex: 2;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .selected {
+    border: 2px solid #f86969 !important;
+  }
+
+  .tIconGame {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    &:hover {
+      color: #f86969
+    }
+  }
+
+
+  .viewButtonVS {
+    margin: 8px;
+    width: 30px;
+    height: 30px;
+    // background-image: url('assets/VerticalSplit.png');
+    background-size: cover;
+    /* This will ensure that the image covers the whole button */
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid black;
+
+    &:hover {
+      border: 2px solid #f86969 !important;
+    }
+  }
+
+  .viewButtonHS {
+    margin: 8px;
+    width: 30px;
+    height: 30px;
+    // background-image: url('assets/HorizontalSplit.png');
+    background-size: cover;
+    /* This will ensure that the image covers the whole button */
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid black;
+
+    &:hover {
+      border: 2px solid #f86969 !important;
+    }
+  }
+
+  .viewButtonS2S {
+    margin: 8px;
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid black;
+
+    &:hover {
+      border: 2px solid #f86969 !important;
+    }
+  }
+
+
+
+}

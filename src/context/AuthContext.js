@@ -20,10 +20,10 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, [token]);
 
-  const signUp = async (email, username, password) => {
+  const signUp = async (email, name, password) => {
     // try {
-    console.log(email, username, password)
-    const response = await axios.post(`${API_URL}/new`, { email, username, password });
+    console.log(email, name, password)
+    const response = await axios.post(`${API_URL}/new`, { email, name, password });
     console.log(response.data.token)
     setToken(response.data.token);
     setUser({ email });

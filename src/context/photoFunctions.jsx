@@ -14,13 +14,14 @@ export const postPhoto = async (data, userId) => {
   return response;
 }
 
+// remove photo from user
 export const removePhoto = async (userId, photoId) => {
-  // console.log({ imageUrl, photoProperties })
-  // const response = axios.post(`${API_URL}/photo/new`, data);
-  // const d = (await response).data.id
-  // const photoId = { "photoId": photoId }
-
   axios.put(`${API_URL}/users/removePhoto/${userId}`, { "photoId": photoId });
   // return response;
+}
+
+// delete photo object from database 
+export const DeletePhoto = async (photoId) => {
+  await axios.delete(`${API_URL}/photo/${photoId}`);
 }
 

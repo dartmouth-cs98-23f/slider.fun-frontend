@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
 import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
@@ -12,6 +12,8 @@ import verticalSplit from "../assets/VerticalSplit.png"
 import horizontalSplit from "../assets/HorizontalSplit.png"
 import { compareTwoPhotos, getImageStyle } from '../components/Scoring'
 import { defaultSlider } from '../components/Slider'
+import { IconPhotoQuestion, IconRotate } from '@tabler/icons-react';
+import "../styles/game.scss"
 
 import axios from 'axios';
 
@@ -96,9 +98,9 @@ const Game = (props) => {
     if (defaultScore === false) {
       setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
     }
-    console.log("hi", filter1, filter2)
+    // console.log("hi", filter1, filter2)
     let photoScore = (await compareTwoPhotos(photo, filter1, filter2))
-    console.log("photo score", photoScore)
+    // console.log("photo score", photoScore)
     setScore(photoScore)
   }
 
@@ -109,7 +111,7 @@ const Game = (props) => {
 
       // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
       let calcPercentScore = 100 - (Math.round(score))
-      console.log("percent store", calcPercentScore)
+      // console.log("percent store", calcPercentScore)
 
       setPercentScore(calcPercentScore)
       if (updateScores !== undefined) {
@@ -138,7 +140,7 @@ const Game = (props) => {
     setIsModalVisible(false)
   };
 
-   const SetView = (active) => {
+  const SetView = (active) => {
     $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
 
     // Add 'selected' class to the clicked image based on 'active' parameter
@@ -165,6 +167,13 @@ const Game = (props) => {
           <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
           <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
           <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
+          {
+            location.pathname.startsWith('/tutorial') &&
+            <IconPhotoQuestion className="tIconGame" onClick={props.openModal} />
+          }
+          <IconRotate className='tIconGame' />
+
+
         </div>
 
         <div className='slidersContainer'>
@@ -184,8 +193,8 @@ const Game = (props) => {
         </div>
         <div className='actionButtons'>
           <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
-          {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Explanation</button>}
-          <button onClick={handleCompareClick}>Compare</button>
+
+          <button onClick={handleCompareClick}>Submit</button>
 
           {/* uncomment below for easier navigation */}
 

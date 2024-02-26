@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Game from './Game'
+import InfoModal from '../components/InfoModal'
 
 const CURRENT_OPTIONS = [
   {
@@ -103,13 +104,20 @@ const Daily = () => {
 
   // Select a random link
   const randomLink = links[randomKey];
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+  };
+
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
 
   return (
     <div>
-      {/* {isModalVisible && <div className="modal-overlay"></div>} */}
-      {/* <InfoModal heading="Blur" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} /> */}
-      {/* <TutorialHeader /> */}
-      {/* <h1> Coming Soon....</h1> */}
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal isModalVisible={isModalVisible} daily={true} closeModal={closeModal} openModal={openModal} />
       <Game
         stageOptions={CURRENT_OPTIONS} pic_link={randomLink}
       />

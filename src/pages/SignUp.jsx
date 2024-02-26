@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userName, setUsername] = useState('')
+  const [name, setName] = useState('')
   const [err, setErr] = useState(null)
   const { signUp } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      await signUp(email, userName, password);
+      await signUp(email, name, password);
       navigate("/profile");
     } catch (error) {
       setErr(error.response.data.error)
@@ -72,7 +72,7 @@ const SignUp = () => {
           <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
           <input placeholder='email' onChange={(e) => setEmail(e.target.value)} />
 
-          <input placeholder='username' onChange={(e) => setUsername(e.target.value)} />
+          <input placeholder='username' onChange={(e) => setName(e.target.value)} />
 
           <input placeholder='password' onChange={(e) => setPassword(e.target.value)} />
 
