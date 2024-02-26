@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/resultspage.scss';
 
 const ScoreCard = ({ stage, score }) => {
@@ -14,20 +15,27 @@ const ScoreCard = ({ stage, score }) => {
     );
 };
 
-const ResultsModal = ({ averageScore, onRetry }) => (
-    <div className="results-modal">
+const ResultsModal = ({ averageScore, onRetry }) => {
+    const navigate = useNavigate();
+    const handleNavigate = (path) => {
+        navigate(path);
+      };
+    return (
+        <div className="results-modal">
         <div className="modal-content">
             <h2>Your Average Score</h2>
             <p>{averageScore.toFixed(2)}</p>
-            <button onClick={() => window.location.reload()}>Retry</button>
+            <button onClick={() => handleNavigate("/tutorial")}>Retry</button>
             <button onClick={() => console.log('Share feature to be implemented')}>Share</button>
         </div>
     </div>
-);
+    )
+};
 
 const ResultsPage = ({ scores }) => {
     const [showModal, setShowModal] = useState(false);
     const [averageScore, setAverageScore] = useState(0);
+
 
     useEffect(() => {
         // Calculate the average score
