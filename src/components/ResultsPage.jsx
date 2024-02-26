@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/resultspage.scss';
 
-const ScoreCard = ({stage, score}) => {
+const ScoreCard = ({ stage, score }) => {
     const stageClass = stage.replace(/\s+/g, '-').toLowerCase();
     return (
         <div className={`score-card ${stageClass}`}>
@@ -11,39 +11,42 @@ const ScoreCard = ({stage, score}) => {
                 <div className="stage-score">{score}</div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-const ScoreSummary = ({ scores, onPlayAgain }) => {
-    return (
-        <div className="score-summary">
-            <div className="average-score">Average Score: []</div>
-            <button onClick={onPlayAgain}>Play Again</button>
-            <button>Share</button>
+const ResultsModal = ({ averageScore, onRetry }) => (
+    <div className="results-modal">
+        <div className="modal-content">
+            <h2>Your Average Score</h2>
+            <p>{averageScore.toFixed(2)}</p>
+            <button onClick={() => window.location.reload()}>Retry</button>
+            <button onClick={() => console.log('Share feature to be implemented')}>Share</button>
         </div>
-    )
-}
+    </div>
+);
 
-const ResultsPage = ({scores}) => {
-    // Scores should be an object with keys as stage names and valuesas the score
-    // For example: { Brightness: 96, Contrast: 98, Saturation: 99, Grayscale: 94, Sepia: }
+const ResultsPage = ({ scores }) => {
+    const [showModal, setShowModal] = useState(false);
+    const [averageScore, setAverageScore] = useState(0);
+
+    useEffect(() => {
+        // Calculate the average score
+        const totalScore = Object.values(scores).reduce((acc, score) => acc + score, 0);
+        const calculatedAverageScore = totalScore / Object.keys(scores).length;
+        setAverageScore(calculatedAverageScore);
+
+        // Simulate a delay to show the modal after scores are displayed
+        setTimeout(() => setShowModal(true), 3000); // Adjust time as needed
+    }, [scores]);
+
     return (
         <div className="results-page">
-            <ScoreCard key="brightness" stage="brightness" score={scores[0]}></ScoreCard>
-            <ScoreCard key="contrast" stage="contrast" score={scores[1]}></ScoreCard>
-            <ScoreCard key="saturation" stage="saturation" score={scores[2]}></ScoreCard>
-            <ScoreCard key="grayscale" stage="grayscale" score={scores[3]}></ScoreCard>
-            <ScoreCard key="sepia" stage="sepia" score={scores[4]}></ScoreCard>
-            <ScoreCard key="hue rotate" stage="hue rotate" score={scores[5]}></ScoreCard>
-            <ScoreCard key="blur" stage="blur" score={scores[6]}></ScoreCard>
-            {/* <div className="scores-container">
-                {Object.entries(scores).map(([stage, score]) => (
-                    <ScoreCard key={stage} stage={stage} score={score} />
-                ))}
-            </div> */}
+            {Object.entries(scores).map(([stage, score], index) => (
+                <ScoreCard key={index} stage={stage} score={score} />
+            ))}
+            {showModal && <ResultsModal averageScore={averageScore} onRetry={() => setShowModal(false)} />}
         </div>
-        
-    )
-}
+    );
+};
 
 export default ResultsPage;
