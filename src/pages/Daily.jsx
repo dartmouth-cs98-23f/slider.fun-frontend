@@ -85,7 +85,7 @@ const CURRENT_OPTIONS = [
 
 const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
 const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
-const bakerTower = "https://slider-fun.onrender.com/api/photo/6553e9f6ab042abb281b276b"
+const bakerTower = "https://slider-fun.onrender.com/api/photo/65cc7534ef5a21ddc90401e7"
 
 const links = {
   "1": dHallLink,

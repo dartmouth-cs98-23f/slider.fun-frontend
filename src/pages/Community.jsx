@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PuzzleCard from '../components/PuzzleCard'
 import axios from 'axios';
 import '../styles/community.scss';
+import { DeletePhoto } from '../context/photoFunctions';
 
 const Community = () => {
 
@@ -14,6 +15,7 @@ const Community = () => {
 
       if (response.status === 200) {
         setPhotos(response.data)
+        console.log(photos)
         return response.data; // This will contain the data returned from the server
       } else {
         console.error(`Error: ${response.status} - ${response.statusText}`);
@@ -28,19 +30,34 @@ const Community = () => {
 
   useEffect(() => {
     fetchAllPhoto()
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  const handleRemovePhoto = async (photoId) => {
+    try {
+      await DeletePhoto(photoId);
+      const updatedPuzzleHistory = photos.filter(photo => photo.id !== photoId);
+      setPhotos(updatedPuzzleHistory);
+      console.log(photoId, "removed")
+    } catch (error) {
+      console.error('Error removing photo:', error);
+    }
+  };
+
 
   const puzzleCards = photos.map((puzzle, index) => (
     <PuzzleCard
       key={puzzle.id || index}
       photoUrl={puzzle.imageUrl}
       photoProperties={puzzle.photoProperties}
+      authorId={puzzle.authorId}
+      onRemove={() => handleRemovePhoto(puzzle.id)}
     />
   ));
 
   return (
     <div >
-      <div className='headerText' style={{ padding: "5px" }} > Community Photo Gallery </div>
+      <div className='headerText' style={{ padding: "5px", marginLeft: "60px" }} > Community Gallery </div>
       <div className='communityPhotoContainer'> {puzzleCards} </div>
     </div>
   )

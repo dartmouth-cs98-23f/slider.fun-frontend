@@ -47,7 +47,8 @@ const PhotoCreation = (props) => {
 
     const data = {
       "imageUrl": imageUrl,
-      "photoProperties": photoProperties
+      "photoProperties": photoProperties,
+      "authorId": props.userId
     }
     console.log(data, props.userId)
     try {

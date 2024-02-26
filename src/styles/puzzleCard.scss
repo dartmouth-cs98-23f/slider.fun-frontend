@@ -1,10 +1,11 @@
 .puzzleCardContainer {
-  // width: 100%;
-  // width: 250px;
+  // display: flex;
+  max-width: 360px;
   padding: 12px 12px 12px 12px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   height: fit-content;
+  transition: transform 0.3s;
 
   &:hover {
     transform: rotate(-5deg) scale(1.05); // Slight tilt and zoom on hover for effect
@@ -19,9 +20,9 @@
   }
 
   img {
-    width: 255px; // Ensure the photo fills the frame
+    width: 355px; // Ensure the photo fills the frame
     display: block; // Remove any default margins/paddings
-    height: 150px; // Maintain aspect ratio
+    height: 250px; // Maintain aspect ratio
     object-fit: cover; // Maintain aspect ratio
 
   }

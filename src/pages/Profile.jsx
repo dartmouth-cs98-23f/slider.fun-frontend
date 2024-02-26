@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/profile.scss';
@@ -11,14 +11,14 @@ const Profile = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const userToken = localStorage.getItem('token');
 
-  const fetchUserInfo = async () => {
+  const fetchUserInfo = useCallback(async () => {
     try {
       const data = await getUserInfo();
       setCurrentUser(data);
     } catch (error) {
       console.error('Failed to fetch user info:', error);
     }
-  };
+  }, [getUserInfo, setCurrentUser]);
 
   // Use an effect for redirecting if the user is not authenticated
   useEffect(() => {
@@ -30,7 +30,7 @@ const Profile = () => {
       fetchUserInfo();
       navigate("/profile");
     }
-  }, [userToken]);
+  }, [fetchUserInfo, navigate, userToken]);
 
   const signOutHandler = async () => {
     try {
@@ -49,8 +49,6 @@ const Profile = () => {
   if (!currentUser) {
     return <div>User not found...</div>;
   }
-
-
 
   return (
     <div className='profileContainer'>

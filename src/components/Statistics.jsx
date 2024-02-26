@@ -31,6 +31,7 @@ const Statistics = ({ userInfo }) => {
       await removePhotoAPI(userInfo.id, photoId);
       const updatedPuzzleHistory = puzzleHistory.filter(photo => photo.id !== photoId);
       setPuzzleHistory(updatedPuzzleHistory);
+      console.log(photoId, "removed")
     } catch (error) {
       console.error('Error removing photo:', error);
     }
