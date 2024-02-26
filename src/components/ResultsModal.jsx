@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
@@ -6,6 +7,7 @@ import makeConfetti from './Confetti';
 
 
 function ResultsModal(props) {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,6 +23,9 @@ function ResultsModal(props) {
 
   const nextStageHandler = () => {
     props.onClose();
+   if (props.stageNumber === 6) {
+      navigate("/resultspage")
+    }
     props.goToNextStage();
   }
 
