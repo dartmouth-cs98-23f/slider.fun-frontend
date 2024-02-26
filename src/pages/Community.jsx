@@ -15,7 +15,7 @@ const Community = () => {
 
       if (response.status === 200) {
         setPhotos(response.data)
-        console.log(photos)
+        console.log(response.data)
         return response.data; // This will contain the data returned from the server
       } else {
         console.error(`Error: ${response.status} - ${response.statusText}`);

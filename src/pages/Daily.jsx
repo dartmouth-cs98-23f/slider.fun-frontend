@@ -1,6 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Game from './Game'
 import InfoModal from '../components/InfoModal'
+import axios from 'axios'
+
+export const fetchPuzzleOfDay = async () => {
+
+  try {
+    const currentDate = new Date();
+    // Format the date as YYYY/MM/DD
+    const formattedDate = currentDate.toISOString().slice(0, 10);
+
+    // console.log(formattedDate);
+    const data = {
+      "date": formattedDate
+    }
+    console.log(data)
+    // Use the formatted date in your API request
+    const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
+      params: {
+        date: formattedDate // The date is passed as a query parameter
+      }
+    });
+
+    // Assuming you want to do something with the response here
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('There was an error fetching the puzzle of the day:', error);
+    // Handle the error appropriately
+  }
+};
+
 
 const CURRENT_OPTIONS = [
   {
@@ -94,11 +124,27 @@ const links = {
 }
 
 const Daily = () => {
+
+  const [dailyPuzzle, setDailyPuzzle] = useState({})
   // Function to generate a random number
   const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
+  useEffect(() => {
+    const fetchAndSetPuzzle = async () => {
+      try {
+        const dailyPuzzleTemp = await fetchPuzzleOfDay();
+        console.log(dailyPuzzleTemp);
+        setDailyPuzzle(dailyPuzzleTemp);
+      } catch (error) {
+        console.error('Failed to fetch daily puzzle:', error);
+
+      }
+    };
+
+    fetchAndSetPuzzle();
+  }, [])
   // Generate a random key
   const randomKey = getRandomNumber(1, Object.keys(links).length);
 
@@ -118,9 +164,9 @@ const Daily = () => {
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
       <InfoModal isModalVisible={isModalVisible} daily={true} closeModal={closeModal} openModal={openModal} />
-      <Game
-        stageOptions={CURRENT_OPTIONS} pic_link={randomLink}
-      />
+      {dailyPuzzle.photo && <Game
+        stageOptions={CURRENT_OPTIONS} closeModal={closeModal} openModal={openModal} pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
+      />}
     </div>
   )
 }

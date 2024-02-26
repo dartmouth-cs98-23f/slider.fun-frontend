@@ -21,12 +21,29 @@
 }
 
 .headerModal {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 120px;
+
+  .exitButton {
+    position: absolute;
+    right: 5px;
+    top: 2.5px;
+    // display: block;
+    cursor: pointer;
+    // padding: 10px;
+  }
+
+  .puzzleTextBlock {
+    text-align: center;
+
+  }
 }
+
+
 
 .buttonsModal {
   display: flex;

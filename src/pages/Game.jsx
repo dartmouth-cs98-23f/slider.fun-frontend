@@ -12,7 +12,7 @@ import verticalSplit from "../assets/VerticalSplit.png"
 import horizontalSplit from "../assets/HorizontalSplit.png"
 import { compareTwoPhotos, getImageStyle } from '../components/Scoring'
 import { defaultSlider } from '../components/Slider'
-import { IconPhotoQuestion, IconRotate } from '@tabler/icons-react';
+import { IconPhotoQuestion } from '@tabler/icons-react';
 import "../styles/game.scss"
 
 import axios from 'axios';
@@ -163,15 +163,16 @@ const Game = (props) => {
         <ImageView active={active} importEdited={importEdited} getImageStyle={getImageStyle} currentOptions={currentOptions} editedOptions={editedOptions} />
 
         <div className='viewButtonsContainer'>
+          <IconPhotoQuestion className="tIconGame" onClick={props.openModal} />
           <p> View: &nbsp;&nbsp;&nbsp;</p>
           <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
           <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
           <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
-          {
+          {/* {
             location.pathname.startsWith('/tutorial') &&
             <IconPhotoQuestion className="tIconGame" onClick={props.openModal} />
-          }
-          <IconRotate className='tIconGame' />
+          } */}
+          {/* <IconRotate className='tIconGame' /> */}
 
 
         </div>
