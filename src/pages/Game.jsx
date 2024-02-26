@@ -4,7 +4,6 @@ import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
-import { useLocation } from 'react-router-dom';
 import $ from 'jquery';
 import ImageView from '../components/ImageView'
 import side2side from "../assets/SideToSideSplit.png"
@@ -44,7 +43,6 @@ const Game = (props) => {
   const updateScores = props.updateScores;
   const stageNumber = props.stageNumber;
 
-  const location = useLocation();
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
   const [currentOptions, setCurrentOptions] = useState(stageOptions)
@@ -107,7 +105,7 @@ const Game = (props) => {
   useEffect(() => {
     if (score && defaultScore) {
       // zero is full score
-      console.log(score / defaultScore)
+      // console.log(score / defaultScore)
 
       // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
       let calcPercentScore = 100 - (Math.round(score))

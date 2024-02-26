@@ -16,7 +16,7 @@ const TutorialHeader = (props) => {
   const [messageVisability, setMessageVisability] = useState(false);
   // Function to determine button style based on the stage number
   const buttonStyle = (stageNumber) => {
-    console.log(props.mostForwardStage)
+    // console.log(props.mostForwardStage)
     if (stageNumber === currentStageNumber) {
       // Current stage 
       return "tutorialNavButton currentStage";

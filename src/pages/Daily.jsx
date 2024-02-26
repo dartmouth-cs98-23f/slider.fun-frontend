@@ -113,23 +113,23 @@ const CURRENT_OPTIONS = [
 ]
 
 
-const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
-const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
-const bakerTower = "https://slider-fun.onrender.com/api/photo/65cc7534ef5a21ddc90401e7"
+// const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
+// const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
+// const bakerTower = "https://slider-fun.onrender.com/api/photo/65cc7534ef5a21ddc90401e7"
 
-const links = {
-  "1": dHallLink,
-  "2": nycLink,
-  "3": bakerTower,
-}
+// const links = {
+//   "1": dHallLink,
+//   "2": nycLink,
+//   "3": bakerTower,
+// }
 
 const Daily = () => {
 
   const [dailyPuzzle, setDailyPuzzle] = useState({})
   // Function to generate a random number
-  const getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+  // const getRandomNumber = (min, max) => {
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // };
 
   useEffect(() => {
     const fetchAndSetPuzzle = async () => {
@@ -146,10 +146,10 @@ const Daily = () => {
     fetchAndSetPuzzle();
   }, [])
   // Generate a random key
-  const randomKey = getRandomNumber(1, Object.keys(links).length);
+  // const randomKey = getRandomNumber(1, Object.keys(links).length);
 
   // Select a random link
-  const randomLink = links[randomKey];
+  // const randomLink = links[randomKey];
   const [isModalVisible, setIsModalVisible] = useState(true);
 
   const closeModal = () => {
