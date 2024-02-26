@@ -39,6 +39,19 @@ const ResultsPage = ({ scores }) => {
         setTimeout(() => setShowModal(true), 3000); // Adjust time as needed
     }, [scores]);
 
+    useEffect(() => {
+        if (showModal) {
+            document.body.classList.add('no-scroll');
+        } else {
+            document.body.classList.remove('no-scroll');
+        }
+
+        // Cleanup function to ensure scrolling is re-enabled if the component unmounts
+        return () => {
+            document.body.classList.remove('no-scroll');
+        };
+    }, [showModal]);
+
     return (
         <div className="results-page">
             {Object.entries(scores).map(([stage, score], index) => (
