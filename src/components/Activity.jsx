@@ -1,7 +1,7 @@
 import React from 'react'
 import ActivityCard from './ActivityCard'
 
-const Activity = ({ username }) => {
+const Activity = ({ userInfo }) => {
   const activities = [
     {
       "header": "Completed Puzzle 1",
@@ -33,7 +33,7 @@ const Activity = ({ username }) => {
 
   return (
     <div className='activityCards'>
-      <div className='headerText' style={{ padding: "5px" }} > {username}'s recent activity </div>
+      <div className='headerText' style={{ padding: "5px" }} > {userInfo.username ? userInfo.username : userInfo.email}'s recent activity </div>
       {activityCards.length < 1 ? "No activity yet" : activityCards}
     </div >
   )

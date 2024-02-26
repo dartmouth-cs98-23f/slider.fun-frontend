@@ -65,7 +65,7 @@ const Statistics = ({ userInfo }) => {
 
   return (
     <div >
-      <div className='headerText' style={{ padding: "5px" }} > {userInfo.email}'s Photo Gallery </div>
+      <div className='headerText' style={{ padding: "5px" }} > {userInfo.username ? userInfo.username : userInfo.email}'s Photo Gallery </div>
       <div className='statisticsContainer'> {puzzleCards} </div>
     </div>
   )

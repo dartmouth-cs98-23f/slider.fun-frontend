@@ -22,9 +22,9 @@ const ProfileViews = ({ token, userInfo, handleGalleryClick }) => {
 
       </div>
       <div className='profileViewContent'>
-        {currentView === 0 ? <Activity username={userInfo.email} /> : ""}
+        {currentView === 0 ? <Activity userInfo={userInfo} /> : ""}
         {currentView === 1 ? <Statistics username={userInfo.email} userInfo={userInfo} /> : ""}
-        {currentView === 2 ? <UploadView username={"Admin"} token={token} userInfo={userInfo}/> : ""}
+        {currentView === 2 ? <UploadView username={"Admin"} token={token} userInfo={userInfo} /> : ""}
 
       </div>
     </div>

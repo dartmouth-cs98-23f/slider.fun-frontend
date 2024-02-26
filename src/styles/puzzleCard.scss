@@ -27,6 +27,17 @@
 
   }
 
+
+  .photoTitle {
+    color: #000000;
+    // text-align: center;
+    // padding: 5px 10px;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+
   .scoreHeader {
     color: #7f7f7f;
     // text-align: center;
@@ -40,5 +51,12 @@
     flex-direction: row;
     gap: 5px;
     align-items: center;
+    justify-content: space-between;
+
+    .rightSidePuzzleStats {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
   }
 }

@@ -1,4 +1,5 @@
 .communityPhotoContainer {
+  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -7,11 +8,4 @@
   margin-left: 60px;
   margin-right: 60px;
   padding: 10px; // Optional: Adds some padding around the entire container
-
-
-  .puzzleCardContainer {
-    flex: 0 1 calc(50.333% - 20px); // Adjust based on your actual gap and container padding
-    // Other styles for your puzzle card...
-  }
-
 }

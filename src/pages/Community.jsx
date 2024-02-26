@@ -50,6 +50,7 @@ const Community = () => {
       key={puzzle.id || index}
       photoUrl={puzzle.imageUrl}
       photoProperties={puzzle.photoProperties}
+      likes={puzzle.likes}
       authorId={puzzle.authorId}
       onRemove={() => handleRemovePhoto(puzzle.id)}
     />
