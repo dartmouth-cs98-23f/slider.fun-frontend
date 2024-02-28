@@ -28,7 +28,7 @@ const UploadView = ({ token, userInfo }) => {
   return (
     <div className='uploadViewContainer'>
       <HoverMessage message={"Uploaded successfully! Check it out in the gallery tab!"} messageVisability={messageVisability} />
-      <FirebaseUpload token={token} photoUrl={photoUrl} setPhotoUrl={setPhotoUrl} openModal={openModal} />
+      <FirebaseUpload userId={userInfo.id} photoUrl={photoUrl} setPhotoUrl={setPhotoUrl} openModal={openModal} />
       {/* <InfoModal isModalVisible="true" /> */}
       <PhotoModal isModalVisible={isModalVisible} photoUrl={photoUrl} userId={userInfo.id} closeModal={closeModal} setMessageVisability={setMessageVisability} />
       {/* <PhotoCreation photoUrl={photoUrl} userId={userId} /> */}
