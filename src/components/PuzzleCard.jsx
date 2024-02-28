@@ -76,7 +76,6 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
 
       </div>
       <div className='scoreDisplay'>
-        <button >Remove Photo</button>
         <div>
           {photoTitle ? <div className='photoTitle'> {photoTitle} </div> : <div className='photoTitle'> Unnamed </div>}
           {username ? <div className='scoreHeader'> {username} </div> : <div className='scoreHeader'> Default </div>}
@@ -85,7 +84,6 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
           <IconCameraHeart className='heartIcon' />
           <div>: {likes !== null ? 0 : likes} </div>
         </div>
-        {/* <ProgressBar bgcolor="green" completed={11} /> */}
       </div>
     </div>
   )
