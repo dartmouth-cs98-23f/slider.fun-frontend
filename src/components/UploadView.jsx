@@ -7,6 +7,7 @@ const UploadView = ({ userInfo }) => {
   const [photoUrl, setPhotoUrl] = useState("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/selfUploadedImages%2FeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NWM2ODQyYTk5YzhiZTNhMTc3OGNhNGMiLCJpYXQiOjE3MDc1MDg3NzkzNDB9.AAFbUj49GaxuytZ_c845fo749BSgvIci8sIZQ5khbjE%2F99243A94-704B-4036-A69C-4D9D791FBDBD.JPG57175079-348e-4738-8ad6-635879600b18?alt=media&token=d32f9f49-8a55-4ffc-88d2-fb5353f0bc4c")
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [messageVisability, setMessageVisability] = useState(false)
+  const [titleMissingVis, setTitleMissingVis] = useState(false)
 
   useEffect(() => {
     // wait for 2 seconds before hiding the message
@@ -28,8 +29,17 @@ const UploadView = ({ userInfo }) => {
   return (
     <div className='uploadViewContainer'>
       <HoverMessage message={"Uploaded successfully! Check it out in the gallery tab!"} messageVisability={messageVisability} />
+      <HoverMessage message={"Please give your photo a title!"} messageVisability={titleMissingVis} />
       <FirebaseUpload userId={userInfo.id} photoUrl={photoUrl} setPhotoUrl={setPhotoUrl} openModal={openModal} />
-      <PhotoModal isModalVisible={isModalVisible} photoUrl={photoUrl} userId={userInfo.id} closeModal={closeModal} setMessageVisability={setMessageVisability} />
+      <PhotoModal
+        isModalVisible={isModalVisible}
+        photoUrl={photoUrl}
+        userId={userInfo.id}
+        closeModal={closeModal}
+        setMessageVisability={setMessageVisability}
+        setTitleMissingVis={setTitleMissingVis}
+        editMode={true}
+      />
     </div>
   )
 }

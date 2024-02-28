@@ -126,10 +126,6 @@ const CURRENT_OPTIONS = [
 const Daily = () => {
 
   const [dailyPuzzle, setDailyPuzzle] = useState({})
-  // Function to generate a random number
-  // const getRandomNumber = (min, max) => {
-  //   return Math.floor(Math.random() * (max - min + 1)) + min;
-  // };
 
   useEffect(() => {
     const fetchAndSetPuzzle = async () => {
@@ -145,11 +141,7 @@ const Daily = () => {
 
     fetchAndSetPuzzle();
   }, [])
-  // Generate a random key
-  // const randomKey = getRandomNumber(1, Object.keys(links).length);
 
-  // Select a random link
-  // const randomLink = links[randomKey];
   const [isModalVisible, setIsModalVisible] = useState(true);
 
   const closeModal = () => {

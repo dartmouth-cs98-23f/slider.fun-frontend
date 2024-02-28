@@ -57,8 +57,10 @@ const Statistics = ({ userInfo }) => {
   const puzzleCards = puzzleHistory.map((puzzle, index) => (
     <PuzzleCard
       key={puzzle.id || index}
-      photoUrl={puzzle.imageUrl}
-      photoProperties={puzzle.photoProperties}
+      // photoUrl={puzzle.imageUrl}
+      puzzleInfo={puzzle}
+      editMode={true}
+      // photoProperties={puzzle.photoProperties}
       onRemove={() => handleRemovePhoto(puzzle.id)}
     />
   ));

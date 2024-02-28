@@ -8,7 +8,7 @@ import { IconCameraHeart } from '@tabler/icons-react';
 import axios from 'axios';
 import GameModal from './GameModal';
 
-const PuzzleCard = ({ puzzleInfo, onRemove, }) => {
+const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
   const photoProperties = puzzleInfo.photoProperties;
@@ -55,7 +55,13 @@ const PuzzleCard = ({ puzzleInfo, onRemove, }) => {
   return (
     <div className='puzzleCardContainer' >
       {/* <div className='dateHeader'> {dailyPuzzle.date} </div> */}
-      {isModalVisible && <GameModal puzzleInfo={puzzleInfo} isModalVisible={isModalVisible} closeModal={closeModal} />}
+      {isModalVisible &&
+        <GameModal
+          puzzleInfo={puzzleInfo}
+          isModalVisible={isModalVisible}
+          closeModal={closeModal}
+          editMode={editMode}
+        />}
 
       <div onClick={openModal}>
         <LazyLoadImage
@@ -65,7 +71,6 @@ const PuzzleCard = ({ puzzleInfo, onRemove, }) => {
           style={getImageStyle(photoProperties)}
         />
 
-        {/* <img src={photoUrl} loading="lazy" alt="pic" style={getImageStyle(photoProperties)} /> */}
       </div>
       <div className='scoreDisplay'>
         {/* <button onClick={onRemove}>Remove Photo</button> */}

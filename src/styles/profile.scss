@@ -185,7 +185,7 @@ $light-text-color: #8d8d8d; // text color
             height: fit-content;
 
             &:hover {
-              transform: rotate(-5deg) scale(1.05); // Slight tilt and zoom on hover for effect
+              // transform: rotate(-5deg) scale(1.05); // Slight tilt and zoom on hover for effect
               cursor: pointer;
             }
 

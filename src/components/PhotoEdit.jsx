@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Slider from './Slider'
 import "../App.scss";
 import ImageView from './ImageView'
-import { getImageStyle } from '../components/Scoring'
-import { defaultSlider } from '../components/Slider'
+import { getImageStyle } from './Scoring'
+import { defaultSlider } from './Slider'
 import { postPhoto } from '../context/photoFunctions';
 import photoReq from '../assets/photoReq.png'
 
-const PhotoCreation = (props) => {
+const PhotoEdit = (props) => {
   const DEFAULT_OPTIONS = defaultSlider;
   // const [active, setActive] = useState(1);
   const [currentOptions, setCurrentOptions] = useState(props.puzzleInfo ? props.puzzleInfo.photoProperties : DEFAULT_OPTIONS);
@@ -40,9 +40,12 @@ const PhotoCreation = (props) => {
 
   async function handleSubmitPhoto(title, photoURL, sliderValues) {
 
-    if (title === "") {
-      props.setTitleMissingVis(true);
+    if (props.editMode === true) {
+      // edit
+
     } else {
+
+      // submission
 
       const imageUrl = photoURL;
       const photoProperties = addStatusToPhotoProperties(sliderValues);
@@ -62,7 +65,6 @@ const PhotoCreation = (props) => {
         console.error('Error submitting photo:', error);
       }
     }
-
   }
 
   const [orientation, setOrientation] = useState('horizontal');
@@ -113,11 +115,10 @@ const PhotoCreation = (props) => {
         ))}
       </div>
       <div className='actionButtons'>
-        <button className='submit' onClick={() => handleSubmitPhoto(props.title, photoUrl, currentOptions)}>{props.editMode ? "update" : "submit"}</button>
-
+        <button className='submit' onClick={() => handleSubmitPhoto(photoUrl, currentOptions)}>{props.editMode ? "update" : "submit"}</button>
       </div>
     </div>
   )
 }
 
-export default PhotoCreation
+export default PhotoEdit

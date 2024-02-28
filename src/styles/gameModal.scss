@@ -1,3 +1,9 @@
+.gameModalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -45,6 +51,9 @@
   height: 95%;
   width: 100%;
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .headerModal {
