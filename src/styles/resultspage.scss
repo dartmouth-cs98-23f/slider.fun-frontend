@@ -28,6 +28,141 @@
     gap: 0;
 }
 
+.share-results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    height: 100vh;
+    width: 100%;
+    // padding: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    background-color: #1a1818;
+    gap: 0;
+}
+
+.share-score-card {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    width: 200px; 
+    height: 100vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+    flex-grow: 1;
+    opacity: 0;
+
+    .stage-name {
+        font-family: Mulish, sans-serif;
+        font-size: 32px; 
+        font-weight: 700;
+        margin: 0 0 10px; 
+        text-transform: uppercase; 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-90deg);
+        transform-origin: center;
+        white-space: nonwrap;
+        width: max-content;
+        letter-spacing: 10px;
+    }
+
+    .stage-score {
+        font-size: 2.5em;
+        font-weight: bold;
+        position: relative;
+        top: 35%;
+        letter-spacing: 2px;
+    }
+
+    &.brightness {
+        background-image: url('../assets/brightness.jpg');
+    }
+    &.contrast {
+        background-image: url('../assets/contrast.jpg');
+    }
+    &.saturation {
+        background-image: url('../assets/saturation.jpg');
+    }
+    &.grayscale {
+        background-image: url('../assets/greyscale.jpg');
+    }
+    &.sepia {
+        background-image: url('../assets/sepia.jpg');
+    }
+    &.hue-rotate {
+        background-image: url('../assets/hue_rotate.jpg');
+    }
+    &.blur {
+        background-image: url('../assets/blur2.jpg');
+    }
+}
+
+.simplified-score-card {
+    background-size: cover;
+    background-position: center;
+    width: 200px; 
+    height: 250px; /* Adjust based on your content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 10px;
+    position: relative;
+}
+/* Add background images for each stage */
+.simplified-score-card.brightness {
+    background-image: url('../assets/brightness.jpg');
+}
+
+.simplified-score-card.contrast {
+    background-image: url('../assets/contrast.jpg');
+}
+
+.simplified-score-card.saturation {
+    background-image: url('../assets/saturation.jpg');
+}
+
+.simplified-score-card.grayscale {
+    background-image: url('../assets/greyscale.jpg');
+}
+
+.simplified-score-card.sepia {
+    background-image: url('../assets/sepia.jpg');
+}
+
+.simplified-score-card.hue-rotate {
+    background-image: url('../assets/hue_rotate.jpg');
+}
+
+.simplified-score-card.blur {
+    background-image: url('../assets/blur2.jpg');
+}
+
+.simplified-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 15px;
+    color: #ebe3e3;
+}
+
+.simplified-stage-name {
+    font-size: 20px; 
+    font-weight: bold;
+    margin: 0 0 10px; 
+    text-transform: uppercase;
+}
+
+.simplified-stage-score {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
 .score-card {
     position: relative;
     background-size: cover;

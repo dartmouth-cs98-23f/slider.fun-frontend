@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import html2canvas from 'html2canvas';
 import '../styles/resultspage.scss';
 
 const ScoreCard = ({ stage, score }) => {
@@ -15,18 +16,51 @@ const ScoreCard = ({ stage, score }) => {
     );
 };
 
-const ResultsModal = ({ averageScore, onRetry }) => {
+const SimplifiedScoreCard = ({ stage, score }) => {
+    const stageClass = stage.replace(/\s+/g, '-').toLowerCase();
+    return (
+        <div className={`simplified-score-card ${stageClass}`}>
+            <div className="simplified-content">
+                <div className="simplified-stage-name">{stage}</div>
+                <div className="simplified-stage-score">{score}</div>
+            </div>
+        </div>
+    );
+};
+
+const ResultsModal = ({ averageScore, onRetry, onShare }) => {
     const navigate = useNavigate();
     const handleNavigate = (path) => {
-        navigate(path);
-      };
+        navigate(path);};
+
+    // const handleShare = () => {
+    //     // Select the results-page element that wraps all scorecards
+    //     const content = document.querySelector('.results-page');
+    //     if (content) {
+    //         html2canvas(content, { 
+    //             scale: 1, 
+    //             useCORS: true,
+    //             logging: true,
+    //             windowWidth: content.scrollWidth,
+    //             windowHeight: content.scrollHeight, 
+    //         }).then((canvas) => {
+    //             const image = canvas.toDataURL('image/png');
+    //             const link = document.createElement('a');
+    //             link.href = image;
+    //             link.download = 'game-scores.png'; // Customizable file name
+    //             document.body.appendChild(link);
+    //             link.click();
+    //             document.body.removeChild(link);
+    //         }).catch(err => console.error("Error capturing image: ", err));
+    //     }
+    // };
     return (
         <div className="results-modal">
         <div className="modal-content">
             <h2>Your Average Score</h2>
             <p>{averageScore.toFixed(2)}</p>
             <button onClick={() => handleNavigate("/tutorial")}>Retry</button>
-            <button onClick={() => console.log('Share feature to be implemented')}>Share</button>
+            <button onClick={onShare}>Share</button>
         </div>
     </div>
     )
@@ -35,7 +69,7 @@ const ResultsModal = ({ averageScore, onRetry }) => {
 const ResultsPage = ({ scores }) => {
     const [showModal, setShowModal] = useState(false);
     const [averageScore, setAverageScore] = useState(0);
-
+    const [isSharing, setIsSharing] = useState(false); // State to control sharing mode
 
     useEffect(() => {
         // Calculate the average score
@@ -43,31 +77,53 @@ const ResultsPage = ({ scores }) => {
         const calculatedAverageScore = totalScore / Object.keys(scores).length;
         setAverageScore(calculatedAverageScore);
 
-        // Simulate a delay to show the modal after scores are displayed
-        setTimeout(() => setShowModal(true), 3000); // Adjust time as needed
+        // Show the modal after a delay
+        setTimeout(() => setShowModal(true), 3000);
     }, [scores]);
 
     useEffect(() => {
-        if (showModal) {
-            document.body.classList.add('no-scroll');
-        } else {
-            document.body.classList.remove('no-scroll');
-        }
-
-        // Cleanup function to ensure scrolling is re-enabled if the component unmounts
+        // Control scrolling based on the modal visibility
+        document.body.style.overflow = showModal ? 'hidden' : 'auto';
+        
         return () => {
-            document.body.classList.remove('no-scroll');
+            document.body.style.overflow = 'auto';
         };
     }, [showModal]);
 
+    // Function to handle the sharing logic
+    const handleShare = () => {
+        setIsSharing(true); // Indicate sharing mode is active
+
+        // Use a timeout to ensure the UI has time to update if necessary
+        setTimeout(() => {
+            const content = document.querySelector('.results-page'); // Adjust selector as needed
+            html2canvas(content, { useCORS: true }).then(canvas => {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'game-scores.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setIsSharing(false); // Reset sharing mode
+            });
+        }, 100); // Adjust delay as needed
+    };
+
     return (
-        <div className="results-page">
+        <>
+            <div className="results-page">
             {Object.entries(scores).map(([stage, score], index) => (
-                <ScoreCard key={index} stage={stage} score={score} />
+                // This condition always false in this setup, adjust according to your actual sharing logic
+                isSharing ? <SimplifiedScoreCard key={index} stage={stage} score={score} /> : <ScoreCard key={index} stage={stage} score={score} />
             ))}
-            {showModal && <ResultsModal averageScore={averageScore} onRetry={() => setShowModal(false)} />}
-        </div>
+            </div>
+            <div>
+                {showModal && <ResultsModal averageScore={averageScore} onRetry={() => setShowModal(false)} onShare={handleShare} />}
+            </div>
+        </>
     );
 };
+
 
 export default ResultsPage;
