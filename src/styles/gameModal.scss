@@ -54,6 +54,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .headerModal {
@@ -73,6 +74,10 @@
   }
 }
 
+.red {
+  color: white;
+  background-color: #f86969;
+}
 
 .buttonsModal {
   display: flex;
@@ -118,4 +123,11 @@
     text-align: left;
 
   }
+}
+
+#editFields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
 }

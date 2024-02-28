@@ -1,51 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PuzzleCard from '../components/PuzzleCard'
-import axios from 'axios';
 import '../styles/community.scss';
-import { DeletePhoto } from '../context/photoFunctions';
+import { useDispatch } from 'react-redux';
+import { deletePhoto } from '../context/photoFunctions';
+import { fetchAllPhoto } from '../actions';
+import { useSelector } from 'react-redux';
 
 const Community = () => {
-
-  const API_URL = "https://slider-fun.onrender.com/api";
-  const [photos, setPhotos] = useState([]);
-
-  async function fetchAllPhoto() {
-    try {
-      const response = await axios.get(`${API_URL}/photo/all`);
-
-      if (response.status === 200) {
-        setPhotos(response.data)
-        console.log(response.data)
-        return response.data; // This will contain the data returned from the server
-      } else {
-        console.error(`Error: ${response.status} - ${response.statusText}`);
-        return null;
-      }
-
-    } catch (error) {
-      console.error('There was an error fetching the photo:', error);
-      return null;
-    }
-  }
+  const dispatch = useDispatch();
+  // const API_URL = "https://slider-fun.onrender.com/api";
+  const photos = useSelector(state => state.photoList);
 
   useEffect(() => {
-    fetchAllPhoto()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    console.log("fetch")
+    dispatch(fetchAllPhoto());
+  }, [dispatch]);
 
   const handleRemovePhoto = async (photoId) => {
     try {
-      await DeletePhoto(photoId);
+      await deletePhoto(photoId);
       const updatedPuzzleHistory = photos.filter(photo => photo.id !== photoId);
-      setPhotos(updatedPuzzleHistory);
+      // setPhotos(updatedPuzzleHistory);
       console.log(photoId, "removed")
     } catch (error) {
       console.error('Error removing photo:', error);
     }
   };
-
-
-
 
   const puzzleCards = photos.map((puzzle, index) => (
     <PuzzleCard

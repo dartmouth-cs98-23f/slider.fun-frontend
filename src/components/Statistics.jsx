@@ -3,11 +3,13 @@ import PuzzleCard from './PuzzleCard'
 import axios from 'axios';
 import { removePhoto as removePhotoAPI } from '../context/photoFunctions'; // Renamed for clarity
 
-
 const Statistics = ({ userInfo }) => {
+  // const { userInfo } = useContext(AuthContext);
+
+  // console.log(userInfo)
   const API_URL = "https://slider-fun.onrender.com/api";
   const [puzzleHistory, setPuzzleHistory] = useState([]);
-
+  console.log(puzzleHistory)
   // takes a backend photo link and return the photo object
   async function fetchPhoto(link) {
     try {
@@ -37,7 +39,6 @@ const Statistics = ({ userInfo }) => {
     }
   };
 
-
   // useEffect to fetch all photo objects based on photoObjectList (an array of links)
   useEffect(() => {
     async function fetchAllPhotos() {
@@ -57,10 +58,8 @@ const Statistics = ({ userInfo }) => {
   const puzzleCards = puzzleHistory.map((puzzle, index) => (
     <PuzzleCard
       key={puzzle.id || index}
-      // photoUrl={puzzle.imageUrl}
       puzzleInfo={puzzle}
       editMode={true}
-      // photoProperties={puzzle.photoProperties}
       onRemove={() => handleRemovePhoto(puzzle.id)}
     />
   ));

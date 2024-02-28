@@ -21,7 +21,11 @@ export const removePhoto = async (userId, photoId) => {
 }
 
 // delete photo object from database 
-export const DeletePhoto = async (photoId) => {
+export const deletePhoto = async (photoId) => {
   await axios.delete(`${API_URL}/photo/${photoId}`);
 }
 
+
+export const editPhoto = async (photoId, data) => {
+  await axios.put(`${API_URL}/photo/${photoId}`, data);
+}

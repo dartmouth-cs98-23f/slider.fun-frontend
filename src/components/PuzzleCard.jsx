@@ -7,8 +7,10 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { IconCameraHeart } from '@tabler/icons-react';
 import axios from 'axios';
 import GameModal from './GameModal';
+import { deletePhoto } from '../actions';
 
 const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
+
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
   const photoProperties = puzzleInfo.photoProperties;
@@ -61,6 +63,7 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
           isModalVisible={isModalVisible}
           closeModal={closeModal}
           editMode={editMode}
+          username={username}
         />}
 
       <div onClick={openModal}>
@@ -73,7 +76,7 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
 
       </div>
       <div className='scoreDisplay'>
-        {/* <button onClick={onRemove}>Remove Photo</button> */}
+        <button >Remove Photo</button>
         <div>
           {photoTitle ? <div className='photoTitle'> {photoTitle} </div> : <div className='photoTitle'> Unnamed </div>}
           {username ? <div className='scoreHeader'> {username} </div> : <div className='scoreHeader'> Default </div>}

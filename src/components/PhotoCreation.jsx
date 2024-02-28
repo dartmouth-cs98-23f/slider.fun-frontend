@@ -90,12 +90,6 @@ const PhotoCreation = (props) => {
     <div className="container">
 
       <ImageView active={1} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={editedOptions} editedOptions={currentOptions} />
-      {/* <div className='viewButtonsContainer'>
-        <p> View: &nbsp;&nbsp;&nbsp;</p>
-        <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
-        <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
-        <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
-      </div> */}
 
       <div className='slidersContainer'>
         {currentOptions.map((option, index) => (

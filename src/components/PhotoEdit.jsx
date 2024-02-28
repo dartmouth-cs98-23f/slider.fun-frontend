@@ -4,7 +4,7 @@ import "../App.scss";
 import ImageView from './ImageView'
 import { getImageStyle } from './Scoring'
 import { defaultSlider } from './Slider'
-import { postPhoto } from '../context/photoFunctions';
+import { editPhoto } from '../context/photoFunctions';
 import photoReq from '../assets/photoReq.png'
 
 const PhotoEdit = (props) => {
@@ -38,32 +38,26 @@ const PhotoEdit = (props) => {
   }
 
 
-  async function handleSubmitPhoto(title, photoURL, sliderValues) {
+  async function handleEditPhoto() {
 
-    if (props.editMode === true) {
-      // edit
 
-    } else {
+    // submission
 
-      // submission
+    // const imageUrl = photoURL;
+    // const photoProperties = addStatusToPhotoProperties(sliderValues);
+    const data = {
+      "title": props.title,
+      "photoProperties": currentOptions,
+      // "authorId": props.userId
+    }
 
-      const imageUrl = photoURL;
-      const photoProperties = addStatusToPhotoProperties(sliderValues);
-
-      const data = {
-        "title": title,
-        "imageUrl": imageUrl,
-        "photoProperties": photoProperties,
-        "authorId": props.userId
-      }
-      console.log(data, props.userId)
-      try {
-        await postPhoto(data, props.userId);
-        props.closeModal();
-        setMessageVisability(true);
-      } catch (error) {
-        console.error('Error submitting photo:', error);
-      }
+    console.log(props.puzzleInfo.id, data)
+    try {
+      await editPhoto(props.puzzleInfo.id, data);
+      props.closeModal();
+      // setMessageVisability(true);
+    } catch (error) {
+      console.error('Error submitting photo:', error);
     }
   }
 
@@ -109,13 +103,12 @@ const PhotoEdit = (props) => {
             value={option.value}
             status={true}
             handleChange={(event) => handleSliderChange(index, event)}
-            // only want to set `step` for the last slider
             step={0.1}
           />
         ))}
       </div>
       <div className='actionButtons'>
-        <button className='submit' onClick={() => handleSubmitPhoto(photoUrl, currentOptions)}>{props.editMode ? "update" : "submit"}</button>
+        <button className='submit' onClick={() => handleEditPhoto()}>{props.editMode ? "update" : "submit"}</button>
       </div>
     </div>
   )

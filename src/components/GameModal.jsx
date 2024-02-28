@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/gameModal.scss";
 import PhotoEdit from './PhotoEdit';
+import { deletePhoto } from '../context/photoFunctions';
 
-function GameModal({ puzzleInfo, isModalVisible, closeModal, setMessageVisability, editMode }) {
+// used for edit
+
+function GameModal({ puzzleInfo, isModalVisible, closeModal, setMessageVisability, editMode, username }) {
   const photoUrl = puzzleInfo.imageUrl;
   const [title, setTitle] = useState(puzzleInfo.title)
   // const photoProperties = puzzleInfo.photoProperties;
@@ -16,20 +19,36 @@ function GameModal({ puzzleInfo, isModalVisible, closeModal, setMessageVisabilit
     console.log(title)
   };
 
+
+  async function handleDelete() {
+    try {
+      await deletePhoto(puzzleInfo.id);
+      closeModal();
+      // setMessageVisability(true);
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+    }
+  }
+
   return (
 
     <>
 
       {isModalVisible &&
         <div>
-
           <div className='exitButton' onClick={closeModal}> X </div>
           <div className="modalOverlay"></div>
           <div className="gameModal">
-            {editMode &&
+            {editMode ?
+              <div id="editFields">
+                <div>
+                  <label htmlFor="photoTitle"> Title: </label>
+                  <input type="text" id="photoTitle" name="photoTitle" value={title} onChange={handleChange} />
+                </div>
+                <button className="red" onClick={handleDelete}> Delete Photo</button>
+              </div> :
               <div>
-                <label htmlFor="removePhoto"> Title: </label>
-                <input type="text" id="removePhoto" name="removePhoto" value={title} onChange={handleChange} />
+                <h2 htmlFor="photoTitle"> {title} </h2>
               </div>
             }
             <PhotoEdit
@@ -38,6 +57,7 @@ function GameModal({ puzzleInfo, isModalVisible, closeModal, setMessageVisabilit
               photoUrl={photoUrl}
               userId={authorId}
               closeModal={closeModal}
+              title={title}
               setMessageVisability={setMessageVisability}
             />
           </div>
