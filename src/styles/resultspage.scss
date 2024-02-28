@@ -28,6 +28,12 @@
     gap: 0;
 }
 
+.hidden-container {
+    position: absolute;
+    left: -10000px;
+    top: 0;
+}
+
 .share-results {
     display: flex;
     flex-direction: row;

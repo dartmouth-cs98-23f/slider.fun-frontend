@@ -96,7 +96,7 @@ const ResultsPage = ({ scores }) => {
 
         // Use a timeout to ensure the UI has time to update if necessary
         setTimeout(() => {
-            const content = document.querySelector('.results-page'); // Adjust selector as needed
+            const content = document.querySelector('.hidden-container'); // Adjust selector as needed
             html2canvas(content, { useCORS: true }).then(canvas => {
                 const image = canvas.toDataURL('image/png');
                 const link = document.createElement('a');
@@ -113,10 +113,15 @@ const ResultsPage = ({ scores }) => {
     return (
         <>
             <div className="results-page">
-            {Object.entries(scores).map(([stage, score], index) => (
-                // This condition always false in this setup, adjust according to your actual sharing logic
-                isSharing ? <SimplifiedScoreCard key={index} stage={stage} score={score} /> : <ScoreCard key={index} stage={stage} score={score} />
-            ))}
+                {Object.entries(scores).map(([stage, score], index) => (
+                    <ScoreCard key={index} stage={stage} score={score} />
+                ))}
+            </div>
+            {/* Hidden container for SimplifiedScoreCard */}
+            <div className="hidden-container" aria-hidden="true">
+                {Object.entries(scores).map(([stage, score], index) => (
+                    <SimplifiedScoreCard key={index} stage={stage} score={score} />
+                ))}
             </div>
             <div>
                 {showModal && <ResultsModal averageScore={averageScore} onRetry={() => setShowModal(false)} onShare={handleShare} />}
