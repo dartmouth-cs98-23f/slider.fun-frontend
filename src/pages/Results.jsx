@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../components/Header';
-import stockPhoto from "../images/stockphoto.png"
 import preImage from "../images/pre.jpeg";
 import goalImage from "../images/goal.jpeg";
 import "../styles/results.scss";
@@ -16,10 +15,10 @@ const Results = () => {
                 </div>
                 <div className="imagesModal-container">
                     <div>
-                        <img src={preImage} />
+                        <img src={preImage} alt='preImage' />
                     </div>
                     <div>
-                        <img src={goalImage} />
+                        <img src={goalImage} alt="goalImage" />
                     </div>
                 </div>
                 <div className="buttonsModal">

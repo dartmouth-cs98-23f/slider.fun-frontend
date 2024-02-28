@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from 'react'
-import Header from '../components/Header'
 import Slider from '../components/Slider'
 import ResultsModal from '../components/ResultsModal'
 import current from '../assets/Chai000724-R2-077-37.jpg'
 import "../App.scss";
-import { useEffect } from 'react'
-import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
+import { useLocation } from 'react-router-dom';
+import $ from 'jquery';
+import ImageView from '../components/ImageView'
+import side2side from "../assets/SideToSideSplit.png"
+import verticalSplit from "../assets/VerticalSplit.png"
+import horizontalSplit from "../assets/HorizontalSplit.png"
 
 import axios from 'axios';
 
@@ -27,15 +30,13 @@ async function fetchPhoto() {
   }
 }
 
-
-
 const DEFAULT_OPTIONS = [
   {
     name: 'Brightness',
     property: 'brightness',
-    value: 100,
+    value: 110,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%'
@@ -43,9 +44,9 @@ const DEFAULT_OPTIONS = [
   {
     name: 'Contrast',
     property: 'contrast',
-    value: 100,
+    value: 110,
     range: {
-      min: 0,
+      min: 20,
       max: 200
     },
     unit: '%'
@@ -53,7 +54,7 @@ const DEFAULT_OPTIONS = [
   {
     name: 'Saturation',
     property: 'saturate',
-    value: 100,
+    value: 110,
     range: {
       min: 0,
       max: 200
@@ -102,126 +103,64 @@ const DEFAULT_OPTIONS = [
   }
 ]
 
-
-const CURRENT_OPTIONS = [
-  {
-    name: 'Brightness',
-    property: 'brightness',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: false,
-  },
-  {
-    name: 'Contrast',
-    property: 'contrast',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Saturation',
-    property: 'saturate',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Grayscale',
-    property: 'grayscale',
-    value: 0,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Sepia',
-    property: 'sepia',
-    value: 0,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Hue Rotate',
-    property: 'hue-rotate',
-    value: 0,
-    range: {
-      min: 0,
-      max: 360
-    },
-    unit: 'deg',
-    status: true,
-  },
-  {
-    name: 'Blur',
-    property: 'blur',
-    value: 0,
-    range: {
-      min: 0,
-      max: 20
-    },
-    unit: 'px',
-    status: false,
-  }
-]
-
 const MODIFIED_OPTIONS = []
 
-const Game = (stage_options) => {
-  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
+const Game = (props) => {
+  const stageOptions = props.stageOptions;
+
+  const location = useLocation();
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
-  const [currentOptions, setCurrentOptions] = useState(stage_options.stage_options)
+  const [currentOptions, setCurrentOptions] = useState(props.stage_options)
   const [score, setScore] = useState(0)
   const [percentScore, setPercentScore] = useState(0)
   const [defaultScore, setDefaultScore] = useState(false)
+
   const [importEdited, setImportEdited] = useState("https://wallpapers.com/images/featured/blank-white-7sn5o1woonmklx1h.jpg")
-  // const selectedOption = currentOptions[selectedOptionIndex]
+  const [active, setActive] = React.useState(1);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [resetPressable, setResetPressable] = useState(true);
+
 
 
   function handleSliderChange(propertyIndex, { target }) {
-    console.log(currentOptions)
-    setCurrentOptions(prevOptions => {
-      return prevOptions.map((option, index) => {
-        if (index !== propertyIndex) return option
-        return { ...option, value: target.value }
-      })
-    })
+    setResetPressable(false);
+
+    const newSliderValues = currentOptions.map((option, index) => {
+      if (index !== propertyIndex) {
+        return option;
+      }
+      return { ...option, value: target.value };
+    });
+
+    // sets the local sliders to the new value 
+    setCurrentOptions(newSliderValues)
+
+    // sets the global tutorial sliders to the new value
+    if (props.updateStageSliders !== undefined) {
+      props.updateStageSliders(props.stageNumber, newSliderValues)
+    }
   }
 
   useEffect(() => {
     // Example usage:
-    fetchPhoto().then(data => {
+    fetchPhoto(props.pic_link).then(data => {
       // console.log("Received data:", data); // Check the full data object
       if (data) {
-        // console.log("second loop:", data.imageUrl); // Check the full data object
 
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
 
-        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fblur.jpeg?alt=media&token=3b5de3b7-32d6-4765-85c7-43ff91f0d803")
+        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fdaily3.jpeg?alt=media&token=faeb4d74-5b3b-4fc4-8c68-e19278a570fe")
         // setEditedOptions(defaultOptions)
       }
     });
   }, []);
+
+
+  useEffect(() => {
+    setCurrentOptions(stageOptions)
+  }, [stageOptions]);
 
   const getRBG = (pictureFile, filters = false) => {
     // console.log(filters)
@@ -286,7 +225,6 @@ const Game = (stage_options) => {
       img.onerror = function (err) {
         reject(new Error("Image loading error"));
       };
-      // console.log("hi", gridAverageRgbValues.length)
       return (gridAverageRgbValues)
     });
   }
@@ -300,21 +238,22 @@ const Game = (stage_options) => {
     }
 
     let redSum = 0, greenSum = 0, blueSum = 0;
-
+    // for loop to calculate the differences for each color
     for (let i = 0; i < pic1RGB.length; i++) {
       redSum += Math.pow(pic1RGB[i].averageRed - pic2RGB[i].averageRed, 2);
       greenSum += Math.pow(pic1RGB[i].averageGreen - pic2RGB[i].averageGreen, 2);
       blueSum += Math.pow(pic1RGB[i].averageBlue - pic2RGB[i].averageBlue, 2);
     }
 
+    // calculate the RMSE for each color
     const redRMSE = Math.sqrt(redSum / pic1RGB.length);
     const greenRMSE = Math.sqrt(greenSum / pic1RGB.length);
     const blueRMSE = Math.sqrt(blueSum / pic1RGB.length);
 
     const totalRMSE = (redRMSE + greenRMSE + blueRMSE) / 3;
 
-    console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
-    console.log('Total RMSE:', totalRMSE);
+    // console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
+    // console.log('Total RMSE:', totalRMSE);
 
     return totalRMSE;
   }
@@ -328,12 +267,14 @@ const Game = (stage_options) => {
 
 
   const handleScoreProcessing = async (photo, filter1, filter2) => {
+    // setting a default score for the first time
     if (defaultScore === false) {
       setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
     }
-
-    setScore(await compareTwoPhotos(photo, filter1, filter2))
-
+    // console.log("hi", filter1, filter2)
+    let photoScore = (await compareTwoPhotos(photo, filter1, filter2))
+    // console.log("photo score", photoScore)
+    setScore(photoScore)
   }
 
 
@@ -347,204 +288,105 @@ const Game = (stage_options) => {
   useEffect(() => {
     if (score && defaultScore) {
       // zero is full score
-      console.log(score / defaultScore)
+      // console.log(score / defaultScore)
+
       // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
-      setPercentScore(100 - (Math.round(score)))
+      let calcPercentScore = 100 - (Math.round(score))
+      // console.log("percent store", calcPercentScore)
+
+      setPercentScore(calcPercentScore)
+      if (updateScores !== undefined) {
+        updateScores(stageNumber, calcPercentScore)
+      }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score, defaultScore])
 
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   const handleCompareClick = () => {
+
     handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
     setIsModalVisible(true);
+  };
+
+  const handleResetSliders = () => {
+    currentOptions[0].value = defaultOptions[0].value;
+    currentOptions[1].value = defaultOptions[1].value;
+    currentOptions[2].value = defaultOptions[2].value;
+    currentOptions[3].value = defaultOptions[3].value;
+    currentOptions[4].value = defaultOptions[4].value;
+    currentOptions[5].value = defaultOptions[5].value;
+    currentOptions[6].value = defaultOptions[6].value;
+    setResetPressable(true);
   };
 
   const closeModal = () => {
     setIsModalVisible(false)
   };
 
-  const [active, setActive] = React.useState(1);
   const SetView = (active) => {
-    setActive(active);
-  };
+    $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
 
-  const ImageView = () => {
-    switch (active) {
-      case 1:
-        return (
-          <div className='photoContainer'>
-            <div className='photo'>
-              <p> You </p>
-              <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
-            </div>
-            <div className='photo'>
-              <p> Target </p>
-              <img src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />
-            </div>
-          </div>
-        )
-      case 2:
-        return (
-          <div style={{ width: '75%', height: '75%', flexGrow: 1 }}>
-            <ReactCompareSlider
-              handle={
-                <ReactCompareSliderHandle
-                  buttonStyle={{
-                    backdropFilter: undefined,
-                    WebkitBackdropFilter: undefined,
-                    backgroundColor: '#E27272',
-                    marginLeft: "-15px"
-                  }}
-                  linesStyle={{
-                    opacity: 0
-
-                  }}
-                />
-              }
-              itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
-              itemTwo={<ReactCompareSliderImage src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />}
-            />
-          </div>
-        )
-      default:
-        return (
-          <div className='comparisonContainer'>
-            <ReactCompareSlider
-              portrait
-              handle={
-                <ReactCompareSliderHandle
-                  portrait
-                  buttonStyle={{
-                    backdropFilter: undefined,
-                    WebkitBackdropFilter: undefined,
-                    backgroundColor: '#E27272',
-                    marginTop: "-15px"
-                  }}
-                  linesStyle={{
-                    opacity: 0
-                  }}
-                />
-              }
-              itemOne={<ReactCompareSliderImage src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />}
-              itemTwo={<ReactCompareSliderImage src={importEdited} alt="edited pics" style={getImageStyle(editedOptions)} />}
-            />
-          </div>
-        )
+    // Add 'selected' class to the clicked image based on 'active' parameter
+    if (active === 1) {
+      $('.viewButtonS2S').addClass('selected');
+    } else if (active === 2) {
+      $('.viewButtonVS').addClass('selected');
+    } else if (active === 3) {
+      $('.viewButtonHS').addClass('selected');
     }
+
+    setActive(active);
   };
 
   return (
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
-      <Header>  </Header>
       <div className="container">
-        {/* <div className='photoContainer'>
-          <div className='photo'>
-            <p> You </p>
-            <img src={importEdited} alt="pre edit pics" style={getImageStyle(currentOptions)} />
-          </div>
-          <div className='photo'>
-            <p> Target </p>
-            <img src={importEdited} style={getImageStyle(editedOptions)} alt="edited pics" />
-          </div>
-        </div> */}
-        {ImageView()}
+
+        <ImageView active={active} importEdited={importEdited} getImageStyle={getImageStyle} currentOptions={currentOptions} editedOptions={editedOptions} />
 
         <div className='viewButtonsContainer'>
           <p> View: &nbsp;&nbsp;&nbsp;</p>
-          <button class='viewButtonS2S' onClick={() => SetView(1)}></button>
-          <button class='viewButtonVS' onClick={() => SetView(2)}></button>
-          <button class='viewButtonHS' onClick={() => SetView(3)}></button>
+          <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
+          <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
+          <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
         </div>
         
         <div className='slidersContainer'>
-          <div className='sliderContainer'>
-            <p> Brightness</p>
+          {currentOptions.map((option, index) => (
             <Slider
-              min={currentOptions[0].range.min}
-              max={currentOptions[0].range.max}
-              value={currentOptions[0].value}
-              status={currentOptions[0].status}
-              handleChange={(event) => handleSliderChange(0, event)}
+              key={index}
+              name={option.name}
+              min={option.range.min}
+              max={option.range.max}
+              value={option.value}
+              status={option.status}
+              handleChange={(event) => handleSliderChange(index, event)}
+              // only want to set `step` for the last slider
+              step={index === 6 ? 0.1 : undefined}
             />
-          </div>
-          <div className='sliderContainer'>
-            <p> Contrast</p>
-            <Slider
-              min={currentOptions[1].range.min}
-              max={currentOptions[1].range.max}
-              value={currentOptions[1].value}
-              status={currentOptions[1].status}
-              handleChange={(event) => handleSliderChange(1, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Saturation </p>
-            <Slider
-              min={currentOptions[2].range.min}
-              max={currentOptions[2].range.max}
-              value={currentOptions[2].value}
-              status={currentOptions[2].status}
-              handleChange={(event) => handleSliderChange(2, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Greyscale</p>
-            <Slider
-              min={currentOptions[3].range.min}
-              max={currentOptions[3].range.max}
-              value={currentOptions[3].value}
-              status={currentOptions[3].status}
-              handleChange={(event) => handleSliderChange(3, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Sepia</p>
-            <Slider
-              min={currentOptions[4].range.min}
-              max={currentOptions[4].range.max}
-              value={currentOptions[4].value}
-              status={currentOptions[4].status}
-              handleChange={(event) => handleSliderChange(4, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Hue Rotate</p>
-            <Slider
-              min={currentOptions[5].range.min}
-              max={currentOptions[5].range.max}
-              value={currentOptions[5].value}
-              status={currentOptions[5].status}
-              handleChange={(event) => handleSliderChange(5, event)}
-            />
-          </div>
-          <div className='sliderContainer'>
-            <p> Blur</p>
-            <Slider
-              min={currentOptions[6].range.min}
-              max={currentOptions[6].range.max}
-              value={currentOptions[6].value}
-              status={currentOptions[6].status}
-              handleChange={(event) => handleSliderChange(6, event)}
-            />
-          </div>
+          ))}
         </div>
-        <button onClick={handleCompareClick}>Compare</button>
+        <div className='actionButtons'>
+
+          <button className='resetButton' onClick={handleResetSliders} disabled={resetPressable}>Reset</button>
+          {location.pathname.startsWith('/tutorial') && <button className='infoModalButton' onClick={props.openModal} >Explanation</button>}
+          <button onClick={handleCompareClick}>Compare</button>
+          {/* <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button>
+          <button onClick={props.goToNextStage} disabled={props.currentStageIndex === 7 - 1}>Next Stage</button> */}
+        </div>
+
         {isModalVisible && (
-          <ResultsModal score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
-        {/* <button onClick={() => handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)} > Compare! </button> */}
         <div className='score'>
           {/* <p> Default Score: {defaultScore}</p> */}
           {/* <p> Current Score: {score}</p> */}
           {percentScore !== null && percentScore !== undefined && percentScore !== 0 && (
-            <p>Score: {percentScore}%</p>
+            <p>Percent score: {percentScore}</p>
           )}
         </div>
       </div>
-      {/* <div>{averageRgbValues}</div> */}
     </div>
   )
 }

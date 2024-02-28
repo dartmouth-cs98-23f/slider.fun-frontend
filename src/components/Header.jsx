@@ -1,30 +1,32 @@
 import React from 'react'
 import "../styles/header.scss"
-import sliderHeader from "../assets/header_red.png"
+import domainLogo from "../assets/domain_logo.svg"
 import { useNavigate } from 'react-router-dom';
+import TodaysDate from './TodaysDate';
+import { useLocation } from 'react-router-dom';
 
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const handleNavigate = (path) => {
     navigate(path);
   };
   return (
 
     <div className='headerContainer'>
-      <img src={sliderHeader} alt="" width="800"></img>
+      <div className='contentContainer'>
+        <div className="logoDateContainer">
+          <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
+          {location.pathname.startsWith('/daily') && <TodaysDate />}
 
-      <nav className='headerNav'>
-        <button onClick={() => handleNavigate("/stage1")}>Brightness</button>
-        <button onClick={() => handleNavigate("/stage2")}>Contrast</button>
-        <button onClick={() => handleNavigate("/stage3")}>Saturation</button>
-        <button onClick={() => handleNavigate("/stage4")}>Greyscale</button>
-        <button onClick={() => handleNavigate("/stage5")}>Sepia</button>
-        <button onClick={() => handleNavigate("/stage6")}>Hue Rotate</button>
-        <button onClick={() => handleNavigate("/stage7")}>Blur</button>
-      </nav>
-    </div>
+        </div>
+        <nav className='headerNav'>
+          <button className="tutorialButton" onClick={() => handleNavigate("/tutorial")}>Tutorial Mode</button>
+          <button className="dailyButton" onClick={() => handleNavigate("/daily")}> Daily Puzzle </button>
+        </nav>
+      </div>
+    </div >
   )
 }
 
