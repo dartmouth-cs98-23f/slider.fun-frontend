@@ -33,11 +33,8 @@ export const AuthContextProvider = ({ children }) => {
     // try {
     const response = await axios.post(`${API_URL}/signin`, { email, password });
     console.log(response.data.token)
-
     setToken(response.data.token);
-
     setUser({ email });
-
     // } catch (error) {
     //   console.error('Error during sign in:', error);
     // }

@@ -3,15 +3,16 @@ import { storage } from '../firebase';
 import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 
-const FirebaseUpload = ({ token, setPhotoUrl, openModal }) => {
+const FirebaseUpload = ({ userId, setPhotoUrl, openModal }) => {
   // contains the image metadata 
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
-  const imagesListRef = ref(storage, `selfUploadedImages/${token}`);
+  const imagesListRef = ref(storage, `selfUploadedImages/${userId}`);
 
   const uploadFile = () => {
     if (imageUpload == null) return;
-    const imageRef = ref(storage, `selfUploadedImages/${token}/${imageUpload.name + v4()}`);
+    console.log(userId)
+    const imageRef = ref(storage, `selfUploadedImages/${userId}/${imageUpload.name + v4()}`);
     uploadBytes(imageRef, imageUpload)
       .then((snapshot) => getDownloadURL(snapshot.ref))
       .then((url) => {

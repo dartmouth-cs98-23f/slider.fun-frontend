@@ -116,7 +116,7 @@ const Game = (props) => {
         updateScores(stageNumber, calcPercentScore)
       }
     }
-  }, [score, defaultScore, updateScores, stageNumber])
+  }, [score, defaultScore])
 
   const handleCompareClick = () => {
     handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)

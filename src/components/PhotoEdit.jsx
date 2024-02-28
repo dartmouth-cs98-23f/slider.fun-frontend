@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Slider from './Slider'
 import "../App.scss";
 import ImageView from './ImageView'
-import { getImageStyle } from '../components/Scoring'
-import { defaultSlider } from '../components/Slider'
-import { postPhoto } from '../context/photoFunctions';
+import { getImageStyle } from './Scoring'
+import { defaultSlider } from './Slider'
+import { editPhoto } from '../context/photoFunctions';
 import photoReq from '../assets/photoReq.png'
 
-const PhotoCreation = (props) => {
+const PhotoEdit = (props) => {
   const DEFAULT_OPTIONS = defaultSlider;
   // const [active, setActive] = useState(1);
   const [currentOptions, setCurrentOptions] = useState(props.puzzleInfo ? props.puzzleInfo.photoProperties : DEFAULT_OPTIONS);
@@ -38,31 +38,27 @@ const PhotoCreation = (props) => {
   }
 
 
-  async function handleSubmitPhoto(title, photoURL, sliderValues) {
+  async function handleEditPhoto() {
 
-    if (title === "") {
-      props.setTitleMissingVis(true);
-    } else {
 
-      const imageUrl = photoURL;
-      const photoProperties = addStatusToPhotoProperties(sliderValues);
+    // submission
 
-      const data = {
-        "title": title,
-        "imageUrl": imageUrl,
-        "photoProperties": photoProperties,
-        "authorId": props.userId
-      }
-      console.log(data, props.userId)
-      try {
-        await postPhoto(data, props.userId);
-        props.closeModal();
-        setMessageVisability(true);
-      } catch (error) {
-        console.error('Error submitting photo:', error);
-      }
+    // const imageUrl = photoURL;
+    // const photoProperties = addStatusToPhotoProperties(sliderValues);
+    const data = {
+      "title": props.title,
+      "photoProperties": currentOptions,
+      // "authorId": props.userId
     }
 
+    console.log(props.puzzleInfo.id, data)
+    try {
+      await editPhoto(props.puzzleInfo.id, data);
+      props.closeModal();
+      // setMessageVisability(true);
+    } catch (error) {
+      console.error('Error submitting photo:', error);
+    }
   }
 
   const [orientation, setOrientation] = useState('horizontal');
@@ -90,6 +86,12 @@ const PhotoCreation = (props) => {
     <div className="container">
 
       <ImageView active={1} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={editedOptions} editedOptions={currentOptions} />
+      {/* <div className='viewButtonsContainer'>
+        <p> View: &nbsp;&nbsp;&nbsp;</p>
+        <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
+        <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
+        <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
+      </div> */}
 
       <div className='slidersContainer'>
         {currentOptions.map((option, index) => (
@@ -101,17 +103,15 @@ const PhotoCreation = (props) => {
             value={option.value}
             status={true}
             handleChange={(event) => handleSliderChange(index, event)}
-            // only want to set `step` for the last slider
             step={0.1}
           />
         ))}
       </div>
       <div className='actionButtons'>
-        <button className='submit' onClick={() => handleSubmitPhoto(props.title, photoUrl, currentOptions)}>{props.editMode ? "update" : "submit"}</button>
-
+        <button className='submit' onClick={() => handleEditPhoto()}>{props.editMode ? "update" : "submit"}</button>
       </div>
     </div>
   )
 }
 
-export default PhotoCreation
+export default PhotoEdit
