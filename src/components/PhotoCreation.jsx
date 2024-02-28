@@ -28,8 +28,6 @@ const PhotoCreation = (props) => {
     setCurrentOptions(newSliderValues)
   }
 
-
-
   function addStatusToPhotoProperties(photoProperties) {
     // Iterate through each property in the photoProperties array
     photoProperties.forEach(property => {

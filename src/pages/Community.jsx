@@ -30,8 +30,8 @@ const Community = () => {
 
   useEffect(() => {
     fetchAllPhoto()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleRemovePhoto = async (photoId) => {
     try {
@@ -45,13 +45,12 @@ const Community = () => {
   };
 
 
+
+
   const puzzleCards = photos.map((puzzle, index) => (
     <PuzzleCard
+      puzzleInfo={puzzle}
       key={puzzle.id || index}
-      photoUrl={puzzle.imageUrl}
-      photoProperties={puzzle.photoProperties}
-      likes={puzzle.likes}
-      authorId={puzzle.authorId}
       onRemove={() => handleRemovePhoto(puzzle.id)}
     />
   ));

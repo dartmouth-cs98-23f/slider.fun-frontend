@@ -2,6 +2,11 @@
 $header-color: #EDEDED; // primary color
 $accent-color: #E27272; // accent color
 
+.bodyNoScroll {
+  overflow: hidden;
+  height: 100%;
+  /* Optional, to ensure the page height doesn't change */
+}
 
 *,
 *::before,

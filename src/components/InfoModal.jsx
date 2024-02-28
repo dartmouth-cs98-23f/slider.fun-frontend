@@ -22,7 +22,6 @@ function InfoModal(props) {
               </div>
               <div className='puzzleTextBlock'>
                 <img src={dailyPuzzleTutorial} alt="test test" />
-                <p> {props.extraText}</p>
               </div>
               <div className="buttonsModal">
                 <p> Try out our tutorial mode!!!! -{'>'} </p>
