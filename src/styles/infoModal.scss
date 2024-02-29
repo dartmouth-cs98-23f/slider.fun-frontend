@@ -42,20 +42,21 @@
     text-align: center;
     gap: 0px;
 
+  }
+  .buttonsModal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  
     .tutorialButton {
-      width: auto;
+      background-color: #E27272;
     }
   }
 }
 
 
 
-.buttonsModal {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .imagesModal-container {
   display: flex;

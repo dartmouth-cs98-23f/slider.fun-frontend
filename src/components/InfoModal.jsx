@@ -19,15 +19,14 @@ function InfoModal(props) {
               <div className='puzzleTextBlock'>
                 <p> Match the photos using the 7 sliders</p>
 
-                <button className="tutorialButton" onClick={() => navigate("/tutorial")} >Try out our tutorial mode!</button>
-
               </div>
               <div className='puzzleTextBlock'>
                 <img src={dailyPuzzleTutorial} alt="test test" />
               </div>
               <div className="buttonsModal">
-                <button onClick={props.closeModal}>Close</button>
+                <button className="tutorialButton" onClick={() => navigate("/tutorial")} >Tutorial</button>
 
+                <button onClick={props.closeModal}>Close</button>
               </div>
             </div>
           </div >
