@@ -38,7 +38,7 @@ const Home = () => {
           <button id = "Daily" onClick={() => { navigate("/daily") }}>
             Play
           </button>
-          <button id = "Scroll" onClick={scrollToTutorial}>about<br/> <img id = "Down" src={downIcon} alt="Down"/> </button>
+          <button id = "Scroll" onClick={scrollToTutorial}>About<br/> <img id = "Down" src={downIcon} alt="Down"/> </button>
         </div>
       </div>
 
