@@ -32,6 +32,7 @@
     position: absolute;
     left: -10000px;
     top: 0;
+    //visibility: hidden; /* Keep invisible if it's only for capturing */
 }
 
 .share-results {
@@ -107,15 +108,35 @@
     }
 }
 
+.simplified-score-card-container {
+    width: 1090px;
+    height: 1920px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 10px; /* First value is for vertical gap (row), second is for horizontal gap (column) */
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items to the start of each row */
+    background: radial-gradient(circle, #9b2e2e 10%, #bb5473 100%);
+    padding: 10px;
+    //width: calc(50% - 20px); /* For two cards per row with some gap, adjust as necessary */
+    //display: flex;
+    //flex-wrap: wrap; /* Allows items to wrap to the next line */
+    //justify-content: center; /* Center items horizontally */
+   // align-items: flex-start; /* Align items to the start of each row */
+    //gap: 20px; /* Space between the scorecards */
+}
+
 .simplified-score-card {
-    background-size: cover;
+   //background-size: cover;
     background-position: center;
-    width: 200px; 
-    height: 250px; /* Adjust based on your content */
+    background-repeat: no-repeat;
+    width: 500px; /* Adjust based on your content */
+    height: 450px; /* Adjust based on your content */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin: 10px;
-    position: relative;
+    margin: 5px;
+
+    //margin: 10px; /* Space around each card */
+    //position: relative;
 }
 /* Add background images for each stage */
 .simplified-score-card.brightness {
@@ -157,14 +178,14 @@
 }
 
 .simplified-stage-name {
-    font-size: 20px; 
+    font-size: 40px; 
     font-weight: bold;
     margin: 0 0 10px; 
     text-transform: uppercase;
 }
 
 .simplified-stage-score {
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
 }
 

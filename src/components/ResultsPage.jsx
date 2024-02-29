@@ -19,10 +19,12 @@ const ScoreCard = ({ stage, score }) => {
 const SimplifiedScoreCard = ({ stage, score }) => {
     const stageClass = stage.replace(/\s+/g, '-').toLowerCase();
     return (
-        <div className={`simplified-score-card ${stageClass}`}>
-            <div className="simplified-content">
-                <div className="simplified-stage-name">{stage}</div>
-                <div className="simplified-stage-score">{score}</div>
+        <div className="simplified-score-card-container">
+            <div className={`simplified-score-card ${stageClass}`}>
+                <div className="simplified-content">
+                    <div className="simplified-stage-name">{stage}</div>
+                    <div className="simplified-stage-score">{score}</div>
+                </div>
             </div>
         </div>
     );
@@ -97,7 +99,13 @@ const ResultsPage = ({ scores }) => {
         // Use a timeout to ensure the UI has time to update if necessary
         setTimeout(() => {
             const content = document.querySelector('.hidden-container'); // Adjust selector as needed
-            html2canvas(content, { useCORS: true }).then(canvas => {
+            html2canvas(content, { 
+                useCORS: true,
+                scale: 1,
+                width: 1080,
+                height: 1920,
+            
+            }).then(canvas => {
                 const image = canvas.toDataURL('image/png');
                 const link = document.createElement('a');
                 link.href = image;
@@ -117,15 +125,19 @@ const ResultsPage = ({ scores }) => {
                     <ScoreCard key={index} stage={stage} score={score} />
                 ))}
             </div>
-            {/* Hidden container for SimplifiedScoreCard */}
             <div className="hidden-container" aria-hidden="true">
-                {Object.entries(scores).map(([stage, score], index) => (
-                    <SimplifiedScoreCard key={index} stage={stage} score={score} />
-                ))}
+                <div className="simplified-score-card-container">
+                    {Object.entries(scores).map(([stage, score], index) => (
+                        <div className={`simplified-score-card ${stage.replace(/\s+/g, '-').toLowerCase()}`} key={index}>
+                            <div className="simplified-content">
+                                <div className="simplified-stage-name">{stage}</div>
+                                <div className="simplified-stage-score">{score}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div>
-                {showModal && <ResultsModal averageScore={averageScore} onRetry={() => setShowModal(false)} onShare={handleShare} />}
-            </div>
+            {showModal && <ResultsModal averageScore={averageScore} onRetry={() => setShowModal(false)} onShare={handleShare} />}
         </>
     );
 };
