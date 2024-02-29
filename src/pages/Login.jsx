@@ -64,8 +64,7 @@ const Login = () => {
         </form>
         <div className='helperContainer'>
           {err && <p> {err} </p>}
-          <p className='b1'> Forgot your password? </p>
-          <p> not a member yet? <button className='helperButton' onClick={() => navigate("/signup")}> sign up </button> </p>
+          <p> not a member yet?<button className='helperButton' onClick={() => navigate("/signup")}> sign up </button> </p>
         </div>
       </div >
     )
