@@ -15,8 +15,9 @@ const photoListReducer = produce((draftState, action) => {
       break;
     case ActionTypes.REMOVE_PHOTO:
       // Assuming action.payload is the id of the photo to be removed
-      const index = draftState.findIndex(photo => photo.id === action.payload);
-      if (index !== -1) draftState.splice(index, 1);
+      if (draftState.photoObjects.hasOwnProperty(action.payload)) {
+        draftState.photoObjects[action.payload] = undefined;
+      }
       break;
     case ActionTypes.PHOTO_LIKE_SUCCESS:
       draftState.community[action.payload.id].likedBy = action.payload.likedBy;
