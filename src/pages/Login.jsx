@@ -3,6 +3,9 @@ import { AuthContext } from '../context/AuthContext'
 import "../styles/login.scss"
 import domainLogo from "../assets/domain_logo.svg"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userSignIn } from '../actions/userAction';
+
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -11,12 +14,12 @@ const Login = () => {
   const [err, setErr] = useState(null)
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  // console.log(token)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log("login page", token)
     if (token !== null) {
-   
+
       navigate("/profile");
     }
   }, [navigate, token])
@@ -40,8 +43,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signIn(email, password);
-      console.log("navgating to profile")
+      await dispatch(userSignIn(email, password))
       navigate("/profile");
     } catch (error) {
       setErr(error.response.data.error)
@@ -52,21 +54,23 @@ const Login = () => {
 
   const login = () => {
     return (
-      <div className='formContainer'>
-        <form onSubmit={handleLogin}>
+      <div className="signUpModal">
+        <div className='formContainer'>
+          <form onSubmit={handleLogin}>
 
-          <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
-          <input placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
+            <input placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
-          <input placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button>login</button>
+            <input placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <button>login</button>
 
-        </form>
-        <div className='helperContainer'>
-          {err && <p> {err} </p>}
-          <p> not a member yet?<button className='helperButton' onClick={() => navigate("/signup")}> sign up </button> </p>
-        </div>
-      </div >
+          </form>
+          <div className='helperContainer'>
+            {err && <p> {err} </p>}
+            <p> not a member yet?<button className='helperButton' onClick={() => navigate("/signup")}> sign up </button> </p>
+          </div>
+        </div >
+      </div>
     )
   }
 

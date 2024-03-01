@@ -7,16 +7,19 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { IconCameraHeart } from '@tabler/icons-react';
 import axios from 'axios';
 import GameModal from './GameModal';
-import { deletePhoto } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { likePhoto, removeLikeFromPhoto } from '../actions/photoListAction';
 
-const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
-
+const PuzzleCard = ({ id, photoListLocation, editMode, userId, openSignUpModal }) => {
+  const puzzleInfo = useSelector(photoListLocation === "user" ? state => state.user.photoObjects[id] : state => state.photoList.community[id])
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
   const photoProperties = puzzleInfo.photoProperties;
-  const likes = puzzleInfo.likes;
+  const likes = puzzleInfo.likedBy.length;
   const authorId = puzzleInfo.authorId;
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const dispatch = useDispatch();
+
 
   const API_URL = "https://slider-fun.onrender.com/api";
   const [username, setUsername] = useState(false);
@@ -24,7 +27,6 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
   async function fetchUsernameFromId() {
     try {
       const response = await axios.get(`${API_URL}/users/username/${authorId}`);
-
       if (response.status === 200) {
         setUsername(response.data)
         return response.data;
@@ -45,18 +47,29 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
   }, [authorId])
 
   const closeModal = () => {
-    console.log("close")
     setIsModalVisible(false)
   };
 
   const openModal = () => {
-    console.log("open")
-    setIsModalVisible(true)
+    if (editMode) {
+      setIsModalVisible(true)
+    }
+  }
+
+  const handleAddingLike = async (photoId) => {
+    if (localStorage.getItem('token') !== null) {
+      if (puzzleInfo.likedBy.indexOf(userId) === -1) {
+        dispatch(likePhoto(photoId, userId));
+      } else {
+        dispatch(removeLikeFromPhoto(photoId, userId))
+      }
+    } else {
+      openSignUpModal()
+    }
   }
 
   return (
     <div className='puzzleCardContainer' >
-      {/* <div className='dateHeader'> {dailyPuzzle.date} </div> */}
       {isModalVisible &&
         <GameModal
           puzzleInfo={puzzleInfo}
@@ -66,23 +79,22 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
           username={username}
         />}
 
-      <div onClick={openModal}>
+      <div onClick={() => openModal()}>
         <LazyLoadImage
           alt={"Puzzle image"}
           src={photoUrl}
           effect="blur"
           style={getImageStyle(photoProperties)}
         />
-
       </div>
       <div className='scoreDisplay'>
         <div>
           {photoTitle ? <div className='photoTitle'> {photoTitle} </div> : <div className='photoTitle'> Unnamed </div>}
           {username ? <div className='scoreHeader'> {username} </div> : <div className='scoreHeader'> Default </div>}
         </div>
-        <div className='rightSidePuzzleStats'>
+        <div className={`rightSidePuzzleStats ${puzzleInfo.likedBy.indexOf(userId) === -1 ? 'default' : 'redLike'}`} onClick={() => (handleAddingLike(id))}>
           <IconCameraHeart className='heartIcon' />
-          <div>: {likes !== null ? 0 : likes} </div>
+          <div>: {likes ? likes : 0} </div>
         </div>
       </div>
     </div>

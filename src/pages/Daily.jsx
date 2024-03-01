@@ -4,26 +4,17 @@ import InfoModal from '../components/InfoModal'
 import axios from 'axios'
 
 export const fetchPuzzleOfDay = async () => {
-
   try {
     const currentDate = new Date();
     // Format the date as YYYY/MM/DD
     const formattedDate = currentDate.toISOString().slice(0, 10);
 
-    // console.log(formattedDate);
-    const data = {
-      "date": formattedDate
-    }
-    console.log(data)
-    // Use the formatted date in your API request
     const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
       params: {
         date: formattedDate // The date is passed as a query parameter
       }
     });
 
-    // Assuming you want to do something with the response here
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('There was an error fetching the puzzle of the day:', error);
@@ -131,8 +122,11 @@ const Daily = () => {
     const fetchAndSetPuzzle = async () => {
       try {
         const dailyPuzzleTemp = await fetchPuzzleOfDay();
+
         console.log(dailyPuzzleTemp);
-        setDailyPuzzle(dailyPuzzleTemp);
+        if (dailyPuzzleTemp) {
+          setDailyPuzzle(dailyPuzzleTemp);
+        }
       } catch (error) {
         console.error('Failed to fetch daily puzzle:', error);
 
@@ -154,11 +148,16 @@ const Daily = () => {
 
   return (
     <div>
-      {isModalVisible && <div className="modal-overlay"></div>}
+      {isModalVisible && <div className="modal-overlay" onClick={() => closeModal()}></div>}
       <InfoModal isModalVisible={isModalVisible} daily={true} closeModal={closeModal} openModal={openModal} />
-      {dailyPuzzle.photo && <Game
-        stageOptions={CURRENT_OPTIONS} closeModal={closeModal} openModal={openModal} pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
-      />}
+      {dailyPuzzle.photo &&
+        <Game
+          stageOptions={CURRENT_OPTIONS}
+          closeModal={closeModal}
+          openModal={openModal}
+          pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
+          daily={true}
+        />}
     </div>
   )
 }

@@ -13,8 +13,10 @@ import { compareTwoPhotos, getImageStyle } from '../components/Scoring'
 import { defaultSlider } from '../components/Slider'
 import { IconPhotoQuestion } from '@tabler/icons-react';
 import "../styles/game.scss"
+import { useDispatch } from 'react-redux'
 
 import axios from 'axios';
+import { updateScores } from '../actions/tutorialAction'
 
 // takes a backend photo link and return the photo object
 async function fetchPhoto(link) {
@@ -39,8 +41,9 @@ const DEFAULT_OPTIONS = defaultSlider
 const MODIFIED_OPTIONS = []
 
 const Game = (props) => {
+
+  const dispatch = useDispatch();
   const stageOptions = props.stageOptions;
-  const updateScores = props.updateScores;
   const stageNumber = props.stageNumber;
 
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
@@ -104,17 +107,16 @@ const Game = (props) => {
 
   useEffect(() => {
     if (score && defaultScore) {
-      // zero is full score
-      // console.log(score / defaultScore)
-
       // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
       let calcPercentScore = 100 - (Math.round(score))
       // console.log("percent store", calcPercentScore)
 
       setPercentScore(calcPercentScore)
-      if (updateScores !== undefined) {
-        updateScores(stageNumber, calcPercentScore)
+
+      if (props.tutorial) {
+        dispatch(updateScores(stageNumber, calcPercentScore))
       }
+
     }
   }, [score, defaultScore])
 
@@ -171,8 +173,6 @@ const Game = (props) => {
             <IconPhotoQuestion className="tIconGame" onClick={props.openModal} />
           } */}
           {/* <IconRotate className='tIconGame' /> */}
-
-
         </div>
 
         <div className='slidersContainer'>
@@ -202,7 +202,15 @@ const Game = (props) => {
         </div>
 
         {isModalVisible && (
-          <ResultsModal tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal
+            daily={props.daily}
+            tutorial={props.tutorial}
+            goToNextStage={props.goToNextStage}
+            score={percentScore}
+            onClose={closeModal}
+            img={importEdited}
+            currentStyle={getImageStyle(currentOptions)}
+            targetStyle={getImageStyle(editedOptions)} />
         )}
         <div className='score'>
           {/* <p> Default RMSE: {defaultScore}</p>

@@ -54,10 +54,31 @@
     align-items: center;
     justify-content: space-between;
 
+    .redLike {
+      color: #E27272;
+
+      &:hover {
+        color: #7f7f7f;
+      }
+
+    }
+
+    .default {
+      color: #7f7f7f;
+
+      &:hover {
+        color: #E27272;
+      }
+    }
+
     .rightSidePuzzleStats {
       display: flex;
       flex-direction: row;
       align-items: center;
+
+      .redLike:hover {
+        color: #7f7f7f;
+      }
     }
   }
 }

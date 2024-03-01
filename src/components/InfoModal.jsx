@@ -1,8 +1,9 @@
 import React from 'react';
 import "../styles/infoModal.scss";
+import domainLogo from "../assets/domain_logo.svg"
 import dailyPuzzleTutorial from "../assets/dailyPuzzleTutorial.gif";
-import { IconX } from '@tabler/icons-react';
 import { useNavigate } from "react-router-dom";
+import SignUpForm from './SignUpForm';
 
 function InfoModal(props) {
   const navigate = useNavigate();
@@ -33,8 +34,22 @@ function InfoModal(props) {
         }
       </>
     )
-  }
+  } else if (props.signUp) {
+    return (
+      <>
+        {
+          props.isModalVisible &&
+          <>
+            <div className="modal-overlay" onClick={() => props.closeSignUpModal()}></div>
 
+            <div className='signUpModal'>
+              <SignUpForm logoVisible={false} />
+            </div>
+          </>
+        }
+      </>
+    )
+  }
   return (
     <>
       {props.isModalVisible &&

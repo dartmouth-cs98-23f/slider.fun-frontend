@@ -5,11 +5,18 @@ import ImageView from './ImageView'
 import { getImageStyle } from '../components/Scoring'
 import { defaultSlider } from '../components/Slider'
 import { postPhoto } from '../context/photoFunctions';
+import side2side from "../assets/SideToSideSplit.png"
+import verticalSplit from "../assets/VerticalSplit.png"
+import horizontalSplit from "../assets/HorizontalSplit.png"
 import photoReq from '../assets/photoReq.png'
+import $ from 'jquery';
+import { useDispatch } from 'react-redux';
+import { postPhotoToUser } from '../actions/userAction';
 
 const PhotoCreation = (props) => {
   const DEFAULT_OPTIONS = defaultSlider;
-  // const [active, setActive] = useState(1);
+  const dispatch = useDispatch();
+  const [active, setActive] = useState(1);
   const [currentOptions, setCurrentOptions] = useState(props.puzzleInfo ? props.puzzleInfo.photoProperties : DEFAULT_OPTIONS);
   const [editedOptions] = useState(DEFAULT_OPTIONS)
   const setMessageVisability = props.setMessageVisability;
@@ -37,32 +44,34 @@ const PhotoCreation = (props) => {
     return photoProperties;
   }
 
+  const SetView = (active) => {
+    $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
+    // Add 'selected' class to the clicked image based on 'active' parameter
+    if (active === 1) {
+      $('.viewButtonS2S').addClass('selected');
+    } else if (active === 2) {
+      $('.viewButtonVS').addClass('selected');
+    } else if (active === 3) {
+      $('.viewButtonHS').addClass('selected');
+    }
+    setActive(active);
+  };
+
 
   async function handleSubmitPhoto(title, photoURL, sliderValues) {
-
     if (title === "") {
       props.setTitleMissingVis(true);
     } else {
-
       const imageUrl = photoURL;
       const photoProperties = addStatusToPhotoProperties(sliderValues);
-
-      const data = {
-        "title": title,
-        "imageUrl": imageUrl,
-        "photoProperties": photoProperties,
-        "authorId": props.userId
-      }
-      console.log(data, props.userId)
       try {
-        await postPhoto(data, props.userId);
+        await dispatch(postPhotoToUser(props.userId, { title, imageUrl, photoProperties, "authorId": props.userId }));
         props.closeModal();
         setMessageVisability(true);
       } catch (error) {
         console.error('Error submitting photo:', error);
       }
     }
-
   }
 
   const [orientation, setOrientation] = useState('horizontal');
@@ -88,8 +97,13 @@ const PhotoCreation = (props) => {
   }
   return (
     <div className="container">
-
-      <ImageView active={1} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={editedOptions} editedOptions={currentOptions} />
+      <ImageView active={active} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={editedOptions} editedOptions={currentOptions} />
+      <div className='viewButtonsContainer'>
+        <p> View: &nbsp;&nbsp;&nbsp;</p>
+        <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
+        <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
+        <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
+      </div>
 
       <div className='slidersContainer'>
         {currentOptions.map((option, index) => (
@@ -106,6 +120,7 @@ const PhotoCreation = (props) => {
           />
         ))}
       </div>
+
       <div className='actionButtons'>
         <button className='submit' onClick={() => handleSubmitPhoto(props.title, photoUrl, currentOptions)}>{props.editMode ? "update" : "submit"}</button>
 

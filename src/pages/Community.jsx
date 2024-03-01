@@ -1,42 +1,50 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PuzzleCard from '../components/PuzzleCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
-import { deletePhoto } from '../context/photoFunctions';
-import { fetchAllPhoto } from '../actions';
+import { fetchAllPhoto, likePhoto } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
+import InfoModal from '../components/InfoModal';
 
 const Community = () => {
   const dispatch = useDispatch();
-  // const API_URL = "https://slider-fun.onrender.com/api";
-  const photos = useSelector(state => state.photoList);
+  const hasFetchedPhotosRef = useRef(false);
+  const userId = useSelector(state => state.user.info.id);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
-    console.log("fetch")
-    dispatch(fetchAllPhoto());
-  }, [dispatch]);
-
-  const handleRemovePhoto = async (photoId) => {
-    try {
-      await deletePhoto(photoId);
-      const updatedPuzzleHistory = photos.filter(photo => photo.id !== photoId);
-      // setPhotos(updatedPuzzleHistory);
-      console.log(photoId, "removed")
-    } catch (error) {
-      console.error('Error removing photo:', error);
+    if (!hasFetchedPhotosRef.current) {
+      hasFetchedPhotosRef.current = true;
+      dispatch(fetchAllPhoto());
     }
+  }, []);
+
+  const communityPhotoList = useSelector(state => state.photoList.community);
+
+  const closeSignUpModal = () => {
+    setIsModalVisible(false)
   };
 
-  const puzzleCards = photos.map((puzzle, index) => (
+  const openSignUpModal = () => {
+    setIsModalVisible(true)
+  }
+
+  const puzzleCards = Object.keys(communityPhotoList).map((key, index) => (
     <PuzzleCard
-      puzzleInfo={puzzle}
-      key={puzzle.id || index}
-      onRemove={() => handleRemovePhoto(puzzle.id)}
+      puzzleInfo={communityPhotoList[key]}
+      id={communityPhotoList[key].id || index}
+      key={index}
+      photoListLocation="community"
+      closeSignUpModal={closeSignUpModal}
+      openSignUpModal={openSignUpModal}
+      editMode={false}
+      userId={userId}
     />
   ));
 
   return (
     <div>
+      <InfoModal signUp={true} isModalVisible={isModalVisible} closeSignUpModal={closeSignUpModal} />
       <div className='communityPhotoContainer'> {puzzleCards} </div>
     </div>
   )

@@ -196,17 +196,19 @@ $light-text-color: #8d8d8d; // text color
               padding-bottom: 5px;
             }
 
-            img {
-              width: 255px; // Ensure the photo fills the frame
-              display: block; // Remove any default margins/paddings
-              height: 150px; // Maintain aspect ratio
-              object-fit: cover; // Maintain aspect ratio
+            .photoContainer {
+              img {
+                width: 255px; // Ensure the photo fills the frame
+                display: block; // Remove any default margins/paddings
+                height: 150px; // Maintain aspect ratio
+                object-fit: cover; // Maintain aspect ratio
 
+              }
             }
 
             .scoreHeader {
               color: #7f7f7f;
-              font-family: 'Helvetica', 'Arial', sans-serif; 
+              font-family: 'Helvetica', 'Arial', sans-serif;
               font-size: 14px;
             }
 

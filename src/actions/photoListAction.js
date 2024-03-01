@@ -5,25 +5,30 @@ const API_URL = 'https://slider-fun.onrender.com/api';
 
 // Redux action types
 export const ActionTypes = {
-  FETCH_PHOTOLIST: 'FETCH_PHOTOLIST',
   FETCH_PHOTOLIST_SUCCESS: 'FETCH_PHOTOLIST_SUCCESS',
   FETCH_PHOTOLIST_ERROR: 'FETCH_PHOTOLIST_ERROR',
   POST_PHOTO: 'POST_PHOTO',
   EDIT_PHOTO: "EDIT_PHOTO",
   REMOVE_PHOTO: "REMOVE_PHOTO",
-  FETCH_USER_PHOTO_LIST: "FETCH_USER_PHOTO_LIST"
+  FETCH_USER_PHOTO_LIST: "FETCH_USER_PHOTO_LIST",
+  GET_PHOTO_LIKES_SUCCESS: 'GET_PHOTO_LIKES_SUCCESS',
+  PHOTO_LIKE_SUCCESS: 'PHOTO_LIKE_SUCCESS',
+  REMOVE_PHOTO_LIKE_SUCCESS: 'REMOVE_PHOTO_LIKE_SUCCESS',
 };
 
-// Redux thunk action creator for fetching all photos
 export const fetchAllPhoto = () => async (dispatch) => {
-  dispatch({ type: ActionTypes.FETCH_PHOTOLIST });
-
   try {
     const response = await axios.get(`${API_URL}/photo/all`);
+
     if (response.status === 200) {
+      const photoObjectList = response.data.reduce((acc, photo) => {
+        acc[photo.id] = photo;
+        return acc;
+      }, {});
+
       dispatch({
         type: ActionTypes.FETCH_PHOTOLIST_SUCCESS,
-        payload: response.data,
+        payload: photoObjectList,
       });
     } else {
       dispatch({
@@ -39,7 +44,10 @@ export const fetchAllPhoto = () => async (dispatch) => {
   }
 };
 
-// Action creator for posting a new photo
+
+//  PUT FUNCTIONS  //
+
+
 export const postPhoto = (data, userId) => async (dispatch) => {
   dispatch({ type: ActionTypes.POST_PHOTO });
 
@@ -48,11 +56,8 @@ export const postPhoto = (data, userId) => async (dispatch) => {
     const photoId = response.data.id;
     await axios.put(`${API_URL}/users/addPhoto/${userId}`, { "photoId": photoId });
 
-    // Re-fetch photos or dispatch another action as needed
-    // For example, you could dispatch a success action here
   } catch (error) {
     console.error('Error posting new photo:', error);
-    // Optionally, dispatch an error action here
   }
 };
 
@@ -69,22 +74,44 @@ export const editPhoto = (photoId, data) => async (dispatch) => {
   }
 };
 
-// Action creator for removing a photo
+// Action creator for removing a photo from user
 export const removePhoto = (userId, photoId) => async (dispatch) => {
   dispatch({ type: ActionTypes.REMOVE_PHOTO });
 
   try {
     await axios.put(`${API_URL}/users/removePhoto/${userId}`, { "photoId": photoId });
-    // Optionally, follow up with any state updates or fetches
   } catch (error) {
     console.error('Error removing photo:', error);
-    // Optionally, dispatch an error action here
   }
 };
 
-// Function to delete a photo object from the database
-export const deletePhoto = async (photoId) => {
-  await axios.delete(`${API_URL}/photo/${photoId}`);
-};
 
+export const likePhoto = (photoId, userId) => async (dispatch) => {
+  // console.log(photoId, { userId })
+  try {
+    const response = await axios.put(`${API_URL}/photo/addLike/${photoId}`, { userId });
 
+    dispatch({
+      type: ActionTypes.PHOTO_LIKE_SUCCESS,
+      payload: response.data,
+    });
+
+  } catch (error) {
+    console.error('Error liking photo:', error);
+  }
+}
+
+export const removeLikeFromPhoto = (photoId, userId) => async (dispatch) => {
+  // console.log(photoId, { userId })
+  try {
+    const response = await axios.put(`${API_URL}/photo/removeLike/${photoId}`, { userId });
+
+    dispatch({
+      type: ActionTypes.REMOVE_PHOTO_LIKE_SUCCESS,
+      payload: response.data,
+    });
+
+  } catch (error) {
+    console.error('Error removing like from photo:', error);
+  }
+}

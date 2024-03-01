@@ -1,52 +1,44 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import React, { useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import '../styles/profile.scss';
 import ProfileViews from '../components/ProfileViews';
 import LeftProfileBar from '../components/LeftProfileBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfo, userSignOut } from '../actions/userAction';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { signOut, getUserInfo } = useContext(AuthContext);
-  const [currentUser, setCurrentUser] = useState(null);
+  const currentUser = useSelector(state => state.user.info);
   const userToken = localStorage.getItem('token');
 
-  const fetchUserInfo = useCallback(async () => {
-    try {
-      const data = await getUserInfo();
-      setCurrentUser(data);
-    } catch (error) {
-      console.error('Failed to fetch user info:', error);
-    }
-  }, [getUserInfo, setCurrentUser]);
+  const dispatch = useDispatch();
 
-  // Use an effect for redirecting if the user is not authenticated
   useEffect(() => {
+    // console.log("userToken", userToken)
+
     if (!userToken) {
-      console.log("Redirecting to login page", userToken);
+      // console.log("Redirecting to login page", userToken);
       navigate("/login");
     } else {
-      // Fetch user info if token is present
-      fetchUserInfo();
-      navigate("/profile");
+      if (!currentUser) {
+        dispatch(getUserInfo(userToken))
+        navigate("/profile");
+      }
     }
-  }, [fetchUserInfo, navigate, userToken]);
+  }, [navigate, userToken, dispatch]);
 
   const signOutHandler = async () => {
     try {
-      await signOut();
+      dispatch(userSignOut())
       navigate("/login");
     } catch (error) {
       console.error('Error during sign out:', error);
     }
   };
 
-  const handleGalleryClick = async () => {
-    // Adjust the URL as needed
-    fetchUserInfo();
-  }
-
   if (!currentUser) {
+    // console.log(currentUser)
     return <div>User not found...</div>;
   }
 
@@ -54,7 +46,7 @@ const Profile = () => {
     <div className='profileContainer'>
       <LeftProfileBar userInfo={currentUser} signOutHandler={signOutHandler} />
       <div className='rightProfileBar'>
-        <ProfileViews token={localStorage.getItem('token')} userInfo={currentUser} handleGalleryClick={handleGalleryClick} />
+        <ProfileViews token={localStorage.getItem('token')} userInfo={currentUser} />
       </div>
     </div>
   );

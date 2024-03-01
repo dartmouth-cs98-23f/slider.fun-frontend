@@ -18,7 +18,6 @@ const photoContainerStyle = {
 };
 
 const ImageView = (props) => {
-
   switch (props.active) {
     case 1:
       return (

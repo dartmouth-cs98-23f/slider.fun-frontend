@@ -1,72 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PuzzleCard from './PuzzleCard'
-import axios from 'axios';
-import { removePhoto as removePhotoAPI } from '../context/photoFunctions'; // Renamed for clarity
+import { useSelector } from 'react-redux';
 
 const Statistics = ({ userInfo }) => {
-  // const { userInfo } = useContext(AuthContext);
 
-  // console.log(userInfo)
-  const API_URL = "https://slider-fun.onrender.com/api";
-  const [puzzleHistory, setPuzzleHistory] = useState([]);
-  console.log(puzzleHistory)
-  // takes a backend photo link and return the photo object
-  async function fetchPhoto(link) {
-    try {
-      const response = await axios.get(`${API_URL}/photo/${link}`);
+  const puzzleHistory = useSelector(state => state.user.photoObjects);
 
-      if (response.status === 200) {
-        return response.data; // This will contain the data returned from the server
-      } else {
-        console.error(`Error: ${response.status} - ${response.statusText}`);
-        return null;
-      }
-
-    } catch (error) {
-      console.error('There was an error fetching the photo:', error);
-      return null;
-    }
-  }
-
-  const handleRemovePhoto = async (photoId) => {
-    try {
-      await removePhotoAPI(userInfo.id, photoId);
-      const updatedPuzzleHistory = puzzleHistory.filter(photo => photo.id !== photoId);
-      setPuzzleHistory(updatedPuzzleHistory);
-      console.log(photoId, "removed")
-    } catch (error) {
-      console.error('Error removing photo:', error);
-    }
-  };
-
-  // useEffect to fetch all photo objects based on photoObjectList (an array of links)
-  useEffect(() => {
-    async function fetchAllPhotos() {
-      const photos = await Promise.all(userInfo.photos.map(async (link) => {
-        // console.log(link)
-        const photo = await fetchPhoto(link);
-        return photo; // This will be null if there's an error
-      }));
-
-      // Filter out any null responses to ensure only successfully fetched photo objects are stored
-      setPuzzleHistory(photos.filter(photo => photo !== null));
-    }
-    fetchAllPhotos();
-
-  }, [userInfo.photos]);
-
-  const puzzleCards = puzzleHistory.map((puzzle, index) => (
-    <PuzzleCard
-      key={puzzle.id || index}
-      puzzleInfo={puzzle}
-      editMode={true}
-      onRemove={() => handleRemovePhoto(puzzle.id)}
-    />
-  ));
+  const puzzleCards = Object.keys(puzzleHistory)
+    .filter(key => puzzleHistory[key] !== undefined)
+    .map((key, index) => (
+      <PuzzleCard
+        id={puzzleHistory[key].id || index}
+        key={index}
+        // puzzleInfo={puzzleHistory[key]}
+        photoListLocation="user"
+        editMode={true}
+      />
+    ));
 
   return (
     <div >
-      <div className='headerText' style={{ padding: "5px" }} > {userInfo.username ? userInfo.username : userInfo.email}'s Photo Gallery </div>
+      <div className='headerText' style={{ padding: "5px" }} > {userInfo.userName ? userInfo.userName : userInfo.email}'s Photo Gallery </div>
       <div className='statisticsContainer'> {puzzleCards} </div>
     </div>
   )
