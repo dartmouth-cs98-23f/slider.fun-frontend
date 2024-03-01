@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas'
 import '../styles/resultspage.scss';
+import { useSelector } from 'react-redux'
 
 const ScoreCard = ({ stage, score }) => {
     const stageClass = stage.replace(/\s+/g, '-').toLowerCase();
@@ -68,7 +69,8 @@ const ResultsModal = ({ averageScore, onRetry, onShare }) => {
     )
 };
 
-const ResultsPage = ({ scores }) => {
+const ResultsPage = () => {
+    const scores = useSelector(state => state.tutorial.scores);
     const [showModal, setShowModal] = useState(false);
     const [averageScore, setAverageScore] = useState(0);
     const [isSharing, setIsSharing] = useState(false); // State to control sharing mode

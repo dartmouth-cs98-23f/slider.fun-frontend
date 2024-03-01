@@ -30,11 +30,7 @@ const LeftProfileBar = ({ userInfo, signOutHandler }) => {
           <ProgressBar bgcolor="green" completed={userInfo.sliderScore} />
 
         </div>
-<<<<<<< HEAD
-        <CollapsibleHeader title="About" content="This is the admin account for slider" />
-=======
         <CollapsibleHeader title="About" content={userInfo.about} />
->>>>>>> profilePage
         <CollapsibleHeader title="Achievements" content="no achievement yet" />
       </div>
       <div >

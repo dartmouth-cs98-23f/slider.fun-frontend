@@ -11,12 +11,6 @@ const Tutorial = () => {
   const totalStages = tutorialData.Stages.length;
   const [mostForwardStage, setMostForwardStage] = useState(0);
 
-  // const updateScores = (indexToUpdate, newScore) => {
-  //   // console.log(newScore)
-  //   setScores(scores.map((score, index) => index === indexToUpdate ? newScore : score));
-  //   // console.log(scores)
-  // };
-
   const goToNextStage = () => {
     setCurrentStageIndex((prevIndex) => Math.min(prevIndex + 1, totalStages - 1));
     setMostForwardStage(Math.max(mostForwardStage, currentStageIndex + 1));

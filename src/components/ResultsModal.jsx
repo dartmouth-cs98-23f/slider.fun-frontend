@@ -6,19 +6,11 @@ import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle }
 import makeConfetti from './Confetti';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDailyPuzzleSScore } from '../actions/userAction';
-<<<<<<< HEAD
-=======
-import { useNavigate } from 'react-router-dom';
->>>>>>> profilePage
 
 function ResultsModal(props) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-<<<<<<< HEAD
-=======
-  const navigate = useNavigate();
->>>>>>> profilePage
 
   const userInfo = useSelector(state => state.user.info)
   const [newUser, setNewUser] = useState(false);
@@ -42,7 +34,7 @@ function ResultsModal(props) {
 
   const nextStageHandler = () => {
     props.onClose();
-   if (props.stageNumber === 6) {
+    if (props.stageNumber === 6) {
       navigate("/resultspage")
     }
     props.goToNextStage();
@@ -66,7 +58,7 @@ function ResultsModal(props) {
                 </div>
                 : null}
 
-              {(newUser && props.score >= 95 && !userInfo) ?
+              {(newUser && props.score >= 95) ?
                 <div>
                   <h3>
                     Make an account to save your score!
@@ -111,7 +103,20 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
-          {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
+
+          {
+            props.score >= 95 && props.tutorial ?
+
+              (
+                props.stageNumber === 6 ?
+                  <button onClick={() => navigate("/results")}> Get results!</button>
+                  :
+                  < button onClick={nextStageHandler}> Next!</button>
+              )
+
+
+              : null
+          }
         </div>
       </div >
     </>
