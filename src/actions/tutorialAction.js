@@ -10,8 +10,6 @@ export const ActionTypes = {
   UPDATE_SCORES: 'UPDATE_SCORES',
 };
 
-
-
 export const goToSpecificStage = (index) => async (dispatch) => {
   dispatch({
     type: ActionTypes.GO_TO_SPECIFIC_STAGE,
