@@ -2,11 +2,11 @@
 // this defines what your store state will look like
 import { combineReducers } from '@reduxjs/toolkit';
 import photoListReducer from './photoListReducer';
-import userPhotoListReducer from './userPhotoListReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
   photoList: photoListReducer,
-  userPhotoListReducer: userPhotoListReducer,
+  user: userReducer,
 });
 
 

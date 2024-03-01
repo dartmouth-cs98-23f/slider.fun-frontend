@@ -3,7 +3,7 @@ import PuzzleCard from '../components/PuzzleCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
 import { deletePhoto } from '../context/photoFunctions';
-import { fetchAllPhoto } from '../actions';
+import { fetchAllPhoto } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
 
 const Community = () => {
@@ -11,6 +11,7 @@ const Community = () => {
   // const API_URL = "https://slider-fun.onrender.com/api";
   const photos = useSelector(state => state.photoList);
 
+  console.log(photos)
   useEffect(() => {
     console.log("fetch")
     dispatch(fetchAllPhoto());
@@ -21,6 +22,7 @@ const Community = () => {
       await deletePhoto(photoId);
       const updatedPuzzleHistory = photos.filter(photo => photo.id !== photoId);
       // setPhotos(updatedPuzzleHistory);
+
       console.log(photoId, "removed")
     } catch (error) {
       console.error('Error removing photo:', error);

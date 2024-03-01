@@ -1,36 +1,28 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
+import React, { useContext, useEffect} from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/profile.scss';
 import ProfileViews from '../components/ProfileViews';
 import LeftProfileBar from '../components/LeftProfileBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInfo } from '../actions/userAction';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { signOut, getUserInfo } = useContext(AuthContext);
-  const [currentUser, setCurrentUser] = useState(null);
+  const { signOut } = useContext(AuthContext);
+  const currentUser = useSelector(state => state.user.info);
   const userToken = localStorage.getItem('token');
+  const dispatch = useDispatch();
 
-  const fetchUserInfo = useCallback(async () => {
-    try {
-      const data = await getUserInfo();
-      setCurrentUser(data);
-    } catch (error) {
-      console.error('Failed to fetch user info:', error);
-    }
-  }, [getUserInfo, setCurrentUser]);
-
-  // Use an effect for redirecting if the user is not authenticated
   useEffect(() => {
     if (!userToken) {
       console.log("Redirecting to login page", userToken);
       navigate("/login");
     } else {
-      // Fetch user info if token is present
-      fetchUserInfo();
+      dispatch(getUserInfo(userToken))
       navigate("/profile");
     }
-  }, [fetchUserInfo, navigate, userToken]);
+  }, [navigate, userToken, dispatch]);
 
   const signOutHandler = async () => {
     try {
@@ -41,12 +33,8 @@ const Profile = () => {
     }
   };
 
-  const handleGalleryClick = async () => {
-    // Adjust the URL as needed
-    fetchUserInfo();
-  }
-
   if (!currentUser) {
+    // console.log(currentUser)
     return <div>User not found...</div>;
   }
 
@@ -54,7 +42,7 @@ const Profile = () => {
     <div className='profileContainer'>
       <LeftProfileBar userInfo={currentUser} signOutHandler={signOutHandler} />
       <div className='rightProfileBar'>
-        <ProfileViews token={localStorage.getItem('token')} userInfo={currentUser} handleGalleryClick={handleGalleryClick} />
+        <ProfileViews token={localStorage.getItem('token')} userInfo={currentUser} />
       </div>
     </div>
   );

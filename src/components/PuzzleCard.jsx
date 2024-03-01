@@ -7,7 +7,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { IconCameraHeart } from '@tabler/icons-react';
 import axios from 'axios';
 import GameModal from './GameModal';
-import { deletePhoto } from '../actions';
+import { deletePhoto } from '../actions/photoListAction';
 
 const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
 

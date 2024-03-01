@@ -6,16 +6,15 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
   const [err, setErr] = useState(null)
   const { signUp } = useContext(AuthContext);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  console.log(token)
+  // console.log(token)
 
   useEffect(() => {
-    // console.log("login page", token)
     if (token !== null) {
       console.log("sign up page", token)
       navigate("/profile");
@@ -27,13 +26,12 @@ const SignUp = () => {
 
     try {
       await signUp(email, name, password);
+
       navigate("/profile");
     } catch (error) {
       setErr(error.response.data.error)
       console.error('Error signing in:', error);
-      // throw error
     }
-
   }
 
   // Effect hook to reset error state after 3 seconds
@@ -45,11 +43,8 @@ const SignUp = () => {
         setErr(null);
       }, 3000);
     }
-
-    // Cleanup function to clear the timer if the component unmounts
-    // or if the error changes before the timer completes.
     return () => clearTimeout(timer);
-  }, [err]); // Dependency array includes err to react to its changes
+  }, [err]);
 
 
   return (
@@ -71,11 +66,8 @@ const SignUp = () => {
 
           <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
           <input placeholder='email' onChange={(e) => setEmail(e.target.value)} />
-
           <input placeholder='username' onChange={(e) => setName(e.target.value)} />
-
           <input placeholder='password' onChange={(e) => setPassword(e.target.value)} />
-
           <button>sign up</button>
 
         </form>

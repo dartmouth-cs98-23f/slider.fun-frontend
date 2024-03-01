@@ -3,6 +3,9 @@ import { AuthContext } from '../context/AuthContext'
 import "../styles/login.scss"
 import domainLogo from "../assets/domain_logo.svg"
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userSignIn } from '../actions/userAction';
+
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -11,12 +14,12 @@ const Login = () => {
   const [err, setErr] = useState(null)
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
-  // console.log(token)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log("login page", token)
     if (token !== null) {
-   
+
       navigate("/profile");
     }
   }, [navigate, token])
@@ -41,6 +44,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await signIn(email, password);
+      dispatch(userSignIn(email, password))
       console.log("navgating to profile")
       navigate("/profile");
     } catch (error) {

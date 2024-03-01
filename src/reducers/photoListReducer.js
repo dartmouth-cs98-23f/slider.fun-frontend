@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { ActionTypes } from '../actions';
+import { ActionTypes } from '../actions/photoListAction';
 
 const initialState = [
   {
@@ -110,15 +110,14 @@ const initialState = [
 const photoListReducer = produce((draftState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_PHOTOLIST_SUCCESS:
-      // Replace the draft state with the new photo list from the action's payload
-      return action.payload; // Assuming the payload is the new list of photos
-
+      return action.payload;
     case ActionTypes.REMOVE_PHOTO:
       // Assuming action.payload is the id of the photo to be removed
       const index = draftState.findIndex(photo => photo.id === action.payload);
       if (index !== -1) draftState.splice(index, 1);
       break;
-
+    case ActionTypes.LIKE_PHOTO:
+      break;
     default:
       // In the default case, we don't need to modify the draftState
       return draftState;

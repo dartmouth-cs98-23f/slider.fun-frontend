@@ -15,7 +15,6 @@ function PhotoModal({ photoUrl, userId, isModalVisible, closeModal, setMessageVi
     console.log(title)
   };
 
-
   return (
     <>
       {isModalVisible &&
@@ -25,6 +24,7 @@ function PhotoModal({ photoUrl, userId, isModalVisible, closeModal, setMessageVi
             <input type="text" id="removePhoto" name="removePhoto" value={title} onChange={handleChange} />
           </div>
           <IconXboxX className='exitButton' onClick={closeModal}>Close</IconXboxX>
+
           <PhotoCreation
             title={title}
             photoUrl={photoUrl}

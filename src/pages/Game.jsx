@@ -171,8 +171,6 @@ const Game = (props) => {
             <IconPhotoQuestion className="tIconGame" onClick={props.openModal} />
           } */}
           {/* <IconRotate className='tIconGame' /> */}
-
-
         </div>
 
         <div className='slidersContainer'>

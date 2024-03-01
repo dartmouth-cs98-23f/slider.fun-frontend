@@ -132,7 +132,9 @@ const Daily = () => {
       try {
         const dailyPuzzleTemp = await fetchPuzzleOfDay();
         console.log(dailyPuzzleTemp);
-        setDailyPuzzle(dailyPuzzleTemp);
+        if (dailyPuzzleTemp) {
+          setDailyPuzzle(dailyPuzzleTemp);
+        }
       } catch (error) {
         console.error('Failed to fetch daily puzzle:', error);
 
