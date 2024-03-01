@@ -31,8 +31,7 @@ const Community = () => {
   ));
 
   return (
-    <div >
-      <div className='headerText' style={{ padding: "5px", marginLeft: "60px" }} > Community Gallery </div>
+    <div>
       <div className='communityPhotoContainer'> {puzzleCards} </div>
     </div>
   )

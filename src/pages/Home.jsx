@@ -5,14 +5,15 @@ import sliderLogo from "../assets/main_logo_red.png"
 // import domainLogo from "../assets/domain_logo.png"
 // import homeSliderPic from "../assets/group8.svg"
 import { useNavigate } from "react-router-dom";
+import downIcon from "../assets/down.png"
 
 const Home = () => {
   const tutorialRef = useRef(null);
   const navigate = useNavigate();
 
-  // const scrollToTutorial = () => {
-  //   tutorialRef.current.scrollIntoView({ behavior: 'smooth' });
-  // };
+  const scrollToTutorial = () => {
+     tutorialRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className='homeContainer'>
@@ -29,13 +30,15 @@ const Home = () => {
           <source src="https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/videos%2Fseq.mov?alt=media&token=fe8d69fb-7bf0-405f-bacb-ae38a5059d37" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <img src={sliderLogo} alt=""></img>
+
+        <img id = "Logo" src={sliderLogo} alt=""></img>
 
         <div className='buttonContainer'>
-          {/* <button onClick={scrollToTutorial}>Tutorial</button> */}
-          <button onClick={() => { navigate("/daily") }}>
+          
+          <button id = "Daily" onClick={() => { navigate("/daily") }}>
             Play
           </button>
+          <button id = "Scroll" onClick={scrollToTutorial}>About<br/> <img id = "Down" src={downIcon} alt="Down"/> </button>
         </div>
       </div>
 
