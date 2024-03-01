@@ -13,22 +13,30 @@
     align-items: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
-    height: 100vh;
+    width: 100vw;
+    height: 120vh;
     width: 100vw;
 
-    img {
-      height: auto;
-      opacity: 99%;
-      margin-top: 163px;
-      margin-bottom: 50px;
-      margin-right: 2.5px;
+    .homeVideo {
+      width: 100vw;
+      // height: 100vh;
+      background-color: black;
+    }
+
+    #Logo {
+      height: 300px;
+      opacity: 100%;
+      margin-top: 55px;
+      margin-bottom: 70px;
+      margin-right: 0px;
     }
 
     .buttonContainer {
       display: flex;
-      gap: 50px;
+      flex-direction: column;
+      gap: 15px;
 
-      button {
+      #Daily {
         font-size: 18px;
         justify-content: center;
         padding: 20px 40px 40px 40px;
@@ -42,7 +50,7 @@
         transition: all 0.3s ease;
       }
 
-      button:hover {
+      #Daily:hover {
         justify-content: center;
         font-weight: bold;
         background-color: white;
@@ -50,6 +58,17 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
         transform: scale(1.075); 
         text-shadow: 0px 1px 2px rgba(231, 76, 60, 0.5);
+      }
+      #Scroll {
+        font-size: 14px;
+        justify-content: center;
+        width: 150px;
+        font-weight: bold;
+        background-color: transparent;
+        vertical-align: middle;
+        color: white;
+        cursor: pointer;
+        margin-top: 15px;
       }
     }
   }

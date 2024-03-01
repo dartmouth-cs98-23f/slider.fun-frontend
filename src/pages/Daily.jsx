@@ -1,5 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Game from './Game'
+import InfoModal from '../components/InfoModal'
+import axios from 'axios'
+
+export const fetchPuzzleOfDay = async () => {
+
+  try {
+    const currentDate = new Date();
+    // Format the date as YYYY/MM/DD
+    const formattedDate = currentDate.toISOString().slice(0, 10);
+
+    // console.log(formattedDate);
+    const data = {
+      "date": formattedDate
+    }
+    console.log(data)
+    // Use the formatted date in your API request
+    const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
+      params: {
+        date: formattedDate // The date is passed as a query parameter
+      }
+    });
+
+    // Assuming you want to do something with the response here
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error('There was an error fetching the puzzle of the day:', error);
+    // Handle the error appropriately
+  }
+};
+
 
 const CURRENT_OPTIONS = [
   {
@@ -82,37 +113,59 @@ const CURRENT_OPTIONS = [
 ]
 
 
-const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
-const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
-const bakerTower = "https://slider-fun.onrender.com/api/photo/6553e9f6ab042abb281b276b"
+// const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
+// const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
+// const bakerTower = "https://slider-fun.onrender.com/api/photo/65cc7534ef5a21ddc90401e7"
 
-const links = {
-  "1": dHallLink,
-  "2": nycLink,
-  "3": bakerTower,
-}
+// const links = {
+//   "1": dHallLink,
+//   "2": nycLink,
+//   "3": bakerTower,
+// }
 
 const Daily = () => {
-  // Function to generate a random number
-  const getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const [dailyPuzzle, setDailyPuzzle] = useState({})
+
+  useEffect(() => {
+    const fetchAndSetPuzzle = async () => {
+      try {
+        const dailyPuzzleTemp = await fetchPuzzleOfDay();
+        console.log(dailyPuzzleTemp);
+        if (dailyPuzzleTemp) {
+          setDailyPuzzle(dailyPuzzleTemp);
+        }
+      } catch (error) {
+        console.error('Failed to fetch daily puzzle:', error);
+
+      }
+    };
+
+    fetchAndSetPuzzle();
+  }, [])
+
+  const [isModalVisible, setIsModalVisible] = useState(true);
+
+  const closeModal = () => {
+    setIsModalVisible(false)
   };
 
-  // Generate a random key
-  const randomKey = getRandomNumber(1, Object.keys(links).length);
-
-  // Select a random link
-  const randomLink = links[randomKey];
+  const openModal = () => {
+    setIsModalVisible(true)
+  };
 
   return (
     <div>
-      {/* {isModalVisible && <div className="modal-overlay"></div>} */}
-      {/* <InfoModal heading="Blur" text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} /> */}
-      {/* <TutorialHeader /> */}
-      {/* <h1> Coming Soon....</h1> */}
-      <Game
-        stageOptions={CURRENT_OPTIONS} pic_link={randomLink}
-      />
+      {isModalVisible && <div className="modal-overlay"></div>}
+      <InfoModal isModalVisible={isModalVisible} daily={true} closeModal={closeModal} openModal={openModal} />
+      {dailyPuzzle.photo &&
+        <Game
+          stageOptions={CURRENT_OPTIONS}
+          closeModal={closeModal}
+          openModal={openModal}
+          pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
+          daily={true}
+        />}
     </div>
   )
 }

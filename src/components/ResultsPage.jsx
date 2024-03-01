@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas'
 import '../styles/resultspage.scss';
 
 const ScoreCard = ({ stage, score }) => {
@@ -59,8 +59,8 @@ const ResultsModal = ({ averageScore, onRetry, onShare }) => {
     return (
         <div className="results-modal">
         <div className="modal-content">
-            <h2>Your Average Score</h2>
-            <p>{averageScore.toFixed(2)}</p>
+            <h2>Average Score</h2>
+            <p>{averageScore.toFixed(0)}</p>
             <button onClick={() => handleNavigate("/tutorial")}>Retry</button>
             <button onClick={onShare}>Share</button>
         </div>

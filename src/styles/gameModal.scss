@@ -1,0 +1,133 @@
+.gameModalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: default;
+  /* Dim the background */
+  z-index: 10;
+  /* Ensure this is below the modal but above other content */
+}
+
+.exitButton {
+  z-index: 11;
+  color: white;
+  cursor: pointer;
+  position: fixed;
+  top: 10px;
+  right: 15px;
+  font-weight: bold;
+  font-size: 25px;
+  // display: flex;
+  // justify-self: flex-end;
+
+  &:hover {
+    color: #9e9e9e;
+  }
+}
+
+
+.gameModal {
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 80%;
+  text-align: center;
+  border-radius: 0px;
+  height: 95%;
+  width: 100%;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerModal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // min-height: 100px;
+
+  .section1 {
+    max-height: 50px;
+  }
+
+  .puzzleTextBlock {
+    text-align: center;
+  }
+}
+
+.red {
+  color: white;
+  background-color: #f86969;
+}
+
+.buttonsModal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagesModal-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 400px;
+  max-width: 100%;
+}
+
+.imagesModal-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.shareResultsButton {
+  margin-top: 22px;
+}
+
+.backButton {
+  display: flex;
+}
+
+.infoTextBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 85%;
+
+  h3 {
+    width: 35%;
+    text-align: left;
+  }
+
+  p {
+    text-align: left;
+
+  }
+}
+
+#editFields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+}

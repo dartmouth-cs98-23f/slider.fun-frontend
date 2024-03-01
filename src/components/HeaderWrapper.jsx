@@ -4,7 +4,7 @@ import Header from './Header';
 function HeaderWrapper() {
   const location = useLocation();
   return (
-    location.pathname !== '/' && <Header />
+    (location.pathname !== '/' && location.pathname !== "/login" && location.pathname !== "/signup") && <Header />
   );
 }
 

@@ -1,7 +1,40 @@
 import React from 'react';
 import "../styles/infoModal.scss";
+import dailyPuzzleTutorial from "../assets/dailyPuzzleTutorial.gif";
+import { IconX } from '@tabler/icons-react';
+import { useNavigate } from "react-router-dom";
 
 function InfoModal(props) {
+  const navigate = useNavigate();
+  if (props.daily === true) {
+    return (
+      <>
+        {
+          props.isModalVisible &&
+          <div className="resultsModal">
+            <div className="headerModal">
+              <div className="section1">
+                <h1> How to Play</h1>
+              </div>
+              <div className='puzzleTextBlock'>
+                <p> Match the photos using the 7 sliders</p>
+
+              </div>
+              <div className='puzzleTextBlock'>
+                <img src={dailyPuzzleTutorial} alt="test test" />
+              </div>
+              <div className="buttonsModal">
+                <button className="tutorialButton" onClick={() => navigate("/tutorial")} >Tutorial</button>
+
+                <button onClick={props.closeModal}>Close</button>
+              </div>
+            </div>
+          </div >
+        }
+      </>
+    )
+  }
+
   return (
     <>
       {props.isModalVisible &&
