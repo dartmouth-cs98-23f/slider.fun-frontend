@@ -1,4 +1,4 @@
-import { produce } from 'immer';
+import { produce, current } from 'immer';
 import { ActionTypes } from '../actions/userAction';
 
 const initialState = {
@@ -33,12 +33,16 @@ const userReducer = produce((draftState, action) => {
     case ActionTypes.EDIT_USER_PHOTO_SUCCESS:
       draftState.photoObjects[action.payload.id] = action.payload;
       break;
+    case ActionTypes.PUT_USER_SLIDER_SCORE_SUCCESS:
+      draftState.info.sliderScore = action.payload;
+      break;
     case ActionTypes.FETCH_USER_PHOTOLIST_SUCCESS:
       draftState.photoObjectsFetched = true;
       break;
     case ActionTypes.DELETE_USER_PHOTO_SUCCESS:
-      console.log("deleting", action.payload)
-      draftState.photoObjects.delete(action.payload);
+      if (draftState.photoObjects.hasOwnProperty(action.payload)) {
+        draftState.photoObjects[action.payload] = undefined;
+      }
       break;
     case ActionTypes.FETCH_PHOTO_BY_ID_SUCCESS:
       draftState.photoObjects[action.payload.id] = action.payload;

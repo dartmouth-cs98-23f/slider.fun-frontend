@@ -46,7 +46,6 @@ const PhotoCreation = (props) => {
 
   const SetView = (active) => {
     $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
-
     // Add 'selected' class to the clicked image based on 'active' parameter
     if (active === 1) {
       $('.viewButtonS2S').addClass('selected');
@@ -65,16 +64,14 @@ const PhotoCreation = (props) => {
     } else {
       const imageUrl = photoURL;
       const photoProperties = addStatusToPhotoProperties(sliderValues);
-
       try {
-        await dispatch(postPhotoToUser({ title, imageUrl, photoProperties, "authorId": props.userId }, props.userId));
+        await dispatch(postPhotoToUser(props.userId, { title, imageUrl, photoProperties, "authorId": props.userId }));
         props.closeModal();
         setMessageVisability(true);
       } catch (error) {
         console.error('Error submitting photo:', error);
       }
     }
-
   }
 
   const [orientation, setOrientation] = useState('horizontal');

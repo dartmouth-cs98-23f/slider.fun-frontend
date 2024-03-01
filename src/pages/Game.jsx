@@ -104,9 +104,6 @@ const Game = (props) => {
 
   useEffect(() => {
     if (score && defaultScore) {
-      // zero is full score
-      // console.log(score / defaultScore)
-
       // setPercentScore(100 - (Math.round(score / defaultScore) * 10))
       let calcPercentScore = 100 - (Math.round(score))
       // console.log("percent store", calcPercentScore)
@@ -200,7 +197,7 @@ const Game = (props) => {
         </div>
 
         {isModalVisible && (
-          <ResultsModal tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal daily={props.daily} tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
         )}
         <div className='score'>
           {/* <p> Default RMSE: {defaultScore}</p>

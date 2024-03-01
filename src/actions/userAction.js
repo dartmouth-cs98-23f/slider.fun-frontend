@@ -17,6 +17,7 @@ export const ActionTypes = {
   FETCH_USER_PHOTOLIST_ERROR: "FETCH_USER_PHOTOLIST_ERROR",
   POST_USER_PHOTO_SUCCESS: "POST_USER_PHOTO_SUCCESS",
   EDIT_USER_PHOTO_SUCCESS: "EDIT_USER_PHOTO_SUCCESS",
+  PUT_USER_SLIDER_SCORE_SUCCESS: "PUT_USER_SLIDER_SCORE_SUCCESS",
   DELETE_USER_PHOTO_SUCCESS: "DELETE_USER_PHOTO_SUCCESS",
   SET_USER_TOKEN: "SET_USER_TOKEN",
 };
@@ -131,20 +132,18 @@ export const fetchPhotoById = (photoID) => async (dispatch) => {
 
 // POST FUNCTIONS 
 export const postPhotoToUser = (userId, data) => async (dispatch) => {
-  // console.log({ imageUrl, photoProperties })
   try {
-
-    console.log(userId, data)
     const response1 = await axios.post(`${API_URL}/photo/new`, data);
+    // should do a dispatch here for photo object creation but oh well
 
     const d = response1.data.id
     const photoId = { "photoId": d }
 
-    const response2 = await axios.put(`${API_URL}/users/addPhoto/${userId}`, photoId);
+    await axios.put(`${API_URL}/users/addPhoto/${userId}`, photoId);
 
     dispatch({
       type: ActionTypes.POST_USER_PHOTO_SUCCESS,
-      payload: response2.data
+      payload: response1.data
     });
 
 
@@ -153,10 +152,7 @@ export const postPhotoToUser = (userId, data) => async (dispatch) => {
   }
 }
 
-
-
 // PUT FUNCTIONS
-
 // Edit a photo by ID
 export const editPhotoById = (photoId, data) => async (dispatch) => {
   try {
@@ -176,23 +172,41 @@ export const editPhotoById = (photoId, data) => async (dispatch) => {
   }
 }
 
+export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
+  try {
+
+    console.log({ count })
+    const response = await axios.put(`${API_URL}/users/updateScore/${userId}`, { count });
+    console.log(response)
+    if (response.status === 200) {
+      dispatch({
+        type: ActionTypes.PUT_USER_SLIDER_SCORE_SUCCESS,
+        payload: response.data.sliderScore
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+
+  }
+}
+
+
+
 
 // Delete a photo object from user and the photo itself
 export const removePhotoFromUser = (userId, photoId) => async (dispatch) => {
-
   try {
     const response = await axios.put(`${API_URL}/users/removePhoto/${userId}`, { photoId });
     console.log(response)
 
     dispatch({
       type: ActionTypes.DELETE_USER_PHOTO_SUCCESS,
-      payload: response.data.id
+      payload: photoId
     });
-
   } catch (error) {
     console.log(error);
   }
-
 }
 
 

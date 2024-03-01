@@ -3,10 +3,17 @@ import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 import makeConfetti from './Confetti';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addDailyPuzzleSScore } from '../actions/userAction';
+import { useNavigate } from 'react-router-dom';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const userInfo = useSelector(state => state.user.info)
+  const [newUser, setNewUser] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -14,6 +21,12 @@ function ResultsModal(props) {
       setLoading(false);
       if (props.score >= 95) {
         makeConfetti();
+        if (userInfo && props.daily) {
+          dispatch(addDailyPuzzleSScore(userInfo.id, 5));
+        } else {
+          console.log("make an account")
+          setNewUser(true);
+        }
       }
     }, 1100);
   }, [props.score]);
@@ -33,11 +46,30 @@ function ResultsModal(props) {
               {props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
               {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
               {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
-              {props.score >= 95 ? <h2>Nice job!</h2> : null}
+              {props.score >= 95 ?
+                <div>
+                  <h2>Nice job! </h2>
+                  <h3> +5 SliderPoints </h3>
+                </div>
+                : null}
+              {(newUser && props.score >= 95 && userInfo) ?
+                <div>
+                  <h3>
+                    Make an account to save your score!
+                  </h3>
+                  <button onClick={() => navigate("/signup")}>
+                    Sign Up!
+                  </button>
+                </div>
+                :
+                <div>
+                  <p id="smallText">Total points: {userInfo.sliderScore} </p>
+                </div>
+              }
               <h3> {props.score} </h3>
 
             </div>}
-        </div>
+        </div >
         <div className="imagesModal-container">
           <div>
             <ReactCompareSlider
@@ -67,7 +99,7 @@ function ResultsModal(props) {
           <button onClick={props.onClose}>Close</button>
           {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
         </div>
-      </div>
+      </div >
     </>
   )
 }

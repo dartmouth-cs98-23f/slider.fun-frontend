@@ -158,9 +158,14 @@ const Daily = () => {
     <div>
       {isModalVisible && <div className="modal-overlay"></div>}
       <InfoModal isModalVisible={isModalVisible} daily={true} closeModal={closeModal} openModal={openModal} />
-      {dailyPuzzle.photo && <Game
-        stageOptions={CURRENT_OPTIONS} closeModal={closeModal} openModal={openModal} pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
-      />}
+      {dailyPuzzle.photo &&
+        <Game
+          stageOptions={CURRENT_OPTIONS}
+          closeModal={closeModal}
+          openModal={openModal}
+          pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
+          daily={true}
+        />}
     </div>
   )
 }
