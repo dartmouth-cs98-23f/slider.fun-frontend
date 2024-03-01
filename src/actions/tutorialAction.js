@@ -18,9 +18,6 @@ export const goToSpecificStage = (index) => async (dispatch) => {
 };
 
 export const updateScores = (indexToUpdate, newScore) => async (dispatch) => {
-  // console.log(newScore)
-  // setScores(scores.map((score, index) => index === indexToUpdate ? newScore : score));
-  // console.log(scores)
   dispatch({
     type: ActionTypes.UPDATE_SCORES,
     payload: { indexToUpdate, newScore },

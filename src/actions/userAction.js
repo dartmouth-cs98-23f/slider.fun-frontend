@@ -9,6 +9,7 @@ export const ActionTypes = {
   USER_SIGN_IN_SUCCESS: "USER_SIGN_IN_SUCCESS",
   USER_SIGN_UP_SUCCESS: "USER_SIGN_UP_SUCCESS",
   USER_SIGN_OUT: "USER_SIGN_OUT",
+  SET_USER_INFO: "SET_USER_INFO",
   FETCH_USER_INFO: "FETCH_USER_INFO",
   FETCH_USER_PHOTOLIST: "FETCH_USER_PHOTOLIST",
   FETCH_PHOTO_BY_ID: "FETCH_PHOTO_BY_ID",
@@ -41,15 +42,18 @@ export const userSignIn = (email, password) => async (dispatch) => {
   }
 };
 
-export const userSignUp = (email, userName, password) => async (dispatch) => {
+export const userSignUp = (email, userName, password, sliderScore) => async (dispatch) => {
   console.log({ email, userName, password })
   const data = {
     "email": email,
     "userName": userName,
     "name": userName,
     "about": "nothing yet!",
-    "password": password
+    "password": password,
+    "sliderScore": sliderScore,
   }
+  console.log(data)
+
   const response = await axios.post(`${API_URL}/users/new`, data);
 
   localStorage.setItem('token', response.data.token);
@@ -71,6 +75,13 @@ export const setUserToken = () => async (dispatch) => {
   dispatch({
     type: ActionTypes.SET_USER_TOKEN,
     payload: localStorage.getItem('token'),
+  });
+};
+
+export const setUserInfo = (data) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_USER_INFO,
+    payload: data
   });
 };
 

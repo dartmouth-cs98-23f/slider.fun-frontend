@@ -113,7 +113,10 @@ const Game = (props) => {
 
       setPercentScore(calcPercentScore)
 
-      dispatch(updateScores(stageNumber, calcPercentScore))
+      if (props.tutorial) {
+        dispatch(updateScores(stageNumber, calcPercentScore))
+      }
+
     }
   }, [score, defaultScore])
 
@@ -199,7 +202,15 @@ const Game = (props) => {
         </div>
 
         {isModalVisible && (
-          <ResultsModal daily={props.daily} tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal
+            daily={props.daily}
+            tutorial={props.tutorial}
+            goToNextStage={props.goToNextStage}
+            score={percentScore}
+            onClose={closeModal}
+            img={importEdited}
+            currentStyle={getImageStyle(currentOptions)}
+            targetStyle={getImageStyle(editedOptions)} />
         )}
         <div className='score'>
           {/* <p> Default RMSE: {defaultScore}</p>

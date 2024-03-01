@@ -10,7 +10,7 @@ import GameModal from './GameModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePhoto, removeLikeFromPhoto } from '../actions/photoListAction';
 
-const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
+const PuzzleCard = ({ id, photoListLocation, editMode, userId, openSignUpModal, closeSignUpModal }) => {
   const puzzleInfo = useSelector(photoListLocation === "user" ? state => state.user.photoObjects[id] : state => state.photoList.community[id])
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
@@ -19,6 +19,7 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
   const authorId = puzzleInfo.authorId;
   const [isModalVisible, setIsModalVisible] = useState(false)
   const dispatch = useDispatch();
+
 
   const API_URL = "https://slider-fun.onrender.com/api";
   const [username, setUsername] = useState(false);
@@ -55,17 +56,18 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
     setIsModalVisible(true)
   }
 
-
   const handleAddingLike = async (photoId) => {
-    if (userId && puzzleInfo.likedBy.indexOf(userId) === -1) {
-      console.log(photoId, userId)
-      await dispatch(likePhoto(photoId, userId));
+    if (localStorage.getItem('token') !== null) {
+      if (puzzleInfo.likedBy.indexOf(userId) === -1) {
+        console.log(photoId, userId)
+        dispatch(likePhoto(photoId, userId));
+      } else {
+        dispatch(removeLikeFromPhoto(photoId, userId))
+      }
     } else {
-      await dispatch(removeLikeFromPhoto(photoId, userId))
-      console.log('go make an account smh')
+      openSignUpModal()
     }
   }
-
 
   return (
     <div className='puzzleCardContainer' >

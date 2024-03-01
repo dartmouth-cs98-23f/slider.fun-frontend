@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "../styles/infoModal.scss";
 import PhotoCreation from './PhotoCreation';
-import "../styles/infoModal.scss";
 import { IconXboxX } from '@tabler/icons-react';
 
 // when there's no object in the database yet

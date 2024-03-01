@@ -156,7 +156,7 @@ const Daily = () => {
 
   return (
     <div>
-      {isModalVisible && <div className="modal-overlay"></div>}
+      {isModalVisible && <div className="modal-overlay" onClick={() => closeModal()}></div>}
       <InfoModal isModalVisible={isModalVisible} daily={true} closeModal={closeModal} openModal={openModal} />
       {dailyPuzzle.photo &&
         <Game

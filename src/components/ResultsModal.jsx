@@ -4,7 +4,7 @@ import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 import makeConfetti from './Confetti';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDailyPuzzleSScore } from '../actions/userAction';
+import { addDailyPuzzleSScore, setUserInfo } from '../actions/userAction';
 import { useNavigate } from 'react-router-dom';
 
 function ResultsModal(props) {
@@ -21,11 +21,8 @@ function ResultsModal(props) {
       setLoading(false);
       if (props.score >= 95) {
         makeConfetti();
-        if (userInfo && props.daily) {
+        if (localStorage.getItem("token") === undefined && props.daily) {
           dispatch(addDailyPuzzleSScore(userInfo.id, 5));
-        } else {
-          console.log("make an account")
-          setNewUser(true);
         }
       }
     }, 1100);
@@ -35,6 +32,11 @@ function ResultsModal(props) {
   const nextStageHandler = () => {
     props.onClose();
     props.goToNextStage();
+  }
+
+  const handlePostTutorialSignUp = (points) => {
+    dispatch(setUserInfo({ "sliderScore": points }));
+    navigate("/signup");
   }
 
   return (
@@ -55,12 +57,12 @@ function ResultsModal(props) {
                 </div>
                 : null}
 
-              {(newUser && props.score >= 95 && !userInfo) ?
+              {((!localStorage.getItem("token") && props.score >= 95)) ?
                 <div>
                   <h3>
                     Make an account to save your score!
                   </h3>
-                  <button onClick={() => navigate("/signup")}>
+                  <button onClick={() => handlePostTutorialSignUp(5)}>
                     Sign Up!
                   </button>
                 </div>
