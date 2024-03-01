@@ -10,9 +10,12 @@ import verticalSplit from "../assets/VerticalSplit.png"
 import horizontalSplit from "../assets/HorizontalSplit.png"
 import photoReq from '../assets/photoReq.png'
 import $ from 'jquery';
+import { useDispatch } from 'react-redux';
+import { postPhotoToUser } from '../actions/userAction';
 
 const PhotoCreation = (props) => {
   const DEFAULT_OPTIONS = defaultSlider;
+  const dispatch = useDispatch();
   const [active, setActive] = useState(1);
   const [currentOptions, setCurrentOptions] = useState(props.puzzleInfo ? props.puzzleInfo.photoProperties : DEFAULT_OPTIONS);
   const [editedOptions] = useState(DEFAULT_OPTIONS)
@@ -57,23 +60,14 @@ const PhotoCreation = (props) => {
 
 
   async function handleSubmitPhoto(title, photoURL, sliderValues) {
-
     if (title === "") {
       props.setTitleMissingVis(true);
     } else {
-
       const imageUrl = photoURL;
       const photoProperties = addStatusToPhotoProperties(sliderValues);
 
-      const data = {
-        "title": title,
-        "imageUrl": imageUrl,
-        "photoProperties": photoProperties,
-        "authorId": props.userId
-      }
-      console.log(data, props.userId)
       try {
-        await postPhoto(data, props.userId);
+        await dispatch(postPhotoToUser({ title, imageUrl, photoProperties, "authorId": props.userId }, props.userId));
         props.closeModal();
         setMessageVisability(true);
       } catch (error) {

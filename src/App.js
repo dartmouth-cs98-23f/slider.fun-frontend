@@ -10,8 +10,25 @@ import Tutorial from './pages/Tutorial';
 import { AuthContextProvider } from './context/AuthContext';
 import SignUp from './pages/SignUp';
 import Community from './pages/Community';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserToken, getUserInfo } from './actions/userAction';
 
 function App() {
+  const token = useSelector(state => state.user.token);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setUserToken())
+  }, [])
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getUserInfo(token))
+    }
+
+  }, [token])
+
   return (
     <BrowserRouter>
       <AuthContextProvider>

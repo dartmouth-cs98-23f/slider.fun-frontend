@@ -1,32 +1,37 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/profile.scss';
 import ProfileViews from '../components/ProfileViews';
 import LeftProfileBar from '../components/LeftProfileBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo } from '../actions/userAction';
+import { getUserInfo, setUserToken, userSignOut } from '../actions/userAction';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { signOut } = useContext(AuthContext);
   const currentUser = useSelector(state => state.user.info);
   const userToken = localStorage.getItem('token');
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+
+    console.log("userToken", userToken)
+
     if (!userToken) {
       console.log("Redirecting to login page", userToken);
       navigate("/login");
     } else {
-      dispatch(getUserInfo(userToken))
-      navigate("/profile");
+      if (!currentUser) {
+        dispatch(getUserInfo(userToken))
+        navigate("/profile");
+      }
     }
   }, [navigate, userToken, dispatch]);
 
   const signOutHandler = async () => {
     try {
-      await signOut();
+      dispatch(userSignOut())
       navigate("/login");
     } catch (error) {
       console.error('Error during sign out:', error);

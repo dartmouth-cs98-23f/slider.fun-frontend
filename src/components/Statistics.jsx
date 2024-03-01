@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PuzzleCard from './PuzzleCard'
 import { removePhoto as removePhotoAPI } from '../context/photoFunctions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,15 +6,16 @@ import { fetchUserPhoto } from '../actions/userAction';
 
 const Statistics = ({ userInfo }) => {
   const dispatch = useDispatch();
+  const userPhotoList = useSelector(state => state.user.info.photos);
   const puzzleHistory = useSelector(state => state.user.photoObjects);
-  const hasFetchedPhotosRef = useRef(false);
+  const photoObjectsFetched = useSelector(state => state.user.photoObjectsFetched);
 
-  useEffect(() => {
-    if (userInfo.photos && !hasFetchedPhotosRef.current) {
-      hasFetchedPhotosRef.current = true;
-      dispatch(fetchUserPhoto(userInfo.photos));
-    }
-  }, [userInfo, dispatch]);
+  // useEffect(() => {
+  //   if (!photoObjectsFetched) {
+  //     dispatch(fetchUserPhoto(userInfo.photos));
+  //   }
+  // }, []);
+
   // const handleRemovePhoto = async (photoId) => {
   //   try {
   //     await removePhotoAPI(userInfo.id, photoId);
@@ -26,12 +27,13 @@ const Statistics = ({ userInfo }) => {
   //   }
   // };
 
-  const puzzleCards = puzzleHistory.map((puzzle, index) => (
+  const puzzleCards = Object.keys(puzzleHistory).map((key, index) => (
     <PuzzleCard
-      key={puzzle.id || index}
-      puzzleInfo={puzzle}
+      id={puzzleHistory[key].id || index}
+      key={index}
+      // puzzleInfo={puzzleHistory[key]}
+      photoListLocation="user"
       editMode={true}
-    // onRemove={() => handleRemovePhoto(puzzle.id)}
     />
   ));
 

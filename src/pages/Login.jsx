@@ -43,9 +43,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await signIn(email, password);
-      dispatch(userSignIn(email, password))
-      console.log("navgating to profile")
+      await dispatch(userSignIn(email, password))
       navigate("/profile");
     } catch (error) {
       setErr(error.response.data.error)

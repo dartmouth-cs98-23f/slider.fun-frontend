@@ -1,39 +1,42 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PuzzleCard from '../components/PuzzleCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
-import { deletePhoto } from '../context/photoFunctions';
 import { fetchAllPhoto } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
 
 const Community = () => {
   const dispatch = useDispatch();
-  // const API_URL = "https://slider-fun.onrender.com/api";
-  const photos = useSelector(state => state.photoList);
+  const hasFetchedPhotosRef = useRef(false);
 
-  console.log(photos)
   useEffect(() => {
-    console.log("fetch")
-    dispatch(fetchAllPhoto());
-  }, [dispatch]);
-
-  const handleRemovePhoto = async (photoId) => {
-    try {
-      await deletePhoto(photoId);
-      const updatedPuzzleHistory = photos.filter(photo => photo.id !== photoId);
-      // setPhotos(updatedPuzzleHistory);
-
-      console.log(photoId, "removed")
-    } catch (error) {
-      console.error('Error removing photo:', error);
+    if (!hasFetchedPhotosRef.current) {
+      hasFetchedPhotosRef.current = true;
+      dispatch(fetchAllPhoto());
     }
-  };
+  }, []);
 
-  const puzzleCards = photos.map((puzzle, index) => (
+  const communityPhotoList = useSelector(state => state.photoList.community);
+
+  // const handleRemovePhoto = async (photoId) => {
+  //   try {
+  //     await deletePhoto(photoId);
+  //     const updatedPuzzleHistory = photos.filter(photo => photo.id !== photoId);
+  //     // setPhotos(updatedPuzzleHistory);
+
+  //     console.log(photoId, "removed")
+  //   } catch (error) {
+  //     console.error('Error removing photo:', error);
+  //   }
+  // };
+
+  const puzzleCards = Object.keys(communityPhotoList).map((key, index) => (
     <PuzzleCard
-      puzzleInfo={puzzle}
-      key={puzzle.id || index}
-      onRemove={() => handleRemovePhoto(puzzle.id)}
+      puzzleInfo={communityPhotoList[key]}
+      id={communityPhotoList[key].id || index}
+      key={index}
+      photoListLocation="community"
+      editMode={false}
     />
   ));
 

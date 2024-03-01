@@ -11,8 +11,7 @@ function PhotoModal({ photoUrl, userId, isModalVisible, closeModal, setMessageVi
   const [title, setTitle] = useState("");
 
   const handleChange = (event) => {
-    setTitle(event.target.value); // Update the title state with the new value
-    console.log(title)
+    setTitle(event.target.value);
   };
 
   return (

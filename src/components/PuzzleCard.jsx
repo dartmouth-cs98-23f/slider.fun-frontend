@@ -7,10 +7,10 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { IconCameraHeart } from '@tabler/icons-react';
 import axios from 'axios';
 import GameModal from './GameModal';
-import { deletePhoto } from '../actions/photoListAction';
+import { useSelector } from 'react-redux';
 
-const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
-
+const PuzzleCard = ({ id, photoListLocation, editMode }) => {
+  const puzzleInfo = useSelector(photoListLocation === "user" ? state => state.user.photoObjects[id] : state => state.photoList.community[id])
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
   const photoProperties = puzzleInfo.photoProperties;
@@ -24,7 +24,6 @@ const PuzzleCard = ({ puzzleInfo, onRemove, editMode }) => {
   async function fetchUsernameFromId() {
     try {
       const response = await axios.get(`${API_URL}/users/username/${authorId}`);
-
       if (response.status === 200) {
         setUsername(response.data)
         return response.data;

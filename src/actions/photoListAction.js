@@ -5,7 +5,6 @@ const API_URL = 'https://slider-fun.onrender.com/api';
 
 // Redux action types
 export const ActionTypes = {
-  FETCH_PHOTOLIST: 'FETCH_PHOTOLIST',
   FETCH_PHOTOLIST_SUCCESS: 'FETCH_PHOTOLIST_SUCCESS',
   FETCH_PHOTOLIST_ERROR: 'FETCH_PHOTOLIST_ERROR',
   POST_PHOTO: 'POST_PHOTO',
@@ -17,14 +16,18 @@ export const ActionTypes = {
 
 // Redux thunk action creator for fetching all photos
 export const fetchAllPhoto = () => async (dispatch) => {
-  dispatch({ type: ActionTypes.FETCH_PHOTOLIST });
-
   try {
     const response = await axios.get(`${API_URL}/photo/all`);
+
     if (response.status === 200) {
+      const photoObjectList = response.data.reduce((acc, photo) => {
+        acc[photo.id] = photo;
+        return acc;
+      }, {});
+
       dispatch({
         type: ActionTypes.FETCH_PHOTOLIST_SUCCESS,
-        payload: response.data,
+        payload: photoObjectList,
       });
     } else {
       dispatch({

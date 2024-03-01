@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';;
+import axios from 'axios';
+import { userSignOut } from '../actions/userAction';
+import { useDispatch } from 'react-redux';
 
 export const AuthContext = createContext();
 // online
@@ -11,14 +13,14 @@ const API_URL = 'https://slider-fun.onrender.com/api/users';
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  console.log(user)
-  useEffect(() => {
-    if (token) {
-      localStorage.setItem('token', token);
-    } else {
-      localStorage.removeItem('token');
-    }
-  }, [token]);
+
+  // useEffect(() => {
+  //   if (token) {
+  //     localStorage.setItem('token', token);
+  //   } else {
+  //     localStorage.removeItem('token');
+  //   }
+  // }, [token]);
 
   const signUp = async (email, userName, password) => {
     console.log({ email, userName, password })
@@ -30,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
       "password": password
     }
     const response = await axios.post(`${API_URL}/new`, data);
-    console.log(response.data.token)
+
     setToken(response.data.token);
     setUser({ email });
   };
@@ -41,13 +43,6 @@ export const AuthContextProvider = ({ children }) => {
     setToken(response.data.token);
     setUser({ email });
   };
-
-  const signOut = () => {
-    setToken(null);
-    setUser(null);
-    console.log("sign out")
-  };
-
   // retrieve user info using the token
   // const getUserInfo = async () => {
   //   try {
@@ -76,7 +71,6 @@ export const AuthContextProvider = ({ children }) => {
     token,
     signUp,
     signIn,
-    signOut,
   };
 
   return (

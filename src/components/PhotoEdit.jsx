@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import Slider from './Slider'
 import "../App.scss";
-import ImageView from './ImageView'
-import { getImageStyle } from './Scoring'
-import { defaultSlider } from './Slider'
-import { editPhoto } from '../context/photoFunctions';
-import photoReq from '../assets/photoReq.png'
+import ImageView from './ImageView';
+import { getImageStyle } from './Scoring';
+import { defaultSlider } from './Slider';
+import photoReq from '../assets/photoReq.png';
 import $ from 'jquery';
-import side2side from "../assets/SideToSideSplit.png"
-import verticalSplit from "../assets/VerticalSplit.png"
-import horizontalSplit from "../assets/HorizontalSplit.png"
+import side2side from "../assets/SideToSideSplit.png";
+import verticalSplit from "../assets/VerticalSplit.png";
+import horizontalSplit from "../assets/HorizontalSplit.png";
+import { useDispatch } from 'react-redux';
+import { editPhotoById, removePhotoFromUser } from '../actions/userAction';
+import "../styles/game.scss";
 
 const PhotoEdit = (props) => {
+  const puzzleInfo = props.puzzleInfo;
+
+  const [title, setTitle] = useState(puzzleInfo.title)
+
+  const dispatch = useDispatch();
   const DEFAULT_OPTIONS = defaultSlider;
   const [active, setActive] = useState(1);
-  // const [active, setActive] = useState(1);
-  const [currentOptions, setCurrentOptions] = useState(props.puzzleInfo ? props.puzzleInfo.photoProperties : DEFAULT_OPTIONS);
-  const [editedOptions] = useState(DEFAULT_OPTIONS)
+
+  const [modifiedPhotoProperties, setModifiedPhotoProperties] = useState(props.puzzleInfo ? props.puzzleInfo.photoProperties : DEFAULT_OPTIONS);
+
+  const [originalPhotoProperties] = useState(DEFAULT_OPTIONS)
   const setMessageVisability = props.setMessageVisability;
   const photoUrl = props.photoUrl;
 
   function handleSliderChange(propertyIndex, { target }) {
-    const newSliderValues = currentOptions.map((option, index) => {
+    const newSliderValues = modifiedPhotoProperties.map((option, index) => {
       if (index !== propertyIndex) {
         return option;
       }
@@ -29,38 +37,19 @@ const PhotoEdit = (props) => {
     });
 
     // sets the local sliders to the new value 
-    setCurrentOptions(newSliderValues)
+    setModifiedPhotoProperties(newSliderValues)
   }
 
-  function addStatusToPhotoProperties(photoProperties) {
-    // Iterate through each property in the photoProperties array
-    photoProperties.forEach(property => {
-      // Add the 'status' key with a value of true to each property object
-      property.status = true;
-    });
-
-    return photoProperties;
-  }
-
-
-  async function handleEditPhoto() {
-
-
-    // submission
-
-    // const imageUrl = photoURL;
-    // const photoProperties = addStatusToPhotoProperties(sliderValues);
+  async function handleEditPhoto(title, photoProperties) {
     const data = {
-      "title": props.title,
-      "photoProperties": currentOptions,
-      // "authorId": props.userId
+      "title": title,
+      "photoProperties": photoProperties,
     }
 
     console.log(props.puzzleInfo.id, data)
     try {
-      await editPhoto(props.puzzleInfo.id, data);
+      await dispatch(editPhotoById(props.puzzleInfo.id, data));
       props.closeModal();
-      // setMessageVisability(true);
     } catch (error) {
       console.error('Error submitting photo:', error);
     }
@@ -69,7 +58,6 @@ const PhotoEdit = (props) => {
   const SetView = (active) => {
     $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
 
-    // Add 'selected' class to the clicked image based on 'active' parameter
     if (active === 1) {
       $('.viewButtonS2S').addClass('selected');
     } else if (active === 2) {
@@ -94,6 +82,20 @@ const PhotoEdit = (props) => {
     img.src = photoUrl; // Assuming this is the image URL
   }, [photoUrl]);
 
+  const handleChange = (event) => {
+    setTitle(event.target.value); // Update the title state with the new value
+  };
+
+  async function handleDelete(authorId, photoId) {
+    try {
+      await dispatch(removePhotoFromUser(authorId, photoId))
+      props.closeModal();
+      // setMessageVisability(true);
+    } catch (error) {
+      console.error('Error deleting photo:', error);
+    }
+  }
+
   if (orientation !== 'horizontal') {
     return (
       <div>
@@ -104,8 +106,20 @@ const PhotoEdit = (props) => {
   }
   return (
     <div className="container">
+      {props.editMode ?
+        <div id="editFields">
+          <div>
+            <label htmlFor="photoTitle"> Title: </label>
+            <input type="text" id="photoTitle" name="photoTitle" value={title} onChange={handleChange} />
+          </div>
+          <button className="red" onClick={() => handleDelete(props.userId, puzzleInfo.id)}> Delete Photo</button>
+        </div> :
+        <div>
+          <h2 htmlFor="photoTitle"> {title} </h2>
+        </div>
+      }
 
-      <ImageView active={active} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={editedOptions} editedOptions={currentOptions} />
+      <ImageView active={active} importEdited={photoUrl} getImageStyle={getImageStyle} currentOptions={originalPhotoProperties} editedOptions={modifiedPhotoProperties} />
       <div className='viewButtonsContainer'>
         <p> View: &nbsp;&nbsp;&nbsp;</p>
         <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
@@ -114,7 +128,7 @@ const PhotoEdit = (props) => {
       </div>
 
       <div className='slidersContainer'>
-        {currentOptions.map((option, index) => (
+        {modifiedPhotoProperties.map((option, index) => (
           <Slider
             key={index}
             name={option.name}
@@ -128,7 +142,7 @@ const PhotoEdit = (props) => {
         ))}
       </div>
       <div className='actionButtons'>
-        <button className='submit' onClick={() => handleEditPhoto()}>{props.editMode ? "update" : "submit"}</button>
+        <button className='submit' onClick={() => handleEditPhoto(title, modifiedPhotoProperties)}>{props.editMode ? "update" : "submit"}</button>
       </div>
     </div>
   )
