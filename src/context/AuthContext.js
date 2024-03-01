@@ -1,7 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import axios from 'axios';
-import { userSignOut } from '../actions/userAction';
-import { useDispatch } from 'react-redux';
 
 export const AuthContext = createContext();
 // online
@@ -13,14 +11,6 @@ const API_URL = 'https://slider-fun.onrender.com/api/users';
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('token'));
-
-  // useEffect(() => {
-  //   if (token) {
-  //     localStorage.setItem('token', token);
-  //   } else {
-  //     localStorage.removeItem('token');
-  //   }
-  // }, [token]);
 
   const signUp = async (email, userName, password) => {
     console.log({ email, userName, password })

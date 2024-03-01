@@ -49,10 +49,13 @@ function ResultsModal(props) {
               {props.score >= 95 ?
                 <div>
                   <h2>Nice job! </h2>
-                  <h3> +5 SliderPoints </h3>
+                  {props.daily ?
+                    <h3> +5 SliderPoints </h3>
+                    : null}
                 </div>
                 : null}
-              {(newUser && props.score >= 95 && userInfo) ?
+
+              {(newUser && props.score >= 95 && !userInfo) ?
                 <div>
                   <h3>
                     Make an account to save your score!

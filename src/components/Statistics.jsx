@@ -1,17 +1,13 @@
 import React from 'react'
 import PuzzleCard from './PuzzleCard'
-import { removePhoto as removePhotoAPI } from '../context/photoFunctions';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserPhoto } from '../actions/userAction';
+import { useSelector } from 'react-redux';
 
 const Statistics = ({ userInfo }) => {
-  // const dispatch = useDispatch();
-  // const userPhotoList = useSelector(state => state.user.info.photos);
+
   const puzzleHistory = useSelector(state => state.user.photoObjects);
-  // const photoObjectsFetched = useSelector(state => state.user.photoObjectsFetched);
 
   const puzzleCards = Object.keys(puzzleHistory)
-    .filter(key => puzzleHistory[key] !== undefined) // Filter out undefined entries
+    .filter(key => puzzleHistory[key] !== undefined)
     .map((key, index) => (
       <PuzzleCard
         id={puzzleHistory[key].id || index}

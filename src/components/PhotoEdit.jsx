@@ -96,6 +96,10 @@ const PhotoEdit = (props) => {
     }
   }
 
+  const handleSubmit = async (title, photoProperties) => {
+  
+  }
+
   if (orientation !== 'horizontal') {
     return (
       <div>
@@ -142,7 +146,15 @@ const PhotoEdit = (props) => {
         ))}
       </div>
       <div className='actionButtons'>
-        <button className='submit' onClick={() => handleEditPhoto(title, modifiedPhotoProperties)}>{props.editMode ? "update" : "submit"}</button>
+        {props.editMode ?
+          <button className='submit' onClick={() => handleEditPhoto(title, modifiedPhotoProperties)}>
+            update
+          </button>
+          :
+          <button className='submit' onClick={() => handleSubmit(title, modifiedPhotoProperties)}>
+            submit
+          </button>
+        }
       </div>
     </div>
   )

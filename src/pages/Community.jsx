@@ -18,18 +18,6 @@ const Community = () => {
 
   const communityPhotoList = useSelector(state => state.photoList.community);
 
-  // const handleRemovePhoto = async (photoId) => {
-  //   try {
-  //     await deletePhoto(photoId);
-  //     const updatedPuzzleHistory = photos.filter(photo => photo.id !== photoId);
-  //     // setPhotos(updatedPuzzleHistory);
-
-  //     console.log(photoId, "removed")
-  //   } catch (error) {
-  //     console.error('Error removing photo:', error);
-  //   }
-  // };
-
   const puzzleCards = Object.keys(communityPhotoList).map((key, index) => (
     <PuzzleCard
       puzzleInfo={communityPhotoList[key]}

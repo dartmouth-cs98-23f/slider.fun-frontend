@@ -55,7 +55,6 @@ const PuzzleCard = ({ id, photoListLocation, editMode }) => {
 
   return (
     <div className='puzzleCardContainer' >
-      {/* <div className='dateHeader'> {dailyPuzzle.date} </div> */}
       {isModalVisible &&
         <GameModal
           puzzleInfo={puzzleInfo}

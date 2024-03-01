@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import React, { useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import '../styles/profile.scss';
 import ProfileViews from '../components/ProfileViews';
 import LeftProfileBar from '../components/LeftProfileBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo, setUserToken, userSignOut } from '../actions/userAction';
+import { getUserInfo, userSignOut } from '../actions/userAction';
 
 const Profile = () => {
   const navigate = useNavigate();

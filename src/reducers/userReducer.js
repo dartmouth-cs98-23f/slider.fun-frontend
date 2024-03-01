@@ -1,4 +1,4 @@
-import { produce, current } from 'immer';
+import { produce } from 'immer';
 import { ActionTypes } from '../actions/userAction';
 
 const initialState = {
