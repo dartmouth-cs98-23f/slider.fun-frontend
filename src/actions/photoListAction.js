@@ -87,7 +87,7 @@ export const removePhoto = (userId, photoId) => async (dispatch) => {
 
 
 export const likePhoto = (photoId, userId) => async (dispatch) => {
-  console.log(photoId, { userId })
+  // console.log(photoId, { userId })
   try {
     const response = await axios.put(`${API_URL}/photo/addLike/${photoId}`, { userId });
 
@@ -102,7 +102,7 @@ export const likePhoto = (photoId, userId) => async (dispatch) => {
 }
 
 export const removeLikeFromPhoto = (photoId, userId) => async (dispatch) => {
-  console.log(photoId, { userId })
+  // console.log(photoId, { userId })
   try {
     const response = await axios.put(`${API_URL}/photo/removeLike/${photoId}`, { userId });
 

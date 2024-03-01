@@ -22,12 +22,10 @@ const Community = () => {
   const communityPhotoList = useSelector(state => state.photoList.community);
 
   const closeSignUpModal = () => {
-    console.log("close")
     setIsModalVisible(false)
   };
 
   const openSignUpModal = () => {
-    console.log("open")
     setIsModalVisible(true)
   }
 

@@ -8,21 +8,13 @@ export const fetchPuzzleOfDay = async () => {
     const currentDate = new Date();
     // Format the date as YYYY/MM/DD
     const formattedDate = currentDate.toISOString().slice(0, 10);
-    console.log(currentDate)
-    // console.log(formattedDate);
-    const data = {
-      "date": formattedDate
-    }
-    console.log(data)
-    // Use the formatted date in your API request
+
     const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
       params: {
         date: formattedDate // The date is passed as a query parameter
       }
     });
 
-    // Assuming you want to do something with the response here
-    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('There was an error fetching the puzzle of the day:', error);

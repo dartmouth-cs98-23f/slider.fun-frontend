@@ -12,7 +12,6 @@ const initialState = {
 const tutorialReducer = produce((draftState, action) => {
   switch (action.type) {
     case ActionTypes.GO_TO_SPECIFIC_STAGE:
-      console.log(action.payload)
       draftState.currentStage = action.payload;
       break;
     case ActionTypes.UPDATE_SCORES:

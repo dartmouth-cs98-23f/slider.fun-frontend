@@ -10,7 +10,7 @@ import GameModal from './GameModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePhoto, removeLikeFromPhoto } from '../actions/photoListAction';
 
-const PuzzleCard = ({ id, photoListLocation, editMode, userId, openSignUpModal, closeSignUpModal }) => {
+const PuzzleCard = ({ id, photoListLocation, editMode, userId, openSignUpModal }) => {
   const puzzleInfo = useSelector(photoListLocation === "user" ? state => state.user.photoObjects[id] : state => state.photoList.community[id])
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
@@ -47,19 +47,18 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId, openSignUpModal, 
   }, [authorId])
 
   const closeModal = () => {
-    console.log("close")
     setIsModalVisible(false)
   };
 
   const openModal = () => {
-    console.log("open")
-    setIsModalVisible(true)
+    if (editMode) {
+      setIsModalVisible(true)
+    }
   }
 
   const handleAddingLike = async (photoId) => {
     if (localStorage.getItem('token') !== null) {
       if (puzzleInfo.likedBy.indexOf(userId) === -1) {
-        console.log(photoId, userId)
         dispatch(likePhoto(photoId, userId));
       } else {
         dispatch(removeLikeFromPhoto(photoId, userId))
@@ -80,14 +79,13 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId, openSignUpModal, 
           username={username}
         />}
 
-      <div o>
+      <div onClick={() => openModal()}>
         <LazyLoadImage
           alt={"Puzzle image"}
           src={photoUrl}
           effect="blur"
           style={getImageStyle(photoProperties)}
         />
-
       </div>
       <div className='scoreDisplay'>
         <div>

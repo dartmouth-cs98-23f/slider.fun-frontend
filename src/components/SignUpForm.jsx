@@ -12,7 +12,6 @@ const SignUpForm = ({ logoVisible }) => {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.info)
   const navigate = useNavigate();
-  console.log(logoVisible)
   const [err, setErr] = useState(null)
   const handleSignUp = async (e) => {
 

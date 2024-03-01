@@ -46,7 +46,6 @@ const PhotoEdit = (props) => {
       "photoProperties": photoProperties,
     }
 
-    console.log(props.puzzleInfo.id, data)
     try {
       await dispatch(editPhotoById(props.puzzleInfo.id, data));
       props.closeModal();
@@ -57,7 +56,6 @@ const PhotoEdit = (props) => {
 
   const SetView = (active) => {
     $('.viewButtonS2S, .viewButtonVS, .viewButtonHS').removeClass('selected');
-
     if (active === 1) {
       $('.viewButtonS2S').addClass('selected');
     } else if (active === 2) {
@@ -65,32 +63,28 @@ const PhotoEdit = (props) => {
     } else if (active === 3) {
       $('.viewButtonHS').addClass('selected');
     }
-
     setActive(active);
   };
 
   const [orientation, setOrientation] = useState('horizontal');
-
   useEffect(() => {
     const img = new Image();
-
     img.onload = () => {
       // Determine if the image is vertical or horizontal
       setOrientation(img.width > img.height ? 'horizontal' : 'vertical');
     };
-
-    img.src = photoUrl; // Assuming this is the image URL
+    img.src = photoUrl;
   }, [photoUrl]);
 
   const handleChange = (event) => {
-    setTitle(event.target.value); // Update the title state with the new value
+    setTitle(event.target.value);
   };
 
   async function handleDelete(authorId, photoId) {
     try {
-      await dispatch(removePhotoFromUser(authorId, photoId))
+      dispatch(removePhotoFromUser(authorId, photoId))
       props.closeModal();
-      // setMessageVisability(true);
+
     } catch (error) {
       console.error('Error deleting photo:', error);
     }

@@ -43,7 +43,7 @@ export const userSignIn = (email, password) => async (dispatch) => {
 };
 
 export const userSignUp = (email, userName, password, sliderScore) => async (dispatch) => {
-  console.log({ email, userName, password })
+  // console.log({ email, userName, password })
   const data = {
     "email": email,
     "userName": userName,
@@ -52,7 +52,6 @@ export const userSignUp = (email, userName, password, sliderScore) => async (dis
     "password": password,
     "sliderScore": sliderScore,
   }
-  console.log(data)
 
   const response = await axios.post(`${API_URL}/users/new`, data);
 
@@ -186,9 +185,7 @@ export const editPhotoById = (photoId, data) => async (dispatch) => {
 export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
   try {
 
-    console.log({ count })
     const response = await axios.put(`${API_URL}/users/updateScore/${userId}`, { count });
-    console.log(response)
     if (response.status === 200) {
       dispatch({
         type: ActionTypes.PUT_USER_SLIDER_SCORE_SUCCESS,
@@ -209,12 +206,13 @@ export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
 export const removePhotoFromUser = (userId, photoId) => async (dispatch) => {
   try {
     const response = await axios.put(`${API_URL}/users/removePhoto/${userId}`, { photoId });
-    console.log(response)
 
-    dispatch({
-      type: ActionTypes.DELETE_USER_PHOTO_SUCCESS,
-      payload: photoId
-    });
+    if (response.status === 200) {
+      dispatch({
+        type: ActionTypes.DELETE_USER_PHOTO_SUCCESS,
+        payload: photoId
+      });
+    }
   } catch (error) {
     console.log(error);
   }
