@@ -54,13 +54,38 @@
     align-items: center;
     justify-content: space-between;
 
+<<<<<<< HEAD
+=======
+    .redLike {
+      color: #E27272;
+
+      &:hover {
+        color: #7f7f7f;
+      }
+
+    }
+
+    .default {
+      color: #7f7f7f;
+
+      &:hover {
+        color: #E27272;
+      }
+    }
+
+>>>>>>> profilePage
     .rightSidePuzzleStats {
       display: flex;
       flex-direction: row;
       align-items: center;
 
+<<<<<<< HEAD
       &:hover {
         color: #E27272;
+=======
+      .redLike:hover {
+        color: #7f7f7f;
+>>>>>>> profilePage
       }
     }
   }

@@ -4,12 +4,11 @@ import InfoModal from '../components/InfoModal'
 import axios from 'axios'
 
 export const fetchPuzzleOfDay = async () => {
-
   try {
     const currentDate = new Date();
     // Format the date as YYYY/MM/DD
     const formattedDate = currentDate.toISOString().slice(0, 10);
-
+    console.log(currentDate)
     // console.log(formattedDate);
     const data = {
       "date": formattedDate
@@ -23,7 +22,7 @@ export const fetchPuzzleOfDay = async () => {
     });
 
     // Assuming you want to do something with the response here
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('There was an error fetching the puzzle of the day:', error);
@@ -131,6 +130,7 @@ const Daily = () => {
     const fetchAndSetPuzzle = async () => {
       try {
         const dailyPuzzleTemp = await fetchPuzzleOfDay();
+
         console.log(dailyPuzzleTemp);
         if (dailyPuzzleTemp) {
           setDailyPuzzle(dailyPuzzleTemp);

@@ -18,7 +18,7 @@ const Statistics = ({ userInfo }) => {
       />
     ));
 
-  console.log(puzzleCards);
+  // console.log(puzzleCards);
   return (
     <div >
       <div className='headerText' style={{ padding: "5px" }} > {userInfo.username ? userInfo.username : userInfo.email}'s Photo Gallery </div>

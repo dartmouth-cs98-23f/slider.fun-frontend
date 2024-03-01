@@ -45,15 +45,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="resultspage" element={<ResultsPage scores={{
-              "brightness": 87, 
-              "contrast": 94, 
-              "saturation": 97, 
-              "grayscale": 95,
-              "sepia": 91, 
-              "hue rotate": 93, 
-              "blur": 96
-        }} />} />
+            <Route path="resultspage" element={<ResultsPage />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </div>

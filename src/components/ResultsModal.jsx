@@ -6,11 +6,19 @@ import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle }
 import makeConfetti from './Confetti';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDailyPuzzleSScore } from '../actions/userAction';
+<<<<<<< HEAD
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> profilePage
 
 function ResultsModal(props) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+<<<<<<< HEAD
+=======
+  const navigate = useNavigate();
+>>>>>>> profilePage
 
   const userInfo = useSelector(state => state.user.info)
   const [newUser, setNewUser] = useState(false);
