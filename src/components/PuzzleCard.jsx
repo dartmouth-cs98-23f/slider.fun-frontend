@@ -92,7 +92,7 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
           {photoTitle ? <div className='photoTitle'> {photoTitle} </div> : <div className='photoTitle'> Unnamed </div>}
           {username ? <div className='scoreHeader'> {username} </div> : <div className='scoreHeader'> Default </div>}
         </div>
-        <div className='rightSidePuzzleStats' onClick={() => (handleAddingLike(id))}>
+        <div className={`rightSidePuzzleStats ${puzzleInfo.likedBy.indexOf(userId) === -1 ? 'default' : 'redLike'}`} onClick={() => (handleAddingLike(id))}>
           <IconCameraHeart className='heartIcon' />
           <div>: {likes ? likes : 0} </div>
         </div>

@@ -15,7 +15,6 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     console.log("userToken", userToken)
 
     if (!userToken) {
