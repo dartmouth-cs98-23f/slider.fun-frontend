@@ -54,21 +54,23 @@ const Login = () => {
 
   const login = () => {
     return (
-      <div className='formContainer'>
-        <form onSubmit={handleLogin}>
+      <div className="signUpModal">
+        <div className='formContainer'>
+          <form onSubmit={handleLogin}>
 
-          <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
-          <input placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+            <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
+            <input placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
-          <input placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button>login</button>
+            <input placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <button>login</button>
 
-        </form>
-        <div className='helperContainer'>
-          {err && <p> {err} </p>}
-          <p> not a member yet?<button className='helperButton' onClick={() => navigate("/signup")}> sign up </button> </p>
-        </div>
-      </div >
+          </form>
+          <div className='helperContainer'>
+            {err && <p> {err} </p>}
+            <p> not a member yet?<button className='helperButton' onClick={() => navigate("/signup")}> sign up </button> </p>
+          </div>
+        </div >
+      </div>
     )
   }
 

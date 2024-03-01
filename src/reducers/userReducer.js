@@ -22,6 +22,9 @@ const userReducer = produce((draftState, action) => {
     case ActionTypes.SET_USER_TOKEN:
       draftState.token = action.payload;
       break;
+    case ActionTypes.SET_USER_INFO:
+      Object.assign(draftState.info, action.payload);
+      break;
     case ActionTypes.FETCH_USER_INFO:
       if (draftState.token) {
         draftState.info = action.payload;

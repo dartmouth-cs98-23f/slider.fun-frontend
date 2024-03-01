@@ -9,6 +9,7 @@ export const ActionTypes = {
   USER_SIGN_IN_SUCCESS: "USER_SIGN_IN_SUCCESS",
   USER_SIGN_UP_SUCCESS: "USER_SIGN_UP_SUCCESS",
   USER_SIGN_OUT: "USER_SIGN_OUT",
+  SET_USER_INFO: "SET_USER_INFO",
   FETCH_USER_INFO: "FETCH_USER_INFO",
   FETCH_USER_PHOTOLIST: "FETCH_USER_PHOTOLIST",
   FETCH_PHOTO_BY_ID: "FETCH_PHOTO_BY_ID",
@@ -41,15 +42,17 @@ export const userSignIn = (email, password) => async (dispatch) => {
   }
 };
 
-export const userSignUp = (email, userName, password) => async (dispatch) => {
-  console.log({ email, userName, password })
+export const userSignUp = (email, userName, password, sliderScore) => async (dispatch) => {
+  // console.log({ email, userName, password })
   const data = {
     "email": email,
     "userName": userName,
     "name": userName,
     "about": "nothing yet!",
-    "password": password
+    "password": password,
+    "sliderScore": sliderScore,
   }
+
   const response = await axios.post(`${API_URL}/users/new`, data);
 
   localStorage.setItem('token', response.data.token);
@@ -71,6 +74,13 @@ export const setUserToken = () => async (dispatch) => {
   dispatch({
     type: ActionTypes.SET_USER_TOKEN,
     payload: localStorage.getItem('token'),
+  });
+};
+
+export const setUserInfo = (data) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_USER_INFO,
+    payload: data
   });
 };
 
@@ -175,9 +185,7 @@ export const editPhotoById = (photoId, data) => async (dispatch) => {
 export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
   try {
 
-    console.log({ count })
     const response = await axios.put(`${API_URL}/users/updateScore/${userId}`, { count });
-    console.log(response)
     if (response.status === 200) {
       dispatch({
         type: ActionTypes.PUT_USER_SLIDER_SCORE_SUCCESS,
@@ -198,12 +206,13 @@ export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
 export const removePhotoFromUser = (userId, photoId) => async (dispatch) => {
   try {
     const response = await axios.put(`${API_URL}/users/removePhoto/${userId}`, { photoId });
-    console.log(response)
 
-    dispatch({
-      type: ActionTypes.DELETE_USER_PHOTO_SUCCESS,
-      payload: photoId
-    });
+    if (response.status === 200) {
+      dispatch({
+        type: ActionTypes.DELETE_USER_PHOTO_SUCCESS,
+        payload: photoId
+      });
+    }
   } catch (error) {
     console.log(error);
   }

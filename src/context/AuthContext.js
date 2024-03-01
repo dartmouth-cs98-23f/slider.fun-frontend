@@ -13,7 +13,6 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
 
   const signUp = async (email, userName, password) => {
-    console.log({ email, userName, password })
     const data = {
       "email": email,
       "userName": userName,

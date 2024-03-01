@@ -10,7 +10,7 @@ import GameModal from './GameModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { likePhoto, removeLikeFromPhoto } from '../actions/photoListAction';
 
-const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
+const PuzzleCard = ({ id, photoListLocation, editMode, userId, openSignUpModal }) => {
   const puzzleInfo = useSelector(photoListLocation === "user" ? state => state.user.photoObjects[id] : state => state.photoList.community[id])
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
@@ -19,6 +19,7 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
   const authorId = puzzleInfo.authorId;
   const [isModalVisible, setIsModalVisible] = useState(false)
   const dispatch = useDispatch();
+
 
   const API_URL = "https://slider-fun.onrender.com/api";
   const [username, setUsername] = useState(false);
@@ -46,26 +47,26 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
   }, [authorId])
 
   const closeModal = () => {
-    console.log("close")
     setIsModalVisible(false)
   };
 
   const openModal = () => {
-    console.log("open")
-    setIsModalVisible(true)
-  }
-
-
-  const handleAddingLike = async (photoId) => {
-    if (userId && puzzleInfo.likedBy.indexOf(userId) === -1) {
-      console.log(photoId, userId)
-      await dispatch(likePhoto(photoId, userId));
-    } else {
-      await dispatch(removeLikeFromPhoto(photoId, userId))
-      console.log('go make an account smh')
+    if (editMode) {
+      setIsModalVisible(true)
     }
   }
 
+  const handleAddingLike = async (photoId) => {
+    if (localStorage.getItem('token') !== null) {
+      if (puzzleInfo.likedBy.indexOf(userId) === -1) {
+        dispatch(likePhoto(photoId, userId));
+      } else {
+        dispatch(removeLikeFromPhoto(photoId, userId))
+      }
+    } else {
+      openSignUpModal()
+    }
+  }
 
   return (
     <div className='puzzleCardContainer' >
@@ -78,21 +79,20 @@ const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
           username={username}
         />}
 
-      <div o>
+      <div onClick={() => openModal()}>
         <LazyLoadImage
           alt={"Puzzle image"}
           src={photoUrl}
           effect="blur"
           style={getImageStyle(photoProperties)}
         />
-
       </div>
       <div className='scoreDisplay'>
         <div>
           {photoTitle ? <div className='photoTitle'> {photoTitle} </div> : <div className='photoTitle'> Unnamed </div>}
           {username ? <div className='scoreHeader'> {username} </div> : <div className='scoreHeader'> Default </div>}
         </div>
-        <div className='rightSidePuzzleStats' onClick={() => (handleAddingLike(id))}>
+        <div className={`rightSidePuzzleStats ${puzzleInfo.likedBy.indexOf(userId) === -1 ? 'default' : 'redLike'}`} onClick={() => (handleAddingLike(id))}>
           <IconCameraHeart className='heartIcon' />
           <div>: {likes ? likes : 0} </div>
         </div>

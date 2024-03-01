@@ -20,7 +20,7 @@ const Stage = (props) => {
 
   return (
     <div>
-      {isModalVisible && <div className="modal-overlay"></div>}
+      {isModalVisible && <div className="modal-overlay" onClick={() => closeModal()}></div>}
       <InfoModal heading={title} text={infoText} extraText={extraText} isModalVisible={isModalVisible} closeModal={closeModal} openModal={openModal} />
       <Game
         stageOptions={stageOptions}

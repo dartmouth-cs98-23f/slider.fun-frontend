@@ -1,5 +1,4 @@
 export const getRBG = (pictureFile, filters = false) => {
-  // console.log(filters)
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.src = pictureFile;
@@ -88,8 +87,8 @@ export const compareTwoPhotos = async (pic, editedFilter, goalFilter1) => {
 
   const totalRMSE = (redRMSE + greenRMSE + blueRMSE) / 3;
 
-  console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
-  console.log('Total RMSE:', totalRMSE);
+  // console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
+  // console.log('Total RMSE:', totalRMSE);
 
   return totalRMSE;
 }

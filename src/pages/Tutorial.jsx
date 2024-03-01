@@ -2,22 +2,22 @@ import React, { useState } from 'react'
 import tutorialData from "../assets/TutorialData.js"
 import Stage from '../components/Stage'
 import TutorialHeader from '../components/TutorialHeader'
+import { useSelector } from 'react-redux'
 
 const Tutorial = () => {
   const [currentStageIndex, setCurrentStageIndex] = useState(0);
-  const [scores, setScores] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const scores = useSelector(state => state.tutorial.scores);
 
   const totalStages = tutorialData.Stages.length;
   const [mostForwardStage, setMostForwardStage] = useState(0);
 
-  const updateScores = (indexToUpdate, newScore) => {
-    // console.log(newScore)
-    setScores(scores.map((score, index) => index === indexToUpdate ? newScore : score));
-    // console.log(scores)
-  };
+  // const updateScores = (indexToUpdate, newScore) => {
+  //   // console.log(newScore)
+  //   setScores(scores.map((score, index) => index === indexToUpdate ? newScore : score));
+  //   // console.log(scores)
+  // };
 
   const goToNextStage = () => {
-    // console.log("goToNextStage called")
     setCurrentStageIndex((prevIndex) => Math.min(prevIndex + 1, totalStages - 1));
     setMostForwardStage(Math.max(mostForwardStage, currentStageIndex + 1));
   };
@@ -61,7 +61,6 @@ const Tutorial = () => {
         link={currentStage.link}
         infoText={currentStage.infoText}
         extraText={currentStage.extraText}
-        updateScores={updateScores}
         updateStageSliders={updateStageSliders}
         goToPreviousStage={goToPreviousStage}
         goToNextStage={goToNextStage}
