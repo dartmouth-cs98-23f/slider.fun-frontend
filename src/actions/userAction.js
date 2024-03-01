@@ -87,7 +87,7 @@ export const getUserInfo = (token) => async (dispatch) => {
         }
       });
 
-      await dispatch({
+      dispatch({
         type: ActionTypes.FETCH_USER_INFO,
         payload: response.data
       });

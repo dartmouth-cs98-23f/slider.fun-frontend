@@ -2,12 +2,13 @@ import React, { useEffect, useRef } from 'react'
 import PuzzleCard from '../components/PuzzleCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
-import { fetchAllPhoto } from '../actions/photoListAction';
+import { fetchAllPhoto, likePhoto } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
 
 const Community = () => {
   const dispatch = useDispatch();
   const hasFetchedPhotosRef = useRef(false);
+  const userId = useSelector(state => state.user.info.id);
 
   useEffect(() => {
     if (!hasFetchedPhotosRef.current) {
@@ -25,6 +26,7 @@ const Community = () => {
       key={index}
       photoListLocation="community"
       editMode={false}
+      userId={userId}
     />
   ));
 

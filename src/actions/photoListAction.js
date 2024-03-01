@@ -11,10 +11,11 @@ export const ActionTypes = {
   EDIT_PHOTO: "EDIT_PHOTO",
   REMOVE_PHOTO: "REMOVE_PHOTO",
   FETCH_USER_PHOTO_LIST: "FETCH_USER_PHOTO_LIST",
-  LIKE_PHOTO: 'LIKE_PHOTO',
+  GET_PHOTO_LIKES_SUCCESS: 'GET_PHOTO_LIKES_SUCCESS',
+  PHOTO_LIKE_SUCCESS: 'PHOTO_LIKE_SUCCESS',
+  REMOVE_PHOTO_LIKE_SUCCESS: 'REMOVE_PHOTO_LIKE_SUCCESS',
 };
 
-// Redux thunk action creator for fetching all photos
 export const fetchAllPhoto = () => async (dispatch) => {
   try {
     const response = await axios.get(`${API_URL}/photo/all`);
@@ -43,6 +44,8 @@ export const fetchAllPhoto = () => async (dispatch) => {
   }
 };
 
+
+//  PUT FUNCTIONS  //
 
 
 export const postPhoto = (data, userId) => async (dispatch) => {
@@ -82,14 +85,33 @@ export const removePhoto = (userId, photoId) => async (dispatch) => {
   }
 };
 
-export const likePhoto = (userId, photoId) => async (dispatch) => {
 
+export const likePhoto = (photoId, userId) => async (dispatch) => {
+  console.log(photoId, { userId })
+  try {
+    const response = await axios.put(`${API_URL}/photo/addLike/${photoId}`, { userId });
+
+    dispatch({
+      type: ActionTypes.PHOTO_LIKE_SUCCESS,
+      payload: response.data,
+    });
+
+  } catch (error) {
+    console.error('Error liking photo:', error);
+  }
 }
 
+export const removeLikeFromPhoto = (photoId, userId) => async (dispatch) => {
+  console.log(photoId, { userId })
+  try {
+    const response = await axios.put(`${API_URL}/photo/removeLike/${photoId}`, { userId });
 
-// // Function to delete a photo object from the database
-// export const deletePhoto = async (photoId) => {
-//   await axios.delete(`${API_URL}/photo/${photoId}`);
-// };
+    dispatch({
+      type: ActionTypes.REMOVE_PHOTO_LIKE_SUCCESS,
+      payload: response.data,
+    });
 
-
+  } catch (error) {
+    console.error('Error removing like from photo:', error);
+  }
+}

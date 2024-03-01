@@ -97,7 +97,7 @@ const PhotoEdit = (props) => {
   }
 
   const handleSubmit = async (title, photoProperties) => {
-  
+    props.closeModal();
   }
 
   if (orientation !== 'horizontal') {

@@ -7,16 +7,18 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { IconCameraHeart } from '@tabler/icons-react';
 import axios from 'axios';
 import GameModal from './GameModal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { likePhoto, removeLikeFromPhoto } from '../actions/photoListAction';
 
-const PuzzleCard = ({ id, photoListLocation, editMode }) => {
+const PuzzleCard = ({ id, photoListLocation, editMode, userId }) => {
   const puzzleInfo = useSelector(photoListLocation === "user" ? state => state.user.photoObjects[id] : state => state.photoList.community[id])
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
   const photoProperties = puzzleInfo.photoProperties;
-  const likes = puzzleInfo.likes;
+  const likes = puzzleInfo.likedBy.length;
   const authorId = puzzleInfo.authorId;
   const [isModalVisible, setIsModalVisible] = useState(false)
+  const dispatch = useDispatch();
 
   const API_URL = "https://slider-fun.onrender.com/api";
   const [username, setUsername] = useState(false);
@@ -53,6 +55,18 @@ const PuzzleCard = ({ id, photoListLocation, editMode }) => {
     setIsModalVisible(true)
   }
 
+
+  const handleAddingLike = async (photoId) => {
+    if (userId && puzzleInfo.likedBy.indexOf(userId) === -1) {
+      console.log(photoId, userId)
+      await dispatch(likePhoto(photoId, userId));
+    } else {
+      await dispatch(removeLikeFromPhoto(photoId, userId))
+      console.log('go make an account smh')
+    }
+  }
+
+
   return (
     <div className='puzzleCardContainer' >
       {isModalVisible &&
@@ -64,7 +78,7 @@ const PuzzleCard = ({ id, photoListLocation, editMode }) => {
           username={username}
         />}
 
-      <div onClick={openModal}>
+      <div o>
         <LazyLoadImage
           alt={"Puzzle image"}
           src={photoUrl}
@@ -78,9 +92,9 @@ const PuzzleCard = ({ id, photoListLocation, editMode }) => {
           {photoTitle ? <div className='photoTitle'> {photoTitle} </div> : <div className='photoTitle'> Unnamed </div>}
           {username ? <div className='scoreHeader'> {username} </div> : <div className='scoreHeader'> Default </div>}
         </div>
-        <div className='rightSidePuzzleStats'>
+        <div className='rightSidePuzzleStats' onClick={() => (handleAddingLike(id))}>
           <IconCameraHeart className='heartIcon' />
-          <div>: {likes !== null ? 0 : likes} </div>
+          <div>: {likes ? likes : 0} </div>
         </div>
       </div>
     </div>
