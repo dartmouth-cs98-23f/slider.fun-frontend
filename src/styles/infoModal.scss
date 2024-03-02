@@ -43,11 +43,13 @@
     gap: 0px;
 
   }
+
   .buttonsModal {
     display: flex;
     flex-direction: row;
     justify-content: center;
-  
+    margin-top: 20px;
+
     .tutorialButton {
       background-color: #E27272;
     }

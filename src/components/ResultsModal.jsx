@@ -13,7 +13,7 @@ function ResultsModal(props) {
   const navigate = useNavigate();
 
   const userInfo = useSelector(state => state.user.info)
-  const [newUser, setNewUser] = useState(false);
+  // const [newUser, setNewUser] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -21,12 +21,13 @@ function ResultsModal(props) {
       setLoading(false);
       if (props.score >= 95) {
         makeConfetti();
-        if (localStorage.getItem("token") === undefined && props.daily) {
+        if (localStorage.getItem("token") && props.daily) {
           dispatch(addDailyPuzzleSScore(userInfo.id, 5));
         }
       }
     }, 1100);
-  }, [props.score]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   const nextStageHandler = () => {

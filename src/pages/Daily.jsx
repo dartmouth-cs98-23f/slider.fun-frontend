@@ -2,26 +2,25 @@ import React, { useEffect, useState } from 'react'
 import Game from './Game'
 import InfoModal from '../components/InfoModal'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux';
+import { setHasHowtoPlayShown } from '../actions/dailyAction'
 
 export const fetchPuzzleOfDay = async () => {
   try {
     const currentDate = new Date();
-    // Format the date as YYYY/MM/DD
     const formattedDate = currentDate.toISOString().slice(0, 10);
 
     const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
       params: {
-        date: formattedDate // The date is passed as a query parameter
+        date: formattedDate
       }
     });
 
     return response.data;
   } catch (error) {
     console.error('There was an error fetching the puzzle of the day:', error);
-    // Handle the error appropriately
   }
 };
-
 
 const CURRENT_OPTIONS = [
   {
@@ -102,21 +101,9 @@ const CURRENT_OPTIONS = [
     status: true,
   }
 ]
-
-
-// const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
-// const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
-// const bakerTower = "https://slider-fun.onrender.com/api/photo/65cc7534ef5a21ddc90401e7"
-
-// const links = {
-//   "1": dHallLink,
-//   "2": nycLink,
-//   "3": bakerTower,
-// }
-
 const Daily = () => {
-
   const [dailyPuzzle, setDailyPuzzle] = useState({})
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchAndSetPuzzle = async () => {
@@ -129,17 +116,17 @@ const Daily = () => {
         }
       } catch (error) {
         console.error('Failed to fetch daily puzzle:', error);
-
       }
     };
-
     fetchAndSetPuzzle();
   }, [])
+  const hasHowtoPlayShown = useSelector((state => state.daily.hasHowtoPlayShown));
 
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(!hasHowtoPlayShown);
 
   const closeModal = () => {
     setIsModalVisible(false)
+    dispatch(setHasHowtoPlayShown(true));
   };
 
   const openModal = () => {
