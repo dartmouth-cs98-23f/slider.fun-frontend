@@ -104,7 +104,7 @@
         background-image: url('../assets/hue_rotate.jpg');
     }
     &.blur {
-        background-image: url('../assets/blur2.jpg');
+        background-image: url('../assets/Chai-Edited.jpg');
     }
 }
 
@@ -127,17 +127,17 @@
 }
 
 .simplified-score-card {
-   //background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 500px; /* Adjust based on your content */
-    height: 450px; /* Adjust based on your content */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 5px;
-
-    //margin: 10px; /* Space around each card */
-    //position: relative;
-}
+    //background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     width: 500px; /* Adjust based on your content */
+     height: 450px; /* Adjust based on your content */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     margin: 5px;
+ 
+     //margin: 10px; /* Space around each card */
+     //position: relative;
+ }
 /* Add background images for each stage */
 .simplified-score-card.brightness {
     background-image: url('../assets/brightness.jpg');
@@ -152,7 +152,7 @@
 }
 
 .simplified-score-card.grayscale {
-    background-image: url('../assets/greyscale.jpg');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fgreyscale.JPG?alt=media&token=1f9122cf-ed57-491d-8e37-0bacb53b220b');
 }
 
 .simplified-score-card.sepia {
@@ -200,6 +200,30 @@
     overflow: hidden; 
     flex-grow: 1;
     opacity: 0;
+    //background-image: url('https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fblur.jpeg?alt=media&token=3b5de3b7-32d6-4765-85c7-43ff91f0d803');
+
+    // Background images for each stage
+    &.brightness {
+        background-image: url('../assets/brightness.jpg');
+    }
+    &.contrast {
+        background-image: url('../assets/contrast.jpg');
+    }
+    &.saturation {
+        background-image: url('../assets/saturation.jpg');
+    }
+    &.grayscale {
+        background-image: url('https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fgreyscale.JPG?alt=media&token=1f9122cf-ed57-491d-8e37-0bacb53b220b');
+    }
+    &.sepia {
+        background-image: url('../assets/sepia.jpg');
+    }
+    &.hue-rotate {
+        background-image: url('../assets/hue_rotate.jpg');
+    }
+    &.blur {
+        background-image: url('https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fblur.jpeg?alt=media&token=3b5de3b7-32d6-4765-85c7-43ff91f0d803');
+    }
 
 
     animation: fadeIn 1s ease-out forwards;
@@ -211,16 +235,16 @@
     &:nth-child(6) { animation-delay: 1.2s; }
     &:nth-child(7) { animation-delay: 1.4s; }
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5); 
-        z-index: 1;
-    }
+    // &::before {
+    //     content: "";
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     right: 0;
+    //     bottom: 0;
+    //     background: rgba(0, 0, 0, 0.5); 
+    //     z-index: 1;
+    // }
 
     .overlay {
         position: absolute;
@@ -228,7 +252,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.088); // Semi-transparent black overlay
+        background: rgba(0, 0, 0, 0.5);
+        //background: rgba(0, 0, 0, 0.088); // Semi-transparent black overlay
         z-index: 1; // Ensure the overlay is above the background image but below the content
     }
 
@@ -267,29 +292,6 @@
         position: relative;
         top: 35%;
         letter-spacing: 2px;
-    }
-
-    // Background images for each stage
-    &.brightness {
-        background-image: url('../assets/brightness.jpg');
-    }
-    &.contrast {
-        background-image: url('../assets/contrast.jpg');
-    }
-    &.saturation {
-        background-image: url('../assets/saturation.jpg');
-    }
-    &.grayscale {
-        background-image: url('../assets/greyscale.jpg');
-    }
-    &.sepia {
-        background-image: url('../assets/sepia.jpg');
-    }
-    &.hue-rotate {
-        background-image: url('../assets/hue_rotate.jpg');
-    }
-    &.blur {
-        background-image: url('../assets/blur2.jpg');
     }
 }
 

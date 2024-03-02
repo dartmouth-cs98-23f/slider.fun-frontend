@@ -35,35 +35,13 @@ const ResultsModal = ({ averageScore, onRetry, onShare }) => {
     const navigate = useNavigate();
     const handleNavigate = (path) => {
         navigate(path);};
-
-    // const handleShare = () => {
-    //     // Select the results-page element that wraps all scorecards
-    //     const content = document.querySelector('.results-page');
-    //     if (content) {
-    //         html2canvas(content, { 
-    //             scale: 1, 
-    //             useCORS: true,
-    //             logging: true,
-    //             windowWidth: content.scrollWidth,
-    //             windowHeight: content.scrollHeight, 
-    //         }).then((canvas) => {
-    //             const image = canvas.toDataURL('image/png');
-    //             const link = document.createElement('a');
-    //             link.href = image;
-    //             link.download = 'game-scores.png'; // Customizable file name
-    //             document.body.appendChild(link);
-    //             link.click();
-    //             document.body.removeChild(link);
-    //         }).catch(err => console.error("Error capturing image: ", err));
-    //     }
-    // };
     return (
         <div className="results-modal">
         <div className="modal-content">
             <h2>Average Score</h2>
             <p>{averageScore.toFixed(0)}</p>
             <button onClick={() => handleNavigate("/tutorial")}>Retry</button>
-            <button onClick={onShare}>Share</button>
+            {/* <button onClick={onShare}>Share</button> */}
         </div>
     </div>
     )
@@ -71,6 +49,15 @@ const ResultsModal = ({ averageScore, onRetry, onShare }) => {
 
 const ResultsPage = () => {
     const scores = useSelector(state => state.tutorial.scores);
+    const stages = [
+        "Brightness",
+        "Contrast",
+        "Saturation",
+        "Greyscale",
+        "Sepia",
+        "Hue Rotate",
+        "Blur",
+    ];
     const [showModal, setShowModal] = useState(false);
     const [averageScore, setAverageScore] = useState(0);
     const [isSharing, setIsSharing] = useState(false); // State to control sharing mode
@@ -115,29 +102,36 @@ const ResultsPage = () => {
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                setIsSharing(false); // Reset sharing mode
+                setIsSharing(false);
             });
-        }, 100); // Adjust delay as needed
+        }, 100);
     };
 
     return (
         <>
             <div className="results-page">
-                {Object.entries(scores).map(([stage, score], index) => (
-                    <ScoreCard key={index} stage={stage} score={score} />
-                ))}
+                {stages.map((stage, index) => {
+                    const normalizedStage = stage.replace(/\s+/g, '-').toLowerCase();
+                    const score = scores[index]; // Fetch score from Redux, default to 0 if not found
+                    return <ScoreCard key={index} stage={stage} score={score} />;
+                })}
             </div>
             <div className="hidden-container" aria-hidden="true">
-                <div className="simplified-score-card-container">
-                    {Object.entries(scores).map(([stage, score], index) => (
-                        <div className={`simplified-score-card ${stage.replace(/\s+/g, '-').toLowerCase()}`} key={index}>
-                            <div className="simplified-content">
-                                <div className="simplified-stage-name">{stage}</div>
-                                <div className="simplified-stage-score">{score}</div>
+                {/* This is likely used for the sharing functionality with a simplified layout */}
+                {stages.map((stage, index) => {
+                    const normalizedStage = stage.replace(/\s+/g, '-').toLowerCase();
+                    const score = scores[index];
+                    return (
+                        <div className="simplified-score-card-container">
+                            <div className={`simplified-score-card ${normalizedStage}`}>
+                                <div className="simplified-content">
+                                    <div className="simplified-stage-name">{stage}</div>
+                                    <div className="simplified-stage-score">{score}</div>
+                                </div>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    );
+                })}
             </div>
             {showModal && <ResultsModal averageScore={averageScore} onRetry={() => setShowModal(false)} onShare={handleShare} />}
         </>

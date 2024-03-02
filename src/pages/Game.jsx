@@ -194,8 +194,8 @@ const Game = (props) => {
 
           {/* uncomment below for easier navigation */}
 
-          <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button>
-          <button onClick={props.goToNextStage} disabled={props.currentStageIndex === 7 - 1}>Next Stage</button>
+          {/* <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button> */}
+          {/* <button onClick={props.goToNextStage} disabled={props.currentStageIndex === 7 - 1}>Next Stage</button> */}
         </div>
 
         {isModalVisible && (
