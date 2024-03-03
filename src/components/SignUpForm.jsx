@@ -33,7 +33,7 @@ const SignUpForm = ({ logoVisible }) => {
         {logoVisible ? <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img> :
           <div>
             <h1> Join the Slider.Fun community!</h1>
-            <p> Join today and start earning slider points and upload photos.</p>
+            <p> Join today and start earning slider points and upload your own photos.</p>
           </div>}
         <input placeholder='email' onChange={(e) => setEmail(e.target.value)} />
         <input placeholder='username' onChange={(e) => setName(e.target.value)} />

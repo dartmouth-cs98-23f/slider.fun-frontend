@@ -49,9 +49,11 @@ const PhotoCard = ({ id, puzzleInfo, editMode, userId, openSignUpModal }) => {
   };
 
   const openModal = () => {
-    // if (editMode) {
-    setIsModalVisible(true)
-    // }
+    if (localStorage.getItem('token') !== null) {
+      setIsModalVisible(true)
+    } else {
+      openSignUpModal()
+    }
   }
 
   const handleAddingLike = async (photoId) => {
