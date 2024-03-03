@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import PuzzleCard from '../components/PuzzleCard'
+import PuzzleCard from '../components/PhotoCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
 import { fetchAllPhoto, fetchAllPhotosByLikes } from '../actions/photoListAction';
@@ -22,9 +22,8 @@ const Community = () => {
       dispatch(fetchAllPhotosByLikes());
       dispatch(fetchAllPhoto());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-
 
   const closeSignUpModal = () => {
     setIsModalVisible(false)
@@ -47,7 +46,6 @@ const Community = () => {
     />
   ));
 
-
   const puzzleCards = Object.keys(photoList).map((key, index) => (
     <PuzzleCard
       puzzleInfo={photoList[key]}
@@ -66,10 +64,7 @@ const Community = () => {
       <InfoModal signUp={true} isModalVisible={isModalVisible} closeSignUpModal={closeSignUpModal} />
       <div className='communityPhotoContainer'>
         <CommunityFilter />
-        <br />
-
         {selectedList === "byLikes" ? puzzleCardsByLikes : puzzleCards}
-
       </div>
     </div>
   )

@@ -13,6 +13,7 @@ const Daily = () => {
     if (!puzzleFetched) {
       dispatch(fetchPuzzleOfDay());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const dailyPuzzle = useSelector((state => state.daily.photo));
@@ -43,6 +44,7 @@ const Daily = () => {
           openModal={openModal}
           pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
           daily={true}
+          dailyPuzzleId={dailyPuzzle.id}
         />}
     </div>
   )

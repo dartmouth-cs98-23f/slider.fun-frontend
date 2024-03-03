@@ -83,8 +83,6 @@ const Game = (props) => {
       if (data) {
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
-        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fdaily3.jpeg?alt=media&token=faeb4d74-5b3b-4fc4-8c68-e19278a570fe")
-        // setEditedOptions(defaultOptions)
       }
     });
   }, [props.pic_link]);
@@ -118,6 +116,7 @@ const Game = (props) => {
       }
 
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score, defaultScore])
 
   const handleCompareClick = () => {
@@ -204,11 +203,13 @@ const Game = (props) => {
         {isModalVisible && (
           <ResultsModal
             daily={props.daily}
+            dailyPuzzleId={props.dailyPuzzleId}
             tutorial={props.tutorial}
             goToNextStage={props.goToNextStage}
             score={percentScore}
             onClose={closeModal}
             img={importEdited}
+            userSelectedProperties={currentOptions}
             currentStyle={getImageStyle(currentOptions)}
             targetStyle={getImageStyle(editedOptions)} />
         )}

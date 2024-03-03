@@ -1,14 +1,18 @@
 import React from 'react'
-import PuzzleCard from './PhotoCard'
+import PhotoCard from './PhotoCard'
 import { useSelector } from 'react-redux';
 
-const Statistics = ({ userInfo }) => {
-  const puzzleHistory = useSelector(state => state.user.photoObjects);
+const UserCompletedDaily = ({ userInfo }) => {
+  const puzzleHistory = useSelector(state => state.user.info.dailyPuzzles);
   console.log(puzzleHistory)
-  const puzzleCards = Object.keys(puzzleHistory)
-    .filter(key => puzzleHistory[key] !== undefined)
+
+
+  const filteredPuzzleHistory = puzzleHistory.filter(element => element !== null);
+
+  const puzzleCards = Object.keys(filteredPuzzleHistory)
+    .filter(key => puzzleHistory[key] !== undefined && puzzleHistory[key] !== null)
     .map((key, index) => (
-      <PuzzleCard
+      <PhotoCard
         id={puzzleHistory[key].id || index}
         key={index}
         puzzleInfo={puzzleHistory[key]}
@@ -25,4 +29,4 @@ const Statistics = ({ userInfo }) => {
   )
 }
 
-export default Statistics
+export default UserCompletedDaily

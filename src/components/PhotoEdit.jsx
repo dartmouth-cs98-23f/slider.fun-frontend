@@ -12,6 +12,7 @@ import horizontalSplit from "../assets/HorizontalSplit.png";
 import { useDispatch } from 'react-redux';
 import { editPhotoById, removePhotoFromUser } from '../actions/userAction';
 import "../styles/game.scss";
+import { IconTrash } from '@tabler/icons-react';
 
 const PhotoEdit = (props) => {
   const puzzleInfo = props.puzzleInfo;
@@ -25,7 +26,6 @@ const PhotoEdit = (props) => {
   const [modifiedPhotoProperties, setModifiedPhotoProperties] = useState(props.puzzleInfo ? props.puzzleInfo.photoProperties : DEFAULT_OPTIONS);
 
   const [originalPhotoProperties] = useState(DEFAULT_OPTIONS)
-  const setMessageVisability = props.setMessageVisability;
   const photoUrl = props.photoUrl;
 
   function handleSliderChange(propertyIndex, { target }) {
@@ -104,15 +104,17 @@ const PhotoEdit = (props) => {
   }
   return (
     <div className="container">
+
+      {/* If in edit mode */}
+
       {props.editMode ?
         <div id="editFields">
           <div>
             <label htmlFor="photoTitle"> Title: </label>
             <input type="text" id="photoTitle" name="photoTitle" value={title} onChange={handleChange} />
           </div>
-          <button className="red" onClick={() => handleDelete(props.userId, puzzleInfo.id)}> Delete Photo</button>
         </div> :
-        <div>
+        <div className="photoTitleContainer">
           <h2 htmlFor="photoTitle"> {title} </h2>
         </div>
       }
@@ -139,11 +141,14 @@ const PhotoEdit = (props) => {
           />
         ))}
       </div>
-      <div className='actionButtons'>
+      <div className={`actionButtons ${props.editMode ? "spaceBetween" : ""}`}>
         {props.editMode ?
-          <button className='submit' onClick={() => handleEditPhoto(title, modifiedPhotoProperties)}>
-            update
-          </button>
+          <>
+            <button className="red" onClick={() => handleDelete(props.userId, puzzleInfo.id)}> <IconTrash /></button>
+            <button className='submit' onClick={() => handleEditPhoto(title, modifiedPhotoProperties)}>
+              update
+            </button>
+          </>
           :
           <button className='submit' onClick={() => handleSubmit(title, modifiedPhotoProperties)}>
             submit

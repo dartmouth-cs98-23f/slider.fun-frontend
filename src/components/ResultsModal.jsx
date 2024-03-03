@@ -4,7 +4,7 @@ import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 import makeConfetti from './Confetti';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDailyPuzzleSScore, setUserInfo } from '../actions/userAction';
+import { setUserInfo, handleDailyCompleted } from '../actions/userAction';
 import { useNavigate } from 'react-router-dom';
 
 function ResultsModal(props) {
@@ -22,12 +22,12 @@ function ResultsModal(props) {
       if (props.score >= 95) {
         makeConfetti();
         if (localStorage.getItem("token") && props.daily) {
-          dispatch(addDailyPuzzleSScore(userInfo.id, 5));
+          dispatch(handleDailyCompleted(userInfo.id, props.dailyPuzzleId, props.score, props.userSelectedProperties));
         }
       }
     }, 1100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.score]);
 
 
   const nextStageHandler = () => {

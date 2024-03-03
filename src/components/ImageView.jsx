@@ -13,7 +13,6 @@ const photoContainerStyle = {
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'center',
-  width: '800px',
   height: 'auto',
 };
 
@@ -32,7 +31,6 @@ const ImageView = (props) => {
                   ...props.getImageStyle(props.currentOptions),
                 }}
               />
-
             </div>
             <div className='photo'>
               <p> Edit </p>

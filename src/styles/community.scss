@@ -31,12 +31,18 @@ $light-text-color: #8d8d8d; // text color
     gap: 10px;
     padding: 10px;
 
+
+    .selected {
+      background-color: $accent-color;
+    }
+
     button {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 5px;
       width: fit-content;
+
 
       p {
         font-weight: bold;

@@ -22,7 +22,12 @@ export const ActionTypes = {
   DELETE_USER_PHOTO_SUCCESS: "DELETE_USER_PHOTO_SUCCESS",
   SET_USER_TOKEN: "SET_USER_TOKEN",
   USER_DAILY_COMPLETED: "USER_DAILY_COMPLETED",
+  HANDLE_DAILY_SUCCESS: "HANDLE_DAILY_SUCCESS",
+  ADD_DAILY_TO_USER_SUCCESS: "ADD_DAILY_TO_USER_SUCCESS",
+  FETCH_USER_PUZZLES_SUCCESS: "FETCH_USER_PUZZLES_SUCCESS",
+  FETCH_PUZZLE_BY_ID_SUCCESS: "FETCH_PUZZLE_BY_ID_SUCCESS",
 };
+
 
 // gets the token
 export const userSignIn = (email, password) => async (dispatch) => {
@@ -214,9 +219,19 @@ export const removePhotoFromUser = (userId, photoId) => async (dispatch) => {
   }
 }
 
-export const handleDailyCompleted = (userId, puzzleDataId, userAnswer) => async () => {
-  await userDailyCompleted(userId);
-  await addDailyToUser(userId, puzzleDataId);
+export const handleDailyCompleted = (userId, puzzleDataId, score, userSelectedProperties) => async (dispatch) => {
+  try {
+    await dispatch(userDailyCompleted(userId));
+    await dispatch(addDailyToUser(userId, puzzleDataId, score, userSelectedProperties));
+    await dispatch(addDailyPuzzleSScore(userId, 5));
+
+    dispatch({
+      type: ActionTypes.HANDLE_DAILY_SUCCESS,
+      // payload: response.data.dailyTaskStatus
+    })
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 export const userDailyCompleted = (userId) => async (dispatch) => {
@@ -235,18 +250,61 @@ export const userDailyCompleted = (userId) => async (dispatch) => {
   }
 };
 
-export const addDailyToUser = (userId, puzzleDataId) => async (dispatch) => {
-  try {
-    const response = await axios.put(`${API_URL}/users/addPuzzle/${userId}`, puzzleDataId);
-    if (response.status === 200) {
-      dispatch({
-        type: ActionTypes.ADD_DAILY_TO_USER_SUCCESS,
-        payload: response.data.dailyPuzzles
-      });
-    }
+export const addDailyToUser = (userId, puzzleDataId, score, userSelectedProperties) => async (dispatch) => {
 
+  try {
+    const userPuzzleResponse = await axios.post(`${API_URL}/userPuzzleData/new`, { dailyPuzzle: puzzleDataId, userSelectedProperties, score });
+    if (userPuzzleResponse.status === 200) {
+      console.log(userId, userPuzzleResponse.data.id)
+      try {
+        const puzzleDataId = userPuzzleResponse.data.id;
+        console.log({ puzzleDataId })
+        const response = await axios.put(`${API_URL}/users/addPuzzleData/${userId}`, { puzzleDataId });
+
+        if (response.status === 200) {
+          console.log(response.data)
+          dispatch({
+            type: ActionTypes.ADD_DAILY_TO_USER_SUCCESS,
+            payload: response.data
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   } catch (error) {
     console.log(error);
   }
 };
+
+// PuzzleData
+
+
+export const fetchUserPuzzle = (userPuzzles) => async (dispatch) => {
+  if (userPuzzles) {
+    for (let i = 0; i < userPuzzles.length; i++) {
+      dispatch(fetchPhotoById(userPuzzles[i]));
+    }
+  }
+
+  dispatch({
+    type: ActionTypes.FETCH_USER_PUZZLES_SUCCESS,
+  });
+};
+
+export const fetchPuzzleById = (userPuzzleDataId) => async (dispatch) => {
+  try {
+    const response = await axios.get(`${API_URL}/userPuzzleData/${userPuzzleDataId}`);
+
+    if (response.status === 200) {
+      dispatch({
+        type: ActionTypes.FETCH_PUZZLE_BY_ID_SUCCESS,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 

@@ -5,6 +5,7 @@ const initialState = {
   "token": "",
   "info": {},
   "photoObjects": {},
+  "puzzleObjects": {},
   "photoObjectsFetched": false,
 }
 
@@ -51,7 +52,7 @@ const userReducer = produce((draftState, action) => {
       draftState.photoObjects[action.payload.id] = action.payload;
       break;
     case ActionTypes.USER_DAILY_COMPLETED:
-      draftState.info.dailyTaskStatus = action.payload;
+      draftState.info.dailyTaskStatus = true;
 
       break;
     default:
