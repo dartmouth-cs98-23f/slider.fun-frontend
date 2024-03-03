@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import Slider from '../components/Slider'
-import ResultsModal from '../components/ResultsModal'
-import current from '../assets/Chai000724-R2-077-37.jpg'
+import ResultsModal from '../components/ResultsModal';
+import current from '../assets/Chai000724-R2-077-37.jpg';
 import "../App.scss";
 import $ from 'jquery';
 import ImageView from '../components/ImageView'
@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux'
 
 import axios from 'axios';
 import { updateScores } from '../actions/tutorialAction'
-
+console.log(current)
 // takes a backend photo link and return the photo object
 async function fetchPhoto(link) {
   try {
@@ -93,13 +93,10 @@ const Game = (props) => {
   }, [stageOptions]);
 
   const handleScoreProcessing = async (photo, filter1, filter2) => {
-    // setting a default score for the first time
     if (defaultScore === false) {
       setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
     }
-    // console.log("hi", filter1, filter2)
     let photoScore = (await compareTwoPhotos(photo, filter1, filter2))
-    // console.log("photo score", photoScore)
     setScore(photoScore)
   }
 
@@ -116,7 +113,7 @@ const Game = (props) => {
       }
 
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score, defaultScore])
 
   const handleCompareClick = () => {

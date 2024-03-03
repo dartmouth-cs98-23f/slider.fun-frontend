@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import PuzzleCard from '../components/PhotoCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
-import { fetchAllPhoto, fetchAllPhotosByLikes } from '../actions/photoListAction';
+import { fetchAllPhoto, fetchAllPhotosByLikes, setScoreHighMessageVis, setScoreLowMessageVis } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
 import InfoModal from '../components/InfoModal';
 import CommunityFilter from '../components/CommunityFilter';
+import HoverMessage from '../components/HoverMessage';
 
 const Community = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,9 @@ const Community = () => {
   const photoListByLikes = useSelector(state => state.photoList.communityByLikes);
   const photoList = useSelector(state => state.photoList.community);
   const selectedList = useSelector(state => state.photoList.selected);
+  const scoreLowMessageVis = useSelector(state => state.photoList.scoreLowMessageVis);
+  const scoreHighMessageVis = useSelector(state => state.photoList.scoreHighMessageVis);
+  const currentPhotoScore = useSelector(state => state.photoList.currentPhotoScore);
 
   // console.log(communityPhotoList)
   useEffect(() => {
@@ -22,7 +26,7 @@ const Community = () => {
       dispatch(fetchAllPhotosByLikes());
       dispatch(fetchAllPhoto());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeSignUpModal = () => {
@@ -32,6 +36,7 @@ const Community = () => {
   const openSignUpModal = () => {
     setIsModalVisible(true)
   }
+
 
   const puzzleCardsByLikes = Object.keys(photoListByLikes).map((key, index) => (
     <PuzzleCard
@@ -59,9 +64,31 @@ const Community = () => {
     />
   ));
 
+  useEffect(() => {
+    // wait for 2 seconds before hiding the message
+    const timer = setTimeout(() => {
+      dispatch(setScoreHighMessageVis(false));
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [dispatch, scoreHighMessageVis]);
+
+  useEffect(() => {
+    // wait for 2 seconds before hiding the message
+    const timer = setTimeout(() => {
+      dispatch(setScoreLowMessageVis(false));
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [dispatch, scoreLowMessageVis]);
+
   return (
     <div>
+
+
       <InfoModal signUp={true} isModalVisible={isModalVisible} closeSignUpModal={closeSignUpModal} />
+      <HoverMessage message={`Try again! You got a ${currentPhotoScore}`} messageVisability={scoreLowMessageVis} />
+      <HoverMessage message={`+1 SliderPoint! You got a ${currentPhotoScore} `} messageVisability={scoreHighMessageVis} />
       <div className='communityPhotoContainer'>
         <CommunityFilter />
         {selectedList === "byLikes" ? puzzleCardsByLikes : puzzleCards}

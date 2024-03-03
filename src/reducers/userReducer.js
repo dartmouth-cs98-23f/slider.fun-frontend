@@ -53,7 +53,8 @@ const userReducer = produce((draftState, action) => {
       break;
     case ActionTypes.USER_DAILY_COMPLETED:
       draftState.info.dailyTaskStatus = true;
-
+      break;
+    case ActionTypes.HANDLE_PHOTO_PLAY_SUCCESS:
       break;
     default:
       return draftState;

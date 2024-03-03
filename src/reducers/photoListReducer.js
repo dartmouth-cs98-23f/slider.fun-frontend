@@ -6,6 +6,9 @@ const initialState = {
   "community": {},
   "communityByLikes": {},
   "photoListFetched": false,
+  "scoreHighMessageVis": false,
+  "scoreLowMessageVis": false,
+  "currentPhotoScore": 0,
 }
 
 const photoListReducer = produce((draftState, action) => {
@@ -34,6 +37,15 @@ const photoListReducer = produce((draftState, action) => {
       break;
     case ActionTypes.SET_SELECTED_PHOTO_LIST:
       draftState.selected = action.payload;
+      break;
+    case ActionTypes.SET_SCORE_LOW_MESSAGE_VIS:
+      draftState.scoreLowMessageVis = action.payload;
+      break;
+    case ActionTypes.SET_SCORE_HIGH_MESSAGE_VIS:
+      draftState.scoreHighMessageVis = action.payload;
+      break;
+    case ActionTypes.SET_CURRENT_PHOTO_SCORE:
+      draftState.currentPhotoScore = action.payload;
       break;
     default:
       return draftState;

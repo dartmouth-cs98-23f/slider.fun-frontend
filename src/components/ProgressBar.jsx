@@ -12,7 +12,7 @@ const ProgressBar = (props) => {
 
   const progressStyles = {
     height: 5,
-    width: `${completed}%`,
+    width: `0.${completed}%`,
     backgroundColor: bgcolor,
     borderRadius: 5,
   };

@@ -16,6 +16,9 @@ export const ActionTypes = {
   REMOVE_PHOTO_LIKE_SUCCESS: 'REMOVE_PHOTO_LIKE_SUCCESS',
   SET_SELECTED_PHOTO_LIST: 'SET_SELECTED_PHOTO_LIST',
   FETCH_PHOTOLIST_BY_LIKES_SUCCESS: 'FETCH_PHOTOLIST_BY_LIKES_SUCCESS',
+  SET_SCORE_LOW_MESSAGE_VIS: 'SET_SCORE_LOW_MESSAGE_VIS',
+  SET_SCORE_HIGH_MESSAGE_VIS: 'SET_SCORE_HIGH_MESSAGE_VIS',
+  SET_CURRENT_PHOTO_SCORE: 'SET_CURRENT_PHOTO_SCORE',
 };
 
 export const fetchAllPhoto = () => async (dispatch) => {
@@ -149,4 +152,26 @@ export const setSelectedPhotoList = (type) => async (dispatch) => {
   });
 
 
+}
+
+
+export const setScoreHighMessageVis = (visibility) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_SCORE_HIGH_MESSAGE_VIS,
+    payload: visibility
+  })
+}
+
+export const setScoreLowMessageVis = (visibility) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_SCORE_LOW_MESSAGE_VIS,
+    payload: visibility
+  })
+}
+
+export const setCurrentPhotoScore = (score) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_CURRENT_PHOTO_SCORE,
+    payload: score
+  })
 }

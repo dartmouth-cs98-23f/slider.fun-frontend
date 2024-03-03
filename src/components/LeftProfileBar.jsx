@@ -7,9 +7,9 @@ const LeftProfileBar = ({ userInfo, signOutHandler }) => {
   return (
     <div className='leftProfileBar'>
       <div className='topBar'>
-        <div className='avatarContainer'>
+        {/* <div className='avatarContainer'>
           <img className='avatar' src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" />
-        </div>
+        </div> */}
         <div className='username'>
           <div>
             {userInfo.name}
@@ -22,8 +22,8 @@ const LeftProfileBar = ({ userInfo, signOutHandler }) => {
       <div className='middleBar'>
         <div >
           <div className='rowFlex sliderScoreHeader'>
-            <div className='headerText'> SliderScore </div>
-            <div className='scoreQuestionMark'> <IconQuestionMark size={15} /> </div>
+            <div className='headerText'> SliderPoints </div>
+            {/* <div className='scoreQuestionMark'> <IconQuestionßark size={15} /> </div> */}
           </div>
 
           <div className='headerText'> {userInfo.sliderScore}</div>

@@ -26,6 +26,7 @@ export const ActionTypes = {
   ADD_DAILY_TO_USER_SUCCESS: "ADD_DAILY_TO_USER_SUCCESS",
   FETCH_USER_PUZZLES_SUCCESS: "FETCH_USER_PUZZLES_SUCCESS",
   FETCH_PUZZLE_BY_ID_SUCCESS: "FETCH_PUZZLE_BY_ID_SUCCESS",
+  HANDLE_PHOTO_PLAY_SUCCESS: "HANDLE_PHOTO_PLAY_SUCCESS",
 };
 
 
@@ -274,6 +275,24 @@ export const addDailyToUser = (userId, puzzleDataId, score, userSelectedProperti
     }
   } catch (error) {
     console.log(error);
+  }
+};
+
+
+// Handle Community Photo Complete
+
+export const handlePhotoComplete = (userId) => async (dispatch) => {
+  try {
+    // need more stuff here but don't got time
+
+    await dispatch(addDailyPuzzleSScore(userId, 1));
+
+    dispatch({
+      type: ActionTypes.HANDLE_PHOTO_PLAY_SUCCESS,
+      // payload: response.data.dailyTaskStatus
+    })
+  } catch (error) {
+    console.log(error)
   }
 };
 
