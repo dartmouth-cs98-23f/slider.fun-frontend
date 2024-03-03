@@ -3,7 +3,6 @@ import PuzzleCard from './PuzzleCard'
 import { useSelector } from 'react-redux';
 
 const Statistics = ({ userInfo }) => {
-
   const puzzleHistory = useSelector(state => state.user.photoObjects);
 
   const puzzleCards = Object.keys(puzzleHistory)

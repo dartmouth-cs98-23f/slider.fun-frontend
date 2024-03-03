@@ -10,10 +10,8 @@ const ProfileViews = ({ token }) => {
   return (
     <div className='profileViewContainer'>
       <div className='profileViewNav'>
-        {/* <button onClick={() => setCurrentView(0)}>Activity</button> */}
         <button onClick={() => setCurrentView(1)}>Gallery</button>
         <button onClick={() => setCurrentView(2)}>Upload</button>
-
       </div>
       <div className='profileViewContent'>
         {/* {currentView === 0 ? <Activity userInfo={userInfo} /> : ""} */}

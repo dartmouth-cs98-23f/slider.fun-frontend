@@ -50,6 +50,10 @@ const userReducer = produce((draftState, action) => {
     case ActionTypes.FETCH_PHOTO_BY_ID_SUCCESS:
       draftState.photoObjects[action.payload.id] = action.payload;
       break;
+    case ActionTypes.USER_DAILY_COMPLETED:
+      draftState.info.dailyTaskStatus = action.payload;
+
+      break;
     default:
       return draftState;
   }

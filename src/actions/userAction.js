@@ -21,6 +21,7 @@ export const ActionTypes = {
   PUT_USER_SLIDER_SCORE_SUCCESS: "PUT_USER_SLIDER_SCORE_SUCCESS",
   DELETE_USER_PHOTO_SUCCESS: "DELETE_USER_PHOTO_SUCCESS",
   SET_USER_TOKEN: "SET_USER_TOKEN",
+  USER_DAILY_COMPLETED: "USER_DAILY_COMPLETED",
 };
 
 // gets the token
@@ -85,12 +86,8 @@ export const setUserInfo = (data) => async (dispatch) => {
 };
 
 export const getUserInfo = (token) => async (dispatch) => {
-
-  console.log(token)
   try {
     if (token) {
-      // Adjust the URL as needed
-
       const response = await axios.get(`${API_URL}/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -178,7 +175,6 @@ export const editPhotoById = (photoId, data) => async (dispatch) => {
 
   } catch (error) {
     console.log(error);
-
   }
 }
 
@@ -218,4 +214,39 @@ export const removePhotoFromUser = (userId, photoId) => async (dispatch) => {
   }
 }
 
+export const handleDailyCompleted = (userId, puzzleDataId, userAnswer) => async () => {
+  await userDailyCompleted(userId);
+  await addDailyToUser(userId, puzzleDataId);
+};
+
+export const userDailyCompleted = (userId) => async (dispatch) => {
+  try {
+    const response = await axios.put(`${API_URL}/users/completePuzzle/${userId}`);
+
+    if (response.status === 200) {
+      dispatch({
+        type: ActionTypes.USER_DAILY_COMPLETED,
+        payload: response.data.dailyTaskStatus
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addDailyToUser = (userId, puzzleDataId) => async (dispatch) => {
+  try {
+    const response = await axios.put(`${API_URL}/users/addPuzzle/${userId}`, puzzleDataId);
+    if (response.status === 200) {
+      dispatch({
+        type: ActionTypes.ADD_DAILY_TO_USER_SUCCESS,
+        payload: response.data.dailyPuzzles
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 

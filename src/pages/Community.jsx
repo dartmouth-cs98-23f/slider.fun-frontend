@@ -1,25 +1,30 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import PuzzleCard from '../components/PuzzleCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
-import { fetchAllPhoto, likePhoto } from '../actions/photoListAction';
+import { fetchAllPhoto, fetchAllPhotosByLikes } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
 import InfoModal from '../components/InfoModal';
+import CommunityFilter from '../components/CommunityFilter';
 
 const Community = () => {
   const dispatch = useDispatch();
-  const hasFetchedPhotosRef = useRef(false);
   const userId = useSelector(state => state.user.info.id);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const photoListFetched = useSelector(state => state.photoList.photoListFetched);
+  const photoListByLikes = useSelector(state => state.photoList.communityByLikes);
+  const photoList = useSelector(state => state.photoList.community);
+  const selectedList = useSelector(state => state.photoList.selected);
 
+  // console.log(communityPhotoList)
   useEffect(() => {
-    if (!hasFetchedPhotosRef.current) {
-      hasFetchedPhotosRef.current = true;
+    if (!photoListFetched) {
+      dispatch(fetchAllPhotosByLikes());
       dispatch(fetchAllPhoto());
     }
   }, []);
 
-  const communityPhotoList = useSelector(state => state.photoList.community);
+
 
   const closeSignUpModal = () => {
     setIsModalVisible(false)
@@ -29,10 +34,24 @@ const Community = () => {
     setIsModalVisible(true)
   }
 
-  const puzzleCards = Object.keys(communityPhotoList).map((key, index) => (
+  const puzzleCardsByLikes = Object.keys(photoListByLikes).map((key, index) => (
     <PuzzleCard
-      puzzleInfo={communityPhotoList[key]}
-      id={communityPhotoList[key].id || index}
+      puzzleInfo={photoListByLikes[key]}
+      id={photoListByLikes[key].id || index}
+      key={index}
+      photoListLocation="community"
+      closeSignUpModal={closeSignUpModal}
+      openSignUpModal={openSignUpModal}
+      editMode={false}
+      userId={userId}
+    />
+  ));
+
+
+  const puzzleCards = Object.keys(photoList).map((key, index) => (
+    <PuzzleCard
+      puzzleInfo={photoList[key]}
+      id={photoList[key].id || index}
       key={index}
       photoListLocation="community"
       closeSignUpModal={closeSignUpModal}
@@ -45,7 +64,13 @@ const Community = () => {
   return (
     <div>
       <InfoModal signUp={true} isModalVisible={isModalVisible} closeSignUpModal={closeSignUpModal} />
-      <div className='communityPhotoContainer'> {puzzleCards} </div>
+      <div className='communityPhotoContainer'>
+        <CommunityFilter />
+        <br />
+
+        {selectedList === "byLikes" ? puzzleCardsByLikes : puzzleCards}
+
+      </div>
     </div>
   )
 }

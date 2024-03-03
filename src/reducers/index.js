@@ -8,7 +8,7 @@ import dailyReducer from './dailyReducer';
 
 const rootReducer = combineReducers({
   tutorial: tutorialReducer,
-  dailyReducer: dailyReducer,
+  daily: dailyReducer,
   photoList: photoListReducer,
   user: userReducer,
 });

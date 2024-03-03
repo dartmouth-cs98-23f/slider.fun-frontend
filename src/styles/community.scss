@@ -1,5 +1,10 @@
+$header-color: #EDEDED; // primary color
+$light-header-color: #bbbbbb; // primary color
+$accent-color: #E27272; // accent color
+$text-color: #333; // text color
+$light-text-color: #8d8d8d; // text color
+
 .communityPhotoContainer {
-  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -7,7 +12,43 @@
   justify-content: center;
   margin-left: 60px;
   margin-right: 60px;
-  margin-top: 20px;
   margin-bottom: 20px;
-  padding: 10px; // Optional: Adds some padding around the entire container
+  width: fit-content;
+}
+
+// filter
+.communityFilterContainer {
+  display: flex;
+  // margin-top: 10px;
+  border-radius: 10px;
+  width: 100%;
+  // margin-bottom: 5px;
+  // background-color: $header-color;
+
+  .communityFilterBar {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: fit-content;
+
+      p {
+        font-weight: bold;
+      }
+    }
+
+    .communityFilters {
+      display: flex;
+      background-color: $text-color;
+      padding: 10px;
+      gap: 10px;
+      font-weight: bold;
+    }
+  }
 }
