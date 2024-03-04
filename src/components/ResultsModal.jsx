@@ -13,6 +13,7 @@ function ResultsModal(props) {
   const navigate = useNavigate();
 
   const userInfo = useSelector(state => state.user.info)
+  const stageNumber = useSelector(state => state.tutorial.stageNumber);
   // const [newUser, setNewUser] = useState(false);
 
   useEffect(() => {
@@ -53,12 +54,15 @@ function ResultsModal(props) {
               {props.score >= 95 ?
                 <div>
                   <h2>Nice job! </h2>
-                  {/* If user */}
-                  {!userInfo.dailyTaskStatus ?
+                  {/* If user have not completed daily*/}
+                  {!props.tutorial ?
                     <h3> +5 SliderPoints </h3>
                     :
-                    <p> but you've already done the daily puzzle today!</p>
+                    // if user have completed daily and is on dailypage
+                    null
                   }
+
+                  {props.tutorial ? null : <p> but you've already done the daily puzzle today!</p>}
                 </div>
                 : null}
 
