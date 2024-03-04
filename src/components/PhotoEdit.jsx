@@ -9,7 +9,7 @@ import $ from 'jquery';
 import side2side from "../assets/SideToSideSplit.png";
 import verticalSplit from "../assets/VerticalSplit.png";
 import horizontalSplit from "../assets/HorizontalSplit.png";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editPhotoById, handlePhotoComplete, removePhotoFromUser } from '../actions/userAction';
 import "../styles/game.scss";
 import { IconTrash } from '@tabler/icons-react';
@@ -27,8 +27,7 @@ const PhotoEdit = (props) => {
 
   const [originalPhotoProperties, setOriginalPhotoProperties] = useState(DEFAULT_OPTIONS)
   const photoUrl = props.photoUrl;
-
-
+  const signedInUserId = useSelector(state => state.user.info.id);
 
   function handleSliderChange(propertyIndex, { target }) {
     const newSliderValues = modifiedPhotoProperties.map((option, index) => {
@@ -200,7 +199,7 @@ const PhotoEdit = (props) => {
           </>
           :
           // if in play mode
-          <button className='submit' onClick={() => handlePlaySubmit(props.userId)}>
+          <button className='submit' onClick={() => handlePlaySubmit(signedInUserId)}>
             submit
           </button>
         }
