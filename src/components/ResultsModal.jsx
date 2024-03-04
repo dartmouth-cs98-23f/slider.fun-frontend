@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import "../styles/results.scss";
 import Loader from './Loader';
 import { ReactCompareSlider, ReactCompareSliderImage, ReactCompareSliderHandle } from 'react-compare-slider';
 import makeConfetti from './Confetti';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDailyPuzzleSScore } from '../actions/userAction';
+import { setUserInfo, handleDailyCompleted } from '../actions/userAction';
+import { useNavigate } from 'react-router-dom';
 
 function ResultsModal(props) {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userInfo = useSelector(state => state.user.info)
-  const [newUser, setNewUser] = useState(false);
+  // const [newUser, setNewUser] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -21,23 +21,23 @@ function ResultsModal(props) {
       setLoading(false);
       if (props.score >= 95) {
         makeConfetti();
-        if (userInfo && props.daily) {
-          dispatch(addDailyPuzzleSScore(userInfo.id, 5));
-        } else {
-          console.log("make an account")
-          setNewUser(true);
+        if (localStorage.getItem("token") && props.daily && !userInfo.dailyTaskStatus) {
+          dispatch(handleDailyCompleted(userInfo.id, props.dailyPuzzleId, props.score, props.userSelectedProperties));
         }
       }
     }, 1100);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.score]);
 
 
   const nextStageHandler = () => {
     props.onClose();
-    if (props.stageNumber === 6) {
-      navigate("/resultspage")
-    }
     props.goToNextStage();
+  }
+
+  const handlePostTutorialSignUp = (points) => {
+    dispatch(setUserInfo({ "sliderScore": points }));
+    navigate("/signup");
   }
 
   return (
@@ -49,27 +49,31 @@ function ResultsModal(props) {
               {props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
               {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
               {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
+              {/* If score is 95 */}
               {props.score >= 95 ?
                 <div>
                   <h2>Nice job! </h2>
-                  {props.daily ?
+                  {/* If user */}
+                  {!userInfo.dailyTaskStatus ?
                     <h3> +5 SliderPoints </h3>
-                    : null}
+                    :
+                    <p> but you've already done the daily puzzle today!</p>
+                  }
                 </div>
                 : null}
 
-              {(newUser && props.score >= 95) ?
+              {((!localStorage.getItem("token") && props.score >= 95 && !props.tutorial)) ?
                 <div>
                   <h3>
                     Make an account to save your score!
                   </h3>
-                  <button onClick={() => navigate("/signup")}>
+                  <button onClick={() => handlePostTutorialSignUp(5)}>
                     Sign Up!
                   </button>
                 </div>
                 :
                 <div>
-                  <p id="smallText">Total points: {userInfo.sliderScore} </p>
+                  <p id="smallText"> Total points: {userInfo.sliderScore} </p>
                 </div>
               }
               <h3> {props.score} </h3>
@@ -103,20 +107,7 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
-
-          {
-            props.score >= 95 && props.tutorial ?
-
-              (
-                props.stageNumber === 6 ?
-                  <button onClick={() => navigate("/results")}> Get results!</button>
-                  :
-                  < button onClick={nextStageHandler}> Next!</button>
-              )
-
-
-              : null
-          }
+          {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
         </div>
       </div >
     </>

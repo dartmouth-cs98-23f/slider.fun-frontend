@@ -11,7 +11,6 @@ const initialState = {
 
 const tutorialReducer = produce((draftState, action) => {
   switch (action.type) {
-
     case ActionTypes.GO_TO_SPECIFIC_STAGE:
       draftState.currentStage = action.payload;
       break;

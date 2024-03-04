@@ -15,10 +15,9 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("userToken", userToken)
-
+    // console.log("userToken", userToken)
     if (!userToken) {
-      console.log("Redirecting to login page", userToken);
+      // console.log("Redirecting to login page", userToken);
       navigate("/login");
     } else {
       if (!currentUser) {

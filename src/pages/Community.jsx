@@ -1,38 +1,98 @@
-import React, { useEffect, useRef } from 'react'
-import PuzzleCard from '../components/PuzzleCard'
+import React, { useState, useEffect } from 'react'
+import PuzzleCard from '../components/PhotoCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
-import { fetchAllPhoto, likePhoto } from '../actions/photoListAction';
+import { fetchAllPhoto, fetchAllPhotosByLikes, setScoreHighMessageVis, setScoreLowMessageVis } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
+import InfoModal from '../components/InfoModal';
+import CommunityFilter from '../components/CommunityFilter';
+import HoverMessage from '../components/HoverMessage';
 
 const Community = () => {
   const dispatch = useDispatch();
-  const hasFetchedPhotosRef = useRef(false);
   const userId = useSelector(state => state.user.info.id);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const photoListFetched = useSelector(state => state.photoList.photoListFetched);
+  const photoListByLikes = useSelector(state => state.photoList.communityByLikes);
+  const photoList = useSelector(state => state.photoList.community);
+  const selectedList = useSelector(state => state.photoList.selected);
+  const scoreLowMessageVis = useSelector(state => state.photoList.scoreLowMessageVis);
+  const scoreHighMessageVis = useSelector(state => state.photoList.scoreHighMessageVis);
+  const currentPhotoScore = useSelector(state => state.photoList.currentPhotoScore);
 
+  // console.log(communityPhotoList)
   useEffect(() => {
-    if (!hasFetchedPhotosRef.current) {
-      hasFetchedPhotosRef.current = true;
+    if (!photoListFetched) {
+      dispatch(fetchAllPhotosByLikes());
       dispatch(fetchAllPhoto());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const communityPhotoList = useSelector(state => state.photoList.community);
+  const closeSignUpModal = () => {
+    setIsModalVisible(false)
+  };
 
-  const puzzleCards = Object.keys(communityPhotoList).map((key, index) => (
+  const openSignUpModal = () => {
+    setIsModalVisible(true)
+  }
+
+
+  const puzzleCardsByLikes = Object.keys(photoListByLikes).map((key, index) => (
     <PuzzleCard
-      puzzleInfo={communityPhotoList[key]}
-      id={communityPhotoList[key].id || index}
+      puzzleInfo={photoListByLikes[key]}
+      id={photoListByLikes[key].id || index}
       key={index}
       photoListLocation="community"
+      closeSignUpModal={closeSignUpModal}
+      openSignUpModal={openSignUpModal}
       editMode={false}
       userId={userId}
     />
   ));
 
+  const puzzleCards = Object.keys(photoList).map((key, index) => (
+    <PuzzleCard
+      puzzleInfo={photoList[key]}
+      id={photoList[key].id || index}
+      key={index}
+      photoListLocation="community"
+      closeSignUpModal={closeSignUpModal}
+      openSignUpModal={openSignUpModal}
+      editMode={false}
+      userId={userId}
+    />
+  ));
+
+  useEffect(() => {
+    // wait for 2 seconds before hiding the message
+    const timer = setTimeout(() => {
+      dispatch(setScoreHighMessageVis(false));
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [dispatch, scoreHighMessageVis]);
+
+  useEffect(() => {
+    // wait for 2 seconds before hiding the message
+    const timer = setTimeout(() => {
+      dispatch(setScoreLowMessageVis(false));
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [dispatch, scoreLowMessageVis]);
+
   return (
     <div>
-      <div className='communityPhotoContainer'> {puzzleCards} </div>
+
+
+      <InfoModal signUp={true} isModalVisible={isModalVisible} closeSignUpModal={closeSignUpModal} />
+      <HoverMessage message={`Try again! You got a ${currentPhotoScore}`} messageVisability={scoreLowMessageVis} />
+      <HoverMessage message={`+1 SliderPoint! You got a ${currentPhotoScore} `} messageVisability={scoreHighMessageVis} />
+      <div className='communityPhotoContainer'>
+        <CommunityFilter />
+        {selectedList === "byLikes" ? puzzleCardsByLikes : puzzleCards}
+      </div>
     </div>
   )
 }

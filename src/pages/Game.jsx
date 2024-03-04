@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import Slider from '../components/Slider'
-import ResultsModal from '../components/ResultsModal'
-import current from '../assets/Chai000724-R2-077-37.jpg'
+import ResultsModal from '../components/ResultsModal';
+import current from '../assets/Chai000724-R2-077-37.jpg';
 import "../App.scss";
 import $ from 'jquery';
 import ImageView from '../components/ImageView'
@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux'
 
 import axios from 'axios';
 import { updateScores } from '../actions/tutorialAction'
-
+console.log(current)
 // takes a backend photo link and return the photo object
 async function fetchPhoto(link) {
   try {
@@ -83,8 +83,6 @@ const Game = (props) => {
       if (data) {
         setImportEdited(data.imageUrl);
         setEditedOptions(data.photoProperties)
-        // setImportEdited("https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/images%2Fdaily3.jpeg?alt=media&token=faeb4d74-5b3b-4fc4-8c68-e19278a570fe")
-        // setEditedOptions(defaultOptions)
       }
     });
   }, [props.pic_link]);
@@ -95,13 +93,10 @@ const Game = (props) => {
   }, [stageOptions]);
 
   const handleScoreProcessing = async (photo, filter1, filter2) => {
-    // setting a default score for the first time
     if (defaultScore === false) {
       setDefaultScore(await compareTwoPhotos(photo, getImageStyle(defaultOptions), filter2))
     }
-    // console.log("hi", filter1, filter2)
     let photoScore = (await compareTwoPhotos(photo, filter1, filter2))
-    // console.log("photo score", photoScore)
     setScore(photoScore)
   }
 
@@ -113,8 +108,12 @@ const Game = (props) => {
 
       setPercentScore(calcPercentScore)
 
-      dispatch(updateScores(stageNumber, calcPercentScore))
+      if (props.tutorial) {
+        dispatch(updateScores(stageNumber, calcPercentScore))
+      }
+
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score, defaultScore])
 
   const handleCompareClick = () => {
@@ -165,11 +164,6 @@ const Game = (props) => {
           <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
           <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
           <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
-          {/* {
-            location.pathname.startsWith('/tutorial') &&
-            <IconPhotoQuestion className="tIconGame" onClick={props.openModal} />
-          } */}
-          {/* <IconRotate className='tIconGame' /> */}
         </div>
 
         <div className='slidersContainer'>
@@ -199,7 +193,17 @@ const Game = (props) => {
         </div>
 
         {isModalVisible && (
-          <ResultsModal daily={props.daily} stageNumber={props.stageNumber} tutorial={props.tutorial} goToNextStage={props.goToNextStage} score={percentScore} onClose={closeModal} img={importEdited} currentStyle={getImageStyle(currentOptions)} targetStyle={getImageStyle(editedOptions)} />
+          <ResultsModal
+            daily={props.daily}
+            dailyPuzzleId={props.dailyPuzzleId}
+            tutorial={props.tutorial}
+            goToNextStage={props.goToNextStage}
+            score={percentScore}
+            onClose={closeModal}
+            img={importEdited}
+            userSelectedProperties={currentOptions}
+            currentStyle={getImageStyle(currentOptions)}
+            targetStyle={getImageStyle(editedOptions)} />
         )}
         <div className='score'>
           {/* <p> Default RMSE: {defaultScore}</p>

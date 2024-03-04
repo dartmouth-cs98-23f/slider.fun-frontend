@@ -25,12 +25,8 @@
 
 
 .headerModal {
-  // position: relative;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  // min-height: 100px;
 
   .section1 {
     max-height: 60px;
@@ -43,11 +39,13 @@
     gap: 0px;
 
   }
+
   .buttonsModal {
     display: flex;
     flex-direction: row;
     justify-content: center;
-  
+    margin-top: 20px;
+
     .tutorialButton {
       background-color: #E27272;
     }

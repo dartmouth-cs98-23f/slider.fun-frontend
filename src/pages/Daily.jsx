@@ -1,153 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Game from './Game'
 import InfoModal from '../components/InfoModal'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux';
+import { defaultPhotoProperties, fetchPuzzleOfDay, setHasHowtoPlayShown } from '../actions/dailyAction'
 
-export const fetchPuzzleOfDay = async () => {
-  try {
-    const currentDate = new Date();
-    // Format the date as YYYY/MM/DD
-    const formattedDate = currentDate.toISOString().slice(0, 10);
-    console.log(currentDate)
-    // console.log(formattedDate);
-    const data = {
-      "date": formattedDate
-    }
-    console.log(data)
-    // Use the formatted date in your API request
-    const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
-      params: {
-        date: formattedDate // The date is passed as a query parameter
-      }
-    });
-
-    // Assuming you want to do something with the response here
-    // console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error('There was an error fetching the puzzle of the day:', error);
-    // Handle the error appropriately
-  }
-};
-
-
-const CURRENT_OPTIONS = [
-  {
-    name: 'Brightness',
-    property: 'brightness',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Contrast',
-    property: 'contrast',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Saturation',
-    property: 'saturate',
-    value: 100,
-    range: {
-      min: 0,
-      max: 200
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Grayscale',
-    property: 'grayscale',
-    value: 0,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Sepia',
-    property: 'sepia',
-    value: 0,
-    range: {
-      min: 0,
-      max: 100
-    },
-    unit: '%',
-    status: true,
-  },
-  {
-    name: 'Hue Rotate',
-    property: 'hue-rotate',
-    value: 0,
-    range: {
-      min: 0,
-      max: 360
-    },
-    unit: 'deg',
-    status: true,
-  },
-  {
-    name: 'Blur',
-    property: 'blur',
-    value: 0,
-    range: {
-      min: 0,
-      max: 1.5
-    },
-    unit: 'px',
-    status: true,
-  }
-]
-
-
-// const dHallLink = "https://slider-fun.onrender.com/api/photo/6553e5a2ab042abb281b2661"
-// const nycLink = "https://slider-fun.onrender.com/api/photo/6553e6b0ab042abb281b2702"
-// const bakerTower = "https://slider-fun.onrender.com/api/photo/65cc7534ef5a21ddc90401e7"
-
-// const links = {
-//   "1": dHallLink,
-//   "2": nycLink,
-//   "3": bakerTower,
-// }
-
+const CURRENT_OPTIONS = defaultPhotoProperties;
 const Daily = () => {
-
-  const [dailyPuzzle, setDailyPuzzle] = useState({})
+  const dispatch = useDispatch();
+  const puzzleFetched = useSelector((state => state.daily.puzzleFetched));
 
   useEffect(() => {
-    const fetchAndSetPuzzle = async () => {
-      try {
-        const dailyPuzzleTemp = await fetchPuzzleOfDay();
-
-        console.log(dailyPuzzleTemp);
-        if (dailyPuzzleTemp) {
-          setDailyPuzzle(dailyPuzzleTemp);
-        }
-      } catch (error) {
-        console.error('Failed to fetch daily puzzle:', error);
-
-      }
-    };
-
-    fetchAndSetPuzzle();
+    if (!puzzleFetched) {
+      dispatch(fetchPuzzleOfDay());
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const dailyPuzzle = useSelector((state => state.daily.photo));
+  const hasHowtoPlayShown = useSelector((state => state.daily.hasHowtoPlayShown));
+  const [isModalVisible, setIsModalVisible] = useState(!hasHowtoPlayShown);
 
   const closeModal = () => {
     setIsModalVisible(false)
+    dispatch(setHasHowtoPlayShown(true));
   };
 
   const openModal = () => {
@@ -156,8 +31,12 @@ const Daily = () => {
 
   return (
     <div>
-      {isModalVisible && <div className="modal-overlay"></div>}
+      {/* modal */}
+      {isModalVisible && <div className="modal-overlay" onClick={() => closeModal()}></div>}
       <InfoModal isModalVisible={isModalVisible} daily={true} closeModal={closeModal} openModal={openModal} />
+
+
+      {/* if dailyPuzzle valid */}
       {dailyPuzzle.photo &&
         <Game
           stageOptions={CURRENT_OPTIONS}
@@ -165,6 +44,7 @@ const Daily = () => {
           openModal={openModal}
           pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
           daily={true}
+          dailyPuzzleId={dailyPuzzle.id}
         />}
     </div>
   )

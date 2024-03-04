@@ -55,22 +55,4 @@ $accent-color: #E27272; // accent color
     margin: 8px;
     height: 35px;
   }
-
-  .whiteButton {
-    background-color: #ffffff;
-    border: 2px solid #363636;
-    color: black;
-
-    // hover to red 
-    &:hover {
-      background-color: $accent-color;
-      color: white;
-    }
-  }
-
-  .BlackButton {
-    &:hover {
-      background-color: #70737a;
-    }
-  }
 }
