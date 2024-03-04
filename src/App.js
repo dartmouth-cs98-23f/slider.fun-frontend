@@ -1,5 +1,5 @@
 import './App.scss';
-import Home from './pages/Home';
+//import Home from './pages/Home';
 import Game from './pages/Game';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Daily from './pages/Daily';
@@ -13,6 +13,8 @@ import Community from './pages/Community';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserToken, getUserInfo } from './actions/userAction';
+import ResultsPage from './components/ResultsPage';
+import Home from "./pages/Home"
 
 function App() {
   const token = useSelector(state => state.user.token);
@@ -43,6 +45,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="results" element={<ResultsPage />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </div>
