@@ -18,7 +18,7 @@ const Header = () => {
     <div className='headerContainer'>
       <div className='contentContainer'>
         <div className="logoDateContainer">
-          <img onClick={() => handleNavigate("/")} src={domainLogo} alt="" width="150"></img>
+          <img onClick={() => handleNavigate("/community")} src={domainLogo} alt="" width="150"></img>
           {location.pathname.startsWith('/daily') && <TodaysDate />}
 
         </div>

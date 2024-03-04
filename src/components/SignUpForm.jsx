@@ -18,7 +18,7 @@ const SignUpForm = ({ logoVisible }) => {
     e.preventDefault();
 
     try {
-      dispatch(userSignUp(email, name, password, (userInfo.sliderScore || 0)));
+      await dispatch(userSignUp(email, name, password, (userInfo.sliderScore || 0)));
 
       navigate("/profile");
     } catch (error) {

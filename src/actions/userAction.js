@@ -33,20 +33,20 @@ export const ActionTypes = {
 // gets the token
 export const userSignIn = (email, password) => async (dispatch) => {
 
-  try {
-    const response = await axios.post(`${API_URL}/users/signin`, { email, password });
+  // try {
+  const response = await axios.post(`${API_URL}/users/signin`, { email, password });
 
-    await dispatch({
-      type: ActionTypes.USER_SIGN_IN_SUCCESS,
-      payload: response.data.token,
-    });
+  await dispatch({
+    type: ActionTypes.USER_SIGN_IN_SUCCESS,
+    payload: response.data.token,
+  });
 
-    localStorage.setItem('token', response.data.token);
-    await dispatch(getUserInfo(response.data.token));
+  localStorage.setItem('token', response.data.token);
+  await dispatch(getUserInfo(response.data.token));
 
-  } catch (error) {
-    console.error('Error signing in:', error);
-  }
+  // } catch (error) {
+  //   console.error('Error signing in:', error);
+  // }
 };
 
 export const userSignUp = (email, userName, password, sliderScore) => async (dispatch) => {
@@ -63,7 +63,7 @@ export const userSignUp = (email, userName, password, sliderScore) => async (dis
   const response = await axios.post(`${API_URL}/users/new`, data);
 
   localStorage.setItem('token', response.data.token);
-  dispatch({
+  await dispatch({
     type: ActionTypes.USER_SIGN_UP_SUCCESS,
     payload: response.data.token,
   });

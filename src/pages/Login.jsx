@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../context/AuthContext'
+import React, { useEffect, useState } from 'react'
 import "../styles/login.scss"
 import domainLogo from "../assets/domain_logo.svg"
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +9,6 @@ import { userSignIn } from '../actions/userAction';
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { signIn } = useContext(AuthContext);
   const [err, setErr] = useState(null)
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -34,8 +32,6 @@ const Login = () => {
       }, 3000);
     }
 
-    // Cleanup function to clear the timer if the component unmounts
-    // or if the error changes before the timer completes.
     return () => clearTimeout(timer);
   }, [err]); // Dependency array includes err to react to its changes
 
