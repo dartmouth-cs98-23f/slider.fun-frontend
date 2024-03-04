@@ -21,7 +21,7 @@ function ResultsModal(props) {
       setLoading(false);
       if (props.score >= 95) {
         makeConfetti();
-        if (localStorage.getItem("token") && props.daily) {
+        if (localStorage.getItem("token") && props.daily && !userInfo.dailyTaskStatus) {
           dispatch(handleDailyCompleted(userInfo.id, props.dailyPuzzleId, props.score, props.userSelectedProperties));
         }
       }

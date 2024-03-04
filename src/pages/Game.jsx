@@ -164,11 +164,6 @@ const Game = (props) => {
           <img onClick={() => SetView(1)} className='viewButtonS2S selected' src={side2side} alt="card" />
           <img onClick={() => SetView(2)} className='viewButtonVS ' src={verticalSplit} alt="card" />
           <img onClick={() => SetView(3)} className='viewButtonHS ' src={horizontalSplit} alt="card" />
-          {/* {
-            location.pathname.startsWith('/tutorial') &&
-            <IconPhotoQuestion className="tIconGame" onClick={props.openModal} />
-          } */}
-          {/* <IconRotate className='tIconGame' /> */}
         </div>
 
         <div className='slidersContainer'>
