@@ -31,8 +31,8 @@ function ResultsModal(props) {
 
 
   const nextStageHandler = () => {
-    props.onClose();
-    props.goToNextStage();
+      props.onClose();
+      props.goToNextStage();
   }
 
   const handlePostTutorialSignUp = (points) => {
@@ -107,7 +107,7 @@ function ResultsModal(props) {
         </div>
         <div className="buttonsModal">
           <button onClick={props.onClose}>Close</button>
-          {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
+          {props.score >= 5 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
         </div>
       </div >
     </>

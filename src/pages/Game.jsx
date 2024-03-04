@@ -14,6 +14,7 @@ import { defaultSlider } from '../components/Slider'
 import { IconPhotoQuestion } from '@tabler/icons-react';
 import "../styles/game.scss"
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 import { updateScores } from '../actions/tutorialAction'
@@ -45,6 +46,7 @@ const Game = (props) => {
   const dispatch = useDispatch();
   const stageOptions = props.stageOptions;
   const stageNumber = props.stageNumber;
+  const navigate = useNavigate();
 
   const [defaultOptions] = useState(DEFAULT_OPTIONS)
   const [editedOptions, setEditedOptions] = useState(MODIFIED_OPTIONS)
@@ -116,9 +118,16 @@ const Game = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score, defaultScore])
 
-  const handleCompareClick = () => {
-    handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
+  const handleCompareClick = async () => {
+    // Existing logic for handling the compare click
+    await handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter);
     setIsModalVisible(true);
+
+    if (stageNumber === 6) {
+      let calcPercentScore = 100 - (Math.round(score))
+      await dispatch(updateScores(stageNumber, calcPercentScore))
+      navigate('/results')
+    }
   };
 
   const handleResetSliders = () => {
@@ -195,6 +204,7 @@ const Game = (props) => {
         {isModalVisible && (
           <ResultsModal
             daily={props.daily}
+            stageNumber={props.stageNumber}
             dailyPuzzleId={props.dailyPuzzleId}
             tutorial={props.tutorial}
             goToNextStage={props.goToNextStage}
