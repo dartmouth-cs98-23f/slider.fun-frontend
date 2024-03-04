@@ -31,9 +31,12 @@ const photoListReducer = produce((draftState, action) => {
       break;
     case ActionTypes.PHOTO_LIKE_SUCCESS:
       draftState.community[action.payload.id].likedBy = action.payload.likedBy;
+      draftState.communityByLikes[action.payload.id].likedBy = action.payload.likedBy;
+
       break;
     case ActionTypes.REMOVE_PHOTO_LIKE_SUCCESS:
       draftState.community[action.payload.id].likedBy = action.payload.likedBy;
+      draftState.communityByLikes[action.payload.id].likedBy = action.payload.likedBy;
       break;
     case ActionTypes.SET_SELECTED_PHOTO_LIST:
       draftState.selected = action.payload;
