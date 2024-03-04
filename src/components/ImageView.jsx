@@ -13,7 +13,7 @@ const photoContainerStyle = {
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'center',
-  height: 'auto',
+  // height: 'auto',
 };
 
 const ImageView = (props) => {
