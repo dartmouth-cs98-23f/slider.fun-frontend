@@ -186,9 +186,9 @@ export const editPhotoById = (photoId, data) => async (dispatch) => {
 
 export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
   try {
-
     const response = await axios.put(`${API_URL}/users/updateScore/${userId}`, { count });
     if (response.status === 200) {
+      console.log(response.data)
       dispatch({
         type: ActionTypes.PUT_USER_SLIDER_SCORE_SUCCESS,
         payload: response.data.sliderScore
@@ -200,9 +200,6 @@ export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
 
   }
 }
-
-
-
 
 // Delete a photo object from user and the photo itself
 export const removePhotoFromUser = (userId, photoId) => async (dispatch) => {
