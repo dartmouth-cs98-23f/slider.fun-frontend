@@ -186,7 +186,7 @@ export const editPhotoById = (photoId, data) => async (dispatch) => {
 
 export const addDailyPuzzleSScore = (userId, count) => async (dispatch) => {
   try {
-    const response = await axios.put(`${API_URL}/users/updateScore/${userId}`, { count });
+    const response = await axios.put(`${API_URL}/users/addScore/${userId}`, { count });
     if (response.status === 200) {
       console.log(response.data)
       dispatch({
