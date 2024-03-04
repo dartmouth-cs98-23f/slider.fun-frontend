@@ -14,6 +14,11 @@ export const ActionTypes = {
   GET_PHOTO_LIKES_SUCCESS: 'GET_PHOTO_LIKES_SUCCESS',
   PHOTO_LIKE_SUCCESS: 'PHOTO_LIKE_SUCCESS',
   REMOVE_PHOTO_LIKE_SUCCESS: 'REMOVE_PHOTO_LIKE_SUCCESS',
+  SET_SELECTED_PHOTO_LIST: 'SET_SELECTED_PHOTO_LIST',
+  FETCH_PHOTOLIST_BY_LIKES_SUCCESS: 'FETCH_PHOTOLIST_BY_LIKES_SUCCESS',
+  SET_SCORE_LOW_MESSAGE_VIS: 'SET_SCORE_LOW_MESSAGE_VIS',
+  SET_SCORE_HIGH_MESSAGE_VIS: 'SET_SCORE_HIGH_MESSAGE_VIS',
+  SET_CURRENT_PHOTO_SCORE: 'SET_CURRENT_PHOTO_SCORE',
 };
 
 export const fetchAllPhoto = () => async (dispatch) => {
@@ -21,7 +26,7 @@ export const fetchAllPhoto = () => async (dispatch) => {
     const response = await axios.get(`${API_URL}/photo/all`);
 
     if (response.status === 200) {
-      const photoObjectList = response.data.reduce((acc, photo) => {
+      const photoObjectList = response.data.reduceRight((acc, photo) => {
         acc[photo.id] = photo;
         return acc;
       }, {});
@@ -34,6 +39,30 @@ export const fetchAllPhoto = () => async (dispatch) => {
       dispatch({
         type: ActionTypes.FETCH_PHOTOLIST_ERROR,
         payload: `Error: ${response.status} - ${response.statusText}`,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.FETCH_PHOTOLIST_ERROR,
+      payload: 'There was an error fetching the photos: ' + error,
+    });
+  }
+};
+
+export const fetchAllPhotosByLikes = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${API_URL}/photo/allSorted`);
+
+    if (response.status === 200) {
+      const photoObjectList = response.data.reduce((acc, photo) => {
+        photo.id = photo._id;
+        acc[photo.id] = photo;
+        return acc;
+      }, {});
+
+      dispatch({
+        type: ActionTypes.FETCH_PHOTOLIST_BY_LIKES_SUCCESS,
+        payload: photoObjectList,
       });
     }
   } catch (error) {
@@ -70,7 +99,6 @@ export const editPhoto = (photoId, data) => async (dispatch) => {
     // Dispatch success or re-fetch photos as needed
   } catch (error) {
     console.error('Error editing photo:', error);
-    // Optionally, dispatch an error action here
   }
 };
 
@@ -114,4 +142,36 @@ export const removeLikeFromPhoto = (photoId, userId) => async (dispatch) => {
   } catch (error) {
     console.error('Error removing like from photo:', error);
   }
+}
+
+
+export const setSelectedPhotoList = (type) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_SELECTED_PHOTO_LIST,
+    payload: type,
+  });
+
+
+}
+
+
+export const setScoreHighMessageVis = (visibility) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_SCORE_HIGH_MESSAGE_VIS,
+    payload: visibility
+  })
+}
+
+export const setScoreLowMessageVis = (visibility) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_SCORE_LOW_MESSAGE_VIS,
+    payload: visibility
+  })
+}
+
+export const setCurrentPhotoScore = (score) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_CURRENT_PHOTO_SCORE,
+    payload: score
+  })
 }

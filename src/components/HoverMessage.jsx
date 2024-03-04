@@ -9,7 +9,7 @@ const HoverMessage = (props) => {
 
   return (
     <div style={{
-      zIndex: '100',
+      zIndex: '200',
       position: 'fixed',
       top: '30%',
       left: '50%',

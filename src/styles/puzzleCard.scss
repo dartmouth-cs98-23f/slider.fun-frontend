@@ -28,7 +28,14 @@
 
   }
 
+  .photoTitleContainer {
+    height: fit-content;
 
+    h2 {
+      margin: 0;
+      padding: 0;
+    }
+  }
   .photoTitle {
     color: #000000;
     // text-align: center;
@@ -36,6 +43,8 @@
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-size: 14px;
     font-weight: bold;
+    margin: 0;
+    padding: 0;
   }
 
 

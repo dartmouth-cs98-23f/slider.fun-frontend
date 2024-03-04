@@ -16,7 +16,6 @@ const Profile = () => {
 
   useEffect(() => {
     // console.log("userToken", userToken)
-
     if (!userToken) {
       // console.log("Redirecting to login page", userToken);
       navigate("/login");

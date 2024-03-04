@@ -1,3 +1,10 @@
+
+
+import { defaultSlider } from '../components/Slider'
+import bruh from '../assets/Chai000724-R2-077-37.jpg';
+
+const DEFAULT_OPTIONS = defaultSlider
+
 export const getRBG = (pictureFile, filters = false) => {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -89,7 +96,6 @@ export const compareTwoPhotos = async (pic, editedFilter, goalFilter1) => {
 
   // console.log('RMSE - Red:', redRMSE, 'Green:', greenRMSE, 'Blue:', blueRMSE);
   // console.log('Total RMSE:', totalRMSE);
-
   return totalRMSE;
 }
 
@@ -99,4 +105,13 @@ export const getImageStyle = (state) => {
     return `${option.property}(${option.value}${option.unit})`
   })
   return { filter: filters.join(' ') }
+}
+
+
+export const handleScoreProcessing = async (filter1, filter2) => {
+
+  let photoScore = (await compareTwoPhotos(bruh, filter1, filter2))
+  let calcPercentScore = 100 - (Math.round(photoScore))
+
+  return calcPercentScore
 }

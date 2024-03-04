@@ -10,7 +10,7 @@ import GameModal from './GameModal';
 import { useDispatch } from 'react-redux';
 import { likePhoto, removeLikeFromPhoto } from '../actions/photoListAction';
 
-const PuzzleCard = ({ id, puzzleInfo, editMode, userId, openSignUpModal }) => {
+const PhotoCard = ({ id, puzzleInfo, editMode, userId, openSignUpModal }) => {
   const photoTitle = puzzleInfo.title;
   const photoUrl = puzzleInfo.imageUrl;
   const photoProperties = puzzleInfo.photoProperties;
@@ -49,8 +49,10 @@ const PuzzleCard = ({ id, puzzleInfo, editMode, userId, openSignUpModal }) => {
   };
 
   const openModal = () => {
-    if (editMode) {
+    if (localStorage.getItem('token') !== null) {
       setIsModalVisible(true)
+    } else {
+      openSignUpModal()
     }
   }
 
@@ -99,4 +101,4 @@ const PuzzleCard = ({ id, puzzleInfo, editMode, userId, openSignUpModal }) => {
   )
 }
 
-export default PuzzleCard
+export default PhotoCard
