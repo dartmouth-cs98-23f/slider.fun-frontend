@@ -139,7 +139,7 @@ const PhotoEdit = (props) => {
         <div id="editFields">
           <div>
             <label htmlFor="photoTitle"> Title: </label>
-            <input type="text" id="photoTitle" name="photoTitle" value={title} onChange={handleChange} />
+            <input type="text" id="photoTitle" name="photoTitle" value={title} maxLength="1000" onChange={handleChange} />
           </div>
         </div> :
         <div className="photoTitleContainer">
