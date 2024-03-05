@@ -4,7 +4,6 @@ import PhotoCreation from './PhotoCreation';
 import { IconXboxX } from '@tabler/icons-react';
 
 // when there's no object in the database yet
-
 function PhotoModal({ photoUrl, userId, isModalVisible, closeModal, setMessageVisability, setTitleMissingVis }) {
 
   const [title, setTitle] = useState("");

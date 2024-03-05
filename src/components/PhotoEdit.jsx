@@ -167,7 +167,7 @@ const PhotoEdit = (props) => {
                 value={option.value}
                 status={true}
                 handleChange={(event) => handleSliderChange(index, event)}
-                step={0.1}
+                step={index === 6 ? 0.1 : undefined}
               />
             ))}
           </div>
@@ -183,7 +183,7 @@ const PhotoEdit = (props) => {
                 value={option.value}
                 status={true}
                 handleChange={(event) => handleCurrentSliderChnage(index, event)}
-                step={0.1}
+                step={index === 6 ? 0.1 : undefined}
               />
             ))}
           </div>
