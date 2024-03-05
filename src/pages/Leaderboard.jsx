@@ -34,7 +34,7 @@ const Leaderboard = () => {
         <div className='userCardContainer'>
           <div className='leftContainer'>
             <h3>  Rank </h3>
-            <div>  Username  </div>
+            <div>  User  </div>
           </div>
           <div className='rightContainer'> Points
           </div>
