@@ -25,7 +25,7 @@ const Leaderboard = () => {
     />
   ));
 
-  console.log(top25)
+  // console.log(top25)
   return (
     <div className="leaderboardPageContainer">
       <h1 className='leaderboard'>Leaderboard</h1>

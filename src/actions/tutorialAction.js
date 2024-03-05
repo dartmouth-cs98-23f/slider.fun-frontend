@@ -5,7 +5,6 @@
 // 
 // Redux action types
 export const ActionTypes = {
-
   GO_TO_SPECIFIC_STAGE: 'GO_TO_SPECIFIC_STAGE',
   UPDATE_SCORES: 'UPDATE_SCORES',
 };

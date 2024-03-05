@@ -72,7 +72,7 @@ const TutorialData = {
       "value": 0,
       "range": {
         "min": 0,
-        "max": 20
+        "max": 0.5
       },
       "unit": "px",
       "status": false
