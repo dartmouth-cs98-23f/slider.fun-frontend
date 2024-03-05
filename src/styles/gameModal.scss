@@ -49,7 +49,8 @@
   text-align: center;
   border-radius: 0px;
   height: 95%;
-  width: 100%;
+  width: 70%;
+  padding: 10px;
   cursor: default;
   display: flex;
   flex-direction: column;
@@ -125,7 +126,6 @@
 
   p {
     text-align: left;
-
   }
 }
 
@@ -133,5 +133,31 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50%;
+}
+
+
+#reportUl {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  list-style-type: none;
+  /* Reset padding on the UL element */
+  margin: 0;
+  /* Removes the default margin */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  /* Optional: adds a shadow to the dropdown */
+  z-index: 10000;
+  padding: 10px;
+
+  &:hover {
+    background-color: #d7d7d7;
+    cursor: pointer;
+  }
+
+  #reportLi {
+    color: red;
+    font-weight: bold;
+  }
+
 }

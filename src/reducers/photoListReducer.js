@@ -8,6 +8,7 @@ const initialState = {
   "photoListFetched": false,
   "scoreHighMessageVis": false,
   "scoreLowMessageVis": false,
+  "reportedMessageVis": false,
   "currentPhotoScore": 0,
 }
 
@@ -47,8 +48,23 @@ const photoListReducer = produce((draftState, action) => {
     case ActionTypes.SET_SCORE_HIGH_MESSAGE_VIS:
       draftState.scoreHighMessageVis = action.payload;
       break;
+    case ActionTypes.SET_REPORT_PHOTO_VIS:
+      draftState.reportedMessageVis = action.payload;
+      break;
     case ActionTypes.SET_CURRENT_PHOTO_SCORE:
       draftState.currentPhotoScore = action.payload;
+      break;
+    case ActionTypes.REPORT_PHOTO:
+      console.log(action.payload)
+
+      if (!draftState.community[action.payload.id].reported) {
+        draftState.community[action.payload.id].reported = [];
+      }
+      if (!draftState.communityByLikes[action.payload.id].reported) {
+        draftState.communityByLikes[action.payload.id].reported = [];
+      }
+      draftState.community[action.payload.id].reported = (action.payload.reported);
+      draftState.communityByLikes[action.payload.id].reported = (action.payload.reported);
       break;
     default:
       return draftState;

@@ -30,12 +30,26 @@
 
   .photoTitleContainer {
     height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* This spreads out the child elements */
+    align-items: center;
+    /* This vertically centers the child elements in the container */
+    width: 100%;
+
 
     h2 {
       margin: 0;
       padding: 0;
     }
+
+    #reportContainer {
+      margin-left: auto;
+    }
+
   }
+
   .photoTitle {
     color: #000000;
     // text-align: center;

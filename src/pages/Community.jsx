@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PuzzleCard from '../components/PhotoCard'
 import '../styles/community.scss';
 import { useDispatch } from 'react-redux';
-import { fetchAllPhoto, fetchAllPhotosByLikes, setScoreHighMessageVis, setScoreLowMessageVis } from '../actions/photoListAction';
+import { fetchAllPhoto, fetchAllPhotosByLikes, setReportPhotoVis, setScoreHighMessageVis, setScoreLowMessageVis } from '../actions/photoListAction';
 import { useSelector } from 'react-redux';
 import InfoModal from '../components/InfoModal';
 import CommunityFilter from '../components/CommunityFilter';
@@ -18,6 +18,7 @@ const Community = () => {
   const selectedList = useSelector(state => state.photoList.selected);
   const scoreLowMessageVis = useSelector(state => state.photoList.scoreLowMessageVis);
   const scoreHighMessageVis = useSelector(state => state.photoList.scoreHighMessageVis);
+  const photoReportedMessageVis = useSelector(state => state.photoList.reportedMessageVis);
   const currentPhotoScore = useSelector(state => state.photoList.currentPhotoScore);
 
   // console.log(communityPhotoList)
@@ -82,6 +83,15 @@ const Community = () => {
     return () => clearTimeout(timer);
   }, [dispatch, scoreLowMessageVis]);
 
+  useEffect(() => {
+    // wait for 2 seconds before hiding the message
+    const timer = setTimeout(() => {
+      dispatch(setReportPhotoVis(false));
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [dispatch, photoReportedMessageVis]);
+
   return (
     <div>
 
@@ -89,6 +99,7 @@ const Community = () => {
       <InfoModal signUp={true} isModalVisible={isModalVisible} closeSignUpModal={closeSignUpModal} />
       <HoverMessage message={`Try again! You got a ${currentPhotoScore}`} messageVisability={scoreLowMessageVis} />
       <HoverMessage message={`+1 SliderPoint! You got a ${currentPhotoScore} `} messageVisability={scoreHighMessageVis} />
+      <HoverMessage message={`Photo reported! `} messageVisability={photoReportedMessageVis} />
       <div className='communityPhotoContainer'>
         <CommunityFilter />
         {selectedList === "byLikes" ? puzzleCardsByLikes : puzzleCards}
