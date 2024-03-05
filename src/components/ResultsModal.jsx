@@ -19,13 +19,14 @@ function ResultsModal(props) {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      setLoading(false);
       if (props.score >= 95) {
         makeConfetti();
         if (localStorage.getItem("token") && props.daily && !userInfo.dailyTaskStatus) {
           dispatch(handleDailyCompleted(userInfo.id, props.dailyPuzzleId, props.score, props.userSelectedProperties));
         }
       }
+
+      setLoading(false);
     }, 1100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.score]);
@@ -50,32 +51,49 @@ function ResultsModal(props) {
           <div className="headerModal">
             {loading ? <Loader /> :
               <div>
+                <h2> {props.score}% </h2>
                 {props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
                 {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
                 {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
                 {/* If score is 95 */}
                 {props.score >= 95 ?
                   <div>
-                    <h2>Nice job! </h2>
-                  </div> : null}
-                <h3> You got a {props.score} </h3>
-
-                {((!localStorage.getItem("token") && props.score >= 95 && props.stageNumber === 6)) ?
-                  <div>
-                    <h3>
-                      Make an account to save your score!
-                    </h3>
-                    <button onClick={() => handlePostTutorialSignUp(5)}>
-                      Sign Up!
-                    </button>
+                    <h3>Nice job! </h3>
                   </div> : null}
 
-              </div>}
+                {/* if user signed in */}
+                {localStorage.getItem("token") ? (
+                  (props.score >= 95 && props.stageNumber === 6) ? (
+                    // if in last stage of tutorial:
+                    <div>
+                      <h3>
+                        It's always good to refresh up on the basics.
+                      </h3>
+                    </div>
+                  ) :
+                    // if not in last stage, do nothing
+                    null
+                ) :
+                  // if not signed in 
+                  (
+                    // if in last stage, prompt user to sign up
+                    (props.score >= 95 && props.stageNumber === 6) && (
+                      <div>
+                        <h3>
+                          Make an account to save your score!
+                        </h3>
+                        <button onClick={() => handlePostTutorialSignUp(5)}>
+                          Sign Up!
+                        </button>
+                      </div>
+                    )
+                  )}
+              </div>
+            }
           </div >
           <div className="imagesModal-container">
-            <div>
+            <div className="reactCompareSliderContainer">
               <ReactCompareSlider
-
                 handle={
                   <ReactCompareSliderHandle
                     buttonStyle={{
@@ -110,47 +128,51 @@ function ResultsModal(props) {
           <div className="headerModal">
             {loading ? <Loader /> :
               <div>
+                <h2> {props.score}% </h2>
                 {props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
                 {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
                 {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
                 {/* If score is 95 */}
                 {props.score >= 95 ?
                   <div>
-                    <h2>Nice job! </h2>
-                    {/* If user */}
-                    {!userInfo.dailyTaskStatus ?
-                      <h3> +5 SliderPoints </h3>
-                      :
+                    <h3>  Nice job! </h3>
+                    {/* If user is signed in */}
+
+                    {localStorage.getItem("token") ?
                       <div>
-                        <p> but you've already done the daily puzzle today!</p>
-                        <TimeUntilMidnight />
+                        {userInfo.dailyTaskStatus ?
+                          // if user completed daily already
+                          <div>
+                            <p> you've already done the daily puzzle today!</p>
+                            <TimeUntilMidnight />
+                            <p id="smallText"> Total points: {userInfo.sliderScore} </p>
+                          </div>
+                          :
+                          // if user has not completed daily
+                          <h3> +5 SliderPoints </h3>
+                        }
+                      </div>
+                      :
+                      // if user not signed in
+                      <div>
+                        <h3>
+                          Make an account to save your score!
+                        </h3>
+                        <button onClick={() => handlePostTutorialSignUp(5)}>
+                          Sign Up!
+                        </button>
                       </div>
                     }
-                  </div>
-                  : null}
-
-                {((!localStorage.getItem("token") && props.score >= 95 && !props.tutorial)) ?
-                  <div>
-                    <h3>
-                      Make an account to save your score!
-                    </h3>
-                    <button onClick={() => handlePostTutorialSignUp(5)}>
-                      Sign Up!
-                    </button>
-                  </div>
-                  :
-                  <div>
-                    <p id="smallText"> Total points: {userInfo.sliderScore} </p>
-                  </div>
+                  </div> :
+                  // if score less then 95
+                  null
                 }
-                <h3> {props.score} </h3>
-
-              </div>}
+              </div>
+            }
           </div >
           <div className="imagesModal-container">
-            <div>
+            <div className="reactCompareSliderContainer">
               <ReactCompareSlider
-
                 handle={
                   <ReactCompareSliderHandle
                     buttonStyle={{
@@ -174,7 +196,6 @@ function ResultsModal(props) {
           </div>
           <div className="buttonsModal">
             <button onClick={props.onClose}>Close</button>
-            {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
           </div>
         </div >
 

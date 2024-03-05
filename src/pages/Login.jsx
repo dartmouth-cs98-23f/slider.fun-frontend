@@ -17,7 +17,6 @@ const Login = () => {
   useEffect(() => {
     // console.log("login page", token)
     if (token !== null) {
-
       navigate("/profile");
     }
   }, [navigate, token])

@@ -20,14 +20,13 @@ function App() {
 
   useEffect(() => {
     dispatch(setUserToken())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (token) {
       dispatch(getUserInfo(token))
     }
-
-  }, [token])
+  }, [dispatch, token])
 
   return (
     <BrowserRouter>

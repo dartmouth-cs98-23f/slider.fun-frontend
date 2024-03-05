@@ -4,7 +4,6 @@ import "../App.scss";
 import ImageView from './ImageView'
 import { getImageStyle } from '../components/Scoring'
 import { defaultSlider } from '../components/Slider'
-import { postPhoto } from '../context/photoFunctions';
 import side2side from "../assets/SideToSideSplit.png"
 import verticalSplit from "../assets/VerticalSplit.png"
 import horizontalSplit from "../assets/HorizontalSplit.png"

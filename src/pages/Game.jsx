@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux'
 
 import axios from 'axios';
 import { updateScores } from '../actions/tutorialAction'
-console.log(current)
+// console.log(current)
 // takes a backend photo link and return the photo object
 async function fetchPhoto(link) {
   try {
@@ -187,8 +187,8 @@ const Game = (props) => {
           <button onClick={handleCompareClick}>Submit</button>
 
           {/* uncomment below for easier navigation */}
-
-          {/* <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button>
+          {/* 
+          <button onClick={props.goToPreviousStage} disabled={props.currentStageIndex === 0}>Previous Stage</button>
           <button onClick={props.goToNextStage} disabled={props.currentStageIndex === 7 - 1}>Next Stage</button> */}
         </div>
 
@@ -198,6 +198,7 @@ const Game = (props) => {
             dailyPuzzleId={props.dailyPuzzleId}
             tutorial={props.tutorial}
             goToNextStage={props.goToNextStage}
+            stageNumber={props.stageNumber}
             score={percentScore}
             onClose={closeModal}
             img={importEdited}

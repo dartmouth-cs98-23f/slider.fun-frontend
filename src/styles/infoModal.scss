@@ -23,10 +23,18 @@
   }
 }
 
+@media (max-width: 600px) {
+
+  .resultsModal {
+    width: 100%;
+    max-width: 100%;
+  }
+}
 
 .headerModal {
   display: flex;
   flex-direction: column;
+  padding-bottom: 7px;
 
   .section1 {
     max-height: 60px;

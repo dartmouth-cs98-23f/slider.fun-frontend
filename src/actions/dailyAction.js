@@ -24,7 +24,7 @@ export const fetchPuzzleOfDay = () => async (dispatch) => {
     let formattedDateInEST = moment().tz("America/New_York").format('YYYY-MM-DD');
 
 
-    const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
+    const response = await axios.get(`${API_URL}/dailyPuzzle/byDate`, {
       params: {
         date: formattedDateInEST
       }

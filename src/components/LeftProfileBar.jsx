@@ -1,6 +1,6 @@
 import React from 'react'
 import CollapsibleHeader from './CollabsableHeader'
-import { IconQuestionMark } from '@tabler/icons-react';
+// import { IconQuestionMark } from '@tabler/icons-react';
 import ProgressBar from './ProgressBar'
 
 const LeftProfileBar = ({ userInfo, signOutHandler }) => {
