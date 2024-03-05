@@ -39,8 +39,8 @@ body {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  // width: 100%;
-  height: 60%;
+  width: 100%;
+  // height: 60%;
 
   .photoContainer {
     display: flex;
@@ -298,4 +298,9 @@ button {
   &:hover {
     background-color: #70737a;
   }
+}
+
+
+.hoverPointer {
+  cursor: pointer;
 }

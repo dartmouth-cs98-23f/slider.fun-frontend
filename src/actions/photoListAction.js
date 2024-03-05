@@ -18,7 +18,9 @@ export const ActionTypes = {
   FETCH_PHOTOLIST_BY_LIKES_SUCCESS: 'FETCH_PHOTOLIST_BY_LIKES_SUCCESS',
   SET_SCORE_LOW_MESSAGE_VIS: 'SET_SCORE_LOW_MESSAGE_VIS',
   SET_SCORE_HIGH_MESSAGE_VIS: 'SET_SCORE_HIGH_MESSAGE_VIS',
+  SET_REPORT_PHOTO_VIS: 'SET_REPORT_PHOTO_VIS',
   SET_CURRENT_PHOTO_SCORE: 'SET_CURRENT_PHOTO_SCORE',
+  REPORT_PHOTO: 'REPORT_PHOTO',
 };
 
 export const fetchAllPhoto = () => async (dispatch) => {
@@ -169,9 +171,33 @@ export const setScoreLowMessageVis = (visibility) => async (dispatch) => {
   })
 }
 
+export const setReportPhotoVis = (visibility) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_REPORT_PHOTO_VIS,
+    payload: visibility
+  })
+}
+
 export const setCurrentPhotoScore = (score) => async (dispatch) => {
   dispatch({
     type: ActionTypes.SET_CURRENT_PHOTO_SCORE,
     payload: score
   })
+}
+
+
+
+export const reportPhoto = (photoId, userId) => async (dispatch) => {
+  // console.log(photoId, { userId })
+  try {
+    const response = await axios.put(`${API_URL}/photo/reportPhoto/${photoId}`, { userId });
+
+    dispatch({
+      type: ActionTypes.REPORT_PHOTO,
+      payload: response.data,
+    });
+
+  } catch (error) {
+    console.error('Error reporting photo:', error);
+  }
 }

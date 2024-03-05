@@ -14,6 +14,8 @@ import { editPhotoById, handlePhotoComplete, removePhotoFromUser } from '../acti
 import "../styles/game.scss";
 import { IconTrash } from '@tabler/icons-react';
 import { setCurrentPhotoScore, setScoreHighMessageVis, setScoreLowMessageVis } from '../actions/photoListAction';
+import { IconDots } from '@tabler/icons-react';
+import Dropdown from './Dropdown';
 
 const PhotoEdit = (props) => {
   const puzzleInfo = props.puzzleInfo;
@@ -111,6 +113,7 @@ const PhotoEdit = (props) => {
 
     if (score >= 95) {
       dispatch(handlePhotoComplete(userId))
+      dispatch(handlePhotoComplete(props.userId))
 
       console.log("you got points", score)
       dispatch(setScoreHighMessageVis(true));
@@ -133,7 +136,6 @@ const PhotoEdit = (props) => {
   return (
     <div className="container">
       {/* If in edit mode */}
-
       {props.editMode ?
         <div id="editFields">
           <div>
@@ -143,6 +145,10 @@ const PhotoEdit = (props) => {
         </div> :
         <div className="photoTitleContainer">
           <h2 htmlFor="photoTitle"> {title} </h2>
+          <div id='reportContainer'>
+            {/* <IconDots className="hoverPointer" /> */}
+            <Dropdown photoId={puzzleInfo.id} closeModal={props.closeModal} />
+          </div>
         </div>
       }
 
