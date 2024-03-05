@@ -25,6 +25,7 @@ const Profile = () => {
         navigate("/profile");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, userToken, dispatch]);
 
   const signOutHandler = async () => {

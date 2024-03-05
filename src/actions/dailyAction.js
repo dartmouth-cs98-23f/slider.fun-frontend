@@ -18,12 +18,15 @@ export const setHasHowtoPlayShown = (displayStatus) => async (dispatch) => {
 
 export const fetchPuzzleOfDay = () => async (dispatch) => {
   try {
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().slice(0, 10);
+    const moment = require('moment-timezone')
 
-    const response = await axios.get("https://slider-fun.onrender.com/api/dailyPuzzle/byDate", {
+    // For just the date part in 'YYYY-MM-DD' format
+    let formattedDateInEST = moment().tz("America/New_York").format('YYYY-MM-DD');
+
+
+    const response = await axios.get(`${API_URL}/dailyPuzzle/byDate`, {
       params: {
-        date: formattedDate
+        date: formattedDateInEST
       }
     });
 

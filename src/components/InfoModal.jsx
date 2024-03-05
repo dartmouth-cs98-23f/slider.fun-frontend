@@ -1,6 +1,6 @@
 import React from 'react';
 import "../styles/infoModal.scss";
-import domainLogo from "../assets/domain_logo.svg"
+// import domainLogo from "../assets/domain_logo.svg"
 import dailyPuzzleTutorial from "../assets/dailyPuzzleTutorial.gif";
 import { useNavigate } from "react-router-dom";
 import SignUpForm from './SignUpForm';

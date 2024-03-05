@@ -1,9 +1,9 @@
 
 
-import { defaultSlider } from '../components/Slider'
+// import { defaultSlider } from '../components/Slider'
 import bruh from '../assets/Chai000724-R2-077-37.jpg';
 
-const DEFAULT_OPTIONS = defaultSlider
+// const DEFAULT_OPTIONS = defaultSlider
 
 export const getRBG = (pictureFile, filters = false) => {
   return new Promise((resolve, reject) => {
