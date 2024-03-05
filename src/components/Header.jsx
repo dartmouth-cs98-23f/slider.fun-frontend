@@ -25,6 +25,7 @@ const Header = () => {
         <nav className='headerNav'>
           <button className="dailyButton blackButton" onClick={() => handleNavigate("/daily")}> Daily</button>
           <button className="communityButton blackButton" onClick={() => handleNavigate("/community")}>Community</button>
+          <button className="dailyButton blackButton" onClick={() => handleNavigate("/leaderboard")}> Leaderboard</button>
           <button className="tutorialButton whiteButton" onClick={() => handleNavigate("/tutorial")}>Tutorial</button>
           {localStorage.getItem('token') === null ? <button className="loginButton whiteButton" onClick={() => handleNavigate("/login")}> Login </button> : <ProfileIcon />}
         </nav>

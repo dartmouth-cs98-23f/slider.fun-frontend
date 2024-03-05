@@ -13,6 +13,7 @@ import Community from './pages/Community';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserToken, getUserInfo } from './actions/userAction';
+import Leaderboard from './pages/Leaderboard';
 
 function App() {
   const token = useSelector(state => state.user.token);
@@ -39,9 +40,11 @@ function App() {
             <Route path="tutorial" element={<Tutorial />} />
             <Route path="daily" element={<Daily />} />
             <Route path="community" element={<Community />} />
+            <Route path="leaderboard" element={<Leaderboard />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="profile" element={<Profile />} />
+
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
         </div>
