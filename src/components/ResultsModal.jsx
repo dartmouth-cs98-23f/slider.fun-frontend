@@ -6,6 +6,7 @@ import makeConfetti from './Confetti';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserInfo, handleDailyCompleted } from '../actions/userAction';
 import { useNavigate } from 'react-router-dom';
+import TimeUntilMidnight from './TimeUntilMidnight';
 
 function ResultsModal(props) {
   const [loading, setLoading] = useState(false);
@@ -42,74 +43,142 @@ function ResultsModal(props) {
 
   return (
     <>
-      <div className="resultsModal">
-        <div className="headerModal">
-          {loading ? <Loader /> :
+
+      {/* tutorial  */}
+      {props.tutorial ?
+        <div className="resultsModal">
+          <div className="headerModal">
+            {loading ? <Loader /> :
+              <div>
+                {props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
+                {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
+                {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
+                {/* If score is 95 */}
+                {props.score >= 95 ?
+                  <div>
+                    <h2>Nice job! </h2>
+                  </div> : null}
+                <h3> You got a {props.score} </h3>
+
+                {((!localStorage.getItem("token") && props.score >= 95 && props.stageNumber === 6)) ?
+                  <div>
+                    <h3>
+                      Make an account to save your score!
+                    </h3>
+                    <button onClick={() => handlePostTutorialSignUp(5)}>
+                      Sign Up!
+                    </button>
+                  </div> : null}
+
+              </div>}
+          </div >
+          <div className="imagesModal-container">
             <div>
-              {props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
-              {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
-              {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
-              {/* If score is 95 */}
-              {props.score >= 95 ?
-                <div>
-                  <h2>Nice job! </h2>
-                  {/* If user */}
-                  {!userInfo.dailyTaskStatus ?
-                    <h3> +5 SliderPoints </h3>
-                    :
-                    <p> but you've already done the daily puzzle today!</p>
-                  }
-                </div>
-                : null}
+              <ReactCompareSlider
 
-              {((!localStorage.getItem("token") && props.score >= 95 && !props.tutorial)) ?
-                <div>
-                  <h3>
-                    Make an account to save your score!
-                  </h3>
-                  <button onClick={() => handlePostTutorialSignUp(5)}>
-                    Sign Up!
-                  </button>
-                </div>
-                :
-                <div>
-                  <p id="smallText"> Total points: {userInfo.sliderScore} </p>
-                </div>
-              }
-              <h3> {props.score} </h3>
+                handle={
+                  <ReactCompareSliderHandle
+                    buttonStyle={{
+                      backdropFilter: undefined,
+                      WebkitBackdropFilter: undefined,
+                      border: 0,
+                      boxShadow: 'none',
+                      marginLeft: "-15px"
+                    }}
+                    linesStyle={{
+                      opacity: 0.0,
+                    }}
+                  />
+                }
 
-            </div>}
-        </div >
-        <div className="imagesModal-container">
-          <div>
-            <ReactCompareSlider
+                itemOne={<ReactCompareSliderImage src={props.img} alt="pre edit pics" style={props.currentStyle} />}
+                itemTwo={<ReactCompareSliderImage src={props.img} alt="edited pics" style={props.targetStyle} />}
+              />
+            </div>
 
-              handle={
-                <ReactCompareSliderHandle
-                  buttonStyle={{
-                    backdropFilter: undefined,
-                    WebkitBackdropFilter: undefined,
-                    border: 0,
-                    boxShadow: 'none',
-                    marginLeft: "-15px"
-                  }}
-                  linesStyle={{
-                    opacity: 0.0,
-                  }}
-                />
-              }
-
-              itemOne={<ReactCompareSliderImage src={props.img} alt="pre edit pics" style={props.currentStyle} />}
-              itemTwo={<ReactCompareSliderImage src={props.img} alt="edited pics" style={props.targetStyle} />}
-            />
           </div>
+          <div className="buttonsModal">
+            <button onClick={props.onClose}>Close</button>
+            {props.score >= 95 && props.tutorial && props.stageNumber !== 6 ? <button onClick={nextStageHandler}> Next!</button> : null}
 
-        </div>
-        <div className="buttonsModal">
-          <button onClick={props.onClose}>Close</button>
-          {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
-        </div>
-      </div >
+
+          </div>
+        </div >
+        :
+        // daily/ not tutorial
+        <div className="resultsModal">
+          <div className="headerModal">
+            {loading ? <Loader /> :
+              <div>
+                {props.score < 70 ? <h2>Maybe try a new slider? </h2> : null}
+                {props.score >= 70 && props.score < 90 ? <h2>Keep trying!</h2> : null}
+                {props.score >= 90 && props.score < 95 ? <h2>So close!</h2> : null}
+                {/* If score is 95 */}
+                {props.score >= 95 ?
+                  <div>
+                    <h2>Nice job! </h2>
+                    {/* If user */}
+                    {!userInfo.dailyTaskStatus ?
+                      <h3> +5 SliderPoints </h3>
+                      :
+                      <div>
+                        <p> but you've already done the daily puzzle today!</p>
+                        <TimeUntilMidnight />
+                      </div>
+                    }
+                  </div>
+                  : null}
+
+                {((!localStorage.getItem("token") && props.score >= 95 && !props.tutorial)) ?
+                  <div>
+                    <h3>
+                      Make an account to save your score!
+                    </h3>
+                    <button onClick={() => handlePostTutorialSignUp(5)}>
+                      Sign Up!
+                    </button>
+                  </div>
+                  :
+                  <div>
+                    <p id="smallText"> Total points: {userInfo.sliderScore} </p>
+                  </div>
+                }
+                <h3> {props.score} </h3>
+
+              </div>}
+          </div >
+          <div className="imagesModal-container">
+            <div>
+              <ReactCompareSlider
+
+                handle={
+                  <ReactCompareSliderHandle
+                    buttonStyle={{
+                      backdropFilter: undefined,
+                      WebkitBackdropFilter: undefined,
+                      border: 0,
+                      boxShadow: 'none',
+                      marginLeft: "-15px"
+                    }}
+                    linesStyle={{
+                      opacity: 0.0,
+                    }}
+                  />
+                }
+
+                itemOne={<ReactCompareSliderImage src={props.img} alt="pre edit pics" style={props.currentStyle} />}
+                itemTwo={<ReactCompareSliderImage src={props.img} alt="edited pics" style={props.targetStyle} />}
+              />
+            </div>
+
+          </div>
+          <div className="buttonsModal">
+            <button onClick={props.onClose}>Close</button>
+            {props.score >= 95 && props.tutorial ? <button onClick={nextStageHandler}> Next!</button> : null}
+          </div>
+        </div >
+
+      }
     </>
   )
 }
