@@ -1,7 +1,7 @@
 
 # Slider.Fun
 
-Our aim for this project is to help players learn photo editing skill in a fun way. We will provide the player with an edited photo and give them options to change things such as contrast, brightness, etc to get the original image as close as possible to the eddited image provided. 
+Slider is a photo editing puzzle game. You use the sliders to edit the unedited photo, aiming to match the (edited) target photo. As you complete more puzzles, your photo editing skills will improve. Slider is hosted live at www.slider.fun. 
 
 ![Start Screen](project_photos/start_screen2.png)
 ![Game Screen](project_photos/share_screen2.png)
@@ -17,11 +17,11 @@ Our aim for this project is to help players learn photo editing skill in a fun w
 
 #### For developer
 If setting up the environment for the first time you need to do
-`npm i` to download all necessary React dependencies. and then do `npm run start`
+`npm i` to download all necessary React dependencies. and then do `npm run start`. Once downloaded, the development server can be built with `npm start`.
  
 ## Deployment
 
-This project will be hosted using AWS and it will be synced with the github repo. It's not currently set up yet but will most likely be using the command  `npm run deploy`
+This project will be hosted using AWS and it will be synced with the github repo. Use the command  `npm run deploy`.
 
 ## Authors
 
