@@ -56,7 +56,7 @@ const Login = () => {
             <img src={domainLogo} onClick={() => navigate("/community")} alt=""></img>
             <input placeholder='email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
-            <input placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input placeholder='password' type="password" autoComplete="false" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button>login</button>
 
           </form>

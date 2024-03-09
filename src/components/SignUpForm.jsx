@@ -9,22 +9,30 @@ const SignUpForm = ({ logoVisible }) => {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user.info)
   const navigate = useNavigate();
   const [err, setErr] = useState(null)
+
+
   const handleSignUp = async (e) => {
-
     e.preventDefault();
+    if (password === passwordConfirm) {
 
-    try {
-      await dispatch(userSignUp(email, name, password, (userInfo.sliderScore || 0)));
 
-      navigate("/profile");
-    } catch (error) {
-      setErr(error.response.data.error)
-      console.error('Error signing in:', error);
+      try {
+        await dispatch(userSignUp(email, name, password, (userInfo.sliderScore || 0)));
+
+        navigate("/profile");
+      } catch (error) {
+        setErr(error.response.data.error)
+        console.error('Error signing in:', error);
+      }
+    } else {
+      setErr("Passwords do not match")
     }
+
   }
 
   return (
@@ -37,7 +45,8 @@ const SignUpForm = ({ logoVisible }) => {
           </div>}
         <input placeholder='email' onChange={(e) => setEmail(e.target.value)} />
         <input placeholder='username' onChange={(e) => setName(e.target.value)} />
-        <input placeholder='password' onChange={(e) => setPassword(e.target.value)} />
+        <input placeholder='password' type="password" autoComplete="off" onChange={(e) => setPassword(e.target.value)} />
+        <input placeholder='password again' type="password" autoComplete="off" onChange={(e) => setPasswordConfirm(e.target.value)} />
         <button>sign up</button>
 
       </form>
