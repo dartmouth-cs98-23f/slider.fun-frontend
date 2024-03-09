@@ -143,7 +143,7 @@ function ResultsModal(props) {
                         {userInfo.dailyTaskStatus ?
                           // if user completed daily already
                           <div>
-                            <p> you've already done the daily puzzle today!</p>
+                            {/* <p> you've already done the daily puzzle today!</p> */}
                             <TimeUntilMidnight />
                             <p id="smallText"> Total points: {userInfo.sliderScore} </p>
                           </div>
