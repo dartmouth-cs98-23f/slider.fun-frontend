@@ -13,7 +13,7 @@ const Daily = () => {
     if (!puzzleFetched) {
       dispatch(fetchPuzzleOfDay());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const dailyPuzzle = useSelector((state => state.daily.photo));
@@ -37,15 +37,18 @@ const Daily = () => {
 
 
       {/* if dailyPuzzle valid */}
-      {dailyPuzzle.photo &&
-        <Game
-          stageOptions={CURRENT_OPTIONS}
-          closeModal={closeModal}
-          openModal={openModal}
-          pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : null}
-          daily={true}
-          dailyPuzzleId={dailyPuzzle.id}
-        />}
+
+      <Game
+        stageOptions={CURRENT_OPTIONS}
+        closeModal={closeModal}
+        openModal={openModal}
+        pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : `https://slider-fun.onrender.com/api/photo/65ee092c0e2b6d15b32ff4ef`}
+        daily={true}
+        dailyPuzzleId={dailyPuzzle.id ? dailyPuzzle.id : "65ee092c0e2b6d15b32ff4ef"}
+      /> :
+
+      {/* <div className="loading">Loading........</div> */}
+
     </div>
   )
 }

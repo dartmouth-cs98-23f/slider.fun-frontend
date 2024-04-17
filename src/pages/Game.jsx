@@ -41,7 +41,6 @@ const DEFAULT_OPTIONS = defaultSlider
 const MODIFIED_OPTIONS = []
 
 const Game = (props) => {
-
   const dispatch = useDispatch();
   const stageOptions = props.stageOptions;
   const stageNumber = props.stageNumber;
@@ -117,6 +116,7 @@ const Game = (props) => {
   }, [score, defaultScore])
 
   const handleCompareClick = () => {
+
     handleScoreProcessing(current, getImageStyle(currentOptions).filter, getImageStyle(editedOptions).filter)
     setIsModalVisible(true);
   };
