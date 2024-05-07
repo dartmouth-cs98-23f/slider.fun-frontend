@@ -71,7 +71,7 @@ const Daily = () => {
         stageOptions={CURRENT_OPTIONS}
         closeModal={closeModal}
         openModal={openModal}
-        pic_link={dailyPuzzle.photo ? `https://slider-fun.onrender.com/api/photo/${dailyPuzzle.photo}` : `https://slider-fun.onrender.com/api/photo/${dailyBackUp}`}
+        pic_link={`https://slider-fun.onrender.com/api/photo/${dailyBackUp}`}
         daily={true}
         dailyPuzzleId={dailyPuzzle.id ? dailyPuzzle.id : dailyBackUp}
       /> :
