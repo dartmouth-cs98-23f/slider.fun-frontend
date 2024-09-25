@@ -1,6 +1,6 @@
 // $header-color: #333; // primary color
-$header-color: #EDEDED; // primary color
-$accent-color: #E27272; // accent color
+$header-color: #ededed; // primary color
+$accent-color: #e27272; // accent color
 
 .headerContainer {
   display: flex;
@@ -10,6 +10,7 @@ $accent-color: #E27272; // accent color
   flex-direction: row;
   padding: 10px 0px 5px 0px;
   background-color: $header-color;
+  width: 100%;
 
   .contentContainer {
     display: flex;
@@ -35,11 +36,37 @@ $accent-color: #E27272; // accent color
   }
 }
 
+.modalContainer {
+  .headerNavModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 10;
+    background-color: white;
+
+    button {
+      border-radius: 0;
+      width: 100%;
+      height: 5%;
+    }
+  }
+}
+
 .headerNav {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 910px) {
+    width: 100%;
+    justify-content: flex-start;
+  }
 
   .profileIcon {
     width: 35px;
@@ -47,7 +74,7 @@ $accent-color: #E27272; // accent color
     cursor: pointer;
 
     &:hover {
-      color: #E27272;
+      color: #e27272;
     }
   }
 
@@ -55,4 +82,7 @@ $accent-color: #E27272; // accent color
     margin: 8px;
     height: 35px;
   }
+}
+.menuButton {
+  cursor: pointer;
 }
