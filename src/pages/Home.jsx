@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import "../styles/home.scss";
 // import Header from '../components/Header'
 import sliderLogo from "../assets/main_logo_red.png"
+import seqVideo from "../assets/seq.mov"
 // import domainLogo from "../assets/domain_logo.png"
 // import homeSliderPic from "../assets/group8.svg"
 import { useNavigate } from "react-router-dom";
@@ -27,7 +28,7 @@ const Home = () => {
           preload="auto"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         >
-          <source src="https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/videos%2Fseq.mov?alt=media&token=fe8d69fb-7bf0-405f-bacb-ae38a5059d37" type="video/mp4" />
+          <source src={seqVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
