@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../styles/login.scss"
+import seqVideo from "../assets/seq.mov"
 import { useNavigate } from 'react-router-dom';
 
 import SignUpForm from '../components/SignUpForm';
@@ -42,7 +43,7 @@ const SignUp = () => {
         preload="auto"
         style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '.8' }}
       >
-        <source src="https://firebasestorage.googleapis.com/v0/b/sliderdotfun-3af7a.appspot.com/o/videos%2Fseq.mov?alt=media&token=fe8d69fb-7bf0-405f-bacb-ae38a5059d37" type="video/mp4" />
+        <source src={seqVideo} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="signUpModal">
